@@ -64,6 +64,13 @@ The resolution process is handled by the `SalveEngine` class, which follows a de
 4. **Lexicon Matching**: Queries the `GreetingPack` for the active locale to find the best `GreetingLexiconEntry` matching the event and context (phase, role, formality).
 5. **Assembly**: Dynamically constructs the `GreetingResult`, incorporating address resolution and the final salutation string.
 
+### 4.4 Calendar Plugins
+Calendar plugins are responsible for resolving the current date and time into semantic events.
+- **Gregorian Plugin (`@salve/calendars-gregorian`)**: The baseline plugin supporting:
+    - Fixed Annual Dates (e.g., New Year's Day).
+    - Nth-Weekday Rules (e.g., 4th Thursday of November).
+    - Temporal Slots (Morning: 05-12, Midday: 11-13, Afternoon: 12-18, Evening: 18-22, Night: 22-05).
+
 ## 6. Design Rationale
 
 ### 6.1 Restoring Cultural Embeddedness

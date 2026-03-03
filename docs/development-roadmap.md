@@ -19,10 +19,11 @@ This document outlines the detailed, staged implementation plan for the Salve Un
     - Define pluggable memory interface.
     - Implement default localStorage provider for browser environments.
 
-## Milestone 3: Multiple calendar Systems & Plugins
-- **M3.1: Gregorian Plugin** (`@salve/calendars-gregorian`)
-    - Fixed dates, nth-weekday rules (e.g., Thanksgiving).
-- **M3.2: Religious Calendar Plugins**
+## Milestone 3: Implementing Calendar Plugins
+- **M3.1: Gregorian Plugin** (Completed)
+    - Implement baseline date resolution (fixed dates).
+    - Support Nth-weekday rules (e.g., Thanksgiving).
+    - Implement temporal slots (Morning, Afternoon, Evening, Night).
     - `@salve/calendars-pascha`: Orthodox and Western Easter calculations.
     - `@salve/calendars-hijri`: Tabular Islamic calendar or conversion utility.
 - **M3.3: Specialty Calendars**
