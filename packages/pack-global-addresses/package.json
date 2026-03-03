@@ -1,0 +1,19 @@
+{
+    "name": "@salve/pack-global-addresses",
+    "version": "0.1.0",
+    "description": "Global address honorifics and templates for Salve",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "test": "jest"
+    },
+    "dependencies": {
+        "@salve/types": "0.1.0"
+    },
+    "author": "Wouter Soudan",
+    "license": "MIT"
+}
