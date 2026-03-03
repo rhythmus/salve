@@ -1,0 +1,19 @@
+{
+  "name": "salve-monorepo",
+  "private": true,
+  "description": "Universal Greeting & Cultural Awareness Engine",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "prettier --check .",
+    "format": "prettier --write ."
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "Wouter Soudan",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}
