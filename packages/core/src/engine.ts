@@ -8,13 +8,19 @@ import {
     GreetingPack,
     CalendarPlugin,
     CelebrationEvent,
-    GreetingLexiconEntry
+    GreetingLexiconEntry,
+    GreetingMemory
 } from "./types";
 import { calculateEventScore, isAffiliated } from "./scoring";
 
 export class SalveEngine {
     private plugins: CalendarPlugin[] = [];
     private packs: Map<string, GreetingPack> = new Map();
+    private memory?: GreetingMemory;
+
+    constructor(options?: { memory?: GreetingMemory }) {
+        this.memory = options?.memory;
+    }
 
     /**
      * Register a calendar plugin for date resolution
@@ -78,6 +84,13 @@ export class SalveEngine {
 
         const candidate = this.selectGreeting(pack, bestEvent, context, trace);
 
+        // 5. Record in memory to prevent repetition
+        if (this.memory && candidate.id !== "err") {
+            const memoryKey = `g:${pack.locale}:${candidate.id}`;
+            this.memory.record(memoryKey, 3600 * 1000); // Default 1h TTL
+            trace.push(`Recorded greeting [${candidate.id}] in memory.`);
+        }
+
         const address = this.resolveAddress(context);
 
         // 5. Construct the result
@@ -108,8 +121,11 @@ export class SalveEngine {
             const phaseMatch = !context.phase || g.phase === context.phase;
             const roleMatch = !context.role || g.role === context.role;
             const formalityMatch = !context.formality || g.formality === context.formality;
-            // TODO: Add relationship and setting matching
-            return eventMatch && phaseMatch && roleMatch && formalityMatch;
+
+            // Anti-repetition check
+            const isRemembered = this.memory?.has(`g:${pack.locale}:${g.id}`) ?? false;
+
+            return eventMatch && phaseMatch && roleMatch && formalityMatch && !isRemembered;
         });
 
         if (candidates.length > 0) {
