@@ -1,0 +1,1411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Salve — Greeting Engine Demo (Mock)</title>
+<style>
+  :root{
+    --bg:#0b0f17;
+    --panel:#0f1624;
+    --panel2:#0c1320;
+    --text:#e7ecf3;
+    --muted:#9fb0c6;
+    --muted2:#6f8199;
+    --accent:#7aa7ff;
+    --good:#72f1b8;
+    --warn:#ffd37a;
+    --bad:#ff7a90;
+    --border:rgba(255,255,255,.10);
+    --shadow:0 12px 40px rgba(0,0,0,.45);
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+    --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:radial-gradient(1200px 800px at 20% 0%, rgba(122,167,255,.16), transparent 60%),
+                     radial-gradient(900px 700px at 100% 20%, rgba(114,241,184,.10), transparent 65%),
+                     var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.35;
+  }
+  header{
+    position:sticky; top:0; z-index:20;
+    backdrop-filter: blur(10px);
+    background:rgba(11,15,23,.72);
+    border-bottom:1px solid var(--border);
+  }
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 18px; max-width:1400px; margin:0 auto;
+    gap:14px;
+  }
+  .brand{display:flex; align-items:center; gap:12px}
+  .logo{
+    width:34px; height:34px; border-radius:12px;
+    background:linear-gradient(135deg, rgba(122,167,255,.9), rgba(114,241,184,.85));
+    box-shadow:0 10px 28px rgba(122,167,255,.14);
+  }
+  .brand h1{font-size:16px; margin:0; letter-spacing:.2px}
+  .brand .sub{font-size:12px; color:var(--muted); margin-top:2px}
+  .right{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+  .pill{
+    font-size:12px; color:var(--muted);
+    border:1px solid var(--border);
+    padding:6px 10px; border-radius:999px;
+    background:rgba(255,255,255,.03);
+  }
+  .btn{
+    cursor:pointer;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.05);
+    color:var(--text);
+    padding:8px 10px;
+    border-radius:10px;
+    font-size:12px;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:hover{border-color:rgba(122,167,255,.35); background:rgba(122,167,255,.08)}
+  .btn.primary{background:rgba(122,167,255,.14); border-color:rgba(122,167,255,.35)}
+  .btn.danger{background:rgba(255,122,144,.10); border-color:rgba(255,122,144,.25)}
+  .toggle{
+    display:inline-flex; gap:8px; align-items:center; font-size:12px; color:var(--muted);
+    border:1px solid var(--border); padding:6px 10px; border-radius:999px;
+    background:rgba(255,255,255,.03);
+  }
+  .toggle input{accent-color:var(--accent)}
+  main{
+    max-width:1400px; margin:0 auto; padding:18px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns: 380px 1fr;
+    gap:16px;
+  }
+  @media (max-width: 1050px){
+    .grid{grid-template-columns:1fr}
+  }
+  .card{
+    background:rgba(255,255,255,.03);
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .card .hd{
+    padding:12px 14px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  .card .hd .title{font-weight:650; font-size:13px; letter-spacing:.2px}
+  .card .hd .hint{font-size:12px; color:var(--muted)}
+  .card .bd{padding:14px}
+  .section{margin-bottom:14px}
+  .section:last-child{margin-bottom:0}
+  .section h3{
+    margin:0 0 8px 0; font-size:12px; color:var(--muted);
+    font-weight:650; letter-spacing:.18em; text-transform:uppercase;
+  }
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .row3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px}
+  label{
+    display:block; font-size:12px; color:var(--muted); margin-bottom:6px;
+  }
+  input[type="text"], input[type="date"], select, textarea{
+    width:100%;
+    padding:10px 10px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:rgba(0,0,0,.18);
+    color:var(--text);
+    outline:none;
+    font-size:13px;
+  }
+  textarea{min-height:66px; resize:vertical; font-family:var(--mono); font-size:12px}
+  input[type="text"]::placeholder{color:rgba(159,176,198,.55)}
+  select option{background:#0b0f17}
+  .small{font-size:12px; color:var(--muted2)}
+  .chips{display:flex; flex-wrap:wrap; gap:8px}
+  .chip{
+    padding:6px 10px; border-radius:999px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.03);
+    font-size:12px; color:var(--muted);
+    cursor:pointer; user-select:none;
+  }
+  .chip.on{
+    color:rgba(11,15,23,.95);
+    background:linear-gradient(135deg, rgba(122,167,255,.92), rgba(114,241,184,.85));
+    border-color:transparent;
+  }
+  .hero{
+    padding:18px;
+    background:linear-gradient(135deg, rgba(122,167,255,.12), rgba(114,241,184,.08));
+    border-bottom:1px solid var(--border);
+  }
+  .greeting{
+    font-size:52px;
+    font-weight:820;
+    letter-spacing:-.02em;
+    margin:0;
+    line-height:1.06;
+  }
+  @media (max-width: 800px){
+    .greeting{font-size:40px}
+  }
+  .subline{
+    margin-top:10px;
+    color:var(--muted);
+    font-size:13px;
+    display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+  }
+  .kv{display:inline-flex; gap:8px; align-items:center}
+  .dot{width:6px; height:6px; border-radius:99px; background:rgba(122,167,255,.9); display:inline-block}
+  .modules{
+    padding:14px;
+    display:grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap:14px;
+  }
+  @media (max-width: 1050px){
+    .modules{grid-template-columns:1fr}
+  }
+  .module{
+    background:rgba(0,0,0,.14);
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+  }
+  .module .mh{
+    padding:10px 12px; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+  }
+  .module .mh .t{font-weight:700; font-size:13px}
+  .module .mh .x{font-size:12px; color:var(--muted)}
+  .module .mb{padding:12px}
+  .list{display:flex; flex-direction:column; gap:10px}
+  .item{
+    display:flex; justify-content:space-between; gap:10px; align-items:flex-start;
+    padding:10px 10px; border-radius:12px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.02);
+  }
+  .item .l{display:flex; flex-direction:column; gap:4px}
+  .item .k{font-size:12px; color:var(--muted)}
+  .item .v{font-size:13px}
+  .badge{
+    font-size:11px; padding:5px 8px; border-radius:999px;
+    border:1px solid rgba(255,255,255,.10);
+    color:var(--muted);
+    white-space:nowrap;
+  }
+  .badge.good{border-color:rgba(114,241,184,.25); color:rgba(114,241,184,.95); background:rgba(114,241,184,.08)}
+  .badge.warn{border-color:rgba(255,211,122,.25); color:rgba(255,211,122,.95); background:rgba(255,211,122,.08)}
+  .badge.bad{border-color:rgba(255,122,144,.25); color:rgba(255,122,144,.95); background:rgba(255,122,144,.08)}
+  .mono{font-family:var(--mono)}
+  .twoCol{
+    display:grid; grid-template-columns:1fr 1fr; gap:10px;
+  }
+  @media (max-width: 700px){ .twoCol{grid-template-columns:1fr} }
+  details{
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:rgba(255,255,255,.02);
+    overflow:hidden;
+  }
+  details summary{
+    cursor:pointer;
+    list-style:none;
+    padding:10px 12px;
+    font-weight:700;
+    font-size:13px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  details summary::-webkit-details-marker{display:none}
+  details .content{padding:0 12px 12px 12px}
+  pre{
+    margin:0;
+    padding:12px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(0,0,0,.20);
+    overflow:auto;
+    font-family:var(--mono);
+    font-size:12px;
+    color:#dbe6ff;
+  }
+  .footerNote{
+    margin-top:14px;
+    color:var(--muted2);
+    font-size:12px;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>Salve <span class="small">Demo</span></h1>
+        <div class="sub">Cross‑cultural greeting engine — <span class="mono">mocked</span> packs & calculators</div>
+      </div>
+    </div>
+    <div class="right">
+      <span class="pill" id="pillTime">—</span>
+      <span class="pill" id="pillTZ">—</span>
+      <span class="pill" id="pillLangs">—</span>
+      <label class="toggle"><input type="checkbox" id="devMode"/> Developer mode</label>
+      <button class="btn" id="btnNow">Use browser time</button>
+      <button class="btn danger" id="btnClearMemory">Clear memory</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="grid">
+
+    <!-- Settings -->
+    <div class="card">
+      <div class="hd">
+        <div>
+          <div class="title">Configuration</div>
+          <div class="hint">Change any field — greeting updates live</div>
+        </div>
+        <div class="hint mono" id="packStatus">packs: mock</div>
+      </div>
+      <div class="bd">
+
+        <div class="section">
+          <h3>Mode</h3>
+          <div class="row">
+            <div>
+              <label for="mode">Session mode</label>
+              <select id="mode">
+                <option value="opening">Opening</option>
+                <option value="closing">Closing</option>
+              </select>
+            </div>
+            <div>
+              <label for="formality">Formality</label>
+              <select id="formality">
+                <option value="informal">Informal</option>
+                <option value="formal">Formal</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Time</h3>
+          <div class="row3">
+            <div>
+              <label for="date">Date</label>
+              <input id="date" type="date"/>
+            </div>
+            <div>
+              <label for="time">Time (HH:MM)</label>
+              <input id="time" type="text" placeholder="15:30"/>
+            </div>
+            <div>
+              <label for="timezone">Time zone</label>
+              <select id="timezone">
+                <option value="auto">Auto (browser)</option>
+                <option value="Europe/Berlin">Europe/Berlin</option>
+                <option value="Europe/Brussels">Europe/Brussels</option>
+                <option value="Europe/Athens">Europe/Athens</option>
+                <option value="Asia/Istanbul">Asia/Istanbul</option>
+                <option value="Asia/Shanghai">Asia/Shanghai</option>
+                <option value="UTC">UTC</option>
+              </select>
+            </div>
+          </div>
+          <div class="small" style="margin-top:8px">Note: this demo uses simplified mock calendar math. The real Salve engine will use pluggable calendar systems and packs.</div>
+        </div>
+
+        <div class="section">
+          <h3>User</h3>
+          <div class="row">
+            <div>
+              <label for="givenNames">Given name(s)</label>
+              <input id="givenNames" type="text" placeholder="Giannis; Mehmet; Wei"/>
+              <div class="small">Separate multiple names with <span class="mono">;</span></div>
+            </div>
+            <div>
+              <label for="birthday">Birthday</label>
+              <input id="birthday" type="date"/>
+              <div class="small">Optional</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Locales</h3>
+          <div class="row">
+            <div>
+              <label for="residenceLocale">Residence locale</label>
+              <select id="residenceLocale">
+                <option value="de-DE">de-DE (Germany)</option>
+                <option value="el-GR">el-GR (Greece)</option>
+                <option value="tr-TR">tr-TR (Turkey)</option>
+                <option value="nl-BE">nl-BE (Belgium)</option>
+                <option value="en-GB">en-GB (UK)</option>
+                <option value="zh-CN">zh-CN (China)</option>
+              </select>
+            </div>
+            <div>
+              <label for="greetingLanguage">Greeting language</label>
+              <select id="greetingLanguage">
+                <option value="de-DE">de-DE</option>
+                <option value="en-GB">en-GB</option>
+                <option value="el-GR">el-GR</option>
+                <option value="tr-TR">tr-TR</option>
+                <option value="ar">ar</option>
+                <option value="zh-CN">zh-CN</option>
+                <option value="zh-TW">zh-TW</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:10px">
+            <div>
+              <label>Affiliations (multi‑select)</label>
+              <div class="chips" id="affChips"></div>
+              <div class="small" style="margin-top:8px">Civil participation affects whether residence holidays appear.</div>
+            </div>
+            <div>
+              <label for="scriptPref">Script preference</label>
+              <select id="scriptPref">
+                <option value="latin">Latin</option>
+                <option value="native">Native</option>
+                <option value="arabic">Arabic</option>
+                <option value="simplified">Simplified Chinese</option>
+                <option value="traditional">Traditional Chinese</option>
+              </select>
+              <div style="margin-top:10px">
+                <label class="toggle" style="justify-content:space-between; width:100%">
+                  <span>Participate in residence civil holidays</span>
+                  <input type="checkbox" id="civilParticipation" checked/>
+                </label>
+              </div>
+              <div style="margin-top:10px">
+                <label class="toggle" style="justify-content:space-between; width:100%">
+                  <span>Enable namedays</span>
+                  <input type="checkbox" id="namedaysEnabled" checked/>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Demo shortcuts</h3>
+          <div class="chips" id="scenarioChips"></div>
+          <div class="footerNote">Tip: open Developer mode to inspect event candidates, pack data, and the selected memory key.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Output -->
+    <div class="card">
+      <div class="hero">
+        <p class="greeting" id="heroGreeting">Hello.</p>
+        <div class="subline">
+          <span class="kv"><span class="dot"></span><span id="metaSelected">selected: —</span></span>
+          <span class="kv"><span class="dot" style="background:rgba(114,241,184,.9)"></span><span id="metaLang">lang/script: —</span></span>
+          <span class="kv"><span class="dot" style="background:rgba(255,211,122,.95)"></span><span id="metaKey">memory: —</span></span>
+        </div>
+      </div>
+
+      <div class="modules">
+
+        <div class="module">
+          <div class="mh">
+            <div class="t">Today around the world</div>
+            <div class="x">cross‑culture suggestions</div>
+          </div>
+          <div class="mb" id="aroundWorld"></div>
+        </div>
+
+        <div class="module">
+          <div class="mh">
+            <div class="t">Calendars</div>
+            <div class="x">parallel date view</div>
+          </div>
+          <div class="mb" id="calendarPanel"></div>
+        </div>
+
+        <div class="module">
+          <div class="mh">
+            <div class="t">Today’s namedays</div>
+            <div class="x">if enabled</div>
+          </div>
+          <div class="mb" id="namedayPanel"></div>
+        </div>
+
+        <div class="module">
+          <div class="mh">
+            <div class="t">Upcoming</div>
+            <div class="x">next 5 events (mock)</div>
+          </div>
+          <div class="mb" id="upcomingPanel"></div>
+        </div>
+
+        <div class="module" style="grid-column:1 / -1">
+          <div class="mh">
+            <div class="t">Explain (why this greeting?)</div>
+            <div class="x">candidates · scoring · suppression</div>
+          </div>
+          <div class="mb" id="explainPanel"></div>
+        </div>
+
+        <div class="module" id="devPanel" style="display:none; grid-column:1 / -1">
+          <div class="mh">
+            <div class="t">Developer mode</div>
+            <div class="x">raw JSON · pack fixtures · debug trace</div>
+          </div>
+          <div class="mb">
+            <details open>
+              <summary>Resolved input context <span class="badge mono" id="ctxBadge">ctx</span></summary>
+              <div class="content"><pre id="devCtx"></pre></div>
+            </details>
+            <div style="height:10px"></div>
+            <details>
+              <summary>Candidate events (sorted) <span class="badge mono" id="candBadge">candidates</span></summary>
+              <div class="content"><pre id="devCandidates"></pre></div>
+            </details>
+            <div style="height:10px"></div>
+            <details>
+              <summary>Selected greeting result <span class="badge mono" id="resBadge">result</span></summary>
+              <div class="content"><pre id="devResult"></pre></div>
+            </details>
+            <div style="height:10px"></div>
+            <details>
+              <summary>Memory store (keys) <span class="badge mono" id="memBadge">memory</span></summary>
+              <div class="content"><pre id="devMemory"></pre></div>
+            </details>
+            <div style="height:10px"></div>
+            <details>
+              <summary>Mock packs (registry + lexicon) <span class="badge mono" id="packBadge">packs</span></summary>
+              <div class="content"><pre id="devPacks"></pre></div>
+            </details>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+// ------------------------------
+// Demo: MOCK "Salve Engine"
+// ------------------------------
+// This file is intentionally self-contained and uses fixtures.
+// Replace the compute / packs with real Salve engine later.
+
+const AFFILIATIONS = [
+  { id: "civil", label: "Civil" },
+  { id: "islam", label: "Islam" },
+  { id: "orthodox", label: "Orthodox" },
+  { id: "catholic", label: "Catholic" },
+  { id: "protestant", label: "Protestant" },
+  { id: "anglican", label: "Anglican" },
+  { id: "chinese_traditional", label: "Chinese Tradition" },
+];
+
+const SCENARIOS = [
+  { id: "de_secular", label: "German secular", apply: (s)=>{ 
+      s.residenceLocale="de-DE"; s.greetingLanguage="de-DE"; s.scriptPref="latin"; s.affiliations=["civil"]; s.names="Johannes";
+      s.civilParticipation=true; s.namedaysEnabled=false;
+    } 
+  },
+  { id: "tr_muslim_de", label: "Turkish Muslim in Germany", apply: (s)=>{
+      s.residenceLocale="de-DE"; s.greetingLanguage="tr-TR"; s.scriptPref="latin"; s.affiliations=["civil","islam"]; s.names="Mehmet";
+      s.civilParticipation=true; s.namedaysEnabled=false;
+    }
+  },
+  { id: "el_orthodox", label: "Greek Orthodox", apply: (s)=>{
+      s.residenceLocale="el-GR"; s.greetingLanguage="el-GR"; s.scriptPref="native"; s.affiliations=["civil","orthodox"]; s.names="Γιάννης";
+      s.civilParticipation=true; s.namedaysEnabled=true;
+    }
+  },
+  { id: "zh_diaspora", label: "Chinese diaspora (zh‑CN)", apply: (s)=>{
+      s.residenceLocale="de-DE"; s.greetingLanguage="zh-CN"; s.scriptPref="simplified"; s.affiliations=["civil","chinese_traditional"]; s.names="Wei";
+      s.civilParticipation=true; s.namedaysEnabled=false;
+    }
+  },
+  { id: "dev_mixed", label: "Mixed: EN UI, Arabic Eid", apply: (s)=>{
+      s.residenceLocale="en-GB"; s.greetingLanguage="ar"; s.scriptPref="arabic"; s.affiliations=["islam"]; s.names="Amina";
+      s.civilParticipation=false; s.namedaysEnabled=false;
+    }
+  }
+];
+
+// Mock “packs”: minimal subset to showcase features
+const PACKS = {
+  "de-DE.civil": {
+    events: [
+      { id:"german_unity_day", domain:"civil", calendar:"gregorian", rule:{type:"fixed", m:10, d:3}, priority:80 },
+      { id:"new_year", domain:"civil", calendar:"gregorian", rule:{type:"fixed", m:1, d:1}, priority:75, windowDays:31 },
+      { id:"month_start", domain:"temporal", calendar:"gregorian", rule:{type:"monthStart"}, priority:55 },
+      { id:"time_of_day", domain:"temporal", calendar:"gregorian", rule:{type:"timeOfDay"}, priority:30 },
+      { id:"welcome_opening", domain:"temporal", calendar:"gregorian", rule:{type:"welcome"}, priority:20 },
+      { id:"goodnight_closing", domain:"temporal", calendar:"gregorian", rule:{type:"closingNight"}, priority:35 },
+    ],
+    lexicon: [
+      { eventId:"german_unity_day", locale:"de-DE", formality:"informal", template:"Alles Gute zum Tag der Deutschen Einheit!" },
+      { eventId:"german_unity_day", locale:"de-DE", formality:"formal", template:"Einen schönen Tag der Deutschen Einheit." },
+      { eventId:"new_year", locale:"de-DE", formality:"informal", template:"Frohes neues Jahr{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"new_year", locale:"de-DE", formality:"formal", template:"Frohes neues Jahr!" },
+      { eventId:"month_start", locale:"de-DE", template:"Schönen Monat!" },
+      { eventId:"time_of_day.morning", locale:"de-DE", template:"Guten Morgen{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"time_of_day.afternoon", locale:"de-DE", template:"Guten Tag{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"time_of_day.evening", locale:"de-DE", template:"Guten Abend{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"welcome_opening", locale:"de-DE", template:"Willkommen{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"goodnight_closing", locale:"de-DE", template:"Gute Nacht{{#name}}, {{name}}{{/name}}." },
+    ]
+  },
+  "el-GR.orthodox": {
+    events: [
+      { id:"kalomina", domain:"temporal", calendar:"gregorian", rule:{type:"fixed", m:null, d:1, monthAny:true}, priority:70 },
+      { id:"nameday_ioannis", domain:"personal", calendar:"gregorian", rule:{type:"fixed", m:1, d:7}, priority:95, requiresName:"ioannis" },
+      { id:"time_of_day", domain:"temporal", calendar:"gregorian", rule:{type:"timeOfDay"}, priority:30 },
+      { id:"welcome_opening", domain:"temporal", calendar:"gregorian", rule:{type:"welcome"}, priority:20 },
+    ],
+    lexicon: [
+      { eventId:"kalomina", locale:"el-GR", template:"Καλομήνα{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"nameday_ioannis", locale:"el-GR", template:"Χρόνια Πολλά, {{voc}}!" },
+      { eventId:"time_of_day.morning", locale:"el-GR", template:"Καλημέρα{{#name}} σου, {{name}}{{/name}}!" },
+      { eventId:"time_of_day.afternoon", locale:"el-GR", template:"Καλησπέρα{{#name}} σου, {{name}}{{/name}}!" },
+      { eventId:"welcome_opening", locale:"el-GR", template:"Καλώς ήρθες{{#name}}, {{name}}{{/name}}!" },
+    ]
+  },
+  "islam.core": {
+    events: [
+      { id:"eid_al_fitr", domain:"religious", calendar:"hijri", rule:{type:"hijriFixed", month:10, day:1}, priority:90, windowDays:3 },
+      { id:"ramadan_season", domain:"seasonal", calendar:"hijri", rule:{type:"hijriMonth", month:9}, priority:40, windowDays:30 },
+    ],
+    lexicon: [
+      { eventId:"eid_al_fitr", locale:"tr-TR", script:"latin", template:"Bayramınız kutlu olsun{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"eid_al_fitr", locale:"en-GB", script:"latin", template:"Eid Mubarak{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"eid_al_fitr", locale:"ar", script:"arabic", template:"عيد مبارك" },
+      { eventId:"ramadan_season", locale:"tr-TR", script:"latin", template:"Hayırlı Ramazanlar!" },
+      { eventId:"ramadan_season", locale:"ar", script:"arabic", template:"رمضان كريم" },
+      { eventId:"ramadan_season", locale:"en-GB", script:"latin", template:"Ramadan Kareem!" },
+    ]
+  },
+  "zh.core": {
+    events: [
+      { id:"chinese_new_year", domain:"seasonal", calendar:"chineseLunar", rule:{type:"cny"}, priority:88, windowDays:15 },
+      { id:"lantern_festival", domain:"seasonal", calendar:"chineseLunar", rule:{type:"lantern"}, priority:60, windowDays:1 },
+    ],
+    lexicon: [
+      { eventId:"chinese_new_year", locale:"zh-CN", script:"simplified", template:"新年快乐{{#name}}，{{name}}{{/name}}！" },
+      { eventId:"chinese_new_year", locale:"zh-TW", script:"traditional", template:"新年快樂{{#name}}，{{name}}{{/name}}！" },
+      { eventId:"chinese_new_year", locale:"en-GB", script:"latin", template:"Happy Chinese New Year{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"lantern_festival", locale:"zh-CN", script:"simplified", template:"元宵节快乐！" },
+      { eventId:"lantern_festival", locale:"zh-TW", script:"traditional", template:"元宵節快樂！" },
+    ]
+  }
+};
+
+// Namedays fixture (not exhaustive)
+const NAMEDAYS = {
+  "el-GR": {
+    "01-07": { saint:"Saint John the Baptist (Orthodox)", names:["Ιωάννης","Γιάννης","Ιωάννα","John","Giannis","Ioannis"] },
+    "08-15": { saint:"Assumption of Mary", names:["Μαρία","María","Maria"] }
+  },
+  "bg-BG": {
+    "01-07": { saint:"Ivanovden", names:["Иван","Йоан","Ivan","Yoan"] }
+  }
+};
+
+// Very small Greek vocative mock (for demo only)
+function greekVocative(name){
+  // super naive: Γιάννης -> Γιάννη, Ιωάννης -> Ιωάννη
+  return name
+    .replace(/(ης)$/u,"η")
+    .replace(/(ος)$/u,"ο")
+    .replace(/Γιάννης/u,"Γιάννη")
+    .replace(/Ιωάννης/u,"Ιωάννη");
+}
+
+// Simple mustache-ish template (supports {{name}} and sections {{#name}}...{{/name}})
+function renderTemplate(tpl, ctx){
+  // section handling for name
+  tpl = tpl.replace(/\{\{#name\}\}([\s\S]*?)\{\{\/name\}\}/g, (_,inner)=> ctx.name ? inner : "");
+  // vocative
+  tpl = tpl.replace(/\{\{voc\}\}/g, ctx.voc ?? "");
+  // tokens
+  tpl = tpl.replace(/\{\{name\}\}/g, ctx.name ?? "");
+  tpl = tpl.replace(/\{\{timeOfDay\}\}/g, ctx.timeOfDay ?? "");
+  tpl = tpl.replace(/\{\{zodiac\}\}/g, ctx.zodiac ?? "");
+  return tpl;
+}
+
+// Mock calendar conversions: just to show the UI
+function mockHijriDate(greg){
+  // NOT accurate. A deterministic "fake" mapping for demo visuals.
+  const start = new Date(Date.UTC(greg.getUTCFullYear(),0,1));
+  const days = Math.floor((greg - start)/86400000);
+  const hy = 1447 + (greg.getUTCFullYear()-2026); // anchor-ish
+  const hm = 1 + (days % 354) / 29.5 | 0;
+  const hd = 1 + (days % 29);
+  return { hy, hm: Math.min(12, hm), hd };
+}
+function mockChineseLunar(greg){
+  // NOT accurate. Deterministic placeholder.
+  const start = new Date(Date.UTC(greg.getUTCFullYear(),0,1));
+  const days = Math.floor((greg - start)/86400000);
+  const lm = 1 + (days % 354) / 29.5 | 0;
+  const ld = 1 + (days % 29);
+  return { lm: Math.min(12,lm), ld };
+}
+function timeOfDayBucket(hours){
+  if(hours < 11) return "morning";
+  if(hours < 17) return "afternoon";
+  if(hours < 22) return "evening";
+  return "night";
+}
+
+// Memory store (localStorage)
+const MEM_KEY = "salve_demo_memory_v1";
+function loadMemory(){
+  try{
+    const raw = localStorage.getItem(MEM_KEY);
+    if(!raw) return {};
+    return JSON.parse(raw);
+  }catch{ return {}; }
+}
+function saveMemory(mem){
+  localStorage.setItem(MEM_KEY, JSON.stringify(mem));
+}
+function memHas(mem, key){
+  const item = mem[key];
+  if(!item) return false;
+  if(item.expiresAt && Date.now() > item.expiresAt) return false;
+  return true;
+}
+function memSet(mem, key, expiresAt){
+  mem[key] = { setAt: Date.now(), expiresAt: expiresAt ? expiresAt.getTime() : null };
+  saveMemory(mem);
+}
+
+// Candidate generation (mock)
+function generateCandidates(state){
+  const now = state.now;
+  const y = now.getFullYear();
+  const m = now.getMonth()+1;
+  const d = now.getDate();
+  const mmdd = String(m).padStart(2,"0") + "-" + String(d).padStart(2,"0");
+  const tod = timeOfDayBucket(now.getHours());
+
+  const packs = selectPacksForState(state);
+  const allEvents = packs.flatMap(p => p.events.map(e => ({...e, _pack:p._id})));
+
+  const candidates = [];
+
+  for(const ev of allEvents){
+    // basic applicability by affiliation / civil participation
+    if(ev.domain === "civil" && !state.civilParticipation) continue;
+    if(ev.domain === "religious" || ev.domain === "seasonal"){
+      // require matching affiliation if specified
+      // In fixtures: islam.core is only loaded if affiliation includes islam, etc.
+      // so this is ok.
+    }
+
+    // match rule
+    let active = false;
+    let dateStr = `${y}-${String(m).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+    let windowDays = ev.windowDays ?? ev.windowDays; // fixture naming
+    let startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    let expiresAt = null;
+
+    const rule = ev.rule || {};
+    if(rule.type === "fixed"){
+      if(rule.monthAny){
+        active = (d === rule.d);
+      }else{
+        active = (m === rule.m && d === rule.d);
+      }
+    }else if(rule.type === "monthStart"){
+      active = (d === 1);
+    }else if(rule.type === "timeOfDay"){
+      active = true;
+      // we create a synthetic eventId by bucket
+      ev._variant = `time_of_day.${tod}`;
+    }else if(rule.type === "welcome"){
+      active = (state.mode === "opening" && !state.userConfigured); // first-time before entering profile
+    }else if(rule.type === "closingNight"){
+      active = (state.mode === "closing" && tod === "night");
+    }else if(rule.type === "hijriFixed"){
+      // Use mocked hijri conversion to decide
+      const h = mockHijriDate(new Date(Date.UTC(y, now.getMonth(), now.getDate())));
+      active = (h.hm === rule.month && h.hd === rule.day);
+    }else if(rule.type === "hijriMonth"){
+      const h = mockHijriDate(new Date(Date.UTC(y, now.getMonth(), now.getDate())));
+      active = (h.hm === rule.month);
+    }else if(rule.type === "cny"){
+      const c = mockChineseLunar(new Date(Date.UTC(y, now.getMonth(), now.getDate())));
+      active = (c.lm === 1 && c.ld === 1);
+    }else if(rule.type === "lantern"){
+      const c = mockChineseLunar(new Date(Date.UTC(y, now.getMonth(), now.getDate())));
+      active = (c.lm === 1 && c.ld === 15);
+    }
+
+    if(!active) continue;
+
+    // user match for nameday-style event (mock)
+    if(ev.requiresName){
+      const names = state.namesNormalized;
+      if(!names.includes(ev.requiresName)) continue;
+    }
+
+    // memory key
+    let keyBase = ev.id;
+    if(ev._variant) keyBase = ev._variant;
+    const memKey = `${keyBase}:${y}`;
+
+    // expiration: for windows use end of window from today (rough)
+    if(ev.windowDays){
+      expiresAt = new Date(startDate.getTime() + (ev.windowDays*86400000));
+    }else if(ev.windowDays === undefined && ev.windowDays !== null && ev.windowDays !== 0){
+      // no
+    }
+
+    candidates.push({
+      eventId: ev._variant ? ev._variant : ev.id,
+      baseEventId: ev.id,
+      domain: ev.domain,
+      priority: ev.priority,
+      pack: ev._pack,
+      memKey,
+      expiresAt,
+      activeDate: dateStr,
+      notes: rule.type
+    });
+  }
+
+  // Add birthday as a user-specific event (if present)
+  if(state.birthdayISO){
+    const bd = state.birthdayISO.slice(5); // MM-DD
+    if(bd === mmdd){
+      candidates.push({
+        eventId:"birthday",
+        baseEventId:"birthday",
+        domain:"personal",
+        priority:100,
+        pack:"core.personal",
+        memKey:`birthday:${y}`,
+        expiresAt:new Date(y,11,31),
+        activeDate:`${y}-${mmdd}`,
+        notes:"userBirthday"
+      });
+    }
+  }
+
+  // Add "nameday" as a per-user suggestion (not necessarily greeting for current user)
+  // (not a greeting candidate; shown elsewhere)
+
+  // sort
+  candidates.sort((a,b)=> b.priority - a.priority || a.eventId.localeCompare(b.eventId));
+  return candidates;
+}
+
+function selectPacksForState(state){
+  const packs = [];
+  // residence civil pack
+  if(state.residenceLocale === "de-DE") packs.push({ _id:"de-DE.civil", ...PACKS["de-DE.civil"]});
+  if(state.residenceLocale === "el-GR") packs.push({ _id:"el-GR.orthodox", ...PACKS["el-GR.orthodox"]});
+  if(state.residenceLocale === "en-GB") packs.push({ _id:"de-DE.civil", ...PACKS["de-DE.civil"]}); // reuse German civil as placeholder
+
+  // affiliation packs
+  if(state.affiliations.includes("islam")) packs.push({ _id:"islam.core", ...PACKS["islam.core"]});
+  if(state.affiliations.includes("chinese_traditional")) packs.push({ _id:"zh.core", ...PACKS["zh.core"]});
+  if(state.affiliations.includes("orthodox") && state.residenceLocale !== "el-GR") packs.push({ _id:"el-GR.orthodox", ...PACKS["el-GR.orthodox"]}); // allow diaspora
+  return packs;
+}
+
+function resolveLexicon(state, eventId){
+  const packs = selectPacksForState(state);
+  const entries = packs.flatMap(p => p.lexicon.map(l => ({...l, _pack:p._id})));
+
+  // special: time_of_day.* are stored as separate eventIds
+  const target = eventId;
+
+  const tryLocales = [];
+  const gl = state.greetingLanguage;
+  tryLocales.push(gl);
+  if(gl.includes("-")) tryLocales.push(gl.split("-")[0]);
+  tryLocales.push("en-GB");
+  tryLocales.push("en");
+
+  const tryScripts = [];
+  if(state.scriptPref && state.scriptPref !== "native") tryScripts.push(state.scriptPref);
+  // allow native/no script
+  tryScripts.push(undefined);
+
+  const tryFormalities = [state.formality, undefined];
+
+  for(const loc of tryLocales){
+    for(const script of tryScripts){
+      for(const form of tryFormalities){
+        const hit = entries.find(e =>
+          e.eventId === target &&
+          e.locale === loc &&
+          (script === undefined ? (e.script === undefined) : (e.script === script)) &&
+          (form === undefined ? true : e.formality === form)
+        );
+        if(hit) return hit;
+      }
+    }
+  }
+
+  // fallback: match by base eventId when variant (time_of_day.*)
+  const base = target.split(".")[0];
+  for(const loc of tryLocales){
+    const hit = entries.find(e => e.eventId === base && e.locale === loc);
+    if(hit) return hit;
+  }
+  return null;
+}
+
+function chooseGreeting(state, mem){
+  const candidates = generateCandidates(state);
+
+  // suppression by memory
+  const usable = candidates.filter(c => !memHas(mem, c.memKey));
+  const selected = usable[0] ?? candidates[0] ?? null;
+
+  if(!selected){
+    return { result:null, candidates, suppressed:[] };
+  }
+
+  // lexicon
+  let lex = resolveLexicon(state, selected.eventId);
+
+  // birthday lexicon (built-in minimal)
+  if(selected.eventId === "birthday"){
+    lex = {
+      eventId:"birthday",
+      locale: state.greetingLanguage,
+      template: state.greetingLanguage.startsWith("de") ? "Alles Gute zum Geburtstag{{#name}}, {{name}}{{/name}}!" :
+                state.greetingLanguage.startsWith("el") ? "Χρόνια Πολλά{{#name}}, {{name}}{{/name}}!" :
+                state.greetingLanguage.startsWith("tr") ? "İyi ki doğdun{{#name}}, {{name}}{{/name}}!" :
+                "Happy birthday{{#name}}, {{name}}{{/name}}!"
+    };
+  }
+
+  // if lexicon missing, fallback to English hello
+  if(!lex){
+    lex = { eventId:"fallback", locale:"en-GB", template: state.mode==="closing" ? "Bye!" : "Hello!" };
+  }
+
+  // render ctx
+  const name = state.primaryName || null;
+  const tod = timeOfDayBucket(state.now.getHours());
+  const ctx = {
+    name,
+    timeOfDay: tod,
+    voc: (state.greetingLanguage.startsWith("el") && name) ? greekVocative(name) : name
+  };
+
+  const text = renderTemplate(lex.template, ctx);
+
+  const result = {
+    eventId: selected.eventId,
+    baseEventId: selected.baseEventId,
+    text,
+    language: lex.locale,
+    script: lex.script || state.scriptPref,
+    memKey: selected.memKey,
+    pack: selected.pack,
+    priority: selected.priority
+  };
+
+  return { result, candidates, suppressed: candidates.filter(c => memHas(mem, c.memKey)) };
+}
+
+// UI helpers
+function el(id){ return document.getElementById(id); }
+function formatISODate(d){
+  const y=d.getFullYear(); const m=String(d.getMonth()+1).padStart(2,"0"); const da=String(d.getDate()).padStart(2,"0");
+  return `${y}-${m}-${da}`;
+}
+
+function renderList(items){
+  const wrap = document.createElement("div");
+  wrap.className = "list";
+  for(const it of items){
+    const row = document.createElement("div");
+    row.className = "item";
+    const left = document.createElement("div");
+    left.className="l";
+    const k = document.createElement("div");
+    k.className="k";
+    k.textContent = it.k;
+    const v = document.createElement("div");
+    v.className="v";
+    v.innerHTML = it.v;
+    left.appendChild(k); left.appendChild(v);
+    const badge = document.createElement("div");
+    badge.className = "badge " + (it.badgeClass||"");
+    badge.textContent = it.badge || "";
+    row.appendChild(left);
+    if(it.badge) row.appendChild(badge);
+    wrap.appendChild(row);
+  }
+  return wrap;
+}
+
+function todayAroundWorld(state){
+  // generate a few “friend greetings” regardless of user's own language.
+  const now = state.now;
+  const tod = timeOfDayBucket(now.getHours());
+  const snippets = [];
+
+  // German secular base
+  snippets.push({ who:"🇩🇪 German (civil)", greet: demoGreetingFor("de-DE", "latin", state.formality, tod, state.primaryName) });
+
+  // Turkish Muslim
+  snippets.push({ who:"🇹🇷 Turkish (Islam)", greet: demoHolidayOrTime("tr-TR","latin",tod,"islam", state.primaryName) });
+
+  // Greek Orthodox
+  snippets.push({ who:"🇬🇷 Greek (Orthodox)", greet: demoHolidayOrTime("el-GR","native",tod,"orthodox", state.primaryName) });
+
+  // Arabic
+  snippets.push({ who:"🇸🇦 Arabic (Islam)", greet: demoHolidayOrTime("ar","arabic",tod,"islam", null) });
+
+  // Chinese (simplified & traditional)
+  snippets.push({ who:"🇨🇳 Chinese (Simplified)", greet: demoHolidayOrTime("zh-CN","simplified",tod,"chinese_traditional", state.primaryName) });
+  snippets.push({ who:"🇹🇼 Chinese (Traditional)", greet: demoHolidayOrTime("zh-TW","traditional",tod,"chinese_traditional", state.primaryName) });
+
+  const list = snippets.map(s => ({
+    k: s.who,
+    v: `<span class="mono">${escapeHtml(s.greet)}</span>`,
+    badge: "suggestion",
+    badgeClass:"good"
+  }));
+  return renderList(list);
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, s=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[s]));
+}
+
+// Very simplified: choose “holiday” greeting if mocked event active, else time-of-day.
+function demoHolidayOrTime(locale, script, tod, affiliation, name){
+  // create a temporary state with just that affiliation
+  const tmp = {...stateSnapshot(), greetingLanguage: locale, scriptPref: script, affiliations: affiliation? [affiliation] : ["civil"], primaryName: name, namesNormalized: normalizeNames(name? [name]: [])};
+  // Force opening for nicer display
+  tmp.mode = "opening";
+  tmp.userConfigured = true;
+  const mem = {}; // ignore memory for suggestions
+  const out = chooseGreeting(tmp, mem).result;
+  return out ? out.text : demoGreetingFor(locale, script, "informal", tod, name);
+}
+
+function demoGreetingFor(locale, script, formality, tod, name){
+  // simple base greetings
+  if(locale.startsWith("de")){
+    if(tod==="morning") return `Guten Morgen${name?`, ${name}`:""}!`;
+    if(tod==="afternoon") return `Guten Tag${name?`, ${name}`:""}!`;
+    if(tod==="evening") return `Guten Abend${name?`, ${name}`:""}!`;
+    return `Gute Nacht${name?`, ${name}`:""}!`;
+  }
+  if(locale.startsWith("tr")){
+    if(tod==="morning") return `Günaydın${name?`, ${name}`:""}!`;
+    if(tod==="afternoon") return `İyi günler${name?`, ${name}`:""}!`;
+    if(tod==="evening") return `İyi akşamlar${name?`, ${name}`:""}!`;
+    return `İyi geceler${name?`, ${name}`:""}!`;
+  }
+  if(locale.startsWith("el")){
+    if(tod==="morning") return `Καλημέρα${name?` ${name}`:""}!`;
+    if(tod==="afternoon"||tod==="evening") return `Καλησπέρα${name?` ${name}`:""}!`;
+    return `Καληνύχτα${name?` ${name}`:""}!`;
+  }
+  if(locale.startsWith("zh")){
+    // generic
+    if(tod==="morning") return script==="traditional" ? "早安！" : "早上好！";
+    if(tod==="afternoon") return "你好！";
+    if(tod==="evening") return "晚上好！";
+    return "晚安！";
+  }
+  if(locale==="ar"){
+    if(tod==="morning") return "صباح الخير";
+    if(tod==="afternoon") return "مرحباً";
+    if(tod==="evening") return "مساء الخير";
+    return "تصبح على خير";
+  }
+  // fallback
+  return `Hello${name?`, ${name}`:""}!`;
+}
+
+function buildCalendarsPanel(state){
+  const g = state.now;
+  const hij = mockHijriDate(new Date(Date.UTC(g.getFullYear(), g.getMonth(), g.getDate())));
+  const chi = mockChineseLunar(new Date(Date.UTC(g.getFullYear(), g.getMonth(), g.getDate())));
+  const list = [
+    { k:"Gregorian", v:`<span class="mono">${formatISODate(g)} ${pad2(g.getHours())}:${pad2(g.getMinutes())}</span>`, badge:"base", badgeClass:"good" },
+    { k:"Hijri (mock)", v:`<span class="mono">${hij.hd} / ${hij.hm} / ${hij.hy}</span>`, badge:"plugin", badgeClass:"warn" },
+    { k:"Chinese Lunar (mock)", v:`<span class="mono">Month ${chi.lm}, Day ${chi.ld}</span>`, badge:"plugin", badgeClass:"warn" },
+    { k:"Time-of-day", v:`<span class="mono">${timeOfDayBucket(g.getHours())}</span>`, badge:"computed", badgeClass:"good" },
+  ];
+  return renderList(list);
+}
+function pad2(n){ return String(n).padStart(2,"0"); }
+
+function buildNamedayPanel(state){
+  if(!state.namedaysEnabled){
+    return renderList([{k:"Namedays disabled", v:"Enable namedays to show per‑culture nameday lists.", badge:"off", badgeClass:"bad"}]);
+  }
+  const g = state.now;
+  const mmdd = `${pad2(g.getMonth()+1)}-${pad2(g.getDate())}`;
+  const chunks = [];
+
+  const sources = [
+    { id:"el-GR", label:"🇬🇷 Greece (Orthodox)" },
+    { id:"bg-BG", label:"🇧🇬 Bulgaria (Orthodox)" },
+  ];
+  for(const src of sources){
+    const entry = (NAMEDAYS[src.id]||{})[mmdd];
+    if(entry){
+      chunks.push({
+        k: `${src.label} — ${mmdd}`,
+        v: `<div><span class="mono">${escapeHtml(entry.saint)}</span></div>
+            <div class="small" style="margin-top:6px">Names: ${entry.names.map(n=>`<span class="mono">${escapeHtml(n)}</span>`).join(", ")}</div>`,
+        badge:"today", badgeClass:"good"
+      });
+    }else{
+      chunks.push({ k:`${src.label} — ${mmdd}`, v:"No nameday entry in fixtures for today.", badge:"—", badgeClass:"warn" });
+    }
+  }
+
+  // Suggest to greet friends with those names in German (fun demo)
+  const suggestionNames = (NAMEDAYS["el-GR"][mmdd]?.names || []).slice(0,5);
+  if(suggestionNames.length){
+    const namesStr = suggestionNames.map(n=>`<span class="mono">${escapeHtml(n)}</span>`).join(", ");
+    chunks.unshift({
+      k:"Suggestion (German UI)",
+      v:`Heute könnten Sie Ihre Freunde namens ${namesStr} beglückwünschen: <span class="mono">„Alles Gute zum Namenstag!“</span>`,
+      badge:"showcase", badgeClass:"good"
+    });
+  }
+  return renderList(chunks);
+}
+
+function buildUpcomingPanel(state){
+  // mock: pick a few iconic events and pretend they're upcoming
+  const g = state.now;
+  const y = g.getFullYear();
+  const upcoming = [
+    { when: `${y}-10-03`, what: "German Unity Day", tag:"civil" },
+    { when: `${y}-12-25`, what: "Christmas", tag:"civil/cultural" },
+    { when: `${y+1}-01-01`, what: "New Year", tag:"civil" },
+    { when: `${y}-??-??`, what: "Eid al-Fitr (Hijri)", tag:"islam" },
+    { when: `${y}-??-??`, what: "Chinese New Year (Lunisolar)", tag:"chinese" },
+  ];
+  const list = upcoming.map(u=>({
+    k: u.when,
+    v: `<span>${escapeHtml(u.what)}</span><div class="small">${escapeHtml(u.tag)}</div>`,
+    badge:"forecast", badgeClass:"warn"
+  }));
+  return renderList(list);
+}
+
+function buildExplainPanel(state, out){
+  const { result, candidates, suppressed } = out;
+
+  const list = [];
+  if(!candidates.length){
+    list.push({k:"No candidates", v:"No event rules matched today. (In real Salve, time‑of‑day always matches.)", badge:"empty", badgeClass:"bad"});
+    return renderList(list);
+  }
+
+  const selectedId = result ? result.eventId : "—";
+
+  for(const c of candidates.slice(0,10)){
+    const isSel = result && c.eventId === result.eventId && c.memKey === result.memKey;
+    const isSupp = suppressed.some(s => s.memKey === c.memKey);
+    const badge = isSel ? "selected" : (isSupp ? "suppressed" : "candidate");
+    const badgeClass = isSel ? "good" : (isSupp ? "bad" : "warn");
+    list.push({
+      k: `[${c.priority}] ${c.eventId}`,
+      v: `<div class="small">pack: <span class="mono">${escapeHtml(c.pack)}</span> · rule: <span class="mono">${escapeHtml(c.notes)}</span></div>
+          <div class="mono">${escapeHtml(c.memKey)}</div>`,
+      badge, badgeClass
+    });
+  }
+
+  // Add suppression note
+  if(suppressed.length){
+    list.push({
+      k:"Suppression",
+      v:`${suppressed.length} candidate(s) suppressed by memory keys (see Developer mode → Memory store).`,
+      badge:"memory", badgeClass:"bad"
+    });
+  }else{
+    list.push({
+      k:"Suppression",
+      v:`No suppression active (try creating memory keys by clicking around, or keep the demo open across dates).`,
+      badge:"memory", badgeClass:"good"
+    });
+  }
+
+  return renderList(list);
+}
+
+function stateSnapshot(){
+  const tzSel = el("timezone").value;
+  const tz = (tzSel === "auto") ? Intl.DateTimeFormat().resolvedOptions().timeZone : tzSel;
+
+  const date = el("date").value || formatISODate(new Date());
+  const time = el("time").value || "12:00";
+  const match = time.match(/^(\d{1,2}):(\d{2})$/);
+  const hh = match ? Math.min(23, Math.max(0, parseInt(match[1],10))) : 12;
+  const mm = match ? Math.min(59, Math.max(0, parseInt(match[2],10))) : 0;
+
+  // We store now as local Date for display; timezone is conceptual (real engine will do proper tz)
+  const now = new Date(date + "T" + pad2(hh) + ":" + pad2(mm) + ":00");
+
+  const namesRaw = el("givenNames").value.trim();
+  const names = namesRaw ? namesRaw.split(";").map(s=>s.trim()).filter(Boolean) : [];
+  const primaryName = names[0] || null;
+
+  const bday = el("birthday").value || null;
+
+  const state = {
+    mode: el("mode").value,
+    formality: el("formality").value,
+    timezone: tz,
+    now,
+    residenceLocale: el("residenceLocale").value,
+    greetingLanguage: el("greetingLanguage").value,
+    scriptPref: el("scriptPref").value,
+    affiliations: getSelectedAffiliations(),
+    civilParticipation: el("civilParticipation").checked,
+    namedaysEnabled: el("namedaysEnabled").checked,
+
+    namesRaw,
+    names,
+    primaryName,
+    namesNormalized: normalizeNames(names),
+    birthdayISO: bday,
+
+    userConfigured: (names.length>0 || !!bday || getSelectedAffiliations().length>0)
+  };
+  return state;
+}
+
+function normalizeNames(names){
+  const out = [];
+  for(const n of names){
+    const s = n.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+    if(!s) continue;
+    if(s.includes("giannis") || s.includes("γιάνν")) out.push("ioannis");
+    if(s.includes("ioannis") || s.includes("ιωανν")) out.push("ioannis");
+    if(s.includes("john")) out.push("ioannis");
+    if(s.includes("ivan") || s.includes("иван")) out.push("ioannis");
+    out.push(s.replace(/\s+/g,""));
+  }
+  return Array.from(new Set(out));
+}
+
+// Selected affiliations UI
+let selectedAff = new Set(["civil"]);
+function getSelectedAffiliations(){ return Array.from(selectedAff); }
+
+function renderAffChips(){
+  const host = el("affChips");
+  host.innerHTML = "";
+  for(const a of AFFILIATIONS){
+    const c = document.createElement("div");
+    c.className = "chip " + (selectedAff.has(a.id) ? "on" : "");
+    c.textContent = a.label;
+    c.onclick = ()=>{
+      if(selectedAff.has(a.id)) selectedAff.delete(a.id);
+      else selectedAff.add(a.id);
+      // keep at least one to avoid empty confusion
+      if(selectedAff.size === 0) selectedAff.add("civil");
+      renderAffChips();
+      update();
+    };
+    host.appendChild(c);
+  }
+}
+
+function renderScenarioChips(){
+  const host = el("scenarioChips");
+  host.innerHTML = "";
+  for(const s of SCENARIOS){
+    const c = document.createElement("div");
+    c.className = "chip";
+    c.textContent = s.label;
+    c.onclick = ()=>applyScenario(s);
+    host.appendChild(c);
+  }
+}
+
+function applyScenario(scn){
+  // read current state -> mutate a plain object -> write back to UI
+  const s = {
+    residenceLocale: el("residenceLocale").value,
+    greetingLanguage: el("greetingLanguage").value,
+    scriptPref: el("scriptPref").value,
+    affiliations: getSelectedAffiliations(),
+    names: el("givenNames").value,
+    civilParticipation: el("civilParticipation").checked,
+    namedaysEnabled: el("namedaysEnabled").checked
+  };
+  scn.apply(s);
+
+  el("residenceLocale").value = s.residenceLocale;
+  el("greetingLanguage").value = s.greetingLanguage;
+  el("scriptPref").value = s.scriptPref;
+  el("givenNames").value = s.names;
+
+  selectedAff = new Set(s.affiliations);
+  renderAffChips();
+
+  el("civilParticipation").checked = !!s.civilParticipation;
+  el("namedaysEnabled").checked = !!s.namedaysEnabled;
+
+  update();
+}
+
+function updatePills(state){
+  el("pillTime").textContent = `${formatISODate(state.now)} ${pad2(state.now.getHours())}:${pad2(state.now.getMinutes())}`;
+  el("pillTZ").textContent = `TZ: ${state.timezone}`;
+  const langs = navigator.languages ? navigator.languages.slice(0,3).join(", ") : navigator.language;
+  el("pillLangs").textContent = `navigator: ${langs}`;
+}
+
+function update(){
+  const state = stateSnapshot();
+  updatePills(state);
+
+  const mem = loadMemory();
+  const out = chooseGreeting(state, mem);
+
+  // if selected and not suppressed, set memory key
+  if(out.result){
+    // In real Salve you'd only set upon "display" event; here we set immediately for demo if "opening".
+    // But we keep it conservative: only set if not already present and mode opening.
+    if(state.mode === "opening" && !memHas(mem, out.result.memKey)){
+      memSet(mem, out.result.memKey, null);
+    }
+  }
+
+  // Update UI
+  el("heroGreeting").textContent = out.result ? out.result.text : "Hello.";
+  el("metaSelected").textContent = `selected: ${out.result ? out.result.eventId : "—"} (${out.result ? out.result.pack : "—"})`;
+  el("metaLang").textContent = `lang/script: ${out.result ? out.result.language : "—"} / ${out.result ? (out.result.script || "—") : "—"}`;
+  el("metaKey").textContent = `memory: ${out.result ? out.result.memKey : "—"}`;
+
+  // Panels
+  el("aroundWorld").innerHTML = "";
+  el("aroundWorld").appendChild(todayAroundWorld(state));
+
+  el("calendarPanel").innerHTML = "";
+  el("calendarPanel").appendChild(buildCalendarsPanel(state));
+
+  el("namedayPanel").innerHTML = "";
+  el("namedayPanel").appendChild(buildNamedayPanel(state));
+
+  el("upcomingPanel").innerHTML = "";
+  el("upcomingPanel").appendChild(buildUpcomingPanel(state));
+
+  el("explainPanel").innerHTML = "";
+  el("explainPanel").appendChild(buildExplainPanel(state, out));
+
+  // Developer mode
+  const dev = el("devMode").checked;
+  el("devPanel").style.display = dev ? "block" : "none";
+  if(dev){
+    const packs = selectPacksForState(state);
+    el("devCtx").textContent = JSON.stringify({
+      now: state.now.toISOString(),
+      timezone: state.timezone,
+      mode: state.mode,
+      formality: state.formality,
+      residenceLocale: state.residenceLocale,
+      greetingLanguage: state.greetingLanguage,
+      scriptPreference: state.scriptPref,
+      affiliations: state.affiliations,
+      civilParticipation: state.civilParticipation,
+      namedaysEnabled: state.namedaysEnabled,
+      user: { givenNames: state.names, birthday: state.birthdayISO }
+    }, null, 2);
+
+    el("devCandidates").textContent = JSON.stringify(out.candidates, null, 2);
+    el("devResult").textContent = JSON.stringify(out.result, null, 2);
+    el("devMemory").textContent = JSON.stringify(loadMemory(), null, 2);
+    el("devPacks").textContent = JSON.stringify(packs.map(p=>({ packId:p._id, events:p.events, lexicon:p.lexicon })), null, 2);
+
+    el("ctxBadge").textContent = "context";
+    el("candBadge").textContent = `${out.candidates.length} items`;
+    el("resBadge").textContent = out.result ? out.result.eventId : "null";
+    el("memBadge").textContent = `${Object.keys(loadMemory()).length} keys`;
+    el("packBadge").textContent = `${packs.length} packs`;
+  }
+}
+
+// init
+function init(){
+  // date/time defaults
+  const now = new Date();
+  el("date").value = formatISODate(now);
+  el("time").value = pad2(now.getHours()) + ":" + pad2(now.getMinutes());
+
+  // locale defaults
+  const nav = navigator.language || "en-GB";
+  // pick best match
+  const localeMap = ["de-DE","el-GR","tr-TR","nl-BE","en-GB","zh-CN"];
+  let best = localeMap.find(l => nav.toLowerCase().startsWith(l.split("-")[0].toLowerCase())) || "en-GB";
+  if(best === "nl-BE") best = "nl-BE";
+  el("residenceLocale").value = best === "nl-BE" ? "nl-BE" : (best === "de-DE" ? "de-DE" : "de-DE");
+
+  el("greetingLanguage").value = best === "nl-BE" ? "de-DE" : best; // keep demo packs simple
+  // script default
+  const script = (best.startsWith("zh")) ? "simplified" : (best.startsWith("ar") ? "arabic" : "latin");
+  el("scriptPref").value = script;
+
+  // timezone auto label
+  el("timezone").value = "auto";
+
+  // chips
+  renderAffChips();
+  renderScenarioChips();
+
+  // events
+  ["mode","formality","date","time","timezone","givenNames","birthday","residenceLocale","greetingLanguage","scriptPref","civilParticipation","namedaysEnabled","devMode"]
+    .forEach(id=>{
+      const node = el(id);
+      node.addEventListener("input", update);
+      node.addEventListener("change", update);
+    });
+
+  el("btnNow").onclick = ()=>{
+    const n = new Date();
+    el("date").value = formatISODate(n);
+    el("time").value = pad2(n.getHours()) + ":" + pad2(n.getMinutes());
+    update();
+  };
+
+  el("btnClearMemory").onclick = ()=>{
+    localStorage.removeItem(MEM_KEY);
+    update();
+  };
+
+  update();
+}
+
+init();
+</script>
+</body>
+</html>

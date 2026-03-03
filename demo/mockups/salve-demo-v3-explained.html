@@ -1,0 +1,1306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Salve — Time & Locale‑Aware Greetings (Demo)</title>
+<style>
+  :root{
+    --bg:#0b0f17;
+    --fg:#e7ecf3;
+    --muted:#9fb0c6;
+    --muted2:#6f8199;
+    --line:rgba(255,255,255,.10);
+    --shadow:0 12px 40px rgba(0,0,0,.45);
+    --accent:#7aa7ff;
+    --civil:#7aa7ff;
+    --relig:#ffd37a;
+    --personal:#72f1b8;
+    --season:#b28bff;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+    --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--fg);
+    background:
+      radial-gradient(1200px 700px at 18% 0%, rgba(122,167,255,.16), transparent 60%),
+      radial-gradient(900px 600px at 100% 10%, rgba(114,241,184,.11), transparent 65%),
+      var(--bg);
+  }
+  header{
+    position:sticky; top:0; z-index:10;
+    backdrop-filter: blur(10px);
+    background:rgba(11,15,23,.72);
+    border-bottom:1px solid var(--line);
+  }
+  .top{
+    max-width:1180px;
+    margin:0 auto;
+    padding:14px 16px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  .brand{display:flex; align-items:center; gap:12px}
+  .logoSvg{
+    width:32px; height:32px;
+    color:rgba(231,236,243,.92);
+    filter: drop-shadow(0 10px 24px rgba(122,167,255,.12));
+  }
+  .brand h1{margin:0; font-size:15px; letter-spacing:.2px}
+  .brand .tag{margin-top:2px; font-size:12px; color:var(--muted)}
+  .actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+  .pill{
+    font-size:12px; color:var(--muted);
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.03);
+    padding:6px 10px; border-radius:999px;
+  }
+  .btn{
+    cursor:pointer;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.05);
+    color:var(--fg);
+    padding:8px 10px;
+    border-radius:10px;
+    font-size:12px;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:hover{border-color:rgba(122,167,255,.35); background:rgba(122,167,255,.08)}
+  .toggle{
+    display:inline-flex; gap:8px; align-items:center; font-size:12px; color:var(--muted);
+    border:1px solid var(--line); padding:6px 10px; border-radius:999px;
+    background:rgba(255,255,255,.03);
+    user-select:none;
+  }
+  .toggle input{accent-color:var(--accent)}
+  main{max-width:1180px; margin:0 auto; padding:22px 16px 60px 16px}
+  .hero{padding:18px 0 8px 0;}
+
+  .intro{margin-bottom:14px}
+  .tagline{
+    font-size:14px;
+    font-weight:760;
+    letter-spacing:.1px;
+    color:rgba(231,236,243,.92);
+  }
+  .plain{
+    margin:8px 0 0 0;
+    max-width:980px;
+    line-height:1.45;
+    font-size:13px;
+    color:var(--muted);
+  }
+  .plain strong{color:var(--fg); font-weight:750}
+
+  .headline{
+    font-size:58px;
+    font-weight:850;
+    letter-spacing:-.02em;
+    margin:0;
+    line-height:1.05;
+  }
+  @media (max-width: 820px){ .headline{font-size:44px} }
+  .subtitle{
+    margin-top:10px;
+    color:var(--muted);
+    font-size:14px;
+    display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  }
+  .kvs{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+  .kv{display:inline-flex; gap:8px; align-items:center; font-size:12px; color:var(--muted)}
+  .dot{width:7px; height:7px; border-radius:99px; background:var(--accent)}
+  .rule{font-family:var(--mono); font-size:12px; color:var(--muted2)}
+  .timelineWrap{
+    margin-top:18px;
+    padding:12px 12px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:rgba(255,255,255,.03);
+    box-shadow:var(--shadow);
+  }
+  .timelineTop{
+    display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;
+    padding:2px 4px 10px 4px;
+  }
+  .timelineTop .title{font-weight:750; font-size:13px;}
+  .timelineTop .hint{font-size:12px; color:var(--muted)}
+  .track{
+    display:flex; gap:10px;
+    overflow:auto;
+    padding:6px 4px 10px 4px;
+    scroll-snap-type:x mandatory;
+  }
+  .track::-webkit-scrollbar{height:10px}
+  .track::-webkit-scrollbar-thumb{background:rgba(255,255,255,.10); border-radius:999px}
+  .node{
+    flex:0 0 auto;
+    min-width:168px;
+    border:1px solid rgba(255,255,255,.10);
+    background:rgba(0,0,0,.16);
+    border-radius:14px;
+    padding:10px 10px;
+    cursor:pointer;
+    scroll-snap-align:start;
+    transition: transform .12s ease, border-color .12s ease, background .12s ease;
+  }
+  .node:hover{transform:translateY(-1px); border-color:rgba(122,167,255,.35)}
+  .node.sel{
+    border-color:rgba(122,167,255,.55);
+    background:linear-gradient(180deg, rgba(122,167,255,.14), rgba(0,0,0,.10));
+  }
+  .node .when{font-size:12px; color:var(--muted); display:flex; justify-content:space-between; gap:10px}
+  .node .label{margin-top:6px; font-size:13px; font-weight:750}
+  .badge{
+    font-size:11px; padding:4px 8px; border-radius:999px;
+    border:1px solid rgba(255,255,255,.12);
+    color:var(--muted);
+    white-space:nowrap;
+  }
+  .b-civil{border-color:rgba(122,167,255,.25); color:rgba(122,167,255,.95); background:rgba(122,167,255,.09)}
+  .b-relig{border-color:rgba(255,211,122,.25); color:rgba(255,211,122,.95); background:rgba(255,211,122,.08)}
+  .b-personal{border-color:rgba(114,241,184,.25); color:rgba(114,241,184,.95); background:rgba(114,241,184,.08)}
+  .b-season{border-color:rgba(178,139,255,.25); color:rgba(178,139,255,.95); background:rgba(178,139,255,.08)}
+  .controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+  .mini{
+    font-size:12px; color:var(--muted);
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.03);
+    padding:6px 10px; border-radius:10px;
+    font-family:var(--mono);
+  }
+  .strip{
+    margin-top:18px;
+    display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  }
+  .chip{
+    border:1px solid rgba(255,255,255,.10);
+    background:rgba(0,0,0,.14);
+    border-radius:999px;
+    padding:7px 10px;
+    font-size:12px;
+    color:var(--muted);
+  }
+  .chip .mono{font-family:var(--mono); color:var(--fg)}
+  .row{margin-top:18px; display:grid; grid-template-columns:1fr; gap:12px;}
+  details{
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:rgba(255,255,255,.02);
+    overflow:hidden;
+  }
+  summary{
+    cursor:pointer;
+    list-style:none;
+    padding:12px 12px;
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    font-weight:750; font-size:13px;
+  }
+  summary::-webkit-details-marker{display:none}
+  details .content{padding:0 12px 12px 12px}
+  pre{
+    margin:0;
+    padding:12px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(0,0,0,.20);
+    overflow:auto;
+    font-family:var(--mono);
+    font-size:12px;
+    color:#dbe6ff;
+  }
+  /* Settings drawer */
+  .drawer{
+    position:fixed; top:0; right:0;
+    height:100%;
+    width:min(440px, 92vw);
+    background:rgba(11,15,23,.92);
+    border-left:1px solid var(--line);
+    transform: translateX(105%);
+    transition: transform .18s ease;
+    z-index:30;
+    box-shadow: var(--shadow);
+    display:flex; flex-direction:column;
+  }
+  .drawer.open{transform: translateX(0)}
+  .drawer .dh{
+    padding:14px 14px;
+    border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+  }
+  .drawer .dh .t{font-weight:820}
+  .drawer .db{padding:14px; overflow:auto}
+  label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
+  input[type="text"], input[type="date"], select{
+    width:100%;
+    padding:10px 10px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:rgba(0,0,0,.18);
+    color:var(--fg);
+    outline:none;
+    font-size:13px;
+  }
+  select option{background:#0b0f17}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px}
+  @media (max-width: 520px){ .grid2,.grid3{grid-template-columns:1fr} }
+  .aff{display:flex; flex-wrap:wrap; gap:8px}
+  .aff .a{
+    padding:6px 10px; border-radius:999px;
+    border:1px solid rgba(255,255,255,.10);
+    background:rgba(255,255,255,.03);
+    font-size:12px; color:var(--muted);
+    cursor:pointer; user-select:none;
+  }
+  .aff .a.on{
+    color:rgba(11,15,23,.95);
+    background:linear-gradient(135deg, rgba(122,167,255,.92), rgba(114,241,184,.85));
+    border-color:transparent;
+  }
+  .small{font-size:12px; color:var(--muted2)}
+  .overlay{
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.35);
+    z-index:25;
+    display:none;
+  }
+  .overlay.show{display:block}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="brand">
+      <svg class="logoSvg" width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <!-- Hand (line style, lucide-like) -->
+  <path d="M8 11V6.5a1.5 1.5 0 0 1 3 0V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M11 10V5.8a1.4 1.4 0 1 1 2.8 0V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M13.8 10V6.3a1.35 1.35 0 1 1 2.7 0V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M7.2 11.2v-1.3a1.4 1.4 0 0 0-2.8 0v2.8c0 3.7 2.7 6.8 6.5 7.3 3.7.5 6.9-1.8 7.7-5.4l.7-3.2a1.35 1.35 0 0 0-2.6-.6l-.7 2.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Waving arcs -->
+  <path d="M19.6 3.7c1.2.9 2 2.2 2.2 3.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M18 5.7c.7.5 1.2 1.3 1.3 2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+</svg>
+      <div>
+        <h1>Salve</h1>
+        <div class="tag">Context‑aware greetings for global apps</div>
+      </div>
+    </div>
+    <div class="actions">
+      <span class="pill" id="pillNow">—</span>
+      <span class="pill" id="pillLoc">—</span>
+      <button class="btn" id="btnSettings">⚙ Settings</button>
+      <button class="btn" id="btnReset">↺ Reset</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+
+    <div class="intro">
+      <div class="tagline">Greet your users as they expect you to.</div>
+      <p class="plain" id="plainExplain">—</p>
+    </div>
+    <h2 class="headline" id="heroGreeting">—</h2>
+    <div class="subtitle">
+      <div class="kvs">
+        <span class="kv"><span class="dot"></span><span id="metaEvent">event: —</span></span>
+        <span class="kv"><span class="dot" style="background:var(--relig)"></span><span id="metaWhy">why: —</span></span>
+        <span class="kv"><span class="dot" style="background:var(--personal)"></span><span id="metaLang">lang/script: —</span></span>
+      </div>
+      <div class="rule" id="metaKey">—</div>
+    </div>
+
+    <div class="timelineWrap" id="timelineWrap">
+      <div class="timelineTop">
+        <div>
+          <div class="title">Timeline</div>
+          <div class="hint">Scrub through upcoming “interesting” dates — greeting updates live.</div>
+        </div>
+        <div class="controls">
+          <span class="mini" id="autoState">auto: on</span>
+          <button class="btn" id="btnPrev">◀</button>
+          <button class="btn" id="btnNext">▶</button>
+        </div>
+      </div>
+      <div class="track" id="timelineTrack" aria-label="Timeline of dates"></div>
+    </div>
+
+    <div class="strip" id="alsoStrip"></div>
+  </section>
+
+  <section class="row" id="devArea">
+    <details open>
+      <summary>Selected resolution trace <span class="pill" id="devBadge">—</span></summary>
+      <div class="content"><pre id="devTrace"></pre></div>
+    </details>
+    <details>
+      <summary>Candidate events (sorted)</summary>
+      <div class="content"><pre id="devCandidates"></pre></div>
+    </details>
+    <details>
+      <summary>Resolved context</summary>
+      <div class="content"><pre id="devContext"></pre></div>
+    </details>
+    <details>
+      <summary>Pack fixtures</summary>
+      <div class="content"><pre id="devPacks"></pre></div>
+    </details>
+  </section>
+</main>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Settings drawer">
+  <div class="dh">
+    <div class="t">Settings</div>
+    <button class="btn" id="btnClose">Close</button>
+  </div>
+  <div class="db">
+    <div class="grid2">
+      <div>
+        <label for="mode">Mode</label>
+        <select id="mode">
+          <option value="opening">Opening</option>
+          <option value="closing">Closing</option>
+        </select>
+      </div>
+      <div>
+        <label for="formality">Formality</label>
+        <select id="formality">
+          <option value="informal">Informal</option>
+          <option value="formal">Formal</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="height:12px"></div>
+    <div class="grid3">
+      <div>
+        <label for="date">Date</label>
+        <input id="date" type="date"/>
+      </div>
+      <div>
+        <label for="time">Time (HH:MM)</label>
+        <input id="time" type="text" placeholder="15:30"/>
+      </div>
+      <div>
+        <label for="timezone">Time zone</label>
+        <select id="timezone">
+          <option value="auto">Auto (browser)</option>
+          <option value="Europe/Berlin">Europe/Berlin</option>
+          <option value="Europe/Brussels">Europe/Brussels</option>
+          <option value="Europe/Athens">Europe/Athens</option>
+          <option value="Asia/Istanbul">Asia/Istanbul</option>
+          <option value="Asia/Shanghai">Asia/Shanghai</option>
+          <option value="UTC">UTC</option>
+        </select>
+      </div>
+    </div>
+    <div class="small" style="margin-top:8px">This demo uses fixtures and simplified mock calendar math. The real Salve engine will use pluggable calendar systems and validated packs.</div>
+
+    <div style="height:12px"></div>
+    <div class="grid2">
+      <div>
+        <label for="givenNames">Given name(s)</label>
+        <input id="givenNames" type="text" placeholder="Giannis; Mehmet; Wei"/>
+        <div class="small">Separate with <span style="font-family:var(--mono)">;</span></div>
+      </div>
+      <div>
+        <label for="birthday">Birthday</label>
+        <input id="birthday" type="date"/>
+      </div>
+    </div>
+
+    <div style="height:12px"></div>
+    <div class="grid2">
+      <div>
+        <label for="residenceLocale">Residence locale</label>
+        <select id="residenceLocale">
+          <option value="de-DE">de-DE (Germany)</option>
+          <option value="el-GR">el-GR (Greece)</option>
+          <option value="tr-TR">tr-TR (Turkey)</option>
+          <option value="nl-BE">nl-BE (Belgium)</option>
+          <option value="en-GB">en-GB (UK)</option>
+          <option value="zh-CN">zh-CN (China)</option>
+        </select>
+      </div>
+      <div>
+        <label for="greetingLanguage">Greeting language</label>
+        <select id="greetingLanguage">
+          <option value="de-DE">de-DE</option>
+          <option value="en-GB">en-GB</option>
+          <option value="el-GR">el-GR</option>
+          <option value="tr-TR">tr-TR</option>
+          <option value="ar">ar</option>
+          <option value="zh-CN">zh-CN</option>
+          <option value="zh-TW">zh-TW</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="height:12px"></div>
+    <div class="grid2">
+      <div>
+        <label for="scriptPref">Script preference</label>
+        <select id="scriptPref">
+          <option value="latin">Latin</option>
+          <option value="native">Native</option>
+          <option value="arabic">Arabic</option>
+          <option value="simplified">Simplified Chinese</option>
+          <option value="traditional">Traditional Chinese</option>
+        </select>
+      </div>
+      <div>
+        <label>Affiliations</label>
+        <div class="aff" id="affChips"></div>
+      </div>
+    </div>
+
+    <div style="height:12px"></div>
+    <label class="toggle" style="justify-content:space-between; width:100%">
+      <span>Participate in residence civil holidays</span>
+      <input type="checkbox" id="civilParticipation" checked/>
+    </label>
+    <div style="height:10px"></div>
+    <label class="toggle" style="justify-content:space-between; width:100%">
+      <span>Enable namedays (fixture)</span>
+      <input type="checkbox" id="namedaysEnabled" checked/>
+    </label>
+
+    <div style="height:12px"></div>
+    <label for="scenario">Scenario preset</label>
+    <select id="scenario">
+      <option value="">—</option>
+      <option value="de_secular">German secular</option>
+      <option value="tr_muslim_de">Turkish Muslim in Germany</option>
+      <option value="el_orthodox">Greek Orthodox</option>
+      <option value="zh_diaspora">Chinese diaspora (zh‑CN)</option>
+      <option value="dev_mixed">Mixed: English + Arabic Eid</option>
+    </select>
+  </div>
+</aside>
+
+<script>
+// ------------------------------------------------------------
+// Salve Demo V2 — Minimal landing + timeline "time machine"
+// Self-contained. Uses fixtures and simplified mock calendars.
+// ------------------------------------------------------------
+
+// ---------- Fixtures (trimmed, still expressive)
+const AFFILIATIONS = [
+  { id:"civil", label:"Civil" },
+  { id:"islam", label:"Islam" },
+  { id:"orthodox", label:"Orthodox" },
+  { id:"catholic", label:"Catholic" },
+  { id:"protestant", label:"Protestant" },
+  { id:"anglican", label:"Anglican" },
+  { id:"chinese_traditional", label:"Chinese Tradition" },
+];
+
+const PACKS = {
+  "de-DE.civil": {
+    id:"de-DE.civil",
+    events: [
+      { id:"german_unity_day", domain:"civil", calendar:"gregorian", rule:{type:"fixed", m:10, d:3}, priority:80 },
+      { id:"new_year", domain:"civil", calendar:"gregorian", rule:{type:"fixed", m:1, d:1}, priority:75, windowDays:31 },
+      { id:"month_start", domain:"temporal", calendar:"gregorian", rule:{type:"monthStart"}, priority:55 },
+      { id:"time_of_day", domain:"temporal", calendar:"gregorian", rule:{type:"timeOfDay"}, priority:30 },
+      { id:"welcome_opening", domain:"temporal", calendar:"gregorian", rule:{type:"welcome"}, priority:20 },
+      { id:"goodnight_closing", domain:"temporal", calendar:"gregorian", rule:{type:"closingNight"}, priority:35 },
+    ],
+    lexicon: [
+      { eventId:"german_unity_day", locale:"de-DE", formality:"informal", template:"Alles Gute zum Tag der Deutschen Einheit!" },
+      { eventId:"german_unity_day", locale:"de-DE", formality:"formal", template:"Einen schönen Tag der Deutschen Einheit." },
+      { eventId:"new_year", locale:"de-DE", formality:"informal", template:"Frohes neues Jahr{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"new_year", locale:"de-DE", formality:"formal", template:"Frohes neues Jahr!" },
+      { eventId:"month_start", locale:"de-DE", template:"Schönen Monat!" },
+      { eventId:"time_of_day.morning", locale:"de-DE", template:"Guten Morgen{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"time_of_day.afternoon", locale:"de-DE", template:"Guten Tag{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"time_of_day.evening", locale:"de-DE", template:"Guten Abend{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"time_of_day.night", locale:"de-DE", template:"Gute Nacht{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"welcome_opening", locale:"de-DE", template:"Willkommen{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"goodnight_closing", locale:"de-DE", template:"Gute Nacht{{#name}}, {{name}}{{/name}}." },
+    ]
+  },
+  "el-GR.orthodox": {
+    id:"el-GR.orthodox",
+    events: [
+      { id:"kalomina", domain:"temporal", calendar:"gregorian", rule:{type:"fixed", m:null, d:1, monthAny:true}, priority:70 },
+      { id:"nameday_ioannis", domain:"personal", calendar:"gregorian", rule:{type:"fixed", m:1, d:7}, priority:95, requiresName:"ioannis" },
+      { id:"time_of_day", domain:"temporal", calendar:"gregorian", rule:{type:"timeOfDay"}, priority:30 },
+      { id:"welcome_opening", domain:"temporal", calendar:"gregorian", rule:{type:"welcome"}, priority:20 },
+    ],
+    lexicon: [
+      { eventId:"kalomina", locale:"el-GR", template:"Καλομήνα{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"nameday_ioannis", locale:"el-GR", template:"Χρόνια Πολλά, {{voc}}!" },
+      { eventId:"time_of_day.morning", locale:"el-GR", template:"Καλημέρα{{#name}} σου, {{name}}{{/name}}!" },
+      { eventId:"time_of_day.afternoon", locale:"el-GR", template:"Καλησπέρα{{#name}} σου, {{name}}{{/name}}!" },
+      { eventId:"time_of_day.evening", locale:"el-GR", template:"Καλησπέρα{{#name}} σου, {{name}}{{/name}}!" },
+      { eventId:"time_of_day.night", locale:"el-GR", template:"Καληνύχτα{{#name}} σου, {{name}}{{/name}}!" },
+      { eventId:"welcome_opening", locale:"el-GR", template:"Καλώς ήρθες{{#name}}, {{name}}{{/name}}!" },
+    ]
+  },
+  "islam.core": {
+    id:"islam.core",
+    events: [
+      { id:"eid_al_fitr", domain:"religious", calendar:"hijri", rule:{type:"hijriFixed", month:10, day:1}, priority:90, windowDays:3 },
+      { id:"ramadan_season", domain:"seasonal", calendar:"hijri", rule:{type:"hijriMonth", month:9}, priority:40, windowDays:30 },
+    ],
+    lexicon: [
+      { eventId:"eid_al_fitr", locale:"tr-TR", script:"latin", template:"Bayramınız kutlu olsun{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"eid_al_fitr", locale:"en-GB", script:"latin", template:"Eid Mubarak{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"eid_al_fitr", locale:"ar", script:"arabic", template:"عيد مبارك" },
+      { eventId:"ramadan_season", locale:"tr-TR", script:"latin", template:"Hayırlı Ramazanlar!" },
+      { eventId:"ramadan_season", locale:"ar", script:"arabic", template:"رمضان كريم" },
+      { eventId:"ramadan_season", locale:"en-GB", script:"latin", template:"Ramadan Kareem!" },
+    ]
+  },
+  "zh.core": {
+    id:"zh.core",
+    events: [
+      { id:"chinese_new_year", domain:"seasonal", calendar:"chineseLunar", rule:{type:"cny"}, priority:88, windowDays:15 },
+      { id:"lantern_festival", domain:"seasonal", calendar:"chineseLunar", rule:{type:"lantern"}, priority:60, windowDays:1 },
+    ],
+    lexicon: [
+      { eventId:"chinese_new_year", locale:"zh-CN", script:"simplified", template:"新年快乐{{#name}}，{{name}}{{/name}}！" },
+      { eventId:"chinese_new_year", locale:"zh-TW", script:"traditional", template:"新年快樂{{#name}}，{{name}}{{/name}}！" },
+      { eventId:"chinese_new_year", locale:"en-GB", script:"latin", template:"Happy Chinese New Year{{#name}}, {{name}}{{/name}}!" },
+      { eventId:"lantern_festival", locale:"zh-CN", script:"simplified", template:"元宵节快乐！" },
+      { eventId:"lantern_festival", locale:"zh-TW", script:"traditional", template:"元宵節快樂！" },
+    ]
+  }
+};
+
+// ---------- Utilities
+const el = (id)=>document.getElementById(id);
+const pad2 = (n)=>String(n).padStart(2,"0");
+const fmtISO = (d)=>`${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+const escapeHtml = (s)=>String(s).replace(/[&<>"']/g, c=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+
+function timeOfDayBucket(hours){
+  if(hours < 11) return "morning";
+  if(hours < 17) return "afternoon";
+  if(hours < 22) return "evening";
+  return "night";
+}
+function mockHijriDate(gregUTC){
+  // NOT accurate. Deterministic placeholder mapping for demo visuals.
+  const start = new Date(Date.UTC(gregUTC.getUTCFullYear(),0,1));
+  const days = Math.floor((gregUTC - start)/86400000);
+  const hy = 1447 + (gregUTC.getUTCFullYear()-2026);
+  const hm = 1 + ((days % 354) / 29.5 | 0);
+  const hd = 1 + (days % 29);
+  return { hy, hm: Math.min(12, hm), hd };
+}
+function mockChineseLunar(gregUTC){
+  // NOT accurate. Deterministic placeholder mapping for demo visuals.
+  const start = new Date(Date.UTC(gregUTC.getUTCFullYear(),0,1));
+  const days = Math.floor((gregUTC - start)/86400000);
+  const lm = 1 + ((days % 354) / 29.5 | 0);
+  const ld = 1 + (days % 29);
+  return { lm: Math.min(12,lm), ld };
+}
+function greekVocative(name){
+  return name
+    .replace(/(ης)$/u,"η")
+    .replace(/(ος)$/u,"ο")
+    .replace(/Γιάννης/u,"Γιάννη")
+    .replace(/Ιωάννης/u,"Ιωάννη");
+}
+function renderTemplate(tpl, ctx){
+  tpl = tpl.replace(/\{\{#name\}\}([\s\S]*?)\{\{\/name\}\}/g, (_,inner)=> ctx.name ? inner : "");
+  tpl = tpl.replace(/\{\{voc\}\}/g, ctx.voc ?? "");
+  tpl = tpl.replace(/\{\{name\}\}/g, ctx.name ?? "");
+  return tpl;
+}
+
+// ---------- Memory (simple, but developer-friendly)
+const MEM_KEY = "salve_demo_memory_v2";
+function loadMemory(){ try{ return JSON.parse(localStorage.getItem(MEM_KEY)||"{}"); }catch{return {};} }
+function saveMemory(mem){ localStorage.setItem(MEM_KEY, JSON.stringify(mem)); }
+function memHas(mem,key){
+  const it = mem[key]; if(!it) return false;
+  if(it.expiresAt && Date.now() > it.expiresAt) return false;
+  return true;
+}
+function memSet(mem,key,expiresAt){
+  mem[key] = { setAt: Date.now(), expiresAt: expiresAt ? expiresAt.getTime() : null };
+  saveMemory(mem);
+}
+
+// ---------- State
+let selectedAff = new Set(["civil","islam","orthodox","chinese_traditional"]); // richer by default to showcase
+let autoPlay = true;
+let autoTimer = null;
+let autoIndex = 0;
+let timelineItems = []; // {date, label, type, eventId, packId, key}
+
+// ---------- Pack selection (mock)
+function selectPacksForState(state){
+  const packs = [];
+  // civil packs by residence (demo: reuse de-DE broadly)
+  if(state.residenceLocale === "de-DE" || state.residenceLocale === "nl-BE" || state.residenceLocale === "en-GB"){
+    packs.push(PACKS["de-DE.civil"]);
+  }
+  if(state.residenceLocale === "el-GR"){
+    packs.push(PACKS["el-GR.orthodox"]);
+  }
+  // affiliations
+  if(state.affiliations.includes("islam")) packs.push(PACKS["islam.core"]);
+  if(state.affiliations.includes("orthodox") && !packs.find(p=>p.id==="el-GR.orthodox")) packs.push(PACKS["el-GR.orthodox"]);
+  if(state.affiliations.includes("chinese_traditional")) packs.push(PACKS["zh.core"]);
+  return packs.filter(Boolean);
+}
+
+function resolveLexicon(state, eventId){
+  const packs = selectPacksForState(state);
+  const entries = packs.flatMap(p=>p.lexicon.map(x=>({...x, _pack:p.id})));
+  const gl = state.greetingLanguage;
+  const tryLocales = [gl, gl.includes("-")?gl.split("-")[0]:null, "en-GB", "en"].filter(Boolean);
+  const tryScripts = [state.scriptPref, undefined];
+  const tryForms = [state.formality, undefined];
+
+  for(const loc of tryLocales){
+    for(const script of tryScripts){
+      for(const form of tryForms){
+        const hit = entries.find(e =>
+          e.eventId===eventId &&
+          e.locale===loc &&
+          (script===undefined ? (e.script===undefined) : (e.script===script)) &&
+          (form===undefined ? true : e.formality===form)
+        );
+        if(hit) return hit;
+      }
+    }
+  }
+  return null;
+}
+
+// ---------- Candidate generation
+function normalizeNames(names){
+  const out = [];
+  for(const n of names){
+    const s = n.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+    if(!s) continue;
+    // Demo-level cross-language equivalence examples:
+    if(s.includes("giannis") || s.includes("γιάνν")) out.push("ioannis");
+    if(s.includes("ioannis") || s.includes("ιωανν")) out.push("ioannis");
+    if(s.includes("john")) out.push("ioannis");
+    if(s.includes("jan")) out.push("ioannis");
+    if(s.includes("ivan") || s.includes("иван")) out.push("ioannis");
+    out.push(s.replace(/\s+/g,""));
+  }
+  return Array.from(new Set(out));
+}
+
+function stateSnapshot(){
+  const tzSel = el("timezone").value;
+  const tz = (tzSel==="auto") ? Intl.DateTimeFormat().resolvedOptions().timeZone : tzSel;
+
+  const date = el("date").value || fmtISO(new Date());
+  const time = el("time").value || "12:00";
+  const m = time.match(/^(\d{1,2}):(\d{2})$/);
+  const hh = m ? Math.min(23, Math.max(0, parseInt(m[1],10))) : 12;
+  const mm = m ? Math.min(59, Math.max(0, parseInt(m[2],10))) : 0;
+  const now = new Date(date + "T" + pad2(hh) + ":" + pad2(mm) + ":00");
+
+  const namesRaw = (el("givenNames").value || "").trim();
+  const names = namesRaw ? namesRaw.split(";").map(s=>s.trim()).filter(Boolean) : [];
+  const primaryName = names[0] || null;
+
+  const birthdayISO = el("birthday").value || null;
+
+  return {
+    now,
+    timezone: tz,
+    mode: el("mode").value,
+    formality: el("formality").value,
+    residenceLocale: el("residenceLocale").value,
+    greetingLanguage: el("greetingLanguage").value,
+    scriptPref: el("scriptPref").value,
+    affiliations: Array.from(selectedAff),
+    civilParticipation: el("civilParticipation").checked,
+    namedaysEnabled: el("namedaysEnabled").checked,
+    names, primaryName,
+    namesNormalized: normalizeNames(names),
+    birthdayISO,
+    userConfigured: (names.length>0 || !!birthdayISO || Array.from(selectedAff).length>0)
+  };
+}
+
+function generateCandidates(state){
+  const now = state.now;
+  const y = now.getFullYear();
+  const m = now.getMonth()+1;
+  const d = now.getDate();
+  const mmdd = `${pad2(m)}-${pad2(d)}`;
+  const tod = timeOfDayBucket(now.getHours());
+  const packs = selectPacksForState(state);
+  const allEvents = packs.flatMap(p => p.events.map(e=>({...e, _pack:p.id})));
+
+  const candidates = [];
+
+  for(const ev of allEvents){
+    if(ev.domain==="civil" && !state.civilParticipation) continue;
+
+    let active = false;
+    const rule = ev.rule || {};
+    if(rule.type==="fixed"){
+      if(rule.monthAny) active = (d===rule.d);
+      else active = (m===rule.m && d===rule.d);
+    } else if(rule.type==="monthStart"){
+      active = (d===1);
+    } else if(rule.type==="timeOfDay"){
+      active = true;
+      ev._variant = `time_of_day.${tod}`;
+    } else if(rule.type==="welcome"){
+      active = (state.mode==="opening" && !state.userConfigured);
+    } else if(rule.type==="closingNight"){
+      active = (state.mode==="closing" && tod==="night");
+    } else if(rule.type==="hijriFixed"){
+      const h = mockHijriDate(new Date(Date.UTC(y, now.getMonth(), now.getDate())));
+      active = (h.hm===rule.month && h.hd===rule.day);
+    } else if(rule.type==="hijriMonth"){
+      const h = mockHijriDate(new Date(Date.UTC(y, now.getMonth(), now.getDate())));
+      active = (h.hm===rule.month);
+    } else if(rule.type==="cny"){
+      const c = mockChineseLunar(new Date(Date.UTC(y, now.getMonth(), now.getDate())));
+      active = (c.lm===1 && c.ld===1);
+    } else if(rule.type==="lantern"){
+      const c = mockChineseLunar(new Date(Date.UTC(y, now.getMonth(), now.getDate())));
+      active = (c.lm===1 && c.ld===15);
+    }
+
+    if(!active) continue;
+
+    if(ev.requiresName){
+      if(!state.namesNormalized.includes(ev.requiresName)) continue;
+    }
+
+    const eventId = ev._variant ? ev._variant : ev.id;
+    const memKey = `${eventId}:${y}`;
+    const expiresAt = ev.windowDays ? new Date(now.getFullYear(), now.getMonth(), now.getDate() + ev.windowDays) : null;
+
+    candidates.push({
+      eventId, baseEventId: ev.id,
+      domain: ev.domain, calendar: ev.calendar,
+      priority: ev.priority,
+      packId: ev._pack,
+      memKey, expiresAt,
+      ruleType: rule.type
+    });
+  }
+
+  // Birthday: core personal event
+  if(state.birthdayISO){
+    if(state.birthdayISO.slice(5)===mmdd){
+      candidates.push({
+        eventId:"birthday",
+        baseEventId:"birthday",
+        domain:"personal",
+        calendar:"gregorian",
+        priority:100,
+        packId:"core.personal",
+        memKey:`birthday:${y}`,
+        expiresAt:new Date(y,11,31),
+        ruleType:"userBirthday"
+      });
+    }
+  }
+
+  candidates.sort((a,b)=> b.priority - a.priority || a.eventId.localeCompare(b.eventId));
+  return candidates;
+}
+
+function chooseGreeting(state, mem){
+  const candidates = generateCandidates(state);
+  const usable = candidates.filter(c => !memHas(mem, c.memKey));
+  const selected = usable[0] || candidates[0] || null;
+
+  if(!selected){
+    return { result:null, candidates, suppressed:[], trace:{reason:"noCandidates"} };
+  }
+
+  let lex = null;
+  if(selected.eventId==="birthday"){
+    lex = {
+      eventId:"birthday",
+      locale: state.greetingLanguage,
+      template: state.greetingLanguage.startsWith("de") ? "Alles Gute zum Geburtstag{{#name}}, {{name}}{{/name}}!" :
+                state.greetingLanguage.startsWith("el") ? "Χρόνια Πολλά{{#name}}, {{name}}{{/name}}!" :
+                state.greetingLanguage.startsWith("tr") ? "İyi ki doğdun{{#name}}, {{name}}{{/name}}!" :
+                "Happy birthday{{#name}}, {{name}}{{/name}}!"
+    };
+  } else {
+    lex = resolveLexicon(state, selected.eventId);
+  }
+
+  if(!lex){
+    lex = { eventId:"fallback", locale:"en-GB", template: "Hello!" };
+  }
+
+  const name = state.primaryName || null;
+  const ctx = {
+    name,
+    voc: (state.greetingLanguage.startsWith("el") && name) ? greekVocative(name) : name
+  };
+  const text = renderTemplate(lex.template, ctx);
+
+  const result = {
+    text,
+    eventId: selected.eventId,
+    baseEventId: selected.baseEventId,
+    domain: selected.domain,
+    calendar: selected.calendar,
+    priority: selected.priority,
+    packId: selected.packId,
+    language: lex.locale,
+    script: lex.script || state.scriptPref,
+    memKey: selected.memKey
+  };
+
+  const suppressed = candidates.filter(c=>memHas(mem,c.memKey));
+
+  const trace = {
+    selected,
+    lexicon: { locale: lex.locale, script: lex.script || null, template: lex.template },
+    suppressedCount: suppressed.length,
+    suppressionActive: suppressed.length>0
+  };
+
+  return { result, candidates, suppressed, trace };
+}
+
+// ---------- Timeline computation
+function isInterestingCandidate(c){
+  if(c.eventId.startsWith("time_of_day.")) return false;
+  if(c.eventId==="welcome_opening") return false;
+  return true;
+}
+function classifyDomain(domain, eventId){
+  if(eventId==="birthday" || domain==="personal") return "personal";
+  if(domain==="civil" || domain==="temporal") return "civil";
+  if(domain==="religious") return "relig";
+  if(domain==="seasonal") return "season";
+  return "civil";
+}
+function badgeClass(type){
+  return type==="civil" ? "b-civil" :
+         type==="relig" ? "b-relig" :
+         type==="personal" ? "b-personal" : "b-season";
+}
+function badgeLabel(type){
+  return type==="civil" ? "civil" :
+         type==="relig" ? "religious" :
+         type==="personal" ? "personal" : "seasonal";
+}
+function humanLabel(baseEventId){
+  const map = {
+    german_unity_day:"German Unity Day",
+    new_year:"New Year (window)",
+    month_start:"Month start",
+    kalomina:"Καλό μήνα",
+    nameday_ioannis:"Name day: Ioannis",
+    eid_al_fitr:"Eid al‑Fitr",
+    ramadan_season:"Ramadan (season)",
+    chinese_new_year:"Chinese New Year",
+    lantern_festival:"Lantern Festival",
+    birthday:"Birthday"
+  };
+  return map[baseEventId] || baseEventId;
+}
+
+function computeTimeline(state){
+  const items = [];
+  const base = new Date(state.now.getFullYear(), state.now.getMonth(), state.now.getDate(), state.now.getHours(), state.now.getMinutes(), 0);
+
+  items.push({
+    date: new Date(base.getTime()),
+    key: fmtISO(base),
+    label: "Today",
+    type: "civil",
+    eventId: null,
+    packId: null
+  });
+
+  const seen = new Set();
+  const horizonDays = 365;
+  const mem = {}; // ignore memory for discovery
+  const scanState = {...state, mode:"opening", userConfigured:true};
+
+  for(let i=0;i<=horizonDays;i++){
+    const dt = new Date(base.getFullYear(), base.getMonth(), base.getDate()+i, base.getHours(), base.getMinutes(), 0);
+    scanState.now = dt;
+
+    const out = chooseGreeting(scanState, mem);
+    const todays = out.candidates.filter(isInterestingCandidate);
+
+    for(const c of todays){
+      const id = c.eventId;
+      if(seen.has(id)) continue;
+      seen.add(id);
+      const type = classifyDomain(c.domain, c.eventId);
+      items.push({
+        date: new Date(dt.getTime()),
+        key: `${fmtISO(dt)}:${c.eventId}`,
+        label: humanLabel(c.baseEventId),
+        type,
+        eventId: c.eventId,
+        baseEventId: c.baseEventId,
+        packId: c.packId
+      });
+    }
+    if(items.length>=12) break;
+  }
+
+  items.sort((a,b)=> a.date - b.date || (a.label==="Today" ? -1 : 1));
+  return items.slice(0, 12);
+}
+
+// ---------- "Also today" strip
+function renderAlsoStrip(state){
+  const host = el("alsoStrip");
+  host.innerHTML = "";
+
+  const samples = [
+    { flag:"🇩🇪", text: (chooseGreeting({...state, greetingLanguage:"de-DE", scriptPref:"latin", affiliations:["civil"], userConfigured:true}, {}).result||{text:"Hallo!"}).text },
+    { flag:"🇹🇷", text: (chooseGreeting({...state, greetingLanguage:"tr-TR", scriptPref:"latin", affiliations:["islam"], userConfigured:true}, {}).result||{text:"Merhaba!"}).text },
+    { flag:"🇬🇷", text: (chooseGreeting({...state, greetingLanguage:"el-GR", scriptPref:"native", affiliations:["orthodox"], userConfigured:true}, {}).result||{text:"Γειά!"}).text },
+    { flag:"🇸🇦", text: (chooseGreeting({...state, greetingLanguage:"ar", scriptPref:"arabic", affiliations:["islam"], userConfigured:true}, {}).result||{text:"مرحباً"}).text },
+    { flag:"🇨🇳", text: (chooseGreeting({...state, greetingLanguage:"zh-CN", scriptPref:"simplified", affiliations:["chinese_traditional"], userConfigured:true}, {}).result||{text:"你好"}).text },
+  ];
+
+  for(const it of samples){
+    const div = document.createElement("div");
+    div.className = "chip";
+    div.innerHTML = `${it.flag} <span class="mono">${escapeHtml(it.text)}</span>`;
+    host.appendChild(div);
+  }
+}
+
+// ---------- UI
+function renderAffChips(){
+  const host = el("affChips");
+  host.innerHTML = "";
+  for(const a of AFFILIATIONS){
+    const chip = document.createElement("div");
+    chip.className = "a " + (selectedAff.has(a.id) ? "on" : "");
+    chip.textContent = a.label;
+    chip.onclick = ()=>{
+      if(selectedAff.has(a.id)) selectedAff.delete(a.id);
+      else selectedAff.add(a.id);
+      if(selectedAff.size===0) selectedAff.add("civil");
+      renderAffChips();
+      rebuildTimelineAndUpdate(true);
+    };
+    host.appendChild(chip);
+  }
+}
+
+function setDateInUI(d){
+  el("date").value = fmtISO(d);
+  el("time").value = `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+}
+
+function renderTimeline(selectedKey){
+  const track = el("timelineTrack");
+  track.innerHTML = "";
+  for(const it of timelineItems){
+    const node = document.createElement("div");
+    node.className = "node" + (it.key===selectedKey ? " sel" : "");
+    const when = it.label==="Today" ? "Today" : it.date.toLocaleDateString(undefined, { month:"short", day:"numeric" });
+    node.innerHTML = `
+      <div class="when">
+        <span>${escapeHtml(when)}</span>
+        <span class="badge ${badgeClass(it.type)}">${badgeLabel(it.type)}</span>
+      </div>
+      <div class="label">${escapeHtml(it.label)}</div>
+      <div class="small" style="margin-top:6px">${escapeHtml(fmtISO(it.date))}</div>
+    `;
+    node.onclick = ()=>{
+      pauseAuto("clicked timeline");
+      setDateInUI(it.date);
+      updateFromUI({setMemory:false});
+      highlightTimeline(it.key, true);
+    };
+    track.appendChild(node);
+  }
+}
+
+function highlightTimeline(key, scrollIntoView){
+  const nodes = Array.from(el("timelineTrack").querySelectorAll(".node"));
+  nodes.forEach((n,i)=>{
+    const it = timelineItems[i];
+    n.classList.toggle("sel", it && it.key===key);
+    if(scrollIntoView && it && it.key===key){
+      n.scrollIntoView({behavior:"smooth", inline:"start", block:"nearest"});
+    }
+  });
+}
+
+function pickBestLandingDate(){
+  const state = stateSnapshot();
+  const out = chooseGreeting(state, {});
+  const isGeneric = !out.result || out.result.eventId.startsWith("time_of_day.") || out.result.eventId==="welcome_opening";
+  if(!isGeneric) return {date: state.now, key: fmtISO(state.now)};
+  const next = timelineItems.find(it => it.label!=="Today" && it.eventId && !it.eventId.startsWith("time_of_day."));
+  return next ? {date: next.date, key: next.key} : {date: state.now, key: fmtISO(state.now)};
+}
+
+// ---------- Auto cycling
+function startAuto(){
+  stopAuto();
+  autoPlay = true;
+  el("autoState").textContent = "auto: on";
+  autoTimer = setInterval(()=>{
+    if(!autoPlay) return;
+    if(timelineItems.length<=1) return;
+    autoIndex = (autoIndex + 1) % timelineItems.length;
+    const it = timelineItems[autoIndex];
+    setDateInUI(it.date);
+    updateFromUI({setMemory:false});
+    highlightTimeline(it.key, true);
+  }, 3500);
+}
+function stopAuto(){ if(autoTimer) clearInterval(autoTimer); autoTimer=null; }
+function pauseAuto(reason){
+  autoPlay = false;
+  el("autoState").textContent = "auto: off";
+  stopAuto();
+  setTimeout(()=>{ autoIndex=0; startAuto(); }, 8000);
+}
+
+// ---------- Main update
+function updateFromUI(opts={setMemory:true}){
+  const state = stateSnapshot();
+  const mem = loadMemory();
+  const out = chooseGreeting(state, mem);
+
+  if(opts.setMemory && out.result && state.mode==="opening" && !memHas(mem, out.result.memKey)){
+    memSet(mem, out.result.memKey, out.trace.selected.expiresAt || null);
+  }
+
+  el("pillNow").textContent = `${fmtISO(state.now)} ${pad2(state.now.getHours())}:${pad2(state.now.getMinutes())}`;
+  el("pillLoc").textContent = `${state.residenceLocale} → ${state.greetingLanguage}/${state.scriptPref}`;
+
+  // Plain-language explanation (above hero)
+  const dateLong = state.now.toLocaleDateString(state.residenceLocale, { year:"numeric", month:"long", day:"numeric" });
+  const timeShort = `${pad2(state.now.getHours())}:${pad2(state.now.getMinutes())}`;
+  const langName = (()=>{
+    try{ return new Intl.DisplayNames([state.residenceLocale], {type:"language"}).of(state.greetingLanguage.split("-")[0]) || state.greetingLanguage; }
+    catch{ return state.greetingLanguage; }
+  })();
+  const regionName = (()=>{
+    try{
+      const reg = state.residenceLocale.split("-")[1];
+      return reg ? (new Intl.DisplayNames([state.residenceLocale], {type:"region"}).of(reg) || state.residenceLocale) : state.residenceLocale;
+    } catch { return state.residenceLocale; }
+  })();
+  const who = state.primaryName ? `Your user is <strong>${escapeHtml(state.primaryName)}</strong>. ` : `Your user is a <strong>returning visitor</strong> (name unknown). `;
+  const form = state.formality==="formal" ? "formal" : "informal";
+  const why = out.result ? `<strong>${escapeHtml(out.result.baseEventId || out.result.eventId)}</strong>` : "<strong>—</strong>";
+  const reasonLine = out.result ? `an event: ${why}.` : "no event matched.";
+  const p = `Today is <strong>${escapeHtml(dateLong)}</strong>. It is <strong>${escapeHtml(timeShort)}</strong> in <strong>${escapeHtml(state.timezone)}</strong>. `
+          + `${who}`
+          + `They are using <strong>${escapeHtml(langName)}</strong> (${escapeHtml(state.greetingLanguage)}) and reside in <strong>${escapeHtml(regionName)}</strong>. `
+          + `Salve applies the highest‑priority applicable rule — ${reasonLine} Therefore, you should greet them with:`;
+  const pe = document.getElementById("plainExplain");
+  if(pe) pe.innerHTML = p;
+
+  el("heroGreeting").textContent = out.result ? out.result.text : "Hello.";
+  const ev = out.result ? out.result.eventId : "—";
+  el("metaEvent").textContent = `event: ${ev}`;
+  el("metaWhy").textContent = out.result ? `priority ${out.result.priority} · ${out.result.domain} · ${out.result.calendar}` : "—";
+  el("metaLang").textContent = out.result ? `${out.result.language} / ${out.result.script}` : "—";
+  el("metaKey").textContent = out.result ? `memKey: ${out.result.memKey} · pack: ${out.result.packId}` : "";
+
+  renderAlsoStrip(state);
+
+  const devOn = el("__devModeRemoved__").checked;
+  el("devArea").style.display = devOn ? "grid" : "none";
+  if(devOn){
+    el("devBadge").textContent = out.result ? out.result.eventId : "—";
+    el("devTrace").textContent = JSON.stringify(out.trace, null, 2);
+    el("devCandidates").textContent = JSON.stringify(out.candidates, null, 2);
+    el("devContext").textContent = JSON.stringify({
+      now: state.now.toISOString(),
+      timezone: state.timezone,
+      mode: state.mode,
+      formality: state.formality,
+      residenceLocale: state.residenceLocale,
+      greetingLanguage: state.greetingLanguage,
+      scriptPref: state.scriptPref,
+      affiliations: state.affiliations,
+      civilParticipation: state.civilParticipation,
+      namedaysEnabled: state.namedaysEnabled,
+      user: { names: state.names, birthday: state.birthdayISO }
+    }, null, 2);
+    el("devPacks").textContent = JSON.stringify(selectPacksForState(state), null, 2);
+  }
+
+  return {state, out};
+}
+
+function rebuildTimelineAndUpdate(isUserAction=false){
+  const state = stateSnapshot();
+  timelineItems = computeTimeline(state);
+  const match = timelineItems[0];
+  renderTimeline(match.key);
+  autoIndex = 0;
+  updateFromUI({setMemory: !isUserAction});
+}
+
+// ---------- Drawer
+function openDrawer(){ el("drawer").classList.add("open"); el("overlay").classList.add("show"); pauseAuto("opened settings"); }
+function closeDrawer(){ el("drawer").classList.remove("open"); el("overlay").classList.remove("show"); }
+function wireDrawer(){
+  el("btnSettings").onclick = openDrawer;
+  el("btnClose").onclick = closeDrawer;
+  el("overlay").onclick = closeDrawer;
+}
+
+// ---------- Scenario presets
+function applyScenario(id){
+  const s = {
+    de_secular: ()=>{
+      el("residenceLocale").value="de-DE";
+      el("greetingLanguage").value="de-DE";
+      el("scriptPref").value="latin";
+      selectedAff = new Set(["civil"]);
+      el("givenNames").value="Johannes";
+      el("namedaysEnabled").checked=false;
+      el("civilParticipation").checked=true;
+    },
+    tr_muslim_de: ()=>{
+      el("residenceLocale").value="de-DE";
+      el("greetingLanguage").value="tr-TR";
+      el("scriptPref").value="latin";
+      selectedAff = new Set(["civil","islam"]);
+      el("givenNames").value="Mehmet";
+      el("namedaysEnabled").checked=false;
+      el("civilParticipation").checked=true;
+    },
+    el_orthodox: ()=>{
+      el("residenceLocale").value="el-GR";
+      el("greetingLanguage").value="el-GR";
+      el("scriptPref").value="native";
+      selectedAff = new Set(["civil","orthodox"]);
+      el("givenNames").value="Γιάννης";
+      el("namedaysEnabled").checked=true;
+      el("civilParticipation").checked=true;
+    },
+    zh_diaspora: ()=>{
+      el("residenceLocale").value="de-DE";
+      el("greetingLanguage").value="zh-CN";
+      el("scriptPref").value="simplified";
+      selectedAff = new Set(["civil","chinese_traditional"]);
+      el("givenNames").value="Wei";
+      el("namedaysEnabled").checked=false;
+      el("civilParticipation").checked=true;
+    },
+    dev_mixed: ()=>{
+      el("residenceLocale").value="en-GB";
+      el("greetingLanguage").value="ar";
+      el("scriptPref").value="arabic";
+      selectedAff = new Set(["islam"]);
+      el("givenNames").value="Amina";
+      el("namedaysEnabled").checked=false;
+      el("civilParticipation").checked=false;
+    }
+  };
+  if(s[id]) s[id]();
+  renderAffChips();
+  rebuildTimelineAndUpdate(true);
+}
+
+function wireTimelineControls(){
+  el("btnPrev").onclick = ()=>{
+    pauseAuto("prev");
+    if(!timelineItems.length) return;
+    autoIndex = (autoIndex - 1 + timelineItems.length) % timelineItems.length;
+    const it = timelineItems[autoIndex];
+    setDateInUI(it.date);
+    updateFromUI({setMemory:false});
+    highlightTimeline(it.key, true);
+  };
+  el("btnNext").onclick = ()=>{
+    pauseAuto("next");
+    if(!timelineItems.length) return;
+    autoIndex = (autoIndex + 1) % timelineItems.length;
+    const it = timelineItems[autoIndex];
+    setDateInUI(it.date);
+    updateFromUI({setMemory:false});
+    highlightTimeline(it.key, true);
+  };
+  const track = el("timelineTrack");
+  track.addEventListener("wheel", ()=>pauseAuto("timeline scroll"), {passive:true});
+  track.addEventListener("touchstart", ()=>pauseAuto("timeline touch"), {passive:true});
+}
+
+function wireInputs(){
+  const ids = ["mode","formality","date","time","timezone","givenNames","birthday","residenceLocale","greetingLanguage","scriptPref","civilParticipation","namedaysEnabled"];
+  ids.forEach(id=>{
+    el(id).addEventListener("change", ()=>{ pauseAuto("changed input"); rebuildTimelineAndUpdate(true); });
+  });
+  el("scenario").addEventListener("change", (e)=>{
+    const v = e.target.value;
+    if(v) applyScenario(v);
+  });
+
+  el("btnReset").onclick = ()=>{
+    localStorage.removeItem(MEM_KEY);
+    init(true);
+  };
+}
+
+function init(){
+  const now = new Date();
+  el("date").value = fmtISO(now);
+  el("time").value = `${pad2(now.getHours())}:${pad2(now.getMinutes())}`;
+  el("timezone").value = "auto";
+
+  const nav = (navigator.language || "en-GB").toLowerCase();
+  const residence = nav.startsWith("el") ? "el-GR" :
+                    nav.startsWith("tr") ? "tr-TR" :
+                    nav.startsWith("zh") ? "zh-CN" :
+                    nav.startsWith("nl") ? "nl-BE" :
+                    nav.startsWith("de") ? "de-DE" : "de-DE";
+  el("residenceLocale").value = residence;
+  el("greetingLanguage").value = residence==="nl-BE" ? "de-DE" : residence;
+  el("scriptPref").value = nav.startsWith("zh") ? "simplified" : (nav.startsWith("ar") ? "arabic" : "latin");
+
+  el("givenNames").value = "Jan; Mehmet; Giannis";
+  el("birthday").value = "";
+  el("civilParticipation").checked = true;
+  el("namedaysEnabled").checked = true;
+  el("mode").value = "opening";
+  el("formality").value = "informal";
+
+  selectedAff = new Set(["civil","islam","orthodox","chinese_traditional"]);
+  renderAffChips();
+
+  rebuildTimelineAndUpdate(false);
+
+  const pick = pickBestLandingDate();
+  if(pick && pick.date){
+    setDateInUI(pick.date);
+    updateFromUI({setMemory:false});
+    highlightTimeline(pick.key, true);
+    autoIndex = timelineItems.findIndex(it=>it.key===pick.key);
+    if(autoIndex<0) autoIndex=0;
+  }
+
+  startAuto();
+}
+
+wireDrawer();
+wireTimelineControls();
+wireInputs();
+renderAffChips();
+init();
+</script>
+</body>
+</html>
