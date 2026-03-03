@@ -33,9 +33,10 @@ This document outlines the detailed, staged implementation plan for the Salve Un
     - Add basic astronomical events (full moon, eclipses).
 
 ## Milestone 4: Address Protocol & Social Context
-- **M4.1: Address Resolver**
-    - Implement logic for honorific/title construction.
-    - Support for relationship axes (stranger vs. friend).
+- **M4.1: Address Resolver** (Completed)
+    - Implement localized honorific resolution (Mr/Ms/Mx).
+    - Support academic and professional title integration.
+    - Implement formality-based address formatting.
 - **M4.2: Vocabulary & Punctuation**
     - Implement locale-specific punctuation rules (comma placement).
     - Support for vocative case inflections (morphology hooks).

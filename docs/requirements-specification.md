@@ -18,6 +18,18 @@ Generic fallbacks (e.g., "Hello") are only used when no specialized greeting exi
 ### 2.2 Privacy & Offline-First
 All resolution MUST happen locally. Salve SHALL NOT require runtime API calls to external services. Data is distributed through modular "packs" that are bundled at build-time or fetched and cached at initialization.
 
+### 2.3 Reuse vs. Build (Boundary Definition)
+Following the "Don't Reinvent the Wheel" principle, Salve explicitly defines its boundaries:
+- **Delegate to CLDR/ICU/Intl**: 
+    - Locale identifiers, scripts, and likelySubtags.
+    - Localized date/time formatting (day/month names).
+    - Plural rules and grammatical number.
+- **Build internally (Salve Core/Plugins)**:
+    - **Computus & Event Semantics**: Specific holiday logic (Easter, Ramadan) not provided by `Intl`.
+    - **Cultural Modeling**: Tradition/affiliation mapping and specificity scoring.
+    - **Greeting Lexicon**: Multi-language/multi-script phrase inventory.
+    - **Anti-Repetition**: Runtime memory of delivered greetings.
+
 ### 2.3 CLDR & BCP 47 Alignment
 Salve data structures MUST align with the Unicode Common Locale Data Repository (CLDR) patterns and use BCP 47 locale identifiers. Data packs SHALL be organized hierarchically to support locale inheritance.
 
@@ -27,11 +39,6 @@ Salve data structures MUST align with the Unicode Common Locale Data Repository 
 - **Multi-Calendar Support**: MUST support Gregorian, Hijri, Julian, Revised Julian, and Chinese Lunisolar calendars.
 - **Event Domains**: MUST categorize events into `Personal` (Birthday, Name-day), `Religious` (Easter, Eid), `Civil` (National holidays), `Temporal` (Time of day), and `Cultural Baseline`.
 - **Priority Scoring**: MUST use a deterministic priority system (e.g., Personal > Religious > Civil > Cultural Baseline > Temporal > Generic).
-
-### 3.2 Address Protocol Layer
-- **Social Role Modeling**: MUST support addressing users based on their relationship (stranger, acquaintance, friend, family, superior, subordinate).
-- **Honorifics & Titles**: MUST handle academic titles (Dr., Prof.), professional roles (Judge, Officer), and traditional honorifics (Herr, Frau, Monsieur).
-- **Locale-Specific Grammar**: MUST apply correct title precedence, gender agreement, and vocative morphology (e.g., Greek vocative case for names).
 
 ### 3.3 Name-Day Subsystem
 - **Canonical Saint Identity**: MUST use stable IDs as pivots between languages (e.g., `saint.george`).
