@@ -1,0 +1,438 @@
+# RFC-DRAFT: Salve --- Universal Greeting & Cultural Awareness Engine
+
+Category: Standards Track\
+Version: 1.0.0-draft\
+Status: Draft Specification\
+Date: 2026-03-02T16:12:11.926786 UTC
+
+------------------------------------------------------------------------
+
+# Abstract
+
+This document specifies the Salve Universal Greeting & Cultural
+Awareness Engine ("Salve").\
+Salve is a modular, data-driven, calendar-aware, multi-tradition
+greeting system designed to generate culturally and temporally
+appropriate greetings.
+
+This specification defines:
+
+-   Functional requirements
+-   Architectural boundaries
+-   Distribution model
+-   Monorepo organization
+-   Pack system
+-   Name-day resolution system
+-   Calendar plugin framework
+-   Loader and integrity model
+-   CLI tooling
+-   Developer transparency mechanisms
+
+Normative terms such as MUST, SHOULD, MAY, SHALL, MUST NOT, and
+RECOMMENDED are used as defined in RFC 2119.
+
+------------------------------------------------------------------------
+
+# Table of Contents
+
+1.  Introduction\
+2.  Terminology and Conventions\
+3.  System Overview\
+4.  Design Principles\
+5.  Functional Requirements\
+6.  Non-Functional Requirements\
+7.  Architectural Model\
+8.  Monorepo Organization\
+9.  Core Engine Specification\
+10. Calendar Plugin Framework\
+11. Event Resolution Model\
+12. Rendering and Localization Model\
+13. Memory and Suppression Model\
+14. Data Pack Architecture\
+15. Pack Distribution and Registry\
+16. Loader and Integrity Model\
+17. Name-Day Subsystem Specification\
+18. Name Normalization and Fuzzy Resolution\
+19. Performance Requirements\
+20. Security Considerations\
+21. CLI Tooling Specification\
+22. Demo & Developer Mode Requirements\
+23. Extensibility Model\
+24. Compliance Requirements\
+25. Future Considerations
+
+------------------------------------------------------------------------
+
+# 1. Introduction
+
+Salve provides culturally intelligent greetings based on time, location,
+tradition, and user identity.\
+The system MUST operate deterministically and MUST NOT depend on
+external APIs for core functionality.
+
+Salve MUST support: - Multi-calendar systems - Multi-language
+rendering - Multi-script output - Multi-tradition resolution - Diaspora
+blending scenarios
+
+------------------------------------------------------------------------
+
+# 2. Terminology and Conventions
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", and "MAY" in this document are to
+be interpreted as described in RFC 2119.
+
+Definitions:
+
+Core Engine: The greeting resolution engine. Calendar Plugin: Module
+that computes date rules. Pack: Cultural dataset module. Saint Identity:
+Stable canonical identifier for nameday mapping. Alias Index: Normalized
+name-to-identity mapping dataset. Manifest: Registry file describing
+available packs.
+
+------------------------------------------------------------------------
+
+# 3. System Overview
+
+Salve consists of the following major subsystems:
+
+-   Core Engine
+-   Calendar Plugin Layer
+-   Data Pack Layer
+-   Loader Layer
+-   Name-Day Subsystem
+-   CLI Tooling
+-   Demo & Developer Mode
+
+The Core Engine MUST remain lightweight and MUST NOT embed large
+datasets.
+
+------------------------------------------------------------------------
+
+# 4. Design Principles
+
+Salve MUST adhere to the following principles:
+
+1.  Data-Driven Design
+2.  Separation of Concerns
+3.  Calendar-Agnostic Architecture
+4.  Language-Agnostic Rendering
+5.  Offline Capability
+6.  Deterministic Behavior
+7.  Selective Payload Inclusion
+8.  Explicit Configuration
+
+------------------------------------------------------------------------
+
+# 5. Functional Requirements
+
+5.1 Greeting Generation\
+The system MUST generate exactly one primary greeting per invocation.
+
+5.2 Event Resolution\
+The engine MUST: - Resolve applicable events for a given date. - Filter
+events by user affiliations. - Apply priority ordering.
+
+5.3 Multi-Tradition Support\
+The engine MUST support simultaneous activation of multiple traditions.
+
+5.4 Multi-Calendar Support\
+The system MUST support: - Gregorian - Hijri - Orthodox Pascha - Western
+Easter - Chinese lunisolar - Solar terms - Nth weekday rules - User
+birthday rules
+
+5.5 Name-Day Support\
+The system MUST resolve name-days using canonical saint identifiers.
+
+5.6 Repetition Suppression\
+The system MUST support event-level suppression policies.
+
+------------------------------------------------------------------------
+
+# 6. Non-Functional Requirements
+
+6.1 Performance\
+The core package SHOULD remain under a minimal footprint when no packs
+are included.
+
+6.2 Modularity\
+Each pack MUST be independently publishable.
+
+6.3 Determinism\
+The engine MUST produce consistent outputs for identical inputs.
+
+6.4 Offline Operation\
+The system MUST function fully offline when packs are bundled.
+
+------------------------------------------------------------------------
+
+# 7. Architectural Model
+
+The architecture SHALL be layered:
+
+-   Core Engine
+-   Plugin Interfaces
+-   Data Packs
+-   Loader Abstraction
+-   Distribution Layer
+
+No layer SHALL directly depend on implementation details of another
+layer beyond defined interfaces.
+
+------------------------------------------------------------------------
+
+# 8. Monorepo Organization
+
+The repository SHALL include:
+
+-   @salve/core
+-   @salve/calendars-\*
+-   @salve/pack-\*
+-   @salve/loader
+-   @salve/cli
+-   @salve/demo
+-   @salve/devtools
+
+Each SHALL be independently versioned.
+
+------------------------------------------------------------------------
+
+# 9. Core Engine Specification
+
+The Core Engine MUST:
+
+-   Accept runtime context (date, timezone, mode, user profile).
+-   Query loaded packs.
+-   Resolve active events.
+-   Apply scoring and suppression.
+-   Resolve lexicon.
+-   Produce structured result.
+
+The Core Engine SHALL NOT embed large cultural datasets.
+
+------------------------------------------------------------------------
+
+# 10. Calendar Plugin Framework
+
+Calendar plugins MUST:
+
+-   Provide deterministic date resolution.
+-   Be pure and side-effect free.
+-   Not embed lexicon data.
+
+Calendar plugins MAY implement:
+
+-   Gregorian fixed rules
+-   Easter offset rules
+-   Hijri conversion rules
+-   Lunar computation rules
+
+------------------------------------------------------------------------
+
+# 11. Event Resolution Model
+
+Event resolution MUST:
+
+1.  Identify candidate events.
+2.  Filter by tradition tags.
+3.  Filter by jurisdiction.
+4.  Apply user-specific constraints.
+5.  Sort by priority.
+6.  Apply suppression rules.
+7.  Select highest-priority candidate.
+
+------------------------------------------------------------------------
+
+# 12. Rendering and Localization Model
+
+Rendering MUST:
+
+-   Use BCP-47 language codes.
+-   Support script variants.
+-   Support formal/informal forms.
+-   Inject parameters (name, zodiac, etc.).
+
+The system SHOULD use CLDR-compatible Intl APIs for formatting.
+
+------------------------------------------------------------------------
+
+# 13. Memory and Suppression Model
+
+The engine MUST support:
+
+-   Event-level suppression keys.
+-   Time-bound suppression.
+-   First-visit detection.
+-   Configurable expiration policies.
+
+Memory MUST be pluggable.
+
+------------------------------------------------------------------------
+
+# 14. Data Pack Architecture
+
+Packs MUST include:
+
+-   Metadata
+-   Event registry
+-   Lexicon entries
+-   Optional saint registry
+-   Optional alias partitions
+
+Packs MUST NOT contain executable code when distributed as remote JSON.
+
+------------------------------------------------------------------------
+
+# 15. Pack Distribution and Registry
+
+A Pack Registry MUST:
+
+-   Provide pack metadata.
+-   Include version and integrity hash.
+-   Include download URL.
+-   Declare dependencies.
+
+Integrity verification SHOULD be supported.
+
+------------------------------------------------------------------------
+
+# 16. Loader and Integrity Model
+
+The loader MUST:
+
+-   Support static packs.
+-   Support remote JSON packs.
+-   Optionally verify integrity.
+-   Support caching.
+
+Remote pack loading MUST NOT execute arbitrary code.
+
+------------------------------------------------------------------------
+
+# 17. Name-Day Subsystem Specification
+
+The subsystem MUST:
+
+-   Use saint identity as canonical pivot.
+-   Separate alias index from saint registry.
+-   Support cross-language equivalence.
+-   Allow partitioned alias loading.
+
+Onboarding MUST resolve and persist minimal saint mappings.
+
+------------------------------------------------------------------------
+
+# 18. Name Normalization and Fuzzy Resolution
+
+Normalization MUST include:
+
+-   Lowercasing
+-   Diacritic removal
+-   Unicode normalization
+-   Transliteration where necessary
+
+Resolution SHOULD attempt:
+
+1.  Exact normalized match.
+2.  Diacritic-free match.
+3.  Small edit-distance threshold.
+4.  Optional phonetic matching.
+
+------------------------------------------------------------------------
+
+# 19. Performance Requirements
+
+-   Core MUST remain minimal.
+-   Alias datasets MUST be partitionable.
+-   Lazy loading MUST be supported.
+-   Caching SHOULD be implemented.
+
+------------------------------------------------------------------------
+
+# 20. Security Considerations
+
+-   Remote packs MUST support integrity validation.
+-   Remote code execution MUST NOT be permitted.
+-   All remote data MUST be treated as untrusted input.
+
+------------------------------------------------------------------------
+
+# 21. CLI Tooling Specification
+
+The CLI MUST support:
+
+-   Pack addition
+-   Bundle generation
+-   Version pinning
+-   Static pack aggregation
+-   Build-time configuration
+
+------------------------------------------------------------------------
+
+# 22. Demo & Developer Mode Requirements
+
+The demo MUST include:
+
+-   Primary greeting display
+-   Configuration panel
+-   Multi-calendar display
+-   Cross-culture greeting suggestions
+-   Nameday insights
+-   Event resolution explanation
+-   Memory inspection
+-   Script variant preview
+
+Developer mode MUST expose:
+
+-   Active events
+-   Priority ranking
+-   Suppressed events
+-   Pack metadata
+-   Resolution trace
+
+------------------------------------------------------------------------
+
+# 23. Extensibility Model
+
+Salve MUST allow:
+
+-   Third-party pack creation.
+-   Additional calendar plugins.
+-   Additional tradition registries.
+-   Custom suppression policies.
+
+------------------------------------------------------------------------
+
+# 24. Compliance Requirements
+
+An implementation is compliant if:
+
+-   It adheres to separation of concerns.
+-   It supports modular pack loading.
+-   It implements saint-based nameday pivot.
+-   It provides deterministic resolution.
+
+------------------------------------------------------------------------
+
+# 25. Future Considerations
+
+Potential extensions include:
+
+-   Hebrew calendar support
+-   Buddhist calendar support
+-   Advanced phonetic name matching
+-   Server-side pack optimization tools
+-   Binary pack compression formats
+
+------------------------------------------------------------------------
+
+# Conclusion
+
+This document defines a modular, extensible, culture-aware greeting
+engine suitable for modern web and Node environments.
+
+Salve implementations conforming to this specification SHALL provide
+deterministic, culturally intelligent greetings while maintaining
+payload efficiency and architectural clarity.
+
+------------------------------------------------------------------------
