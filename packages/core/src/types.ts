@@ -37,7 +37,7 @@ export type EventDomain =
 export interface AddressProfile {
     firstName?: string;
     lastName?: string;
-    gender?: "male" | "female" | "non-binary" | "unspecified";
+    gender?: "male" | "female" | "nonBinary" | "unspecified";
     academicTitles?: string[];
     professionalRole?: string;
     nobilityParticle?: string;
@@ -117,6 +117,24 @@ export interface GreetingMemory {
     has(key: string): boolean;
     record(key: string, ttlMs?: number): void;
     clear(): void;
+}
+
+/**
+ * Localized honorifics (Mr, Ms, Mx, etc.)
+ */
+export interface HonorificPack {
+    locale: string;
+    titles: {
+        male: string;
+        female: string;
+        nonBinary?: string;
+        unspecified?: string;
+    };
+    formats: {
+        formal: string; // e.g. "{honorific} {lastName}"
+        informal: string; // e.g. "{firstName}"
+        standard: string; // e.g. "{firstName} {lastName}"
+    };
 }
 
 /**
