@@ -1,0 +1,19 @@
+{
+    "name": "@salve/plugin-nameday",
+    "version": "0.1.0",
+    "description": "Salve Name-Day resolution plugin",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "test": "jest"
+    },
+    "dependencies": {
+        "@salve/types": "0.1.0"
+    },
+    "author": "Wouter Soudan",
+    "license": "MIT"
+}
