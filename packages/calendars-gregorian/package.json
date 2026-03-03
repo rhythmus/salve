@@ -1,0 +1,18 @@
+{
+    "name": "@salve/calendars-gregorian",
+    "version": "0.1.0",
+    "description": "Salve Gregorian calendar plugin",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc"
+    },
+    "dependencies": {
+        "@salve/core": "*"
+    },
+    "author": "Wouter Soudan",
+    "license": "MIT"
+}
