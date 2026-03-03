@@ -16,11 +16,12 @@ describe("SalveEngine", () => {
     const mockPlugin: CalendarPlugin = {
         id: "test-plugin",
         resolveEvents: (now: Date) => {
+            const events: CelebrationEvent[] = [{ id: "default-day", domain: "temporal" }];
             // Mocking a religious event for a specific date
             if (now.getMonth() === 3 && now.getDate() === 5) {
-                return [{ id: "easter", domain: "religious", tradition: "christian" }];
+                events.push({ id: "easter", domain: "religious", tradition: "christian" });
             }
-            return [{ id: "default-day", domain: "temporal" }];
+            return events;
         }
     };
 
@@ -36,6 +37,13 @@ describe("SalveEngine", () => {
         engine = new SalveEngine();
         engine.registerPlugin(mockPlugin);
         engine.registerPack(mockPack);
+
+        // Register English honorifics for testing
+        engine.registerHonorifics({
+            locale: "en",
+            titles: { male: "Mr.", female: "Ms.", unspecified: "Mx." },
+            formats: { formal: "{fullHonorific} {lastName}", informal: "{firstName}", standard: "{firstName} {lastName}" }
+        });
     });
 
     test("should resolve the most specific greeting (Maximal Cultural Specificity)", () => {
@@ -64,6 +72,7 @@ describe("SalveEngine", () => {
         const result = engine.resolve(context);
 
         expect(result.greeting).toBe("Hello");
+        // We pick up the temporal event from the plugin
         expect(result.metadata.eventId).toBe("default-day");
         expect(result.metadata.domain).toBe("temporal");
     });
@@ -74,6 +83,7 @@ describe("SalveEngine", () => {
             locale: "en-US",
             formality: "formal",
             profile: {
+                firstName: "John",
                 lastName: "Smith",
                 gender: "male",
                 academicTitles: ["Dr."]
@@ -83,8 +93,8 @@ describe("SalveEngine", () => {
         const result = engine.resolve(context);
 
         expect(result.greeting).toBe("Hello");
-        expect(result.address).toBeUndefined(); // Address is part of salutation in current impl
-        expect(result.salutation).toBe("Hello, Dr. Smith");
+        expect(result.address).toBe("Mr. Dr. Smith");
+        expect(result.salutation).toBe("Hello, Mr. Dr. Smith");
     });
 
     test("should handle suppression", () => {

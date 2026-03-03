@@ -12,8 +12,8 @@ describe("AddressResolver Integration", () => {
             unspecified: "M."
         },
         formats: {
-            formal: "Guten Tag, {fullHonorific} {lastName}",
-            informal: "Hallo {firstName}",
+            formal: "{fullHonorific} {lastName}",
+            informal: "{firstName}",
             standard: "{firstName} {lastName}"
         }
     };
@@ -27,8 +27,8 @@ describe("AddressResolver Integration", () => {
             unspecified: "M."
         },
         formats: {
-            formal: "Dear {fullHonorific} {lastName}",
-            informal: "Hi {firstName}",
+            formal: "{fullHonorific} {lastName}",
+            informal: "{firstName}",
             standard: "{firstName} {lastName}"
         }
     };
