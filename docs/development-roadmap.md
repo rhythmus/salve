@@ -44,7 +44,7 @@ This document outlines the detailed, staged implementation plan for the Salve Un
     - Create `@salve/pack-global-addresses` with basic honorifics.
 
 ## Milestone 5: Name-Day Subsystem
-- **M5.1: Name-Day Core**
+- **M5.1: Name-Day Core** (Completed)
     - Implement two-stage resolution (Date -> Saint -> Names).
     - Build the Alias Index fuzzy matching (diacritic removal, edit distance).
 - **M5.2: Name-Day Data Curation**
