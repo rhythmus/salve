@@ -1,0 +1,11 @@
+{
+    "name": "@salve/demo",
+    "version": "0.1.0",
+    "description": "Salve web demonstration application",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "author": "Wouter Soudan",
+    "license": "MIT"
+}

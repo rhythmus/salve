@@ -1,0 +1,15 @@
+{
+    "name": "@salve/registry",
+    "version": "0.1.0",
+    "description": "Salve pack registry and versioning system",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc"
+    },
+    "author": "Wouter Soudan",
+    "license": "MIT"
+}

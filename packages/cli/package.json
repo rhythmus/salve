@@ -1,0 +1,13 @@
+{
+    "name": "@salve/cli",
+    "version": "0.1.0",
+    "description": "Salve command line interface",
+    "bin": {
+        "salve": "./dist/bin.js"
+    },
+    "scripts": {
+        "build": "tsc"
+    },
+    "author": "Wouter Soudan",
+    "license": "MIT"
+}

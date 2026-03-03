@@ -1,0 +1,22 @@
+{
+    "name": "@salve/core",
+    "version": "0.1.0",
+    "description": "Salve core greeting resolution engine",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "test": "jest"
+    },
+    "keywords": [
+        "salve",
+        "greeting",
+        "culture",
+        "i18n"
+    ],
+    "author": "Wouter Soudan",
+    "license": "MIT"
+}
