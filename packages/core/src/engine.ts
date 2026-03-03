@@ -9,17 +9,21 @@ import {
     CalendarPlugin,
     CelebrationEvent,
     GreetingLexiconEntry,
-    GreetingMemory
+    GreetingMemory,
+    HonorificPack
 } from "./types";
 import { calculateEventScore, isAffiliated } from "./scoring";
+import { AddressResolver } from "./address";
 
 export class SalveEngine {
     private plugins: CalendarPlugin[] = [];
     private packs: Map<string, GreetingPack> = new Map();
     private memory?: GreetingMemory;
+    private addressResolver: AddressResolver;
 
-    constructor(options?: { memory?: GreetingMemory }) {
-        this.memory = options?.memory;
+    constructor(memory?: GreetingMemory) {
+        this.memory = memory;
+        this.addressResolver = new AddressResolver();
     }
 
     /**
@@ -34,6 +38,13 @@ export class SalveEngine {
      */
     public registerPack(pack: GreetingPack): void {
         this.packs.set(pack.locale, pack);
+    }
+
+    /**
+     * Register a localized honorific pack
+     */
+    public registerHonorifics(pack: HonorificPack): void {
+        this.addressResolver.registerHonorifics(pack);
     }
 
     /**
@@ -77,7 +88,7 @@ export class SalveEngine {
         }
 
         // 4. Select the lexicon entry from packs
-        const pack = this.packs.get(context.locale);
+        const pack = this.getPack(context.locale);
         if (!pack) {
             return this.generateFallback(context, trace);
         }
@@ -139,24 +150,22 @@ export class SalveEngine {
     }
 
     private resolveAddress(context: GreetingContext): string {
-        const profile = context.profile;
-        if (!profile) return "";
+        return this.addressResolver.resolve(context);
+    }
 
-        // Simplified address logic for initial implementation
-        // Future: Use locale-specific address packs (M4.1)
-        if (context.formality === "formal") {
-            const title = profile.academicTitles?.[0] || (profile.gender === "male" ? "Mr." : "Ms.");
-            return `, ${title} ${profile.lastName || ""}`;
-        }
-
-        return profile.firstName ? `, ${profile.firstName}` : "";
+    private getPack(locale: string): GreetingPack | null {
+        if (this.packs.has(locale)) return this.packs.get(locale)!;
+        const base = locale.split("-")[0];
+        return this.packs.get(base) || null;
     }
 
     private generateFallback(context: GreetingContext, trace: string[]): GreetingResult {
         trace.push("No locale pack found. Returning emergency fallback.");
+        const address = this.resolveAddress(context);
         return {
             greeting: "Hello",
-            salutation: "Hello",
+            address: address,
+            salutation: `Hello, ${address}`.replace(/,\s*$/, ""),
             metadata: {
                 locale: context.locale,
                 score: 0,
