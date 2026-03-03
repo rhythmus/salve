@@ -18,5 +18,8 @@
         "i18n"
     ],
     "author": "Wouter Soudan",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "@desquared/greek-vocative-name": "^1.0.2"
+    }
 }

@@ -13,7 +13,10 @@ import {
     HonorificPack
 } from "./types";
 import { calculateEventScore, isAffiliated } from "./scoring";
-import { AddressResolver } from "./address";
+import { AddressResolver, TransformHook } from "./address";
+
+// @ts-ignore - tiny JS lib without types
+import { getVocativeName } from "@desquared/greek-vocative-name";
 
 export class SalveEngine {
     private plugins: CalendarPlugin[] = [];
@@ -24,6 +27,22 @@ export class SalveEngine {
     constructor(memory?: GreetingMemory) {
         this.memory = memory;
         this.addressResolver = new AddressResolver();
+        this.registerDefaultTransforms();
+    }
+
+    private registerDefaultTransforms(): void {
+        // Greek Vocative (M4.2)
+        this.addressResolver.registerTransform("el", (val, key) => {
+            if (key === "firstName" || key === "lastName") {
+                try {
+                    // getVocativeName is the export from the library
+                    return getVocativeName(val);
+                } catch (e) {
+                    return val;
+                }
+            }
+            return val;
+        });
     }
 
     /**
@@ -48,6 +67,13 @@ export class SalveEngine {
     }
 
     /**
+     * Register a localized transform hook
+     */
+    public registerTransform(locale: string, hook: TransformHook): void {
+        this.addressResolver.registerTransform(locale, hook);
+    }
+
+    /**
      * Resolve the primary greeting for the given context
      */
     public resolve(context: GreetingContext): GreetingResult {
@@ -63,9 +89,9 @@ export class SalveEngine {
 
         // 2. Filter by user affiliations and suppressions
         const userAffiliations = context.affiliations ?? [];
-        const filteredEvents = activeEvents.filter(e => {
+        const filteredEvents: CelebrationEvent[] = activeEvents.filter(e => {
             const affiliated = isAffiliated(e, userAffiliations);
-            const suppressed = context.suppressions?.includes(e.id);
+            const suppressed = context.suppressions?.includes(e.id) ?? false;
             return affiliated && !suppressed;
         });
 
@@ -105,10 +131,19 @@ export class SalveEngine {
         const address = this.resolveAddress(context);
 
         // 5. Construct the result
-        return {
+        // Improvement (M4.2): Localized concatenation and punctuation
+        let salutation = candidate.text;
+        if (address) {
+            // Check if greeting already ends with punctuation
+            const endsWithPunct = /[.!?]$/.test(salutation);
+            const separator = endsWithPunct ? " " : ", ";
+            salutation = `${salutation}${separator}${address}`;
+        }
+
+        const result = {
             greeting: candidate.text,
             address: address,
-            salutation: `${candidate.text}${address}`,
+            salutation: salutation,
             expectedResponse: candidate.expectedResponse,
             metadata: {
                 eventId: bestEvent?.id,
@@ -118,6 +153,7 @@ export class SalveEngine {
                 trace: trace
             }
         };
+        return result;
     }
 
     private selectGreeting(
@@ -154,12 +190,17 @@ export class SalveEngine {
     }
 
     private getPack(locale: string): GreetingPack | null {
-        if (this.packs.has(locale)) return this.packs.get(locale)!;
-        const base = locale.split("-")[0];
-        return this.packs.get(base) || null;
+        const result = this.packs.has(locale) ? this.packs.get(locale)! : null;
+        if (!result) {
+            const base = locale.split("-")[0];
+            const fallback = this.packs.get(base) || null;
+            // console.log(`[SALVE_PACK] locale=${locale}, fallback=${fallback?.locale}`);
+            return fallback;
+        }
+        return result;
     }
 
-    private generateFallback(context: GreetingContext, trace: string[]): GreetingResult {
+    private generateFallback(context: GreetingContext, trace: string[], event: CelebrationEvent | null = null): GreetingResult {
         trace.push("No locale pack found. Returning emergency fallback.");
         const address = this.resolveAddress(context);
         return {
@@ -167,6 +208,8 @@ export class SalveEngine {
             address: address,
             salutation: `Hello, ${address}`.replace(/,\s*$/, ""),
             metadata: {
+                eventId: event?.id || "emergency-fallback",
+                domain: event?.domain || "cultural_baseline",
                 locale: context.locale,
                 score: 0,
                 trace: trace
