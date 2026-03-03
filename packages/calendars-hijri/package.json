@@ -1,0 +1,12 @@
+{
+    "name": "@salve/calendars-hijri",
+    "version": "0.1.0",
+    "description": "Salve Hijri (Islamic) calendar plugin",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "dependencies": {
+        "@salve/core": "*"
+    },
+    "author": "Wouter Soudan",
+    "license": "MIT"
+}
