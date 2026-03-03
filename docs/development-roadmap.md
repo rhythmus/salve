@@ -27,8 +27,10 @@ This document outlines the detailed, staged implementation plan for the Salve Un
 - **M3.2: Religious Calendar Plugins** (Completed)
     - `@salve/calendars-pascha`: Orthodox and Western Easter calculations.
     - `@salve/calendars-hijri`: Tabular Islamic calendar or conversion utility.
-- **M3.3: Specialty Calendars**
-    - `@salve/calendars-lunar`: Chinese Lunisolar support for Spring Festival.
+- **M3.3: Specialty Calendars** (Completed)
+    - Implement seasonal transitions (solstices, equinoxes).
+    - Support personal milestones (birthdays, anniversaries).
+    - Add basic astronomical events (full moon, eclipses).
 
 ## Milestone 4: Address Protocol & Social Context
 - **M4.1: Address Resolver**

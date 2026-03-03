@@ -76,6 +76,10 @@ Calendar plugins are responsible for resolving the current date and time into se
 - **Hijri Plugin (`@salve/calendars-hijri`)**: Offline-first Islamic calendar resolution.
     - Tabular Hijri algorithm (Kuwaiti approximation).
     - Supports Ramadan start, Eid al-Fitr, and Eid al-Adha.
+- **Specialty Plugin (`@salve/calendars-specialty`)**: Support for seasons and user milestones.
+    - Seasonal Transitions (Spring, Summer, Autumn, Winter start dates).
+    - Personal Events (Birthdays, Anniversaries) with the highest priority (`personal` domain).
+    - Astronomical approximations (e.g., Full Moon).
 
 ## 6. Design Rationale
 
