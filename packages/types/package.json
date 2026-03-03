@@ -1,0 +1,15 @@
+{
+    "name": "@salve/types",
+    "version": "0.1.0",
+    "description": "Shared types for Salve",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc"
+    },
+    "author": "Wouter Soudan",
+    "license": "MIT"
+}
