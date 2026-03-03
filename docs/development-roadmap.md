@@ -8,10 +8,10 @@ This document outlines the detailed, staged implementation plan for the Salve Un
 - [x] Finalize JSON schemas for greeting packs and event registries.
 
 ## Milestone 2: Core Infrastructure & Resolution Engine
-- **M2.1: Monorepo Scaffolding**
+- **M2.1: Monorepo Scaffolding** (Completed)
     - Initialize workspace (NX or Turborepo).
     - Setup `@salve/core`, `@salve/registry`, and `@salve/types`.
-- **M2.2: Core Resolution Engine**
+- **M2.2: Core Resolution Engine** (Completed)
     - Implement context resolution (locale, time, traditions).
     - Build the deterministic priority scoring engine.
     - Implement "Maximal Cultural Specificity" selection logic.

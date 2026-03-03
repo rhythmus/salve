@@ -55,11 +55,12 @@ Salve data structures MUST align with the Unicode Common Locale Data Repository 
 - Attributes: `type`, `phase` (open/close), `role` (initiator/responder), `relationship`, `setting` (chat/email/UI).
 
 ### 4.3 Runtime resolution pipeline
-1. **Context Intake**: Locale, time, user identity, affiliation, relationship, setting.
-2. **Event Detection**: Querying active calendar plugins.
-3. **Greeting Selection**: Filtering lexicon by constraints and ranking by specificity score.
-4. **Address Construction**: Applying locale-specific honorific/title rules.
-5. **Assembly**: Combining greeting and address with correct punctuation.
+The resolution process is handled by the `SalveEngine` class, which follows a deterministic 5-step pipeline:
+1. **Context Intake**: Consumes `GreetingContext` (locale, now, affiliations, setting, etc.).
+2. **Event Detection**: Queries all registered `CalendarPlugins` to generate `CelebrationEvents`.
+3. **Scoring & Selection**: Filters events by user affiliations and applies the domain-weighted scoring logic to select the primary event.
+4. **Lexicon Matching**: Queries the `GreetingPack` for the active locale to find the best `GreetingLexiconEntry` matching the event and context (phase, role, formality).
+5. **Assembly**: Dynamically constructs the `GreetingResult`, incorporating address resolution and the final salutation string.
 
 ## 6. Design Rationale
 
