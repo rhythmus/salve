@@ -1,0 +1,107 @@
+source	lang_label_ga	function	phrase_raw	phrase_native	phrase_translit	slots_count_est	needs_manual_normalization
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Afracáinis	morning	Goeie môre Goeie middag Goeie naand Goeie nag Hallo		Goeie môre Goeie middag Goeie naand Goeie nag Hallo	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Albáinis	morning	Mirëmëngjes Mirëdita Mirëmbrëma Natën e mirë Mirëdita		Mirëmëngjes Mirëdita Mirëmbrëma Natën e mirë Mirëdita	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Araibis	morning	Sabah el kheir		Sabah el kheir	5	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Araibis	afternoon	صَباح الخير Sabah el kheir	صَباح الخير Sabah el kheir		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Araibis	evening	صَباح الخير Massa el kheir	صَباح الخير Massa el kheir		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Araibis	night	مَساء الخير Layla saida	مَساء الخير Layla saida		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Araibis	hello	لَيْلة سَعيدة Salam	↑ Gambhir، Vijay (1996). The Teaching and Acquisition of South Asian Languages. دار نشر جامعة بنسلفانيا [لغات أخرى]‏. ص. 87. ISBN:0-8122-3328-X. مؤرشف من الأصل في 2017-04-21.{{استشهاد بكتاب}}: صيانة الاستشهاد: علامات ترقيم زائدة (link)		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Bascais	morning	Egun on Arratsalde on Arratsalde on Gabon Kaixo		Egun on Arratsalde on Arratsalde on Gabon Kaixo	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Béarla	morning	Good morning Good afternoon Good evening Good night Hello / Hi		Good morning Good afternoon Good evening Good night Hello / Hi	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Bisaya	morning	Maayong buntag Maayong ablaw Maayong gabii		Maayong buntag Maayong ablaw Maayong gabii	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Boisnis	morning	Dobro jutro Dobar dan Dobro vece Lahku noc Zdravo		Dobro jutro Dobar dan Dobro vece Lahku noc Zdravo	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Breatnais	morning	Bore da Prynhawn da Noswaith da Nos da Hylo		Bore da Prynhawn da Noswaith da Nos da Hylo	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Briotáinis	morning	Demad / (de)boñjour (dit/deoc'h) / Mad ar jeu ? ... Devezh mad / (de)boñjour (dit/deoc'h) / Mad ar jeu ? ... Noz vad (dit/deoc'h) Nozvezh vad (dit/deoc'h) Salud (dit/deoc'h)		Demad / (de)boñjour (dit / deoc'h) / Mad ar jeu ? ... Devezh mad / (de)boñjour (dit / deoc'h) / Mad ar jeu ? ... Noz vad (dit / deoc'h) Nozvezh vad (dit / deoc'h) Salud (dit / deoc'h)	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Bulgáiris	morning	Dobro utro Dobar den Dobar vetcher Leka nocht Zdravei		Dobro utro Dobar den Dobar vetcher Leka nocht Zdravei	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Catalóinis	morning	Bon dia Bona tarda Bon vespre Bona nit Hola		Bon dia Bona tarda Bon vespre Bona nit Hola	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Comórais	morning	Barza asubwihi		Barza asubwihi	5	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Comórais	afternoon	صَباح الخير Barza mtsana	صَباح الخير Barza mtsana		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Comórais	evening	صَباح الخير Barza uku	صَباح الخير Barza uku		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Comórais	night	مَساء الخير Lala unono	مَساء الخير Lala unono		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Comórais	hello	لَيْلة سَعيدة Jeje	لَيْلة سَعيدة Jeje		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Cóiréis	morning	Annyông haseyo		Annyông haseyo	5	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Cóiréis	afternoon	안녕하세요 Annyông haseyo	안녕하세요 Annyông haseyo		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Cóiréis	evening	안녕하세요 Annyông haseyo	안녕하세요 Annyông haseyo		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Cóiréis	night	안녕하세요 Annyông hijumuseyo	안녕하세요 Annyông hijumuseyo		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Cóiréis	hello	안녕히주무세요 Annyông	중국어: 你好 니하오[*]		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Corsaicis	morning	Bonghjornu       Salutu		Bonghjornu       Salutu	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Cróitis	morning	Dobro jutro Dobar dan Dobra vece Laku noc Zdravo		Dobro jutro Dobar dan Dobra vece Laku noc Zdravo	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Danmhairgis	morning	God morgen Goddag God aften God nat		God morgen Goddag God aften God nat	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Eabhrais	morning	Boker tov		Boker tov	5	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Eabhrais	afternoon	בוקר טוב Shalom	בוקר טוב Shalom		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Eabhrais	evening	שלום Erev tov	שלום Erev tov		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Eabhrais	night	ערב טוב Layla tov	ערב טוב Layla tov		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Eabhrais	hello	לילה טוב	לילה טוב		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Edo	morning	Ób’ówie Ób’ávàn Ób’ótà Òkhíen òwie Kóyo		Ób’ówie Ób’ávàn Ób’ótà Òkhíen òwie Kóyo	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Esperanto	morning	Bonan matenon Bonan tagon Bonan vesperon Bonan nokton Saluton		Bonan matenon Bonan tagon Bonan vesperon Bonan nokton Saluton	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Eastóinis	morning	Tere hommikust Tere päevast Tere õhtust Head ööd Tere		Tere hommikust Tere päevast Tere õhtust Head ööd Tere	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Peirsis	morning	Sobh bekheir Salâm / Salâm aleikum Shab bekheir	زبان انگلیسی: Hello, Hi (رسمی), Hey (غیر رسمی), Good Day/Morning/Evening (Good Day.)	Sobh bekheir Salâm / Salâm aleikum Shab bekheir	2	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Fionlainnis	morning	Hyvää huomenta Hyvää päivää Hyvää iltaa Hyvää yötä Hei / Moi / Terve		Hyvää huomenta Hyvää päivää Hyvää iltaa Hyvää yötä Hei / Moi / Terve	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Fraincis	morning	Bonjour Bonjour Bonsoir Bonne nuit Salut		Bonjour Bonjour Bonsoir Bonne nuit Salut	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Gréigis	morning	Kalimera		Kalimera	5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Gréigis	afternoon	Καλιμερα Kalo mesimeri	Καλιμερα Kalo mesimeri		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Gréigis	evening	Kalispera		Kalispera	5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Gréigis	night	Καλισπερα kalinikta	Καλισπερα kalinikta		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Gréigis	hello	Yasou		Yasou	5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Gearmáinis	morning	Guten Morgen Guten Tag Guten Abend Gute Nacht Hallo	Der Kuss bestätigt eine Zusammengehörigkeit in besonderem Maße Abgeleitet hiervon ist der Wangenkuss bzw. das Aneinanderreiben der Wangen aus der morgenländischen Kultur.	Guten Morgen Guten Tag Guten Abend Gute Nacht Hallo	1	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Hiondúis	morning	(Ioslámach) Subh prabhat		(Ioslámach) Subh prabhat	10	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Hiondúis	afternoon	صباحك جميل Subh din	صباحك جميل Subh din		10	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Hiondúis	evening	يومك جميل Subh sandhya	يومك جميل Subh sandhya		10	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Hiondúis	night	نهارك جميل Subh ratri	نهارك جميل Subh ratri		10	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Hiondúis	hello	تصبح على خير subh din	↑ "The Savvy Business Traveler's Guide to Customs and Practices in Other Countries: The Dos and Don'ts to Impress Your Hosts and Make the Sale," Dan Blacharski, Atlantic Publishing Company, 2008, ISBN 9781601380135		10	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Hiondúis	morning	(Hiondúch) ② Namaste / Namaskār		(Hiondúch) ② Namaste / Namaskār	10	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Hiondúis	afternoon	नमस्ते / नमस्कार Namaste / Namaskār	नमस्ते / नमस्कार Namaste	Namaskār	10	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Hiondúis	evening	नमस्ते / नमस्कार Namaste / Namaskār	नमस्ते / नमस्कार Namaste	Namaskār	10	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Hiondúis	night	नमस्ते / नमस्कार Namaste / Namaskār	नमस्ते / नमस्कार Namaste	Namaskār	10	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Hiondúis	hello	नमस्ते / नमस्कार Namaste / Namaskār	↑ "The Savvy Business Traveler's Guide to Customs and Practices in Other Countries: The Dos and Don'ts to Impress Your Hosts and Make the Sale," Dan Blacharski, Atlantic Publishing Company, 2008, ISBN 9781601380135	Namaskār	10	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Indinéisis	morning	Selamat pagi Selamat siang Selamat malam Selamat tidur Selamat		Selamat pagi Selamat siang Selamat malam Selamat tidur Selamat	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Inuktitut	morning	Ullakut Ullukut Unnukut Ai		Ullakut Ullukut Unnukut Ai	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Ioruais	morning	God morgen Goddag God kveld God natt Hallo / Hei		God morgen Goddag God kveld God natt Hallo / Hei	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Íoslainnis	morning	Góðan daginn Góðan daginn Gott kvöld Góða nótt Halló		Góðan daginn Góðan daginn Gott kvöld Góða nótt Halló	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Iodáilis	morning	Buongiorno Buon pomeriggio Buonasera Buonanotte Ciao		Buongiorno Buon pomeriggio Buonasera Buonanotte Ciao	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Laóis	morning	Sabaidi Sabaidi Sabaidi Sabaidi Sabaidi		Sabaidi Sabaidi Sabaidi Sabaidi Sabaidi	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Laplainnis	morning	(Same) Buorre iđit Buorre beaivi Buorre eahket   Dearvva		(Same) Buorre iđit Buorre beaivi Buorre eahket   Dearvva	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Laitvis	morning	Labdien Labvakar Ar labu nakti Sveiks		Labdien Labvakar Ar labu nakti Sveiks	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Liotuáinis	morning	Labas rytas Laba diena Labas vakaras Labànakt Sveikas		Labas rytas Laba diena Labas vakaras Labànakt Sveikas	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Lucsambuirgis	morning	Gudde Moeien Gudde Mëttëg Gudden Ovend Gudd Nuecht Salü		Gudde Moeien Gudde Mëttëg Gudden Ovend Gudd Nuecht Salü	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Malgais	morning	Manao ahoana / Salàma Manao ahoana / Salàma Tafandria mandry Tafandria mandry Manao ahoana / Salàma		Manao ahoana / Salàma Manao ahoana / Salàma Tafandria mandry Tafandria mandry Manao ahoana / Salàma	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Ollainnis	morning	Goedemorgen Goedendag Goedenavond Goede nacht Hallo		Goedemorgen Goedendag Goedenavond Goede nacht Hallo	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Ocsatáinis	morning	⑤ Bonjorn Bon vèspre Bonser Bona nuèch Adieu / Adieusiatz		⑤ Bonjorn Bon vèspre Bonser Bona nuèch Adieu / Adieusiatz	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Peirsis	morning	Sobh Bekheir Rooz Bekheir Shab Bekheir Shab Bekheir	زبان انگلیسی: Hello, Hi (رسمی), Hey (غیر رسمی), Good Day/Morning/Evening (Good Day.)	Sobh Bekheir Rooz Bekheir Shab Bekheir Shab Bekheir	2	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Polainnis	morning	Dzień dobry Miłego dnia Dobry wieczór Dobranoc Cześć		Dzień dobry Miłego dnia Dobry wieczór Dobranoc Cześć	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Portaingéilis	morning	Bom dia Boa tarde Boa tarde Boa noite Olá / Oi	Chinês(Cantonês): "Jo San" (早晨 ((Bom dia)), "Sik Jo Fan Mei" (食咗飯未 (literário, você já comeu?)), "Ha Lo" (哈佬 (Olá))	Bom dia Boa tarde Boa tarde Boa noite Olá / Oi	1	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Romanche	morning	Bun di Buna saira Buna saira Buna notg Ciao		Bun di Buna saira Buna saira Buna notg Ciao	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Rómáinis	morning	Bună dimineaţa Bună ziua Bună seara Noapte bună Bună / salut		Bună dimineaţa Bună ziua Bună seara Noapte bună Bună / salut	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Rúisis	morning	Dobroye utro		Dobroye utro	5	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Rúisis	afternoon	Доброе утро Dobry dyen	Доброе утро Dobry dyen		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Rúisis	evening	Добрый день Dobry vyecher	Добрый день Dobry vyecher		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Rúisis	night	Добрый вечер Spokojnoj nochi	Добрый вечер Spokojnoj nochi		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Rúisis	hello	Спокойной ночи  Privjet	Сайт «Лингвомания» Архивная копия от 10 февраля 2009 на Wayback Machine		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Sairdis	morning	Bonardias Bonu merie Bona sera Bona notti Saludu		Bonardias Bonu merie Bona sera Bona notti Saludu	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Seapáinis	morning	Ohayô gozaimasu		Ohayô gozaimasu	5	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Seapáinis	afternoon	おはようございます Konnichiwa	おはようございます Konnichiwa		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Seapáinis	evening	今日は Konbanwa	今日は Konbanwa		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Seapáinis	night	今晩は Oyasuminasai	今晩は Oyasuminasai		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Seapáinis	hello	お休みなさい ossu	お休みなさい ossu		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Seicis	morning	Dobré ráno Dobry' den Dobry' večer Dobrou noc Ahoj, Čau		Dobré ráno Dobry' den Dobry' večer Dobrou noc Ahoj, Čau	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Sínis	morning	(Cantanais) Jo san / Zan san		(Cantanais) Jo san / Zan san	5	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Sínis	afternoon	早晨 / Néih hóu / Ngh on an san / Ng ngon	早晨	Néih hóu / Ngh on an san / Ng ngon	5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Sínis	evening	你好 / / Maan ngon	你好	Maan ngon	5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Sínis	night	晚安 Jo tau / Hai Néih hóu / Neilhou / Lay ho / Ho yat / Ngh on / Jou san	晚安 Jo tau	Hai Néih hóu / Neilhou / Lay ho / Ho yat / Ngh on / Jou san	5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Sínis	hello	你好 / 您好 / / /	↑ George Boeree. . Webspace.ship.edu. [2011-01-27]. （原始内容存档于2021-01-09）.		5	False
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Slóvaicis	morning	Dobré ráno Dobrý deň Dobrý večer Dobrú noc Ahoj, Čau		Dobré ráno Dobrý deň Dobrý večer Dobrú noc Ahoj, Čau	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Slóivéinis	morning	Dobro jutro Dober dan Dober večer Lahko noc Živjo		Dobro jutro Dober dan Dober večer Lahko noc Živjo	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Spáinnis	morning	Buenos días Buenos días Buenas tardes Buenas noches Hola		Buenos días Buenos días Buenas tardes Buenas noches Hola	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Sualainnis	morning	God morgon Goddag / God middag God afton God natt Hej		God morgon Goddag / God middag God afton God natt Hej	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Suahílí	morning	Subalkheri Masalkheri Usiku mwema Jambo		Subalkheri Masalkheri Usiku mwema Jambo	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Súlú	morning	Umhlala gahle Sawubona Sawubona Lala kahle / Lalani kahle Sawubona		Umhlala gahle Sawubona Sawubona Lala kahle / Lalani kahle Sawubona	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Tagalog	morning	Magandang umaga Magandang araw Magandang gabi		Magandang umaga Magandang araw Magandang gabi	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Téalainnis	morning	Sawatdi +'Krap'(masc)/+'Kha'(fem) Sawatdi Sawatdi Sawatdi Sawatdi		Sawatdi +'Krap'(masc) / +'Kha'(fem) Sawatdi Sawatdi Sawatdi Sawatdi	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Tibéidis	morning	bKra-gshis bde legs bKra-gshis bde legs bKra-gshis bde legs bKra-gshis bde legs bde-mo		bKra-gshis bde legs bKra-gshis bde legs bKra-gshis bde legs bKra-gshis bde legs bde-mo	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Tuircis	morning	Günaydın, merhaba Merhaba İyi akşamlar İyi geceler Selam		Günaydın, merhaba Merhaba İyi akşamlar İyi geceler Selam	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Úcráinis	morning	Dobryi ranok Dobryi den Dobryi vechir   Pryvit		Dobryi ranok Dobryi den Dobryi vechir   Pryvit	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Ungáiris	morning	Jó reggelt Jó napot Jó estét Jó éjszakát Szia / Sziasztok		Jó reggelt Jó napot Jó estét Jó éjszakát Szia / Sziasztok	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Uropi	morning	Bun morna Bun dia Bun vespen Bun noc Halo		Bun morna Bun dia Bun vespen Bun noc Halo	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Vítneaimis	morning	Chào Chào Chào Chào buoi toi / Chúc ngu ngon Chào / Chào ban		Chào Chào Chào Chào buoi toi / Chúc ngu ngon Chào / Chào ban	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Vallóinis	morning	Bondjoû Bondjoû Bonswer Bone nute A		Bondjoû Bondjoû Bonswer Bone nute A	1	True
+ga.wikipedia.org/wiki/Beannú_do_dhuine_i_dteangacha_éagsúla	Xhosa	morning	Molo / Molweni Molo / Molweni Molo / Molweni Rhonanai / Ulale kakuhle Molo / Molweni		Molo / Molweni Molo / Molweni Molo / Molweni Rhonanai / Ulale kakuhle Molo / Molweni	1	True
