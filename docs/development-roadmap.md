@@ -37,7 +37,7 @@ This document outlines the detailed, staged implementation plan for the Salve Un
     - Implement localized honorific resolution (Mr/Ms/Mx).
     - Support academic and professional title integration.
     - Implement formality-based address formatting.
-- **M4.2: Vocabulary & Punctuation**
+- **M4.2: Vocabulary & Punctuation** (Completed)
     - Implement locale-specific punctuation rules (comma placement).
     - Support for vocative case inflections (morphology hooks).
 - **M4.3: Initial Address Packs**

@@ -40,6 +40,11 @@ Salve data structures MUST align with the Unicode Common Locale Data Repository 
 - **Event Domains**: MUST categorize events into `Personal` (Birthday, Name-day), `Religious` (Easter, Eid), `Civil` (National holidays), `Temporal` (Time of day), and `Cultural Baseline`.
 - **Priority Scoring**: MUST use a deterministic priority system (e.g., Personal > Religious > Civil > Cultural Baseline > Temporal > Generic).
 
+### 3.2 Address Protocol Layer
+- **Morphology Hooks**: SUPPORT pluggable linguistic transforms for case-sensitive languages (e.g., Greek vocative).
+- **Localized Honorifics**: MUST support addressing users based on their localized titles (Mr/Ms/Mx) and academic credentials.
+- **Formality Handling**: ADAPT address structure based on the required social context.
+
 ### 3.3 Name-Day Subsystem
 - **Canonical Saint Identity**: MUST use stable IDs as pivots between languages (e.g., `saint.george`).
 - **Two-Stage Resolution**: 
