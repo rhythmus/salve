@@ -24,6 +24,7 @@ This document outlines the detailed, staged implementation plan for the Salve Un
     - Implement baseline date resolution (fixed dates).
     - Support Nth-weekday rules (e.g., Thanksgiving).
     - Implement temporal slots (Morning, Afternoon, Evening, Night).
+- **M3.2: Religious Calendar Plugins** (Completed)
     - `@salve/calendars-pascha`: Orthodox and Western Easter calculations.
     - `@salve/calendars-hijri`: Tabular Islamic calendar or conversion utility.
 - **M3.3: Specialty Calendars**

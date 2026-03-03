@@ -70,6 +70,12 @@ Calendar plugins are responsible for resolving the current date and time into se
     - Fixed Annual Dates (e.g., New Year's Day).
     - Nth-Weekday Rules (e.g., 4th Thursday of November).
     - Temporal Slots (Morning: 05-12, Midday: 11-13, Afternoon: 12-18, Evening: 18-22, Night: 22-05).
+- **Pascha Plugin (`@salve/calendars-pascha`)**: Specialized resolution for movable Christian feasts.
+    - Western Easter (Gregorian algorithm).
+    - Orthodox Easter (Julian algorithm with Gregorian conversion).
+- **Hijri Plugin (`@salve/calendars-hijri`)**: Offline-first Islamic calendar resolution.
+    - Tabular Hijri algorithm (Kuwaiti approximation).
+    - Supports Ramadan start, Eid al-Fitr, and Eid al-Adha.
 
 ## 6. Design Rationale
 
