@@ -145,3 +145,29 @@ export interface GreetingPack {
     extends?: string;
     greetings: GreetingLexiconEntry[];
 }
+/**
+ * Saint definition with WikiData QID
+ */
+export interface SaintDefinition {
+    qid: string; // e.g., "Q43431"
+    canonicalName: string; // e.g., "George"
+    traditions: string[]; // e.g., ["orthodox", "catholic"]
+    aliases: string[]; // e.g., ["Γιώργος", "Georgios"]
+}
+
+/**
+ * Maps a specific date to one or more Saints
+ */
+export interface NameDayEntry {
+    month: number; // 1-12
+    day: number;
+    saintQids: string[];
+}
+
+/**
+ * Specific celebration result for a name-day
+ */
+export interface NameDayCelebration extends CelebrationEvent {
+    saintQid: string;
+    targetName: string;
+}
