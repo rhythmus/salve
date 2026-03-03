@@ -11,7 +11,9 @@ Salve is a modular, data-driven framework designed to resolve and render cultura
 
 ## 2. Core Principles
 ### 2.1 Maximal Cultural Specificity
-Salve MUST default to the most specific culturally, temporally, and traditionally grounded greeting available. Generic fallbacks (e.g., "Hello") are only used when no specialized greeting exists or when explicitly suppressed by policy.
+Salve MUST default to the most specific culturally, temporally, and traditionally grounded greeting available.
+- **Memory**: An anti-repetition layer MUST track delivered greetings using the `GreetingMemory` interface to avoid "Greeting Fatigue". The engine supports pluggable memory providers (e.g., `InMemoryMemory`) with configurable TTL (Time-To-Live).
+Generic fallbacks (e.g., "Hello") are only used when no specialized greeting exists or when explicitly suppressed by policy.
 
 ### 2.2 Privacy & Offline-First
 All resolution MUST happen locally. Salve SHALL NOT require runtime API calls to external services. Data is distributed through modular "packs" that are bundled at build-time or fetched and cached at initialization.

@@ -15,7 +15,7 @@ This document outlines the detailed, staged implementation plan for the Salve Un
     - Implement context resolution (locale, time, traditions).
     - Build the deterministic priority scoring engine.
     - Implement "Maximal Cultural Specificity" selection logic.
-- **M2.3: Anti-Repetition Layer**
+- **M2.3: Anti-Repetition Layer** (Completed)
     - Define pluggable memory interface.
     - Implement default localStorage provider for browser environments.
 
