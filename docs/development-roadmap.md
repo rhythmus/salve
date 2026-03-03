@@ -40,7 +40,7 @@ This document outlines the detailed, staged implementation plan for the Salve Un
 - **M4.2: Vocabulary & Punctuation** (Completed)
     - Implement locale-specific punctuation rules (comma placement).
     - Support for vocative case inflections (morphology hooks).
-- **M4.3: Initial Address Packs**
+- **M4.3: Initial Address Packs** (Completed)
     - Create `@salve/pack-global-addresses` with basic honorifics.
 
 ## Milestone 5: Name-Day Subsystem
