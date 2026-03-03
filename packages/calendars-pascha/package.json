@@ -1,0 +1,12 @@
+{
+    "name": "@salve/calendars-pascha",
+    "version": "0.1.0",
+    "description": "Salve Pascha (Easter) calendar plugin",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "dependencies": {
+        "@salve/core": "*"
+    },
+    "author": "Wouter Soudan",
+    "license": "MIT"
+}
