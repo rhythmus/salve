@@ -111,6 +111,15 @@ export interface CalendarPlugin {
 }
 
 /**
+ * Interface for anti-repetition memory providers
+ */
+export interface GreetingMemory {
+    has(key: string): boolean;
+    record(key: string, ttlMs?: number): void;
+    clear(): void;
+}
+
+/**
  * A collection of greetings for a locale
  */
 export interface GreetingPack {
