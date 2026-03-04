@@ -55,8 +55,8 @@ This document outlines the detailed, staged implementation plan for the Salve Un
 - **M6.1: @salve/registry & Loader** (Completed)
     - Implement manifest-based dynamic loading.
     - Support for integrity hashes and selective payload inclusion.
-- **M6.2: Distribution Infrastructure**
-    - Setup automated CI/CD for publishing packs to NPM and a central CDN (e.g., GitHub Pages).
+- **M6.2: Distribution Infrastructure** (Completed)
+    - Setup automated CI/CD for publishing packs to NPM and a central CDN.
 
 ## Milestone 7: Tooling & Documentation
 - **M7.1: Salve CLI**
