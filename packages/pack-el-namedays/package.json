@@ -1,0 +1,20 @@
+{
+    "name": "@salve/pack-el-namedays",
+    "version": "0.1.0",
+    "description": "Greek name-day data for Salve",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist",
+        "src/data"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "test": "jest"
+    },
+    "dependencies": {
+        "@salve/types": "0.1.0"
+    },
+    "author": "Wouter Soudan",
+    "license": "MIT"
+}

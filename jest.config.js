@@ -5,4 +5,11 @@ module.exports = {
     moduleNameMapper: {
         '^@salve/(.*)$': '<rootDir>/packages/$1/src',
     },
+    transform: {
+        '^.+\\.tsx?$': ['ts-jest', { useESM: true }],
+    },
+    transformIgnorePatterns: [
+        'node_modules/(?!(bg-name-days)/)',
+    ],
+    extensionsToTreatAsEsm: ['.ts'],
 };
