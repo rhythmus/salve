@@ -113,7 +113,7 @@ export interface GreetingResult {
  */
 export interface CalendarPlugin {
     id: string;
-    resolveEvents(now: Date, context: GreetingContext): CelebrationEvent[];
+    resolveEvents(now: Date, context: GreetingContext): CelebrationEvent[] | Promise<CelebrationEvent[]>;
 }
 
 /**

@@ -46,7 +46,7 @@ describe("SalveEngine", () => {
         });
     });
 
-    test("should resolve the most specific greeting (Maximal Cultural Specificity)", () => {
+    test("should resolve the most specific greeting (Maximal Cultural Specificity)", async () => {
         const context: GreetingContext = {
             now: new Date(2026, 3, 5), // April 5th (Easter in mock)
             locale: "en-US",
@@ -54,14 +54,14 @@ describe("SalveEngine", () => {
             phase: "open"
         };
 
-        const result = engine.resolve(context);
+        const result = await engine.resolve(context);
 
         expect(result.greeting).toBe("Happy Easter");
         expect(result.metadata.eventId).toBe("easter");
         expect(result.metadata.domain).toBe("religious");
     });
 
-    test("should fallback to temporal greeting when no religious event matches affiliations", () => {
+    test("should fallback to temporal greeting when no religious event matches affiliations", async () => {
         const context: GreetingContext = {
             now: new Date(2026, 3, 5),
             locale: "en-US",
@@ -69,7 +69,7 @@ describe("SalveEngine", () => {
             phase: "open"
         };
 
-        const result = engine.resolve(context);
+        const result = await engine.resolve(context);
 
         expect(result.greeting).toBe("Hello");
         // We pick up the temporal event from the plugin
@@ -77,7 +77,7 @@ describe("SalveEngine", () => {
         expect(result.metadata.domain).toBe("temporal");
     });
 
-    test("should handle formal address resolution", () => {
+    test("should handle formal address resolution", async () => {
         const context: GreetingContext = {
             now: new Date(2026, 0, 1),
             locale: "en-US",
@@ -90,14 +90,14 @@ describe("SalveEngine", () => {
             }
         };
 
-        const result = engine.resolve(context);
+        const result = await engine.resolve(context);
 
         expect(result.greeting).toBe("Hello");
         expect(result.address).toBe("Mr. Dr. Smith");
         expect(result.salutation).toBe("Hello, Mr. Dr. Smith");
     });
 
-    test("should handle suppression", () => {
+    test("should handle suppression", async () => {
         const context: GreetingContext = {
             now: new Date(2026, 3, 5),
             locale: "en-US",
@@ -105,9 +105,27 @@ describe("SalveEngine", () => {
             suppressions: ["easter"] // Suppress the specific event
         };
 
-        const result = engine.resolve(context);
+        const result = await engine.resolve(context);
 
         expect(result.greeting).toBe("Hello");
         expect(result.metadata.eventId).toBe("default-day");
+    });
+
+    test("should drop address block if surname is missing in formal context (Safety Ladder)", async () => {
+        const context: GreetingContext = {
+            now: new Date(2026, 0, 1),
+            locale: "en-US",
+            formality: "formal",
+            profile: {
+                firstName: "John"
+                // lastName is missing
+            }
+        };
+
+        const result = await engine.resolve(context);
+
+        // Should be just "Hello", not "Hello, Mx. John" or similar
+        expect(result.salutation).toBe("Hello");
+        expect(result.address).toBe("");
     });
 });

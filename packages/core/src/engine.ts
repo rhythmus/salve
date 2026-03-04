@@ -10,11 +10,19 @@ import {
     CelebrationEvent,
     GreetingLexiconEntry,
     GreetingMemory,
-    HonorificPack
+    HonorificPack,
+    AddressProfile
 } from "./types";
 import { calculateEventScore, isAffiliated } from "./scoring";
 import { AddressResolver, TransformHook } from "./address";
 import { SalveRegistry, SalveLoader } from "@salve/registry";
+
+const DEFAULT_CONTEXT_VALUES = {
+    affiliations: ["civil", "secular"],
+    relationship: "stranger" as const,
+    formality: "formal" as const,
+    suppressions: []
+};
 
 // @ts-ignore - tiny JS lib without types
 import { getVocativeName } from "@desquared/greek-vocative-name";
@@ -98,14 +106,19 @@ export class SalveEngine {
     /**
      * Resolve the primary greeting for the given context
      */
-    public resolve(context: GreetingContext): GreetingResult {
+    public async resolve(partialContext: GreetingContext): Promise<GreetingResult> {
+        const context: GreetingContext = {
+            ...DEFAULT_CONTEXT_VALUES,
+            ...partialContext
+        };
+
         const trace: string[] = [];
         const activeEvents: CelebrationEvent[] = [];
 
         // 1. Collect events from all plugins
         const calendars = this.registry.plugins.getAllCalendars();
         for (const plugin of calendars) {
-            const events = plugin.resolveEvents(context.now, context);
+            const events = await plugin.resolveEvents(context.now, context);
             activeEvents.push(...events);
             trace.push(`Plugin [${plugin.id}] provided ${events.length} events.`);
         }
@@ -188,9 +201,9 @@ export class SalveEngine {
         // Filter lexicon by event, phase, role, formality, etc.
         const candidates = pack.greetings.filter(g => {
             const eventMatch = event ? g.eventRef === event.id : !g.eventRef;
-            const phaseMatch = !context.phase || g.phase === context.phase;
-            const roleMatch = !context.role || g.role === context.role;
-            const formalityMatch = !context.formality || g.formality === context.formality;
+            const phaseMatch = !g.phase || g.phase === context.phase;
+            const roleMatch = !g.role || g.role === context.role;
+            const formalityMatch = !g.formality || g.formality === context.formality;
 
             // Anti-repetition check
             const isRemembered = this.memory?.has(`g:${pack.locale}:${g.id}`) ?? false;
