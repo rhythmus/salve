@@ -112,6 +112,23 @@
     .subtitle {
       font-size: 12px;
       color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .reasoning {
+      max-width: 600px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 32px;
+      padding: 16px;
+      border-left: 2px solid var(--line);
+      background: rgba(var(--fg-rgb), 0.02);
+    }
+
+    .reasoning b {
+      color: var(--fg);
+      font-weight: 600;
     }
 
     .timelineWrap {
@@ -485,6 +502,10 @@
         <div class="rule" id="metaKey">—</div>
       </div>
 
+      <div class="reasoning" id="reasoningParagraph">
+        Initializing cultural resolution engine...
+      </div>
+
       <div class="timelineWrap" id="timelineWrap">
 
         <div class="track" id="timelineTrack" aria-label="Timeline of dates"></div>
@@ -711,7 +732,6 @@
       </label>
 
       <div style="height:12px"></div>
-      <label for="scenario">Scenario preset</label>
       <select id="scenario">
         <option value="">—</option>
         <option value="de_secular">German secular</option>
@@ -722,18 +742,71 @@
         <option value="zh_diaspora">Chinese diaspora (zh‑CN)</option>
         <option value="dev_mixed">Mixed: English + Arabic Eid</option>
       </select>
+
+      <div style="height:12px"></div>
+      <label for="persona">Quick Persona</label>
+      <select id="persona">
+        <option value="custom">Custom...</option>
+        <option value="mueller_dr">Dr. Müller (Munich, 12:30)</option>
+        <option value="judge_smith">Justice Smith (London)</option>
+        <option value="papadopoulos_el">Papadopoulos (Athens, Orthodox)</option>
+      </select>
     </div>
   </aside>
 
   <script type="module">
     import { SalveEngine } from "@salve/core";
     import { SalveDevTools } from "@salve/devtools";
+    import { GregorianCalendarPlugin } from "@salve/calendars-gregorian";
 
     // ------------------------------------------------------------
     // Salve Demo V3 — Real Engine + DevTools Overlay
     // ------------------------------------------------------------
 
     const engine = new SalveEngine();
+
+    // Register Plugins
+    const greg = new GregorianCalendarPlugin();
+    engine.registerPlugin(greg);
+
+    // Add Mock Specialty Plugin for the demo
+    engine.registerPlugin({
+      id: "specialty-demo",
+      resolveEvents: (now) => {
+        if (now.getMonth() === 2 && now.getDate() === 25) { // March 25
+          return [{ id: "gr_independence_day", domain: "civil" }];
+        }
+        return [];
+      }
+    });
+
+    // Register Mock Packs for Demo
+    engine.registerPack({
+      locale: "de-DE",
+      greetings: [
+        { id: "morning", text: "Guten Morgen", eventRef: "morning" },
+        { id: "mahlzeit", text: "Mahlzeit", eventRef: "midday", formality: "informal" },
+        { id: "afternoon", text: "Guten Tag", eventRef: "afternoon" },
+        { id: "evening", text: "Guten Abend", eventRef: "evening" },
+        { id: "fallback", text: "Hallo" }
+      ]
+    });
+
+    engine.registerPack({
+      locale: "el-GR",
+      greetings: [
+        { id: "independence", text: "Χρόνια Πολλά!", eventRef: "gr_independence_day" },
+        { id: "morning", text: "Καλημέρα", eventRef: "morning" },
+        { id: "fallback", text: "Γεια σας" }
+      ]
+    });
+
+    engine.registerHonorifics({
+      locale: "de-DE",
+      titles: { male: "Herr", female: "Frau", unspecified: "Guten Tag" },
+      formats: { formal: "{title} {lastName}", informal: "{firstName}", standard: "{firstName} {lastName}" }
+    });
+
     const devTools = new SalveDevTools(engine);
     devTools.mount();
 
@@ -808,9 +881,33 @@
       el("heroGreeting").innerHTML = escapeHtml(result.salutation);
       el("metaEvent").textContent = `event: ${result.metadata.eventId}`;
       el("metaWhy").textContent = `why: ${result.metadata.domain}`;
-      el("metaKey").textContent = `pack: ${result.metadata.packId}`;
+      el("metaKey").textContent = `lang: ${result.metadata.locale}`;
 
+      updateReasoning(result, state);
       renderAlsoStrip(state);
+    }
+
+    function updateReasoning(result, state) {
+      const { eventId, domain, score } = result.metadata;
+      let text = "";
+
+      if (domain === 'personal') {
+        text = `Salve prioritized a <b>Personal Event</b> (${eventId}). These carry the highest weight (score ${score}) because acknowledging a user's specific milestone is the pinnacle of cultural intelligence.`;
+      } else if (domain === 'religious') {
+        text = `The engine detected a <b>Religious Observance</b> (${eventId}). Based on the user's affiliations, this specific tradition-aware greeting (score ${score}) was selected over generic alternatives.`;
+      } else if (domain === 'civil') {
+        text = `A <b>Civil/National Holiday</b> (${eventId}) was resolved. Salve automatically scans for jurisdictional events that foster a sense of shared citizenship (score ${score}).`;
+      } else if (domain === 'temporal') {
+        text = `With no higher-priority events detected, the engine fell back to a <b>Temporal Greeting</b>. It currenty reflects the time of day (${state.now.getHours()}:${pad2(state.now.getMinutes())}) in the active locale (score ${score}).`;
+      } else {
+        text = `A <b>Cultural Baseline</b> greeting was selected. Salve ensures that even in the absence of specific events, the user is greeted with a localized, standard salutation.`;
+      }
+
+      if (state.titleRole !== 'none') {
+        text += ` <br><br>Notice how the <b>Address Protocol</b> correctly integrated the "${state.titleRole}" title, ensuring social protocol is maintained.`;
+      }
+
+      el("reasoningParagraph").innerHTML = text;
     }
 
     async function rebuildTimelineAndUpdate(updateHero = true) {
@@ -826,29 +923,37 @@
       const items = [];
       const base = new Date(state.now.getFullYear(), state.now.getMonth(), state.now.getDate());
 
-      // Add "Today"
+      // SCAN 60 DAYS FOR INTERESTING EVENTS
+      const scanDays = 60;
+      const seenEvents = new Set();
+
+      // Always add today
       items.push({
         date: new Date(base),
         key: fmtISO(base),
         label: "Today",
-        type: "civil"
+        type: "cultural_baseline"
       });
 
-      // Scan future (simplified)
-      for (let i = 1; i < 30; i++) {
+      for (let i = 1; i <= scanDays; i++) {
         const d = new Date(base);
         d.setDate(d.getDate() + i);
         const res = await engine.resolve({ ...state, now: d, locale: state.greetingLanguage });
-        if (res.metadata.domain !== 'temporal') {
-          items.push({
-            date: d,
-            key: fmtISO(d),
-            label: res.metadata.eventId,
-            type: res.metadata.domain === 'civil' ? 'civil' : 'relig'
-          });
+
+        if (res.metadata.domain !== 'temporal' && res.metadata.domain !== 'cultural_baseline') {
+          if (!seenEvents.has(res.metadata.eventId)) {
+            items.push({
+              date: d,
+              key: fmtISO(d),
+              label: res.metadata.eventId.split('.').pop().replace(/_/g, ' '),
+              type: res.metadata.domain
+            });
+            seenEvents.add(res.metadata.eventId);
+          }
         }
         if (items.length > 8) break;
       }
+
       return items;
     }
 
@@ -883,10 +988,36 @@
     }
 
     function wireInputs() {
-      const ids = ["mode", "formality", "gender", "surname", "titleRole", "date", "time", "greetingLanguage"];
+      const ids = ["mode", "formality", "gender", "surname", "titleRole", "date", "time", "greetingLanguage", "persona"];
       ids.forEach(id => {
-        el(id).onchange = () => rebuildTimelineAndUpdate(true);
+        el(id).onchange = () => {
+          if (id === "persona") applyPersona();
+          rebuildTimelineAndUpdate(true);
+        };
       });
+    }
+
+    function applyPersona() {
+      const p = el("persona").value;
+      if (p === "mueller_dr") {
+        el("greetingLanguage").value = "de-DE";
+        el("surname").value = "Müller";
+        el("titleRole").value = "dr";
+        el("formality").value = "formal";
+        el("time").value = "12:30";
+      } else if (p === "judge_smith") {
+        el("greetingLanguage").value = "en-GB";
+        el("surname").value = "Smith";
+        el("titleRole").value = "judge";
+        el("formality").value = "formal";
+        el("time").value = "10:00";
+      } else if (p === "papadopoulos_el") {
+        el("greetingLanguage").value = "el-GR";
+        el("surname").value = "Papadopoulos";
+        el("titleRole").value = "none";
+        el("formality").value = "informal";
+        el("givenNames").value = "Georgios";
+      }
     }
 
     function renderAffChips() {
