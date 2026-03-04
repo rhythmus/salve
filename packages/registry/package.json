@@ -1,14 +1,18 @@
 {
     "name": "@salve/registry",
     "version": "0.1.0",
-    "description": "Salve pack registry and versioning system",
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
+    "description": "Registry and Loader for Salve plugins and data packs",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "files": [
         "dist"
     ],
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "test": "jest"
+    },
+    "dependencies": {
+        "@salve/types": "0.1.0"
     },
     "author": "Wouter Soudan",
     "license": "MIT"
