@@ -16,6 +16,7 @@ describe("SalveEngine Anti-Repetition", () => {
 
     const mockPlugin: CalendarPlugin = {
         id: "test-plugin",
+        // @ts-ignore - simplified for test
         resolveEvents: () => [{ id: "morning", domain: "temporal" }]
     };
 
@@ -35,35 +36,35 @@ describe("SalveEngine Anti-Repetition", () => {
         engine.registerPack(mockPack);
     });
 
-    test("should rotate through available greetings and avoid repetition", () => {
+    test("should rotate through available greetings and avoid repetition", async () => {
         const context: GreetingContext = {
             now: new Date(),
             locale: "de-DE"
         };
 
         // First call -> hi-1
-        const res1 = engine.resolve(context);
+        const res1 = await engine.resolve(context);
         expect(res1.greeting).toBe("Guten Morgen");
 
         // Second call -> hi-2 (since hi-1 is in memory)
-        const res2 = engine.resolve(context);
+        const res2 = await engine.resolve(context);
         expect(res2.greeting).toBe("Moin");
 
         // Third call -> fallback (since both morning greetings are used)
-        const res3 = engine.resolve(context);
+        const res3 = await engine.resolve(context);
         expect(res3.greeting).toBe("Hallo");
     });
 
-    test("should recover greeting after memory is cleared", () => {
+    test("should recover greeting after memory is cleared", async () => {
         const context: GreetingContext = {
             now: new Date(),
             locale: "de-DE"
         };
 
-        engine.resolve(context);
+        await engine.resolve(context);
         memory.clear();
 
-        const res2 = engine.resolve(context);
+        const res2 = await engine.resolve(context);
         expect(res2.greeting).toBe("Guten Morgen");
     });
 });

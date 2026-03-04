@@ -39,7 +39,7 @@ describe("AddressResolver Integration", () => {
         engine.registerHonorifics(englishHonorifics);
     });
 
-    test("should resolve German formal address with academic title", () => {
+    test("should resolve German formal address with academic title", async () => {
         const context: GreetingContext = {
             now: new Date(),
             locale: "de-DE",
@@ -52,26 +52,19 @@ describe("AddressResolver Integration", () => {
             }
         };
 
-        // We need a registered pack to trigger resolution in the engine, 
-        // but the engine.resolve() calls resolveAddress().
-        // For this test, we can check the engine's internal resolveAddress via resolve call
-        // if we have a dummy pack. Let's just test the engine's public resolve output.
-
-        // Register a dummy pack so resolve doesn't fallback to error
         engine.registerPack({
             locale: "de",
             greetings: [{
                 id: "generic",
-                eventRef: undefined,
                 text: "Greeting"
             }]
         });
 
-        const result = engine.resolve(context);
+        const result = await engine.resolve(context);
         expect(result.address).toBe("Herr Dr. Mustermann");
     });
 
-    test("should resolve English informal address", () => {
+    test("should resolve English informal address", async () => {
         const context: GreetingContext = {
             now: new Date(),
             locale: "en-US",
@@ -88,14 +81,14 @@ describe("AddressResolver Integration", () => {
             greetings: [{ id: "hi", text: "Hi" }]
         });
 
-        const result = engine.resolve(context);
+        const result = await engine.resolve(context);
         expect(result.address).toBe("Jane");
     });
 
-    test("should fallback gracefully when no honorific pack is registered", () => {
+    test("should fallback gracefully when no honorific pack is registered", async () => {
         const context: GreetingContext = {
             now: new Date(),
-            locale: "fr-FR", // No French registered
+            locale: "fr-FR",
             formality: "formal",
             profile: {
                 firstName: "Jean",
@@ -109,8 +102,7 @@ describe("AddressResolver Integration", () => {
             greetings: [{ id: "bonjour", text: "Bonjour" }]
         });
 
-        const result = engine.resolve(context);
-        // Fallback in AddressResolver is "Mx. LastName"
+        const result = await engine.resolve(context);
         expect(result.address).toBe("Mx. Dupont");
     });
 });

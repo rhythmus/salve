@@ -6,7 +6,6 @@ describe("Vocabulary & Punctuation (M4.2)", () => {
     beforeEach(() => {
         engine = new SalveEngine();
 
-        // Greek Honorifics
         engine.registerHonorifics({
             locale: "el",
             titles: { male: "Κύριε", female: "Κυρία", unspecified: "Κ." },
@@ -17,7 +16,6 @@ describe("Vocabulary & Punctuation (M4.2)", () => {
             }
         });
 
-        // Greek Greeting Pack
         engine.registerPack({
             locale: "el",
             greetings: [
@@ -26,7 +24,6 @@ describe("Vocabulary & Punctuation (M4.2)", () => {
             ]
         });
 
-        // English Pack for comparative punctuation
         engine.registerPack({
             locale: "en",
             greetings: [
@@ -36,41 +33,38 @@ describe("Vocabulary & Punctuation (M4.2)", () => {
         });
     });
 
-    test("should apply Greek vocative to first name", () => {
+    test("should apply Greek vocative to first name", async () => {
         const context: GreetingContext = {
             now: new Date(),
             locale: "el-GR",
             formality: "informal",
             profile: {
-                firstName: "Γιώργος", // Giorgos
+                firstName: "Γιώργος",
                 gender: "male"
             }
         };
 
-        const result = engine.resolve(context);
-        // Vocative of Γιώργος is Γιώργο
+        const result = await engine.resolve(context);
         expect(result.address).toBe("Γιώργο");
         expect(result.salutation).toBe("Γεια σου, Γιώργο");
     });
 
-    test("should apply Greek vocative to last name in formal address", () => {
+    test("should apply Greek vocative to last name in formal address", async () => {
         const context: GreetingContext = {
             now: new Date(),
             locale: "el-GR",
             formality: "formal",
             profile: {
-                lastName: "Παπαδόπουλος", // Papadopoulos
+                lastName: "Παπαδόπουλος",
                 gender: "male"
             }
         };
 
-        const result = engine.resolve(context);
-        // Vocative of Παπαδόπουλος is Παπαδόπουλε
-        // Format: Κύριε Παπαδόπουλε
+        const result = await engine.resolve(context);
         expect(result.address).toBe("Κύριε Παπαδόπουλε");
     });
 
-    test("should handle punctuation correctly (greedy comma)", () => {
+    test("should handle punctuation correctly (greedy comma)", async () => {
         const context: GreetingContext = {
             now: new Date(),
             locale: "en-US",
@@ -78,16 +72,15 @@ describe("Vocabulary & Punctuation (M4.2)", () => {
             profile: { firstName: "Alice" }
         };
 
-        const result1 = engine.resolve(context);
+        const result1 = await engine.resolve(context);
         expect(result1.salutation).toBe("Hi, Alice");
 
-        // Case with trailing punctuation in template
         engine.registerPack({
             locale: "en",
             greetings: [{ id: "welcome", text: "Welcome!" }]
         });
 
-        const result2 = engine.resolve(context);
+        const result2 = await engine.resolve(context);
         expect(result2.salutation).toBe("Welcome! Alice");
     });
 });
