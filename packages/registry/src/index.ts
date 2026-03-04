@@ -50,6 +50,10 @@ export class PackRegistry {
         return this.honorifics.filter(p => p.locale === locale);
     }
 
+    getAllHonorifics(): HonorificPack[] {
+        return this.honorifics;
+    }
+
     registerSaints(saints: SaintDefinition[]): void {
         this.saints.push(...saints);
     }

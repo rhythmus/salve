@@ -17,6 +17,11 @@ import { calculateEventScore, isAffiliated } from "./scoring";
 import { AddressResolver, TransformHook } from "./address";
 import { SalveRegistry, SalveLoader } from "@salve/registry";
 
+export interface SalveOptions {
+    registry?: SalveRegistry;
+    memory?: GreetingMemory;
+}
+
 const DEFAULT_CONTEXT_VALUES = {
     affiliations: ["civil", "secular"],
     relationship: "stranger" as const,
@@ -34,11 +39,11 @@ export class SalveEngine {
     private registry: SalveRegistry;
     private loader: SalveLoader;
 
-    constructor(memory?: GreetingMemory, registry?: SalveRegistry) {
-        this.memory = memory;
-        this.addressResolver = new AddressResolver();
-        this.registry = registry || new SalveRegistry();
+    constructor(options: SalveOptions = {}) {
+        this.registry = options.registry || new SalveRegistry();
+        this.memory = options.memory;
         this.loader = new SalveLoader(this.registry);
+        this.addressResolver = new AddressResolver(this.registry.packs.getAllHonorifics());
         this.registerDefaultTransforms();
     }
 

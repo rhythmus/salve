@@ -14,6 +14,12 @@ export class AddressResolver {
     private honorifics: Map<string, HonorificPack> = new Map();
     private transforms: Map<string, TransformHook[]> = new Map();
 
+    constructor(honorifics?: HonorificPack[]) {
+        if (honorifics) {
+            honorifics.forEach(p => this.registerHonorifics(p));
+        }
+    }
+
     /**
      * Register a localized honorific pack
      */
