@@ -1,0 +1,19 @@
+{
+    "name": "@salve/plugin-nameday-remote",
+    "version": "0.1.0",
+    "description": "Remote Name-Day resolution plugin for Salve",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "test": "jest"
+    },
+    "dependencies": {
+        "@salve/types": "0.1.0"
+    },
+    "author": "Wouter Soudan",
+    "license": "MIT"
+}
