@@ -13,19 +13,19 @@
 
   <style>
     :root {
-      --bg: rgb(247, 247, 245);
-      --fg-rgb: 17, 17, 17;
+      --bg: #f8f8f8;
+      --fg-rgb: 10, 10, 10;
       --fg: rgb(var(--fg-rgb));
       --muted: rgba(var(--fg-rgb), 0.5);
-      --line: rgba(var(--fg-rgb), 0.15);
-      --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --line: rgba(var(--fg-rgb), 0.1);
+      --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       --serif: 'Alegreya', serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Source Code Pro", monospace;
+      --glass: rgba(255, 255, 255, 0.7);
     }
 
-
     * {
-      box-sizing: border-box
+      box-sizing: border-box;
     }
 
     body {
@@ -33,128 +33,168 @@
       background: var(--bg);
       color: var(--fg);
       font-family: var(--sans);
-      line-height: 1.4;
+      line-height: 1.5;
+      overflow-x: hidden;
     }
 
-    .headlineRow {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin: 24px 0 12px 0;
-      position: relative;
-    }
-
-    .logoSvg {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
-      color: var(--fg);
-    }
-
-    @media (min-width: 1260px) {
-      .logoSvg {
-        position: absolute;
-        right: calc(100% + 0.5em);
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
-
-    .pill {
-      border: 1px solid var(--line);
-      padding: 4px 8px;
-      border-radius: 20px;
-    }
-
-    .btn {
-      background: none;
-      border: 1px solid var(--line);
-      padding: 4px 8px;
-      font-family: var(--mono);
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      background: #000;
-      color: #fff;
-    }
-
+    /* ---- Layout ---- */
     main>* {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 24px 16px 60px 16px;
+      padding: 0 20px;
     }
 
-    .intro {
-      margin-bottom: 24px
+    .hero {
+      padding-top: 80px;
+      padding-bottom: 60px;
     }
 
+    @media (max-width: 768px) {
+      .hero {
+        padding-top: 40px;
+      }
+    }
+
+    /* ---- Typography ---- */
     .tagline {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .plain {
-      margin-top: 8px;
       font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       color: var(--muted);
-      line-height: 1.9;
+      margin-bottom: 24px;
     }
 
     .headline {
       font-family: var(--serif);
-      font-size: 48px;
+      font-size: clamp(48px, 8vw, 84px);
+      line-height: 1;
       margin: 0;
-      font-weight: normal;
+      font-weight: 400;
+      letter-spacing: -0.02em;
     }
 
-    .subtitle {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .reasoning {
-      max-width: 600px;
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--muted);
-      margin-bottom: 32px;
-      padding: 16px;
-      border-left: 2px solid var(--line);
-      background: rgba(var(--fg-rgb), 0.02);
-    }
-
-    .reasoning b {
-      color: var(--fg);
-      font-weight: 600;
-    }
-
-    .timelineWrap {
+    .plain {
       margin-top: 32px;
-      padding-top: 0;
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      padding-left: 16px;
-      padding-right: 16px;
-      padding-right: 16px;
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 800px;
     }
 
+    /* ---- Interactive variables in paragraph ---- */
+    .var {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .vd {
+      color: var(--fg);
+      border-bottom: 1px dotted var(--muted);
+      transition: all 0.2s;
+    }
+
+    .var:hover .vd {
+      color: #000;
+      border-bottom-color: #000;
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .ve {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .ve select,
+    .ve input {
+      font-family: var(--mono);
+      font-size: 14px;
+      border: 1px solid var(--fg);
+      background: #fff;
+      padding: 2px 4px;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    /* Affiliation chips in paragraph */
+    .aff-chip {
+      font-size: 13px;
+      padding: 2px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      margin: 2px 0;
+      display: inline-block;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #fff;
+      color: var(--muted);
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    .aff-chip.on {
+      border-color: var(--fg);
+      color: var(--fg);
+      background: var(--fg);
+      color: #fff;
+    }
+
+    #affToggle,
+    #affCollapse {
+      font-weight: bold;
+      border-style: dashed;
+      color: var(--fg);
+    }
+
+    /* ---- Meta Strip (Secondary info) ---- */
+    .strip {
+      margin-top: 40px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chip .mono {
+      font-family: var(--mono);
+      opacity: 0.7;
+    }
+
+    /* ---- Timeline System ---- */
+    .timelineWrap {
+      margin-top: 60px;
+      border-top: 1px solid var(--line);
+    }
 
     .timelineTop {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
       font-size: 12px;
-      margin-bottom: 12px;
+      color: var(--muted);
     }
 
     .track {
       display: flex;
-      border-top: 1px solid var(--line);
       overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
+      -ms-overflow-style: none;
+      margin: 0 -20px;
+      padding: 0 20px;
     }
 
     .track::-webkit-scrollbar {
@@ -162,256 +202,241 @@
     }
 
     .node {
-      flex: 1;
-      min-width: 180px;
-      padding: 14px 18px 16px;
+      flex: 0 0 220px;
+      padding: 24px 24px 32px 24px;
+      border-right: 1px solid var(--line);
       cursor: pointer;
-      border-left: 1px solid var(--line);
-      transition: background .15s;
+      transition: background 0.2s;
     }
 
-    .node:first-child {
-      border-left: none;
+    .node:hover {
+      background: rgba(0, 0, 0, 0.02);
     }
 
     .node.sel {
-      background: rgba(0, 0, 0, .03);
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      position: relative;
+      z-index: 10;
     }
 
     .node .when {
       font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
       color: var(--muted);
-      text-transform: lowercase;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .node .label {
-      font-weight: 600;
-      font-size: 15px;
-      line-height: 1.3;
+      font-size: 18px;
+      font-family: var(--serif);
+      margin-bottom: 4px;
     }
 
     .node .cal-info {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
-      margin-top: 3px;
-      min-height: 1em;
+      height: 1.5em;
     }
 
     .node .badge {
       display: inline-block;
-      font-family: var(--sans);
+      margin-top: 16px;
       font-size: 10px;
-      padding: 2px 10px;
-      border-radius: 20px;
-      margin-top: 10px;
-      border: 1px solid;
-      background: transparent;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
     }
 
     .badge.b-civil {
-      color: #5a7a4a;
-      border-color: #5a7a4a;
+      background: #e0e8f0;
+      color: #406080;
     }
 
     .badge.b-relig {
-      color: #c06050;
-      border-color: #c06050;
+      background: #f0e8e0;
+      color: #806040;
     }
 
     .badge.b-season {
-      color: #b87848;
-      border-color: #b87848;
+      background: #e8f0e0;
+      color: #608040;
     }
 
     .badge.b-personal {
-      color: #4a8a7a;
-      border-color: #4a8a7a;
+      background: #f0e0f0;
+      color: #804080;
     }
 
-    .usecases {
-      margin-top: 32px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 24px;
+    /* ---- Controls UI ---- */
+    .btnToggle {
+      background: var(--fg);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 40px;
       font-size: 13px;
-      color: var(--muted);
-    }
-
-    .uc {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .uc-icon {
-      font-size: 9px;
-      color: var(--fg);
-    }
-
-    .strip {
-      margin-top: 32px;
-      font-size: 12px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .chip {
-      border: 1px solid var(--line);
-      padding: 4px 8px;
-      border-radius: 20px;
-    }
-
-    details {
-      margin-top: 24px;
-      border-top: 1px solid var(--line);
-      padding-top: 12px;
-    }
-
-    summary {
-      cursor: pointer;
       font-weight: 600;
-      font-size: 13px;
+      cursor: pointer;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
     }
 
-    pre {
-      font-family: var(--mono);
-      font-size: 12px;
-      background: #fff;
-      border: 1px solid var(--line);
-      padding: 12px;
-      overflow: auto;
+    .btnToggle:hover {
+      transform: scale(1.05);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(4px);
+      z-index: 1100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .overlay.show {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .drawer {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 420px;
+      height: 100%;
       background: #fff;
-      border-left: 1px solid var(--line);
+      z-index: 1200;
+      box-shadow: -10px 0 50px rgba(0, 0, 0, 0.1);
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
     }
 
-    .db {
-      display: none;
+    .drawer.open {
+      right: 0;
     }
 
-    input,
-    select {
-      font-family: var(--mono);
-      font-size: 12px;
+    .drawerContent {
+      padding: 40px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .drawer h2 {
+      margin-top: 0;
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 400;
+    }
+
+    .drawer .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      opacity: 0.3;
+    }
+
+    .drawer .btnReset {
+      display: block;
+      width: 100%;
+      margin-top: 30px;
+      padding: 12px;
+      background: none;
       border: 1px solid var(--line);
-      padding: 6px;
-      background: transparent;
+      border-radius: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .toggle input {
+      width: auto;
+    }
+
+    .aff {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
     .aff .a {
       border: 1px solid var(--line);
+      border-radius: 4px;
       padding: 4px 8px;
+      font-size: 11px;
       cursor: pointer;
     }
 
     .aff .a.on {
-      background: #000;
+      background: var(--fg);
       color: #fff;
+      border-color: var(--fg);
     }
 
-
-    .var {
-      cursor: pointer;
-      display: inline;
+    /* Logo */
+    .logo {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      font-family: var(--serif);
+      font-size: 24px;
     }
 
-    .vd {
-      font-family: var(--sans);
-      font-size: 12px;
-      color: var(--fg);
-      border: 1px solid var(--line);
-      padding: 0px 8px;
-      border-radius: 20px;
-      display: inline-block;
-      vertical-align: middle;
-      white-space: nowrap;
-    }
-
-    .vd:hover {
-      border-color: rgba(var(--fg-rgb), 0.4);
-    }
-
-    .ve select,
-    .ve input {
-      font-family: var(--mono);
-      font-size: 12px;
-      border: 1px solid var(--line);
-      background: transparent;
-      border-radius: 20px;
-      vertical-align: middle;
-      padding: 0 6px;
-    }
-
-    .aff-chip {
-      font-family: var(--sans);
-      font-size: 12px;
-      color: var(--fg);
-      border: 1px solid var(--line);
-      padding: 0px 8px;
-      border-radius: 20px;
-      cursor: pointer;
-      display: inline-block;
-      margin: 1px 0;
-      vertical-align: middle;
-    }
-
-    .aff-chip:hover {
-      border-color: rgba(var(--fg-rgb), 0.4);
-    }
-
-    .aff-chip.on {
-      color: var(--fg);
-      background: transparent;
-    }
-
-    .plain input[type="checkbox"] {
-      vertical-align: middle;
-      margin-right: 2px;
-    }
-
-    .github-corner:hover .octo-arm {
-      animation: octocat-wave 560ms ease-in-out;
-    }
-
-    @keyframes octocat-wave {
-
-      0%,
-      100% {
-        transform: rotate(0)
-      }
-
-      20%,
-      60% {
-        transform: rotate(-25deg)
-      }
-
-      40%,
-      80% {
-        transform: rotate(10deg)
-      }
-    }
-
-    .var .vd {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--fg);
-      border-bottom: 1px dotted var(--line);
-      padding-bottom: 1px;
-      white-space: nowrap;
-    }
-
-    .var .ve select,
-    .var .ve input {
-      font-family: var(--mono);
-      font-size: 12px;
-      border: 1px solid var(--line);
-      background: transparent;
-      color: var(--fg);
-      padding: 2px 6px;
+    .small {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
     }
   </style>
 
@@ -466,107 +491,72 @@
   </style>
   <main>
     <section class="hero">
-
-      <div class="intro">
-        <div class="tagline">
-          <h1>Salve solves greetings &amp; salutations</h1>
-          <p>Generate culturally correct, time-aware greetings &mdash; and address people properly (Dr., Professor, Your
-            Honor&hellip;).</p>
-        </div>
-        <p class="plain" id="plainExplain">—</p>
-      </div>
-      <div class="headlineRow">
-        <svg class="logoSvg" width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M8 11V6.5a1.5 1.5 0 0 1 3 0V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round" />
-          <path d="M11 10V5.8a1.4 1.4 0 1 1 2.8 0V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round" />
-          <path d="M13.8 10V6.3a1.35 1.35 0 1 1 2.7 0V11" stroke="currentColor" stroke-width="1.8"
-            stroke-linecap="round" stroke-linejoin="round" />
-          <path
-            d="M7.2 11.2v-1.3a1.4 1.4 0 0 0-2.8 0v2.8c0 3.7 2.7 6.8 6.5 7.3 3.7.5 6.9-1.8 7.7-5.4l.7-3.2a1.35 1.35 0 0 0-2.6-.6l-.7 2.6"
-            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M19.6 3.7c1.2.9 2 2.2 2.2 3.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-          <path d="M18 5.7c.7.5 1.2 1.3 1.3 2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-        </svg>
-        <h2 class="headline" id="heroGreeting">—</h2>
-      </div>
-      <div class="subtitle">
-        <div class="kvs">
-          <span class="kv"><span class="dot"></span><span id="metaEvent">event: —</span></span>
-          <span class="kv"><span class="dot" style="background:var(--relig)"></span><span id="metaWhy">why:
-              —</span></span>
-          <span class="kv"><span class="dot" style="background:var(--personal)"></span><span id="metaLang">lang/script:
-              —</span></span>
-        </div>
-        <div class="rule" id="metaKey">—</div>
-      </div>
-
-      <div class="reasoning" id="reasoningParagraph">
-        Initializing cultural resolution engine...
-      </div>
-
-      <div class="timelineWrap" id="timelineWrap">
-
-        <div class="track" id="timelineTrack" aria-label="Timeline of dates"></div>
-      </div>
-
+      <div class="tagline">Salve solves greetings & salutations</div>
+      <h1 class="headline" id="heroGreeting">—</h1>
+      <p class="plain" id="plainExplain">—</p>
       <div class="strip" id="alsoStrip"></div>
 
-      <div class="usecases">
-        <div class="uc"><span class="uc-icon">&#9671;</span> UI welcome screens</div>
-        <div class="uc"><span class="uc-icon">&#9671;</span> Email generators</div>
-        <div class="uc"><span class="uc-icon">&#9671;</span> CRM systems</div>
-        <div class="uc"><span class="uc-icon">&#9671;</span> Chat systems</div>
-        <div class="uc"><span class="uc-icon">&#9671;</span> Legal automation</div>
-        <div class="uc"><span class="uc-icon">&#9671;</span> Public announcements</div>
-        <div class="uc"><span class="uc-icon">&#9671;</span> Government portals</div>
-        <div class="uc"><span class="uc-icon">&#9671;</span> Academic systems</div>
-        <div class="uc"><span class="uc-icon">&#9671;</span> Court &amp; case systems</div>
+      <div class="timelineWrap">
+        <div class="timelineTop">
+          <div>Upcoming events resolved by Salve</div>
+          <div style="font-family:var(--mono); opacity:0.5">Scanning 60 days...</div>
+        </div>
+        <div class="track" id="timelineTrack"></div>
       </div>
-    </section>
 
-    <section class="row" id="devArea">
-      <details open>
-        <summary>Selected resolution trace <span class="pill" id="devBadge">—</span></summary>
-        <div class="content">
-          <pre id="devTrace"></pre>
+      <section id="devArea" style="display:none; margin-top: 80px; padding-bottom: 100px;">
+        <div class="grid2">
+          <div class="form-group">
+            <label>Engine Trace</label>
+            <pre id="devTrace"
+              style="background: #fff; border: 1px solid var(--line); padding: 20px; font-size: 11px; overflow: auto; max-height: 400px;"></pre>
+          </div>
+          <div class="form-group">
+            <label>Candidate Events</label>
+            <pre id="devCandidates"
+              style="background: #fff; border: 1px solid var(--line); padding: 20px; font-size: 11px; overflow: auto; max-height: 400px;"></pre>
+          </div>
         </div>
-      </details>
-      <details>
-        <summary>Candidate events (sorted)</summary>
-        <div class="content">
-          <pre id="devCandidates"></pre>
-        </div>
-      </details>
-      <details>
-        <summary>Resolved context</summary>
-        <div class="content">
-          <pre id="devContext"></pre>
-        </div>
-      </details>
-      <details>
-        <summary>Pack fixtures</summary>
-        <div class="content">
-          <pre id="devPacks"></pre>
-        </div>
-      </details>
-    </section>
+      </section>
   </main>
 
-  <aside class="drawer" id="drawer" aria-label="Settings drawer">
-    <div class="db">
+  <div class="logo">Salve</div>
+
+  <button class="btnToggle" id="btnSettings">Settings & Scenarios</button>
+
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="drawer" id="drawer">
+    <button class="close" id="btnClose">&times;</button>
+    <div class="drawerContent">
+      <h2>Settings</h2>
+      <p class="small" style="margin-bottom: 30px;">Refine the social and temporal context.</p>
+
+      <div class="form-group">
+        <label for="scenario">Scenario Presets</label>
+        <select id="scenario" style="width: 100%; border-radius: 8px; padding: 10px;">
+          <option value="">Manual control</option>
+          <option value="de_secular">German secular</option>
+          <option value="de_doctor">German: Herr Doktor</option>
+          <option value="en_judge">English: Your Honor</option>
+          <option value="tr_muslim_de">Turkish Muslim in Germany</option>
+          <option value="el_orthodox">Greek Orthodox</option>
+          <option value="zh_diaspora">Chinese diaspora (zh‑CN)</option>
+          <option value="dev_mixed">Mixed: English + Arabic Eid</option>
+        </select>
+      </div>
+
       <div class="grid2">
-        <div>
+        <div class="form-group">
           <label for="mode">Mode</label>
-          <select id="mode">
+          <select id="mode" style="width:100%">
             <option value="opening">Opening</option>
             <option value="closing">Closing</option>
           </select>
         </div>
-        <div>
+        <div class="form-group">
           <label for="formality">Formality</label>
-          <select id="formality">
+          <select id="formality" style="width:100%">
             <option value="informal">Informal</option>
             <option value="formal">Formal</option>
           </select>
@@ -606,151 +596,152 @@
 
       <div style="height:12px"></div>
       <div class="grid3">
-        <div>
+        <div class="form-group">
+          <label for="outputMode">Output</label>
+          <select id="outputMode" style="width:100%">
+            <option value="salutation">Salutation</option>
+            <option value="greeting">Greeting</option>
+            <option value="address">Address</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="relationship">Relation</label>
+          <select id="relationship" style="width:100%">
+            <option value="stranger">Stranger</option>
+            <option value="acquaintance">Acquaintance</option>
+            <option value="friend">Friend</option>
+            <option value="family">Family</option>
+            <option value="superior">Superior</option>
+            <option value="subordinate">Subordinate</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="setting">Setting</label>
+          <select id="setting" style="width:100%">
+            <option value="ui">UI</option>
+            <option value="chat">Chat</option>
+            <option value="email">Email</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="form-group">
           <label for="gender">Gender</label>
-          <select id="gender">
+          <select id="gender" style="width:100%">
             <option value="unknown">Unknown</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="nonbinary">Non-binary</option>
           </select>
         </div>
-        <div>
+        <div class="form-group">
           <label for="surname">Surname</label>
-          <input id="surname" type="text" placeholder="Müller / Smith" />
+          <input id="surname" type="text" placeholder="Surname" style="width:100%" />
         </div>
-        <div>
-          <label for="titleRole">Title / role</label>
-          <select id="titleRole">
+        <div class="form-group">
+          <label for="titleRole">Title</label>
+          <select id="titleRole" style="width:100%">
             <option value="none">None</option>
             <option value="mr">Mr</option>
             <option value="mrs">Mrs</option>
             <option value="ms">Ms</option>
             <option value="mx">Mx</option>
             <option value="dr">Dr</option>
-            <option value="prof">Professor</option>
-            <option value="prof_dr">Professor + Dr</option>
-            <option value="judge">Judge / Your Honor</option>
-            <option value="police">Police / Constable</option>
+            <option value="prof">Prof</option>
+            <option value="prof_dr">Prof. Dr.</option>
+            <option value="judge">Judge</option>
+            <option value="police">Police</option>
             <option value="clergy">Clergy</option>
           </select>
         </div>
       </div>
 
-      <div style="height:12px"></div>
       <div class="grid3">
-        <div>
+        <div class="form-group">
           <label for="date">Date</label>
-          <input id="date" type="date" />
+          <input id="date" type="date" style="width:100%" />
         </div>
-        <div>
-          <label for="time">Time (HH:MM)</label>
-          <input id="time" type="text" placeholder="15:30" />
+        <div class="form-group">
+          <label for="time">Time</label>
+          <input id="time" type="text" placeholder="12:00" style="width:100%" />
         </div>
-        <div>
-          <label for="timezone">Time zone</label>
-          <select id="timezone">
-            <option value="auto">Auto (browser)</option>
-            <option value="Europe/Berlin">Europe/Berlin</option>
-            <option value="Europe/Brussels">Europe/Brussels</option>
-            <option value="Europe/Athens">Europe/Athens</option>
-            <option value="Asia/Istanbul">Asia/Istanbul</option>
-            <option value="Asia/Shanghai">Asia/Shanghai</option>
+        <div class="form-group">
+          <label for="timezone">Zone</label>
+          <select id="timezone" style="width:100%">
+            <option value="auto">auto</option>
             <option value="UTC">UTC</option>
+            <option value="Europe/Berlin">Berlin</option>
+            <option value="Europe/Athens">Athens</option>
+            <option value="Asia/Shanghai">Shanghai</option>
           </select>
         </div>
       </div>
-      <div class="small" style="margin-top:8px">Built on Salve Engine</div>
 
-      <div style="height:12px"></div>
       <div class="grid2">
-        <div>
-          <label for="givenNames">Given name(s)</label>
-          <input id="givenNames" type="text" placeholder="Giannis; Mehmet; Wei" />
-          <div class="small">Separate with <span style="font-family:var(--mono)">;</span></div>
+        <div class="form-group">
+          <label for="givenNames">Given Names</label>
+          <input id="givenNames" type="text" placeholder="Jan; Mehmet" style="width:100%" />
         </div>
-        <div>
+        <div class="form-group">
           <label for="birthday">Birthday</label>
-          <input id="birthday" type="date" />
+          <input id="birthday" type="date" style="width:100%" />
         </div>
       </div>
 
-      <div style="height:12px"></div>
       <div class="grid2">
-        <div>
-          <label for="residenceLocale">Residence locale</label>
-          <select id="residenceLocale">
-            <option value="de-DE">de-DE (Germany)</option>
-            <option value="el-GR">el-GR (Greece)</option>
-            <option value="tr-TR">tr-TR (Turkey)</option>
-            <option value="nl-BE">nl-BE (Belgium)</option>
-            <option value="en-GB">en-GB (UK)</option>
-            <option value="zh-CN">zh-CN (China)</option>
+        <div class="form-group">
+          <label for="residenceLocale">Residence</label>
+          <select id="residenceLocale" style="width:100%">
+            <option value="de-DE">Germany (de-DE)</option>
+            <option value="el-GR">Greece (el-GR)</option>
+            <option value="tr-TR">Turkey (tr-TR)</option>
+            <option value="en-GB">UK (en-GB)</option>
+            <option value="zh-CN">China (zh-CN)</option>
           </select>
         </div>
-        <div>
-          <label for="greetingLanguage">Greeting language</label>
-          <select id="greetingLanguage">
+        <div class="form-group">
+          <label for="greetingLanguage">Language</label>
+          <select id="greetingLanguage" style="width:100%">
             <option value="de-DE">de-DE</option>
             <option value="en-GB">en-GB</option>
             <option value="el-GR">el-GR</option>
             <option value="tr-TR">tr-TR</option>
             <option value="ar">ar</option>
             <option value="zh-CN">zh-CN</option>
-            <option value="zh-TW">zh-TW</option>
           </select>
         </div>
       </div>
 
-      <div style="height:12px"></div>
-      <div class="grid2">
-        <div>
-          <label for="scriptPref">Script preference</label>
-          <select id="scriptPref">
-            <option value="latin">Latin</option>
-            <option value="native">Native</option>
-            <option value="arabic">Arabic</option>
-            <option value="simplified">Simplified Chinese</option>
-            <option value="traditional">Traditional Chinese</option>
-          </select>
-        </div>
-        <div>
-          <label>Affiliations</label>
-          <div class="aff" id="affChips"></div>
-        </div>
+      <div class="form-group">
+        <label for="scriptPref">Script Preference</label>
+        <select id="scriptPref" style="width:100%">
+          <option value="latin">Latin</option>
+          <option value="native">Native</option>
+          <option value="arabic">Arabic</option>
+          <option value="simplified">Simplified</option>
+          <option value="traditional">Traditional</option>
+        </select>
       </div>
 
-      <div style="height:12px"></div>
-      <label class="toggle" style="justify-content:space-between; width:100%">
-        <span>Participate in residence civil holidays</span>
+      <div class="form-group">
+        <label>Affiliations</label>
+        <div class="aff" id="affChips"></div>
+      </div>
+
+      <label class="toggle">
         <input type="checkbox" id="civilParticipation" checked />
+        <span>Civil participation</span>
       </label>
-      <div style="height:10px"></div>
-      <label class="toggle" style="justify-content:space-between; width:100%">
-        <span>Enable namedays</span>
+      <label class="toggle">
         <input type="checkbox" id="namedaysEnabled" checked />
+        <span>Celebrate namedays</span>
       </label>
 
-      <div style="height:12px"></div>
-      <select id="scenario">
-        <option value="">—</option>
-        <option value="de_secular">German secular</option>
-        <option value="de_doctor">German: Herr Doktor</option>
-        <option value="en_judge">English: Your Honor</option>
-        <option value="tr_muslim_de">Turkish Muslim in Germany</option>
-        <option value="el_orthodox">Greek Orthodox</option>
-        <option value="zh_diaspora">Chinese diaspora (zh‑CN)</option>
-        <option value="dev_mixed">Mixed: English + Arabic Eid</option>
-      </select>
+      <button class="btnReset" id="btnReset">Reset state & memory</button>
 
-      <div style="height:12px"></div>
-      <label for="persona">Quick Persona</label>
-      <select id="persona">
-        <option value="custom">Custom...</option>
-        <option value="mueller_dr">Dr. Müller (Munich, 12:30)</option>
-        <option value="judge_smith">Justice Smith (London)</option>
-        <option value="papadopoulos_el">Papadopoulos (Athens, Orthodox)</option>
-      </select>
+      <div style="height:40px"></div>
+      <div class="small">Built with Salve Cultural Intelligence Engine</div>
     </div>
   </aside>
 
@@ -760,7 +751,7 @@
     import { GregorianCalendarPlugin } from "@salve/calendars-gregorian";
 
     // ------------------------------------------------------------
-    // Salve Demo V3 — Real Engine + DevTools Overlay
+    // Salve Demo — Real Engine + Mockup Interactive UI
     // ------------------------------------------------------------
 
     const engine = new SalveEngine();
@@ -769,21 +760,33 @@
     const greg = new GregorianCalendarPlugin();
     engine.registerPlugin(greg);
 
-    // Add Mock Specialty Plugin for the demo
+    // Mock Specialty Plugin for demo events
     engine.registerPlugin({
       id: "specialty-demo",
       resolveEvents: (now) => {
-        if (now.getMonth() === 2 && now.getDate() === 25) { // March 25
-          return [{ id: "gr_independence_day", domain: "civil" }];
+        const events = [];
+        // March 25
+        if (now.getMonth() === 2 && now.getDate() === 25) {
+          events.push({ id: "gr_independence_day", domain: "civil" });
         }
-        return [];
+        // Dec 25
+        if (now.getMonth() === 11 && now.getDate() === 25) {
+          events.push({ id: "christmas", domain: "religious" });
+        }
+        // Oct 3
+        if (now.getMonth() === 9 && now.getDate() === 3) {
+          events.push({ id: "german_unity_day", domain: "civil" });
+        }
+        return events;
       }
     });
 
-    // Register Mock Packs for Demo
+    // Register Base Packs
     engine.registerPack({
       locale: "de-DE",
       greetings: [
+        { id: "unity", text: "Schönen Tag der Deutschen Einheit!", eventRef: "german_unity_day" },
+        { id: "christmas", text: "Frohe Weihnachten", eventRef: "christmas" },
         { id: "morning", text: "Guten Morgen", eventRef: "morning" },
         { id: "mahlzeit", text: "Mahlzeit", eventRef: "midday", formality: "informal" },
         { id: "afternoon", text: "Guten Tag", eventRef: "afternoon" },
@@ -816,28 +819,52 @@
       rebuildTimelineAndUpdate(true);
     });
 
+    // ---------- Global State & Constants
     const el = (id) => document.getElementById(id);
     const pad2 = (n) => String(n).padStart(2, "0");
     const fmtISO = (d) => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
     const escapeHtml = (s) => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-    let selectedAff = new Set(["civil", "islam", "orthodox", "chinese_traditional"]);
+    const AFFILIATIONS = [
+      { id: "civil", label: "Civil" },
+      { id: "islam", label: "Islam" },
+      { id: "orthodox", label: "Orthodox" },
+      { id: "chinese_traditional", label: "Chinese Tradition" }
+    ];
+
+    let selectedAff = new Set(["civil", "orthodox"]);
     let autoTimer = null;
     let autoIndex = 0;
     let resumeTimer = null;
     let timelineItems = [];
+
+    // ---------- Interactive Variable Helpers
+    function iVar(label, value, ctrlId, colorClass) {
+      return `<span class="var ${colorClass}" data-ctrl="${ctrlId}"><span class="vd">${label}:</span> <span class="ve">${escapeHtml(value)}</span></span>`;
+    }
+
+    function iSelCtrl(id, label, options) {
+      let html = `<div class="i-ctrl-overlay" id="ctrl-${id}"><h3>${label}</h3><div class="i-grid">`;
+      options.forEach(opt => {
+        const val = typeof opt === "string" ? opt : opt.value;
+        const disp = typeof opt === "string" ? opt : opt.label;
+        html += `<div class="i-item" data-val="${val}">${disp}</div>`;
+      });
+      html += `</div></div>`;
+      return html;
+    }
 
     // ---------- State Mapping
     function stateSnapshot() {
       const tzSel = el("timezone").value;
       const tz = (tzSel === "auto") ? Intl.DateTimeFormat().resolvedOptions().timeZone : tzSel;
 
-      const date = el("date").value || fmtISO(new Date());
-      const time = el("time").value || "12:00";
-      const m = time.match(/^(\d{1,2}):(\d{2})$/);
+      const dateStr = el("date").value || fmtISO(new Date());
+      const timeStr = el("time").value || "12:00";
+      const m = timeStr.match(/^(\d{1,2}):(\d{2})$/);
       const hh = m ? Math.min(23, Math.max(0, parseInt(m[1], 10))) : 12;
       const mm = m ? Math.min(59, Math.max(0, parseInt(m[2], 10))) : 0;
-      const now = new Date(date + "T" + pad2(hh) + ":" + pad2(mm) + ":00");
+      const now = new Date(dateStr + "T" + pad2(hh) + ":" + pad2(mm) + ":00");
 
       const namesRaw = (el("givenNames").value || "").trim();
       const names = namesRaw ? namesRaw.split(";").map(s => s.trim()).filter(Boolean) : [];
@@ -855,7 +882,9 @@
         surname: el("surname").value,
         gender: el("gender").value,
         titleRole: el("titleRole").value,
-        birthday: el("birthday").value
+        birthday: el("birthday").value,
+        civilParticipation: el("civilParticipation").checked,
+        namedaysEnabled: el("namedaysEnabled").checked
       };
     }
 
@@ -879,43 +908,61 @@
 
       // UI Update
       el("heroGreeting").innerHTML = escapeHtml(result.salutation);
-      el("metaEvent").textContent = `event: ${result.metadata.eventId}`;
-      el("metaWhy").textContent = `why: ${result.metadata.domain}`;
-      el("metaKey").textContent = `lang: ${result.metadata.locale}`;
-
-      updateReasoning(result, state);
+      renderReasoning(result, state);
       renderAlsoStrip(state);
     }
 
-    function updateReasoning(result, state) {
+    function renderReasoning(result, state) {
       const { eventId, domain, score } = result.metadata;
-      let text = "";
+      const timeStr = `${pad2(state.now.getHours())}:${pad2(state.now.getMinutes())}`;
+
+      const vLoc = iVar("in", state.residenceLocale, "residenceLocale", "b-civil");
+      const vLang = iVar("speaking", state.greetingLanguage, "greetingLanguage", "b-civil");
+      const vForm = iVar("formality", state.formality, "formality", "b-civil");
+      const vTime = iVar("time", timeStr, "time", "b-civil");
+
+      let explanation = `Currently, a user ${vLoc}, ${vLang}, with ${vForm} preference, at ${vTime}. `;
 
       if (domain === 'personal') {
-        text = `Salve prioritized a <b>Personal Event</b> (${eventId}). These carry the highest weight (score ${score}) because acknowledging a user's specific milestone is the pinnacle of cultural intelligence.`;
+        explanation += `Salve resolved a <b>Personal Event</b> (${eventId}). These carry high weight because acknowledging precise milestones is the pinnacle of cultural intelligence.`;
       } else if (domain === 'religious') {
-        text = `The engine detected a <b>Religious Observance</b> (${eventId}). Based on the user's affiliations, this specific tradition-aware greeting (score ${score}) was selected over generic alternatives.`;
+        explanation += `The engine detected a <b>Religious Observance</b> (${eventId}). Based on the user's affiliations, this specific tradition-aware greeting (score ${score}) was selected.`;
       } else if (domain === 'civil') {
-        text = `A <b>Civil/National Holiday</b> (${eventId}) was resolved. Salve automatically scans for jurisdictional events that foster a sense of shared citizenship (score ${score}).`;
+        explanation += `A <b>Civil Holiday</b> (${eventId}) was resolved. Salve scans for jurisdictional events that foster a sense of shared citizenship.`;
       } else if (domain === 'temporal') {
-        text = `With no higher-priority events detected, the engine fell back to a <b>Temporal Greeting</b>. It currenty reflects the time of day (${state.now.getHours()}:${pad2(state.now.getMinutes())}) in the active locale (score ${score}).`;
+        explanation += `With no holidays detected, the engine fell back to a <b>Temporal Greeting</b> reflecting the time of day (${timeStr}) in the active locale.`;
       } else {
-        text = `A <b>Cultural Baseline</b> greeting was selected. Salve ensures that even in the absence of specific events, the user is greeted with a localized, standard salutation.`;
+        explanation += `A <b>Cultural Baseline</b> greeting was selected, ensuring standard localized salutation even without specific events.`;
       }
 
-      if (state.titleRole !== 'none') {
-        text += ` <br><br>Notice how the <b>Address Protocol</b> correctly integrated the "${state.titleRole}" title, ensuring social protocol is maintained.`;
-      }
+      el("plainExplain").innerHTML = explanation;
+      wireInlineVars();
+    }
 
-      el("reasoningParagraph").innerHTML = text;
+    function wireInlineVars() {
+      document.querySelectorAll(".var").forEach(v => {
+        v.onclick = (e) => {
+          e.stopPropagation();
+          const ctrlId = v.getAttribute("data-ctrl");
+          if (ctrlId === "time") {
+            const newTime = prompt("Enter time (HH:MM):", el("time").value);
+            if (newTime) { el("time").value = newTime; rebuildTimelineAndUpdate(true); }
+            return;
+          }
+          const target = el(ctrlId);
+          if (target && target.tagName === "SELECT") {
+            // Show a custom mini-overlay or just trigger the select
+            target.focus();
+            openDrawer();
+          }
+        };
+      });
     }
 
     async function rebuildTimelineAndUpdate(updateHero = true) {
       const state = stateSnapshot();
-      // For now we keep a simplified timeline generation, 
-      // but resolve each point via the engine
       timelineItems = await computeTimeline(state);
-      renderTimeline(fmtISO(state.now));
+      renderTimeline(fmtISO(state.now) + (state.now.getHours() > 0 ? ":" + state.now.getHours() : ""));
       if (updateHero) await updateFromUI();
     }
 
@@ -923,35 +970,34 @@
       const items = [];
       const base = new Date(state.now.getFullYear(), state.now.getMonth(), state.now.getDate());
 
-      // SCAN 60 DAYS FOR INTERESTING EVENTS
-      const scanDays = 60;
-      const seenEvents = new Set();
-
-      // Always add today
+      // Today
       items.push({
         date: new Date(base),
         key: fmtISO(base),
         label: "Today",
-        type: "cultural_baseline"
+        type: "civil"
       });
+
+      const scanDays = 60;
+      const seen = new Set();
 
       for (let i = 1; i <= scanDays; i++) {
         const d = new Date(base);
         d.setDate(d.getDate() + i);
-        const res = await engine.resolve({ ...state, now: d, locale: state.greetingLanguage });
+        const res = await engine.resolve({ ...state, now: d });
 
         if (res.metadata.domain !== 'temporal' && res.metadata.domain !== 'cultural_baseline') {
-          if (!seenEvents.has(res.metadata.eventId)) {
+          if (!seen.has(res.metadata.eventId)) {
             items.push({
               date: d,
               key: fmtISO(d),
               label: res.metadata.eventId.split('.').pop().replace(/_/g, ' '),
-              type: res.metadata.domain
+              type: res.metadata.domain === 'religious' ? 'relig' : 'civil'
             });
-            seenEvents.add(res.metadata.eventId);
+            seen.add(res.metadata.eventId);
           }
         }
-        if (items.length > 8) break;
+        if (items.length >= 12) break;
       }
 
       return items;
@@ -964,9 +1010,9 @@
         const node = document.createElement("div");
         node.className = "node" + (it.key === selectedKey ? " sel" : "");
         node.innerHTML = `
-            <div class="when">${it.date.toLocaleDateString(undefined, { day: "numeric", month: "short" })}</div>
-            <div class="label">${it.label}</div>
-            <span class="badge ${it.type === 'civil' ? 'b-civil' : 'b-relig'}">${it.type}</span>
+          <div class="when">${it.date.toLocaleDateString(undefined, { day: "numeric", month: "short" })}</div>
+          <div class="label">${escapeHtml(it.label)}</div>
+          <span class="badge ${it.type === 'relig' ? 'b-relig' : 'b-civil'}">${it.type === 'relig' ? 'religious' : 'civil'}</span>
         `;
         node.onclick = () => {
           setDateInUI(it.date);
@@ -977,9 +1023,34 @@
     }
 
     function renderAlsoStrip(state) {
-      // Simplified samples
       const host = el("alsoStrip");
-      host.innerHTML = '<div class="chip">Samples...</div>';
+      host.innerHTML = "";
+      const samples = [
+        { flag: "🇩🇪", loc: "de-DE", lang: "de-DE" },
+        { flag: "🇬🇷", loc: "el-GR", lang: "el-GR" },
+        { flag: "🇬🇧", loc: "en-GB", lang: "en-GB" },
+        { flag: "🇹🇷", loc: "tr-TR", lang: "tr-TR" }
+      ];
+      samples.forEach(s => {
+        const chip = document.createElement("div");
+        chip.className = "chip";
+        chip.innerHTML = `${s.flag} <span style="font-family:var(--mono);">...</span>`;
+        host.appendChild(chip);
+        // Async resolution for chips
+        engine.resolve({ ...state, locale: s.lang }).then(r => {
+          chip.innerHTML = `${s.flag} <span style="font-family:var(--mono);">${escapeHtml(r.salutation)}</span>`;
+        });
+      });
+    }
+
+    // ---------- UI State Management
+    function openDrawer() {
+      el("drawer").classList.add("open");
+      el("overlay").classList.add("show");
+    }
+    function closeDrawer() {
+      el("drawer").classList.remove("open");
+      el("overlay").classList.remove("show");
     }
 
     function setDateInUI(d) {
@@ -988,48 +1059,83 @@
     }
 
     function wireInputs() {
-      const ids = ["mode", "formality", "gender", "surname", "titleRole", "date", "time", "greetingLanguage", "persona"];
-      ids.forEach(id => {
-        el(id).onchange = () => {
-          if (id === "persona") applyPersona();
+      const inputs = document.querySelectorAll("input, select");
+      inputs.forEach(inp => {
+        inp.onchange = () => {
+          if (inp.id === "scenario") applyScenario();
           rebuildTimelineAndUpdate(true);
         };
       });
+
+      el("btnSettings").onclick = openDrawer;
+      el("btnClose").onclick = closeDrawer;
+      el("overlay").onclick = closeDrawer;
+      el("btnReset").onclick = () => location.reload();
     }
 
-    function applyPersona() {
-      const p = el("persona").value;
-      if (p === "mueller_dr") {
+    function applyScenario() {
+      const s = el("scenario").value;
+      if (s === "de_secular") {
+        el("residenceLocale").value = "de-DE";
         el("greetingLanguage").value = "de-DE";
-        el("surname").value = "Müller";
-        el("titleRole").value = "dr";
         el("formality").value = "formal";
-        el("time").value = "12:30";
-      } else if (p === "judge_smith") {
+        el("titleRole").value = "none";
+        el("surname").value = "Schmidt";
+      } else if (s === "de_doctor") {
+        el("residenceLocale").value = "de-DE";
+        el("greetingLanguage").value = "de-DE";
+        el("formality").value = "formal";
+        el("titleRole").value = "dr";
+        el("surname").value = "Müller";
+      } else if (s === "en_judge") {
+        el("residenceLocale").value = "en-GB";
         el("greetingLanguage").value = "en-GB";
-        el("surname").value = "Smith";
         el("titleRole").value = "judge";
         el("formality").value = "formal";
-        el("time").value = "10:00";
-      } else if (p === "papadopoulos_el") {
+        el("surname").value = "Blackwood";
+      } else if (s === "el_orthodox") {
+        el("residenceLocale").value = "el-GR";
         el("greetingLanguage").value = "el-GR";
-        el("surname").value = "Papadopoulos";
-        el("titleRole").value = "none";
         el("formality").value = "informal";
         el("givenNames").value = "Georgios";
+        el("surname").value = "Papadopoulos";
       }
     }
 
     function renderAffChips() {
       const host = el("affChips");
-      host.innerHTML = '<div class="aff-chip">Mock Affiliations</div>';
+      host.innerHTML = "";
+      AFFILIATIONS.forEach(a => {
+        const chip = document.createElement("div");
+        chip.className = "a " + (selectedAff.has(a.id) ? "on" : "");
+        chip.textContent = a.label;
+        chip.onclick = () => {
+          if (selectedAff.has(a.id)) selectedAff.delete(a.id);
+          else selectedAff.add(a.id);
+          renderAffChips();
+          rebuildTimelineAndUpdate(true);
+        };
+        host.appendChild(chip);
+      });
+    }
+
+    function startAutoCycle() {
+      if (autoTimer) clearInterval(autoTimer);
+      autoTimer = setInterval(() => {
+        if (!timelineItems.length) return;
+        autoIndex = (autoIndex + 1) % timelineItems.length;
+        const it = timelineItems[autoIndex];
+        setDateInUI(it.date);
+        updateFromUI({ setMemory: false });
+      }, 5000);
     }
 
     async function init() {
       setDateInUI(new Date());
-      wireInputs();
       renderAffChips();
+      wireInputs();
       await rebuildTimelineAndUpdate(true);
+      startAutoCycle();
     }
 
     init();

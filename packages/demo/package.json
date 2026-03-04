@@ -9,8 +9,9 @@
     "author": "Wouter Soudan",
     "license": "MIT",
     "dependencies": {
-        "@salve/core": "0.1.0",
-        "@salve/devtools": "0.1.0",
+        "@salve/core": "*",
+        "@salve/devtools": "*",
+        "@salve/calendars-gregorian": "*",
         "@desquared/greek-vocative-name": "^1.0.2"
     },
     "devDependencies": {
