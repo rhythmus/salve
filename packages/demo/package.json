@@ -7,5 +7,13 @@
         "build": "vite build"
     },
     "author": "Wouter Soudan",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "@salve/core": "0.1.0",
+        "@salve/devtools": "0.1.0",
+        "@desquared/greek-vocative-name": "^1.0.2"
+    },
+    "devDependencies": {
+        "vite": "^5.0.0"
+    }
 }

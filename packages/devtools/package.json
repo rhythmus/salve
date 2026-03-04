@@ -1,0 +1,18 @@
+{
+    "name": "@salve/devtools",
+    "version": "0.1.0",
+    "description": "Visual developer tools for Salve",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc"
+    },
+    "author": "Wouter Soudan",
+    "license": "MIT",
+    "dependencies": {
+        "@salve/core": "0.1.0"
+    }
+}
