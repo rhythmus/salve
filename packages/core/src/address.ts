@@ -40,6 +40,11 @@ export class AddressResolver {
         const pack = this.getPack(locale);
         if (!pack) return this.fallbackResolve(context);
 
+        // Safety Ladder: If no surname in formal context, drop address block
+        if (formality === "formal" && !profile.lastName) {
+            return "";
+        }
+
         const isFormal = formality === "formal";
         const honorific = this.getHonorific(profile, pack);
 
