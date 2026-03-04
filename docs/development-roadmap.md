@@ -65,7 +65,9 @@ This document outlines the detailed, staged implementation plan for the Salve Un
 - **M7.2: Developer Tools** (Completed)
     - Visually interactive Developer Mode overlay.
     - Debugging trace for greeting resolution.
-- **M7.3: Project Documentation**
+- **M7.3: Project Documentation** (In Progress)
+    - [x] Create comprehensive README with installation and usage guides.
+    - [x] Add standard open-source metadata (LICENSE, CITATION, FUNDING).
     - Generate full API references.
     - Create "Cultural Implementation Guide" for pack contributors.
 
