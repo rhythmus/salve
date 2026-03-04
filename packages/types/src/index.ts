@@ -2,6 +2,12 @@
  * Salve Core Types & Interfaces
  */
 
+export interface TransformPlugin {
+    id: string;
+    locales: string[];
+    transform(value: string, key: string, profile: AddressProfile): string;
+}
+
 export type Formality = "informal" | "formal" | "neutral";
 
 export type GreetingPhase = "open" | "close";
