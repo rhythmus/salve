@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Soudan"
+    given-names: "Wouter"
+title: "Salve: Universal Greeting & Cultural Awareness Engine"
+version: 0.0.1
+date-released: 2026-03-04
+url: "https://github.com/rhythmus/salve"
+license: MIT
+abstract: "Salve is a modular, offline-first TypeScript framework designed to resolve and render culturally authentic, temporally appropriate greetings. It prioritizes maximal cultural specificity, ensuring applications reflect the rich traditions, religious contexts, and social norms of their users."
+keywords:
+  - "i18n"
+  - "internationalization"
+  - "localization"
+  - "cultural-awareness"
+  - "greetings"
+  - "typescript"
+  - "offline-first"
