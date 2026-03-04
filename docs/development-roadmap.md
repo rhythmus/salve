@@ -52,7 +52,7 @@ This document outlines the detailed, staged implementation plan for the Salve Un
     - Implement partitioning strategy for large alias datasets.
 
 ## Milestone 6: Distribution & Loader Architecture
-- **M6.1: @salve/registry & Loader**
+- **M6.1: @salve/registry & Loader** (Completed)
     - Implement manifest-based dynamic loading.
     - Support for integrity hashes and selective payload inclusion.
 - **M6.2: Distribution Infrastructure**
