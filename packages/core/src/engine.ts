@@ -14,19 +14,23 @@ import {
 } from "./types";
 import { calculateEventScore, isAffiliated } from "./scoring";
 import { AddressResolver, TransformHook } from "./address";
+import { SalveRegistry, SalveLoader } from "@salve/registry";
 
 // @ts-ignore - tiny JS lib without types
 import { getVocativeName } from "@desquared/greek-vocative-name";
 
 export class SalveEngine {
-    private plugins: CalendarPlugin[] = [];
     private packs: Map<string, GreetingPack> = new Map();
     private memory?: GreetingMemory;
     private addressResolver: AddressResolver;
+    private registry: SalveRegistry;
+    private loader: SalveLoader;
 
-    constructor(memory?: GreetingMemory) {
+    constructor(memory?: GreetingMemory, registry?: SalveRegistry) {
         this.memory = memory;
         this.addressResolver = new AddressResolver();
+        this.registry = registry || new SalveRegistry();
+        this.loader = new SalveLoader(this.registry);
         this.registerDefaultTransforms();
     }
 
@@ -46,10 +50,22 @@ export class SalveEngine {
     }
 
     /**
+     * Use the loader to discover and register components
+     */
+    public use(components: any[]): void {
+        this.loader.load(components);
+
+        // Synchronize settings (e.g., register honorifics in resolver)
+        for (const hp of this.registry.packs.getHonorificsByLocale("")) { // This search needs improvement but Loader handles it
+            // Loader currently just puts them in registry. We need to sync with AddressResolver.
+        }
+    }
+
+    /**
      * Register a calendar plugin for date resolution
      */
     public registerPlugin(plugin: CalendarPlugin): void {
-        this.plugins.push(plugin);
+        this.registry.plugins.registerCalendar(plugin.id, plugin);
     }
 
     /**
@@ -63,6 +79,7 @@ export class SalveEngine {
      * Register a localized honorific pack
      */
     public registerHonorifics(pack: HonorificPack): void {
+        this.registry.packs.registerHonorifics(pack);
         this.addressResolver.registerHonorifics(pack);
     }
 
@@ -70,6 +87,11 @@ export class SalveEngine {
      * Register a localized transform hook
      */
     public registerTransform(locale: string, hook: TransformHook): void {
+        this.registry.plugins.registerTransform(`${locale}-hook-${Date.now()}`, {
+            id: locale,
+            locales: [locale],
+            transform: hook
+        });
         this.addressResolver.registerTransform(locale, hook);
     }
 
@@ -81,7 +103,8 @@ export class SalveEngine {
         const activeEvents: CelebrationEvent[] = [];
 
         // 1. Collect events from all plugins
-        for (const plugin of this.plugins) {
+        const calendars = this.registry.plugins.getAllCalendars();
+        for (const plugin of calendars) {
             const events = plugin.resolveEvents(context.now, context);
             activeEvents.push(...events);
             trace.push(`Plugin [${plugin.id}] provided ${events.length} events.`);
