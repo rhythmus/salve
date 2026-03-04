@@ -15,13 +15,7 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
-        "isolatedModules": true,
-        "baseUrl": ".",
-        "paths": {
-            "@salve/*": [
-                "packages/*/src"
-            ]
-        }
+        "isolatedModules": true
     },
     "exclude": [
         "node_modules",
