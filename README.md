@@ -1,18 +1,19 @@
-# Salve Monorepo
+# Salve!
 
-> **Universal Greeting & Cultural Awareness Engine**
+Greet your users as if you were a native speaker of their language
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)
 ![Status: Alpha](https://img.shields.io/badge/Status-Alpha-orange.svg)
+
+_Lectori salutem!_
 
 **Salve** is a modular, offline-first TypeScript framework designed to resolve and render culturally authentic, temporally appropriate greetings. Unlike generic internationalization (i18n) libraries that translate words literally, Salve prioritizes **Maximal Cultural Specificity**, ensuring that applications reflect the rich traditions, religious contexts, and social norms of their users.
 
 ---
 
 ## 📚 Table of Contents
-
-- [Salve Monorepo](#salve-monorepo)
+- [Salve!](#salve)
   - [📚 Table of Contents](#-table-of-contents)
   - [Why Salve?](#why-salve)
   - [Features](#features)
@@ -194,7 +195,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Gelukkige verjaardag, Pieter!
 
-This project is dedicated to my younger brother, Pieter, on his birthday (March 4th, 2026).
+This project is dedicated to my younger brother, Pieter, at the occasion of Salve’s first public release, on his birthday (March 4th, 2026).
 
 Pieter has been my teacher and mentor in coding, instilling in me a deep enthusiasm for engineering and the craft of building beautiful, useful software. This dedication is a tribute to the years-long road we have walked together.
 

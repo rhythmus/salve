@@ -12,5 +12,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - CITATION.cff file for software citation support.
 - GitHub Sponsors configuration (`.github/FUNDING.yml`).
 - Dedication section in README for Pieter's birthday.
+- Demo implementation plan for the showcase application (`docs/demo-implementation-plan.md`).
+- Vite-powered demo package (`@salve/demo`) using the real Salve engine and calendar plugins.
+- Single-file static website build (`website/index.html`) that embeds all CSS and JavaScript.
 
-## [0.0.1] - 2026-03-03
+### Changed
+- Refactored the demo application from a standalone HTML mockup to a proper Vite app using `@salve/core`,
+  `@salve/devtools`, and calendar plugins for real greeting resolution.
+- Updated deployment flow so that building the demo produces a self-contained HTML file suitable for `file://`
+  usage and GitHub Pages hosting.
+
+## [0.0.1] - 2026-03-04

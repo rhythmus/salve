@@ -68,15 +68,26 @@ This document outlines the detailed, staged implementation plan for the Salve Un
 - **M7.3: Project Documentation** (In Progress)
     - [x] Create comprehensive README with installation and usage guides.
     - [x] Add standard open-source metadata (LICENSE, CITATION, FUNDING).
-    - Generate full API references.
-    - Create "Cultural Implementation Guide" for pack contributors.
+    - [ ] **API Reference Generation**: Set up TypeDoc or similar to generate site from TSDoc comments.
+    - [ ] **Cultural Implementation Guide**: Author a comprehensive guide for pack contributors explaining JSON schemas and specificity scoring.
 
 ## Milestone 8: Final Demo & Public Launch
-- **M8.1: Purpose-Driven Landing Page**
-    - Finalizing the interactive timeline and "Reasoning Paragraph".
-    - Integrating the Address Protocol demo (Mahlzeit, Herr Doktor).
-- **M8.2: Initial Ecosystem Seed**
-    - Release core set of 10+ locale packs.
+- **M8.1: The "Salve" Showcase (Demo App)** (In Progress)
+    - [x] Refine `packages/demo` into a polished web experience powered by the real `@salve/core` engine and calendar plugins.
+    - [x] **Interactive Playground**: Add controls for Locale, Time, and User Attributes to see real-time resolution, including presets for multiple cultural scenarios.
+    - [x] **"Explain Why" Visualization**: Render a narrative reasoning paragraph with inline editable variables and expose scoring trace via the `@salve/devtools` overlay.
+    - [x] **Static Showcase Build**: Produce a single self-contained `website/index.html` (all JS and CSS inlined) suitable for `file://` usage and GitHub Pages.
+    - [ ] Polish typography and microcopy for the landing page hero and explanation text.
+- **M8.2: Ecosystem Seeding (Data Packs)**
+    - Finalize and validate existing packs (`el`, `bg`).
+    - Create starter packs for key regions:
+        - `en-US`/`en-GB`: Civil holidays and Thanksgiving.
+        - `de-DE`: High-formality address protocols.
+        - `ar-SA`: Hijri calendar integration demonstration.
+- **M8.3: Launch Logistics**
+    - [ ] Final npm publish of all packages (v1.0.0).
+    - [ ] GitHub Release creation with detailed changelog.
+    - [ ] Public announcement and social sharing (inc. dedication).
 
 ---
 *Roadmap Version 1.0.0*
