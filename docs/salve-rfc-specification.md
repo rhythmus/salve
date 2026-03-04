@@ -359,36 +359,39 @@ Resolution SHOULD attempt:
 
 # 21. CLI Tooling Specification
 
-The CLI MUST support:
+The Salve CLI (`@salve/cli`) provides a command-line interface for project initialization, pack management, and resolution debugging.
 
--   Pack addition
--   Bundle generation
--   Version pinning
--   Static pack aggregation
--   Build-time configuration
+## 21.1 Core Commands
+- `salve init`: Initializes a `salve.config.json` file in the project root.
+- `salve add <pack>`: Registers a new pack (local or remote) in the project configuration.
+- `salve resolve`: Interactive or argument-based tool to test the engine's resolution logic against specific contexts.
+
+## 21.2 Configuration
+The CLI reads from `salve.config.json` which MUST specify:
+- `packs`: Array of pack identifiers or paths.
+- `outDir`: Target directory for bundled artifacts.
 
 ------------------------------------------------------------------------
 
 # 22. Demo & Developer Mode Requirements
 
-The demo MUST include:
+## 22.1 Developer Tools Overlay (`@salve/devtools`)
+The Developer Tools SHALL be provided as a pluggable UI component (`SalveDevTools`) that can be mounted into any web-based application.
 
--   Primary greeting display
--   Configuration panel
--   Multi-calendar display
--   Cross-culture greeting suggestions
--   Nameday insights
--   Event resolution explanation
--   Memory inspection
--   Script variant preview
+### 22.1.1 Context Mocking
+The tools MUST allow overriding the following context parameters:
+- `now` (System Time): For simulating seasonal and temporal greetings.
+- `formality`: For testing social context shifts.
 
-Developer mode MUST expose:
+### 22.1.2 Diagnostics
+The tools MUST expose a "Resolution Trace" containing:
+- Selected Event ID and Domain.
+- Scoring breakdown.
+- Lexicon template selection.
+- Complete resolved context object.
 
--   Active events
--   Priority ranking
--   Suppressed events
--   Pack metadata
--   Resolution trace
+## 22.2 Demo Application (`@salve/demo`)
+The demo application serves as the reference implementation for the Salve ecosystem. It MUST utilize the real `@salve/core` engine and `@salve/devtools` to demonstrate production-grade integration.
 
 ------------------------------------------------------------------------
 

@@ -59,10 +59,10 @@ This document outlines the detailed, staged implementation plan for the Salve Un
     - Setup automated CI/CD for publishing packs to NPM and a central CDN.
 
 ## Milestone 7: Tooling & Documentation
-- **M7.1: Salve CLI**
+- **M7.1: Salve CLI** (Completed)
     - `salve init`: Setup project config.
     - `salve add <pack>`: Manage dependencies and bundling.
-- **M7.2: Developer Tools**
+- **M7.2: Developer Tools** (Completed)
     - Visually interactive Developer Mode overlay.
     - Debugging trace for greeting resolution.
 - **M7.3: Project Documentation**

@@ -93,7 +93,19 @@ Calendar plugins are responsible for resolving the current date and time into se
     - Personal Events (Birthdays, Anniversaries) with the highest priority (`personal` domain).
     - Astronomical approximations (e.g., Full Moon).
 
-## 6. Design Rationale
+## 5. Tooling & Developer Experience
+
+### 5.1 Command Line Interface (`@salve/cli`)
+Salve provides a dedicated CLI to streamline developer workflows:
+- **Project Scaffolding**: Automated generation of `salve.config.json`.
+- **Pack Management**: Managing cultural datasets as project-level dependencies.
+- **Resolution Debugging**: A `resolve` command to verify engine behavior without a UI.
+
+### 5.2 Developer Tools Overlay (`@salve/devtools`)
+To ensure transparency in the "black box" of cultural resolution, Salve provides an interactive overlay:
+- **Visual Trace**: Direct visibility into the engine's internal scoring and selection logic.
+- **Context Time-Travel**: Interactive mocking of date/time and user profile attributes to verify edge cases.
+- **Environment Agnostic**: Can be easily mounted into vanilla JS, React, Vue, or other web frameworks.
 
 ### 6.1 Restoring Cultural Embeddedness
 Standard internationalization (i18n) workflows often result in "cultural flattening," where generic phrases are translated literally. Salve’s **Maximal Cultural Specificity** principle is a deliberate architectural choice to restore cultural nuances, making software feel naturally embedded in the user's specific tradition (e.g., prioritizing "Salam alaikum" or "Grüß Gott" where appropriate).
