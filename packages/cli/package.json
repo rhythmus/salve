@@ -6,7 +6,19 @@
         "salve": "./dist/bin.js"
     },
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "start": "node dist/bin.js"
+    },
+    "dependencies": {
+        "commander": "^11.1.0",
+        "chalk": "^4.1.2",
+        "fs-extra": "^11.2.0",
+        "@salve/core": "0.1.0",
+        "@salve/registry": "0.1.0"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^11.0.4",
+        "@types/node": "^20.10.5"
     },
     "author": "Wouter Soudan",
     "license": "MIT"
