@@ -62,12 +62,16 @@ informational and implementation reference purposes.
 
 ## 1.  Introduction
 
-Salve provides culturally intelligent greetings based on time,
-location, tradition, and user identity.  The system operates
-deterministically and does not depend on external Application
-Programming Interfaces (APIs) for core functionality.  All greeting
-data and calendar computations are local, ensuring offline capability,
-privacy, and reproducibility.
+Standard internationalization (i18n) workflows often result in
+"cultural flattening," where generic phrases are translated literally
+and cultural nuances are lost.  Salve addresses this problem by
+providing culturally intelligent greetings based on time, location,
+tradition, and user identity.
+
+The system operates deterministically and does not depend on external
+Application Programming Interfaces (APIs) for core functionality.
+All greeting data and calendar computations are local, ensuring
+offline capability, privacy, and reproducibility.
 
 Salve supports:
 
@@ -211,6 +215,36 @@ Salve MUST adhere to the following principles:
        and policy constraints MUST be explicitly declared by the
        consuming application; they are never inferred.
 
+   9.  Maximal Cultural Specificity:  The engine MUST default to
+       the most specific culturally, temporally, and traditionally
+       grounded greeting available.  Generic fallbacks (e.g.,
+       "Hello") are used only when no specialized greeting exists
+       or when explicitly suppressed by policy.  This principle
+       is a deliberate architectural choice to restore cultural
+       nuances and ensure that software feels naturally embedded
+       in each user's tradition.
+
+   10. Reuse-vs-Build Boundaries:  Following the "Don't Reinvent
+       the Wheel" principle, Salve explicitly defines its scope.
+       The system delegates locale identifiers, scripts,
+       likelySubtags, date/time formatting, and plural rules to
+       CLDR, ICU, and the Intl API [CLDR].  Salve builds internally
+       only what these standards do not provide: computus and event
+       semantics, cultural modeling, greeting lexicon management,
+       and anti-repetition logic.
+
+   11. Salutation Layer Decoupling:  The greeting phrase and the
+       address form are resolved independently and composed at the
+       final stage.  This separation allows the engine to maintain
+       correctness in highly regulated address systems (e.g.,
+       German, French) without duplicating greeting logic.
+
+   12. Standards-First Compatibility:  Data packs mirror the
+       Unicode Common Locale Data Repository (CLDR) [CLDR]
+       hierarchical locale model and use BCP 47 [BCP47] identifiers.
+       Salve is designed as a complementary layer to existing
+       date/time libraries, not a replacement.
+
 ## 6.  Functional Requirements
 
 ### 6.1.  Greeting Generation
@@ -274,6 +308,21 @@ consumer alongside the primary greeting.  Examples include:
    -  Greek Paschal: "Χριστός Ανέστη" → "Αληθώς Ανέστη"
    -  Arabic Eid: "عيد مبارك" → "الله أكبر"
    -  Arabic Ramadan: "رمضان كريم" → "الله أكرم"
+
+### 6.9.  Data Schema Compatibility
+
+Greeting data MUST be stored in JSON files whose structure translates
+naturally to LDML XML.  Each greeting entry MUST support the
+following attributes in addition to the fields listed in
+Section 17.2:
+
+   -  "type":  The speech-act category of the greeting.
+   -  "phase":  Session phase ("open" for arrivals, "close" for
+      departures).
+   -  "role":  Interaction role ("initiator" or "responder").
+   -  "relationship":  Applicable social relationship contexts.
+   -  "setting":  Applicable interaction settings (e.g., "chat",
+      "email", "direct_address").
 
 ## 7.  Non-Functional Requirements
 
@@ -456,6 +505,26 @@ Each CelebrationEvent MAY include:
       (e.g., "islam", "orthodox").
    -  "priority":  A numeric priority hint.
    -  "metadata":  Arbitrary key-value data.
+
+### 11.1.  Example: Fixed Holiday Plugin
+
+The following illustrative example shows a minimal calendar plugin
+that emits a single civil event on a fixed date:
+
+      class MyTraditionPlugin implements CalendarPlugin {
+          id = "my-tradition";
+          resolveEvents(now: Date) {
+              if (now.getMonth() === 5 && now.getDate() === 15) {
+                  return [{ id: "my_special_day", domain: "civil" }];
+              }
+              return [];
+          }
+      }
+
+Plugin authors SHOULD follow this pattern: check the date against
+the rule, return matching CelebrationEvents, and return an empty
+array otherwise.  More complex plugins (e.g., Pascha, Hijri) apply
+calendar-specific algorithms but follow the same interface contract.
 
 ## 12.  Day Period Resolution
 
@@ -810,6 +879,21 @@ JSON.  Pack files MAY include additional metadata (saint registry,
 alias partitions) as separate JSON files following the same
 validation model.
 
+### 17.6.  Pack Authoring Best Practices
+
+Contributors extending Salve's cultural intelligence SHOULD follow
+these guidelines when creating new packs:
+
+   -  Template Parameters:  Use "{name}" or "{address}" in greeting
+      text when the template requires them.  The engine constructs
+      the salutation automatically when an address is resolved.
+   -  Formality Axis:  Provide both "formal" and "informal" variants
+      of the same greeting where the target culture distinguishes
+      register levels.
+   -  Script Variants:  If a language uses multiple scripts (e.g.,
+      Serbian Latin vs. Cyrillic), differentiate entries using the
+      "script" property.
+
 ## 18.  Pack Distribution and Registry
 
 A Pack Registry MUST:
@@ -823,6 +907,35 @@ A Pack Registry MUST:
       on "el").
 
 Integrity verification SHOULD be supported for remote pack loading.
+
+### 18.1.  CDN Hosting Strategies
+
+To optimize load times and reduce the main application bundle,
+data packs MAY be hosted on a Content Delivery Network (CDN)
+instead of being bundled directly.  The following strategies are
+supported:
+
+   -  GitHub Pages:  Commit the "packs/" directory to a "gh-pages"
+      branch or the "docs/" folder.  Packs are then accessible via
+      <https://{user}.github.io/salve/packs/{locale}/namedays.json>.
+   -  unpkg / jsDelivr:  If packs are published to npm, they are
+      automatically available via public CDN URLs (e.g.,
+      <https://unpkg.com/@salve/pack-el-namedays@latest/dist/data/
+      recurring_namedays.json>).
+   -  Custom S3/CloudFront:  For enterprise deployments, host JSON
+      files on a private S3 bucket fronted by CloudFront.
+
+### 18.2.  Security Recommendations for CDN Distribution
+
+When serving packs from a CDN, implementors MUST consider:
+
+   -  CORS:  The CDN MUST allow requests from the consuming
+      application's domain.
+   -  Versioning:  Pack URLs SHOULD include a version identifier or
+      content hash to prevent caching issues after updates.
+   -  Integrity:  Subresource Integrity (SRI) SHOULD be used where
+      applicable to verify that fetched content has not been
+      tampered with.
 
 ## 19.  Loader and Integrity Model
 
@@ -1501,6 +1614,12 @@ Potential extensions include:
 
    [CLDR]     Unicode Consortium, "Unicode Common Locale Data
               Repository (CLDR)", <https://cldr.unicode.org/>.
+
+   [GREETINGS]
+              Soudan, W., "The Universal Ritual of Connection: A
+              Global Encyclopedia of Greetings", Salve Project,
+              2026,
+              <docs/global_greetings_encyclopedia.md>.
 
    [JSON-SCHEMA]
               Wright, A., Andrews, H., Hutton, B., and G. Dennis,
