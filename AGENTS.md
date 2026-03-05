@@ -36,3 +36,59 @@ Follow this format consistently for all commits.
 5. **No noise**: do not commit generated files (`dist/`, `docs/api/`), secrets, or empty commits.
 
 ## 🏷️ Naming Conventions
+
+## 📄 RFC Specification Authoring
+
+The Salve specification (`docs/salve-rfc-specification.md`) follows the RFC authoring guidelines defined in RFC 7322 ("RFC Style Guide") and its web companion.  All updates to the specification MUST comply with the rules below.
+
+### Required Document Structure
+
+The specification MUST contain the following sections in this order:
+
+1. **First-page header** — title, author(s), category, date, version.
+2. **Abstract** — concise overview; MUST NOT contain citations.
+3. **Status of This Memo** — one-paragraph legal standing.
+4. **Table of Contents** — numbered section list.
+5. **Introduction** (Section 1) — motivation and scope.
+6. **Requirements Language** (Section 2) — cite RFC 2119 [BCP14] and RFC 8174.  Include the standard boilerplate sentence.
+7. **Terminology and Conventions** — define all project-specific terms.
+8. **Body sections** — the technical specification.
+9. **Internationalization Considerations** — i18n-relevant concerns.
+10. **Security Considerations** — REQUIRED; discuss threats and mitigations.
+11. **References** — split into "Normative References" and "Informative References" subsections.
+12. **Author's Address** — name, affiliation, and email (REQUIRED).
+
+### Style Conventions
+
+| Rule | Detail |
+|------|--------|
+| **Language** | English, American spelling preferred, internally consistent. |
+| **Sentence spacing** | Two spaces after a period ending a sentence. |
+| **Serial comma** | Always use the Oxford comma (e.g., "TCP, IP, and SNMP"). |
+| **Capitalization** | Title case for section headings.  Consistent term capitalization throughout. |
+| **Abbreviations** | Expand on first use, followed by the abbreviation in parentheses (e.g., "Application Programming Interface (API)").  Well-known abbreviations (TCP, IP, HTTP, JSON, URI, API, CLI, CDN, npm) may be used without expansion. |
+| **Citations** | Square brackets, no spaces (e.g., `[RFC2119]`, `[BCP47]`).  Every citation MUST have a matching entry in the References section, and vice versa. |
+| **Cross-references** | Use section numbers, not page numbers (e.g., "see Section 15.4"). |
+| **URIs** | Wrap in angle brackets (e.g., `<https://example.com/>`). |
+| **RFC 2119 keywords** | Use ALL CAPS only when the term carries normative weight as defined in RFC 2119 (MUST, SHOULD, MAY, etc.).  Do not capitalize these words for ordinary emphasis. |
+
+### Reference Formatting
+
+Follow the RFC 7322 §4.8.6 format for all reference entries:
+
+```
+[TAG]      Author(s), "Title", Series/Number, Date,
+           <URI>.
+```
+
+Split references into:
+- **Normative References** — essential to implementing or understanding the spec.
+- **Informative References** — provide additional context or background.
+
+### When Editing the Specification
+
+1. Preserve the overall section numbering structure.  Add new sub-sections rather than renumbering.
+2. When adding a new normative term (MUST, SHALL, etc.), verify it is genuinely needed for interoperability — do not overuse.
+3. When referencing a new external document, add a properly formatted entry to the appropriate References sub-section.
+4. Keep prose style: avoid bare bullet-only sections.  A section SHOULD contain at least one introductory sentence before any list.
+5. Maintain consistent terminology.  Use the exact term forms defined in the Terminology section.
