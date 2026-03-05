@@ -11,11 +11,23 @@ import {
     GreetingLexiconEntry,
     GreetingMemory,
     HonorificPack,
-    AddressProfile
+    AddressProfile,
+    SalveContextV1,
+    SalveOutputV1,
+    SalvePrimaryOutput,
+    SalveExtra,
+    SalveTraceEntry,
+    NormalizedContext,
+    GreetingRule,
+    SalveEvent,
+    ScoreTuple,
+    EventDomainV1,
 } from "./types";
-import { calculateEventScore, isAffiliated } from "./scoring";
+import { calculateEventScore, isAffiliated, computeScoreTuple, compareScoreTuples } from "./scoring";
 import { AddressResolver, TransformHook } from "./address";
 import { SalveRegistry, SalveLoader } from "@salve/registry";
+import { normalizeContext } from "./normalize";
+import { applyStyleTransform, StylePack, computeStyleMatchScore } from "./style";
 
 export interface SalveOptions {
     registry?: SalveRegistry;
@@ -38,6 +50,7 @@ export class SalveEngine {
     private addressResolver: AddressResolver;
     private registry: SalveRegistry;
     private loader: SalveLoader;
+    private stylePacks: StylePack[] = [];
 
     constructor(options: SalveOptions = {}) {
         this.registry = options.registry || new SalveRegistry();
@@ -109,7 +122,21 @@ export class SalveEngine {
     }
 
     /**
-     * Resolve the primary greeting for the given context
+     * Register a style pack for rhetorical rendering
+     */
+    public registerStylePack(pack: StylePack): void {
+        this.stylePacks.push(pack);
+    }
+
+    /**
+     * Register ontology-aware greeting rules for a locale
+     */
+    public registerGreetingRules(packId: string, locale: string, rules: GreetingRule[], precedence: number = 0): void {
+        this.registry.greetingRules.registerRules(packId, locale, rules, precedence);
+    }
+
+    /**
+     * Resolve the primary greeting for the given context (legacy API)
      */
     public async resolve(partialContext: GreetingContext): Promise<GreetingResult> {
         const context: GreetingContext = {
@@ -197,6 +224,236 @@ export class SalveEngine {
         return result;
     }
 
+    // ═══════════════════════════════════════════════════════════════
+    // Milestone 9 — v1 Resolution Pipeline
+    // ═══════════════════════════════════════════════════════════════
+
+    /**
+     * Resolve a greeting using the v1 pipeline.
+     *
+     * Pipeline stages:
+     * 1. Context Normalization
+     * 2. Locale Fallback Chain (computed in normalization)
+     * 3. Event Collection
+     * 4. Candidate Enumeration
+     * 5. Deterministic Scoring
+     * 6. Address Resolution
+     * 7. Style Rendering
+     * 8. Composition & Output
+     */
+    public async resolveV1(input: SalveContextV1): Promise<SalveOutputV1> {
+        // ── Stage 1 & 2: Context Normalization ──────────────────
+        const ctx = normalizeContext(input);
+        const traceEntries: SalveTraceEntry[] = [];
+        const usedEvents: string[] = [];
+
+        // ── Stage 3: Event Collection ───────────────────────────
+        const activeEvents: SalveEvent[] = [];
+        const calendars = this.registry.plugins.getAllCalendars();
+
+        for (const plugin of calendars) {
+            const legacyEvents = await plugin.resolveEvents(ctx.env.now, {
+                now: ctx.env.now,
+                locale: ctx.env.locale,
+                affiliations: ctx.memberships.traditions,
+                phase: ctx.interaction.phase === "opening" ? "open" : "close",
+            });
+
+            // Convert CelebrationEvent → SalveEvent
+            for (const le of legacyEvents) {
+                const dateStr = ctx.env.now.toISOString().split("T")[0];
+                activeEvents.push({
+                    id: le.id,
+                    kind: this.mapLegacyDomain(le.domain),
+                    start: dateStr,
+                    end: dateStr,
+                    label: le.id,
+                    source: plugin.id,
+                    precedence: le.priority ?? 0,
+                });
+            }
+        }
+
+        // Filter events by policy
+        const filteredEvents = activeEvents.filter((e: SalveEvent) => {
+            // Domain allowed?
+            if (!ctx.policy.allowDomains.includes(e.kind)) return false;
+
+            // Religious events need explicit traditions
+            if (e.kind === "religious" && ctx.policy.requireExplicitTraditionsForReligious) {
+                if (ctx.memberships.traditions.length === 0) return false;
+            }
+
+            // Protocol events need subculture addressing
+            if (e.kind === "protocol" && !ctx.policy.allowSubcultureAddressing) return false;
+
+            return true;
+        });
+
+        for (const e of filteredEvents) {
+            usedEvents.push(e.id);
+        }
+
+        // ── Stage 4: Candidate Enumeration ──────────────────────
+        const allRuleEntries = this.registry.greetingRules.getRulesByLocaleChain(ctx.localeChain);
+
+        type ScoredCandidate = {
+            packId: string;
+            rule: GreetingRule;
+            event: SalveEvent | null;
+            tuple: ScoreTuple;
+        };
+
+        const candidates: ScoredCandidate[] = [];
+
+        for (const entry of allRuleEntries) {
+            const rule = entry.rule;
+
+            // Phase filter
+            if (rule.when?.phase) {
+                if (rule.when.phase !== ctx.interaction.phase) continue;
+            }
+
+            // Day period filter
+            if (rule.when?.dayPeriod) {
+                if (rule.when.dayPeriod !== ctx.env.dayPeriod) continue;
+            }
+
+            // Formality filter
+            if (rule.when?.formality) {
+                if (rule.when.formality !== ctx.interaction.formality) continue;
+            }
+
+            // Setting filter
+            if (rule.when?.setting) {
+                if (!rule.when.setting.includes(ctx.interaction.setting)) continue;
+            }
+
+            // Relationship filter
+            if (rule.when?.relationship) {
+                if (!rule.when.relationship.includes(ctx.interaction.relationship)) continue;
+            }
+
+            // Subculture filter
+            if (rule.when?.subculturesAny) {
+                const hasMatch = rule.when.subculturesAny.some((sc: string) => ctx.memberships.subcultures.includes(sc));
+                if (!hasMatch) continue;
+            }
+
+            // Affiliation filter
+            if (rule.when?.affiliationsAny) {
+                const hasMatch = rule.when.affiliationsAny.some((a: string) => ctx.memberships.traditions.includes(a));
+                if (!hasMatch) continue;
+            }
+
+            // Event match
+            let matchedEvent: SalveEvent | null = null;
+            if (rule.when?.eventRef) {
+                const resolvedId = this.registry.events.resolveId(rule.when.eventRef);
+                matchedEvent = filteredEvents.find((e: SalveEvent) => e.id === resolvedId || e.id === rule.when!.eventRef!) ?? null;
+                if (!matchedEvent) continue; // Rule requires event that isn't active
+            }
+
+            // ── Stage 5: Scoring ────────────────────────────────
+            const ruleLocale = allRuleEntries.find(
+                (re: { packId: string; precedence: number; rule: GreetingRule }) => re.rule === rule
+            )!;
+            const packInfo = this.registry.greetingRules["packs" as any]?.get(entry.packId);
+            const ruleLocaleStr = packInfo?.locale ?? ctx.localeChain[ctx.localeChain.length - 1];
+
+            const tuple = computeScoreTuple(
+                rule,
+                entry.packId,
+                entry.precedence,
+                matchedEvent,
+                ctx.localeChain,
+                ruleLocaleStr
+            );
+
+            candidates.push({ packId: entry.packId, rule, event: matchedEvent, tuple });
+            traceEntries.push({ ruleId: rule.id, tuple });
+        }
+
+        // Sort candidates: highest score first
+        candidates.sort((a: ScoredCandidate, b: ScoredCandidate) => compareScoreTuples(b.tuple, a.tuple));
+
+        // ── Handle no candidates ────────────────────────────────
+        if (candidates.length === 0) {
+            return {
+                primary: {
+                    text: "Hello",
+                    act: "salutation",
+                    ruleId: "fallback",
+                },
+                trace: {
+                    candidates: traceEntries,
+                    usedEvents,
+                    normalizedContext: ctx,
+                },
+            };
+        }
+
+        // ── Stage 6: Winner selection ───────────────────────────
+        const winner = candidates[0];
+
+        // ── Stage 7: Style Rendering ────────────────────────────
+        const renderedText = applyStyleTransform(
+            winner.rule,
+            ctx.interaction.style,
+            ctx.env.outputLocale,
+            this.stylePacks
+        );
+
+        // ── Stage 8: Composition & Output ───────────────────────
+        const primary: SalvePrimaryOutput = {
+            text: renderedText,
+            act: winner.rule.act,
+            eventId: winner.event?.id,
+            ruleId: winner.rule.id,
+        };
+
+        // Collect affinity extras (only if policy allows)
+        const extras: SalveExtra[] = [];
+        if (ctx.policy.allowExtras) {
+            for (const cand of candidates.slice(1)) {
+                if (cand.event?.kind === "affinity") {
+                    extras.push({
+                        text: cand.rule.template,
+                        eventId: cand.event.id,
+                        ruleId: cand.rule.id,
+                        kind: "affinity",
+                    });
+                }
+            }
+        }
+
+        return {
+            primary,
+            extras: extras.length > 0 ? extras : undefined,
+            trace: {
+                candidates: traceEntries,
+                usedEvents,
+                normalizedContext: ctx,
+            },
+        };
+    }
+
+    /**
+     * Map legacy EventDomain to EventDomainV1
+     */
+    private mapLegacyDomain(domain: string): EventDomainV1 {
+        const map: Record<string, EventDomainV1> = {
+            personal: "personal",
+            religious: "religious",
+            civil: "civil",
+            cultural_baseline: "cultural_baseline",
+            temporal: "temporal",
+        };
+        return map[domain] ?? "cultural_baseline";
+    }
+
+    // ───── Legacy private methods (unchanged) ─────────────────────
+
     private selectGreeting(
         pack: GreetingPack,
         event: CelebrationEvent | null,
@@ -235,7 +492,6 @@ export class SalveEngine {
         if (!result) {
             const base = locale.split("-")[0];
             const fallback = this.packs.get(base) || null;
-            // console.log(`[SALVE_PACK] locale=${locale}, fallback=${fallback?.locale}`);
             return fallback;
         }
         return result;
@@ -258,3 +514,4 @@ export class SalveEngine {
         };
     }
 }
+
