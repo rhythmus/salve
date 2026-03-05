@@ -177,3 +177,254 @@ export interface NameDayCelebration extends CelebrationEvent {
     saintQid: string;
     targetName: string;
 }
+
+// ═══════════════════════════════════════════════════════════════════
+// Milestone 9 — Advanced Architecture Types
+// ═══════════════════════════════════════════════════════════════════
+
+// ── Greeting Ontology Enums ──────────────────────────────────────
+
+/** Speech‐act type of a greeting utterance */
+export type GreetingAct =
+    | "salutation"
+    | "valediction"
+    | "welcome"
+    | "congratulation"
+    | "observance"
+    | "acclamation"
+    | "address_only"
+    | "checkin"
+    | "acknowledge";
+
+/** Structural output form */
+export type GreetingForm =
+    | "greeting_only"
+    | "address_only"
+    | "salutation"
+    | "email_opening"
+    | "email_closing";
+
+/** Rhetorical register / style — never inferred, always configured */
+export type GreetingStyle =
+    | "neutral"
+    | "formal"
+    | "ceremonial"
+    | "liturgical"
+    | "poetic"
+    | "playful"
+    | "archaic"
+    | "bureaucratic"
+    | "minimal";
+
+/** Time-of-day period for greeting selection */
+export type DayPeriod =
+    | "morning"
+    | "midday"
+    | "afternoon"
+    | "evening"
+    | "night";
+
+/** Expanded event domain taxonomy (v1) */
+export type EventDomainV1 =
+    | "bank"
+    | "civil"
+    | "religious"
+    | "personal"
+    | "seasonal"
+    | "protocol"
+    | "affinity"
+    | "custom"
+    // Kept for backward compat with existing packs
+    | "temporal"
+    | "cultural_baseline";
+
+// ── Greeting Rule (Ontology‐Aware) ──────────────────────────────
+
+/** Selection conditions for a greeting rule */
+export interface GreetingRuleWhen {
+    eventRef?: string;
+    dayPeriod?: DayPeriod;
+    phase?: "opening" | "closing";
+    setting?: ("ui" | "chat" | "email")[];
+    relationship?: RelationshipContext[];
+    formality?: Formality;
+    affiliationsAny?: string[];
+    subculturesAny?: string[];
+}
+
+/** A single ontology-aware greeting rule inside a pack */
+export interface GreetingRule {
+    id: string;
+    act: GreetingAct;
+    form: GreetingForm;
+    style: GreetingStyle;
+    priority: number;
+    template: string;
+    when?: GreetingRuleWhen;
+    expectedResponseTemplate?: string;
+    addressTemplate?: string;
+    metadata?: Record<string, unknown>;
+}
+
+// ── Namespaced Events ───────────────────────────────────────────
+
+/** A namespaced event emitted by providers (salve.event.domain.region.name) */
+export interface SalveEvent {
+    id: string;
+    kind: EventDomainV1;
+    start: string;   // ISO date
+    end: string;     // ISO date
+    label?: string;
+    source?: string;
+    precedence?: number;
+    confidence?: number;
+    metadata?: Record<string, unknown>;
+}
+
+/** Entry in the Event Namespace Registry */
+export interface EventRegistryEntry {
+    id: string;
+    domain: EventDomainV1;
+    country?: string;
+    description?: string;
+    scope?: "global" | "regional" | "local";
+    aliases?: string[];
+}
+
+// ── Score Tuple ─────────────────────────────────────────────────
+
+/** Deterministic scoring tuple for greeting rule selection (v1) */
+export interface ScoreTuple {
+    domainRank: number;
+    eventRank: number;
+    packPrecedence: number;
+    rulePriority: number;
+    localeMatchScore: number;
+    stableTieBreak: string; // packId + ruleId for lexicographic ordering
+}
+
+// ── SalveContext v1 ─────────────────────────────────────────────
+
+/** Temporal & locale environment */
+export interface SalveEnv {
+    now: Date;
+    timeZone?: string;
+    locale: string;          // BCP-47
+    outputLocale?: string;   // BCP-47 (defaults to locale)
+    region?: string;         // ISO-3166-1 alpha-2
+}
+
+/** Interaction frame */
+export interface SalveInteraction {
+    phase?: "opening" | "closing";
+    setting?: "ui" | "chat" | "email";
+    role?: "initiator" | "responder";
+    relationship?: RelationshipContext;
+    formality?: Formality;
+    style?: GreetingStyle;
+}
+
+/** Title on a person profile */
+export interface SalveTitle {
+    system: "academic" | "civil" | "religious" | "military" | "other";
+    code: string;
+}
+
+/** Person being addressed */
+export interface SalvePerson {
+    givenNames?: string[];
+    surname?: string;
+    preferredName?: string;
+    gender?: "male" | "female" | "nonbinary" | "unknown";
+    genderSource?: "explicit" | "inferred" | "unknown";
+    titles?: SalveTitle[];
+    birthday?: string;       // YYYY-MM-DD
+    nameday?: {
+        enabled?: boolean;
+        locale?: string;
+        saintIds?: string[];
+    };
+}
+
+/** Declared memberships (strong / identity-like) */
+export interface SalveMemberships {
+    traditions?: string[];    // e.g. ["orthodox", "catholic"]
+    subcultures?: string[];   // e.g. ["student_corporation"]
+}
+
+/** Declared affinities (weak / interest-like) */
+export interface SalveAffinities {
+    locales?: string[];       // "I learn these locales" e.g. ["ja-JP"]
+    tags?: string[];          // e.g. ["anime", "japanese_culture"]
+}
+
+/** Policy (what the engine is allowed to emit) */
+export interface SalvePolicy {
+    allowDomains?: EventDomainV1[];
+    allowExtras?: boolean;
+    allowSubcultureAddressing?: boolean;
+    requireExplicitTraditionsForReligious?: boolean;
+    allowGenderInference?: boolean;
+    repetition?: {
+        windowedGreetings?: boolean;
+        maxSameRulePerDays?: number;
+    };
+}
+
+/** Unified input context (v1) */
+export interface SalveContextV1 {
+    env: SalveEnv;
+    interaction?: SalveInteraction;
+    person?: SalvePerson;
+    memberships?: SalveMemberships;
+    affinities?: SalveAffinities;
+    policy?: SalvePolicy;
+}
+
+// ── Normalized Context ──────────────────────────────────────────
+
+/** Fully resolved context — all fields present, no optionals */
+export interface NormalizedContext {
+    env: Required<SalveEnv> & { dayPeriod: DayPeriod };
+    interaction: Required<SalveInteraction>;
+    person: SalvePerson | null;
+    memberships: Required<SalveMemberships>;
+    affinities: Required<SalveAffinities>;
+    policy: Required<SalvePolicy>;
+    localeChain: string[];
+}
+
+// ── Structured Output ───────────────────────────────────────────
+
+/** Primary greeting result */
+export interface SalvePrimaryOutput {
+    text: string;
+    act: GreetingAct;
+    eventId?: string;
+    ruleId: string;
+}
+
+/** An extra item (e.g. affinity reminder) */
+export interface SalveExtra {
+    text: string;
+    eventId: string;
+    ruleId: string;
+    kind: "affinity" | "info";
+}
+
+/** Trace entry for developer mode */
+export interface SalveTraceEntry {
+    ruleId: string;
+    tuple: ScoreTuple;
+}
+
+/** Structured output of the v1 engine */
+export interface SalveOutputV1 {
+    primary: SalvePrimaryOutput;
+    extras?: SalveExtra[];
+    trace?: {
+        candidates: SalveTraceEntry[];
+        usedEvents: string[];
+        normalizedContext?: NormalizedContext;
+    };
+}
