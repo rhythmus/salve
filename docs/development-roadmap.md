@@ -81,7 +81,11 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
     - [x] **"Explain Why" Visualization**: Render a narrative reasoning paragraph with inline editable variables and expose scoring trace.
     - [x] **Static Showcase Build**: Produce a single self-contained `website/index.html` (all JS and CSS inlined) suitable for `file://` usage and GitHub Pages.
     - [ ] Polish typography and microcopy for the landing page hero and explanation text.
-- **M8.2: Ecosystem Seeding (Data Packs)** (Not Started)
+- **M8.2: Ecosystem Seeding (Data Packs)** (Partially Complete)
+    - [x] Establish single source of truth architecture (`data/packs/`).
+    - [x] Create JSON Schema for pack validation (`data/greeting-pack.schema.json`).
+    - [x] Create generator pipeline (`scripts/generate-demo-packs.ts`) to produce TS packs from JSON.
+    - [x] Seed 6 locale packs: `ar`, `de-DE`, `el-GR`, `en-GB`, `tr-TR`, `zh-CN`.
     - [ ] Finalize and validate existing packs (`el`, `bg`).
     - [ ] Create starter packs for key regions:
         - [ ] `en-US`/`en-GB`: Civil holidays and Thanksgiving.
@@ -95,7 +99,8 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
     - [ ] Split Salve into focused, tree-shakeable packages: `@salve/runtime`, `@salve/schema`, etc.
     - [ ] Implement plugin architecture with 4 main kinds: `pack.locale`, `pack.protocol`, `provider.holiday`, and `provider.nameday`.
 - **M9.2: Greeting Ontology & Canonical Schemas** (Partially Complete)
-    - [ ] Centralize JSON schemas (`greeting-rule.schema.json`, `locale-pack.schema.json`, etc.).
+    - [x] Create `greeting-pack.schema.json` (JSON Schema Draft 2020-12) for locale pack validation.
+    - [ ] Centralize remaining JSON schemas (`greeting-rule.schema.json`, etc.).
     - [x] Implement the formal Greeting Ontology defining rules by `act` (salutation, valediction, etc.), `form` (email_opening, address_only), and `style` (neutral, formal, ceremonial, etc.) — types and `GreetingRule` defined in `@salve/types`.
 - **M9.3: Global Event Namespace Registry** (Completed)
     - [x] Create a deterministic Event Registry (`salve.event.domain.region.name`) with alias support.

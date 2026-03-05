@@ -206,3 +206,26 @@ Progressively strips BCP-47 subtags: `"nl-BE"` → `["nl-BE", "nl", "root"]`.
 - `getStyleFallbackChain(style: GreetingStyle): GreetingStyle[]` — e.g. `"ceremonial"` → `["ceremonial", "formal", "neutral"]`.
 - `applyStyleTransform(rule, requestedStyle, locale, stylePacks?): string` — render a rule template through the style family tree.
 
+---
+
+## Data Architecture & Build Tooling
+
+### Single Source of Truth (`data/packs/`)
+All greeting strings are maintained as canonical JSON files in `data/packs/`, one per BCP 47 locale. These files conform to the `GreetingPack` interface from `@salve/types` and are validated against `data/greeting-pack.schema.json`.
+
+**Current packs:** `ar.json`, `de-DE.json`, `el-GR.json`, `en-GB.json`, `tr-TR.json`, `zh-CN.json`
+
+### JSON Schema (`data/greeting-pack.schema.json`)
+JSON Schema (Draft 2020-12) enforcing pack structure:
+- `locale` (string, BCP 47, required)
+- `greetings` (array of `GreetingEntry`, required, min 1)
+- `extends` (string, optional parent locale)
+
+Each `GreetingEntry` requires `id` and `text`, and optionally supports `eventRef`, `formality`, `phase`, `role`, `relationship`, `setting`, and `expectedResponse`.
+
+### Generator Script (`scripts/generate-demo-packs.ts`)
+Reads `data/packs/*.json` → validates → emits `packages/demo/src/packs.generated.ts`.
+
+**Usage:** `npm run generate:packs`
+
+The generator validates each pack on load and produces a typed `GreetingPack[]` export compatible with `@salve/types`.

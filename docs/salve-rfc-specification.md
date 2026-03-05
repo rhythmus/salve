@@ -3,7 +3,7 @@
 Category: Standards Track\
 Version: 1.0.0-draft\
 Status: Draft Specification\
-Date: 2026-03-02T16:12:11.926786 UTC
+Date: 2026-03-05T21:15:00 UTC
 
 ------------------------------------------------------------------------
 
@@ -271,15 +271,67 @@ Memory MUST be pluggable.
 
 # 14. Data Pack Architecture
 
+## 14.1 Single Source of Truth
+
+All greeting data MUST be maintained as canonical JSON files in the
+repository's `data/packs/` directory. These files constitute the single
+source of truth from which all downstream artefacts — TypeScript packs,
+published NPM modules, and remote JSON distributions — are generated.
+
+Each JSON pack file SHALL correspond to exactly one BCP 47 locale
+identifier (e.g., `de-DE.json`, `el-GR.json`, `ar.json`).
+
+## 14.2 Pack Structure
+
 Packs MUST include:
 
--   Metadata
--   Event registry
--   Lexicon entries
--   Optional saint registry
--   Optional alias partitions
+-   `locale`: BCP 47 locale identifier (REQUIRED).
+-   `greetings`: Non-empty array of greeting entries (REQUIRED).
+-   `extends`: Parent locale for inheritance (OPTIONAL).
+
+Each greeting entry MUST include:
+
+-   `id`: Stable unique identifier within the pack.
+-   `text`: The greeting phrase in the locale's native script.
+
+Each greeting entry MAY include:
+
+-   `eventRef`: Reference to a `CelebrationEvent` identifier.
+-   `expectedResponse`: Call–response pair text.
+-   `formality`: Constraint (`informal`, `formal`, `neutral`).
+-   `phase`: Session phase (`open`, `close`).
+-   `role`: Interaction role (`initiator`, `responder`).
+-   `relationship`: Applicable relationship contexts.
+-   `setting`: Applicable interaction settings.
+
+## 14.3 JSON Schema Validation
+
+A JSON Schema (Draft 2020-12) SHALL be maintained at
+`data/greeting-pack.schema.json`. All pack files MUST reference this
+schema via the `$schema` property and MUST validate against it.
+
+The schema enforces structural constraints including identifier patterns,
+string minimums, and enumeration values. This allows contributors to
+validate edits without running TypeScript.
+
+## 14.4 Generator Pipeline
+
+A generator script (`scripts/generate-demo-packs.ts`) SHALL read all
+`data/packs/*.json` files, validate each against the schema, and emit
+a TypeScript module (`packs.generated.ts`) that exports typed
+`GreetingPack[]` arrays.
+
+The generator MUST:
+
+-   Parse and validate each JSON file.
+-   Fail with a descriptive error on malformed input.
+-   Produce type-safe output importing from `@salve/types`.
+
+## 14.5 Distribution Constraints
 
 Packs MUST NOT contain executable code when distributed as remote JSON.
+Pack files MAY include additional metadata (saint registry, alias
+partitions) as separate JSON files following the same validation model.
 
 ------------------------------------------------------------------------
 
