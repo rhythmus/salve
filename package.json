@@ -4,6 +4,7 @@
   "description": "Universal Greeting & Cultural Awareness Engine",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "generate:packs": "npx ts-node scripts/generate-demo-packs.ts",
     "lint": "prettier --check .",
     "format": "prettier --write .",
     "deploy": "npm run build -w packages/demo"

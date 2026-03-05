@@ -1,0 +1,20 @@
+{
+    "$schema": "../greeting-pack.schema.json",
+    "locale": "ar",
+    "greetings": [
+        {
+            "id": "ar_eid",
+            "text": "عيد مبارك",
+            "eventRef": "eid_al_fitr"
+        },
+        {
+            "id": "ar_ramadan",
+            "text": "رمضان كريم",
+            "eventRef": "ramadan_start"
+        },
+        {
+            "id": "ar_fallback",
+            "text": "مرحباً"
+        }
+    ]
+}

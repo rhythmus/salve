@@ -1,0 +1,121 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://salve.dev/schemas/greeting-pack.schema.json",
+    "title": "Salve Greeting Pack",
+    "description": "A locale-specific collection of greeting strings for the Salve greeting engine. Each pack is the single source of truth for one locale's greetings.",
+    "type": "object",
+    "required": [
+        "locale",
+        "greetings"
+    ],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "JSON Schema reference (for editor validation)"
+        },
+        "locale": {
+            "type": "string",
+            "description": "BCP 47 locale identifier (e.g. 'de-DE', 'el-GR', 'ar')",
+            "pattern": "^[a-z]{2,3}(-[A-Z]{2})?(-[A-Za-z0-9]+)*$"
+        },
+        "extends": {
+            "type": "string",
+            "description": "Optional parent locale for inheritance (e.g. 'de' for 'de-AT')"
+        },
+        "greetings": {
+            "type": "array",
+            "description": "Ordered list of greeting entries for this locale",
+            "items": {
+                "$ref": "#/$defs/GreetingEntry"
+            },
+            "minItems": 1
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {
+        "GreetingEntry": {
+            "type": "object",
+            "description": "A single greeting string with optional context constraints",
+            "required": [
+                "id",
+                "text"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Stable unique identifier within this pack (e.g. 'de_morning')",
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "text": {
+                    "type": "string",
+                    "description": "The greeting phrase in the locale's native script",
+                    "minLength": 1
+                },
+                "eventRef": {
+                    "type": "string",
+                    "description": "Links to a CelebrationEvent ID (e.g. 'morning', 'christmas', 'eid_al_fitr')"
+                },
+                "expectedResponse": {
+                    "type": "string",
+                    "description": "Expected response in call–response pairs (e.g. Easter: Χριστός ἀνέστη → Ἀληθῶς ἀνέστη)"
+                },
+                "formality": {
+                    "type": "string",
+                    "enum": [
+                        "informal",
+                        "formal",
+                        "neutral"
+                    ],
+                    "description": "Formality constraint"
+                },
+                "phase": {
+                    "type": "string",
+                    "enum": [
+                        "open",
+                        "close"
+                    ],
+                    "description": "Session phase constraint"
+                },
+                "role": {
+                    "type": "string",
+                    "enum": [
+                        "initiator",
+                        "responder"
+                    ],
+                    "description": "Interaction role constraint"
+                },
+                "relationship": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "stranger",
+                            "acquaintance",
+                            "friend",
+                            "family",
+                            "superior",
+                            "subordinate"
+                        ]
+                    },
+                    "description": "Applicable relationship contexts"
+                },
+                "setting": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "direct_address",
+                            "group_address",
+                            "public_announcement",
+                            "chat_message",
+                            "email_opening",
+                            "email_closing"
+                        ]
+                    },
+                    "description": "Applicable interaction settings"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
