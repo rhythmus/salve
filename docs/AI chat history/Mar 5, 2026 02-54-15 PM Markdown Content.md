@@ -381,8 +381,6 @@ We define greeting domains with descending specificity:
 When opening the app:
 
 ```
-Code
-
 Personal Event  
 → Major Religious  
 → National  
@@ -394,8 +392,6 @@ Personal Event
 When closing the app:
 
 ```
-Code
-
 If late night → Καληνύχτα  
 Else → Καλό βράδυ / Καλή συνέχεια  
 Else fallback neutral
@@ -414,8 +410,6 @@ We evaluate from specific → general.
 Variables:
 
 ```
-Code
-
 user.isKnown  
 user.name  
 user.gender  
@@ -517,8 +511,6 @@ STOP.
 ## STEP 6 — Time-of-Day Greeting
 
 ```
-Code
-
 if hour < 14:  
     greeting = Καλημέρα  
 else:  
@@ -586,8 +578,6 @@ STOP.
 We define greeting memory keys:
 
 ```
-Code
-
 birthday\_YYYY  
 nameday\_YYYY  
 easter\_YYYY  
@@ -729,8 +719,6 @@ We will design this properly.
 Your greeting engine should be:
 
 ```
-Code
-
 GreetingEngine  
  ├── PersonalEventProvider  
  ├── CivilCalendarProvider  
@@ -910,8 +898,6 @@ type GreetingMemory \= {
 Keys:
 
 ```
-Code
-
 birthday\_2026  
 nameday\_2026  
 easter\_2026  
@@ -1795,8 +1781,6 @@ Host:
 Example:
 
 ```
-Code
-
 /data/  
   el/  
     namedays.fixed.json  
@@ -1856,8 +1840,6 @@ During onboarding:
 2.  App performs **one fetch per language**:
     
     ```
-    Code
-    
     fetch(/data/el/namedays.fixed.json)  
     fetch(/data/el/namedays.movable.json)
     ```
@@ -1949,8 +1931,6 @@ This reduces duplication.
 Namespace by ecclesiastical tradition:
 
 ```
-Code
-
 /el/orthodox/  
 /bg/orthodox/  
 /fr/catholic/  
@@ -2064,8 +2044,6 @@ If you want to reduce initial fetch even more:
 Host per-name files:
 
 ```
-Code
-
 /el/names/giannis.json  
 /el/names/maria.json
 ```
@@ -2506,8 +2484,6 @@ No Greek-specific logic needed.
 You now have:
 
 ```
-Code
-
 GreetingEngine  
  ├── EventRegistry (per locale)  
  ├── CalendarCalculators (pluggable)  
@@ -6176,8 +6152,6 @@ No implementation details — only stable contracts.
 # I. Architectural Layers (Frozen)
 
 ```
-Code
-
 greeting-core  
   ├─ Engine  
   ├─ Policy  
@@ -7382,8 +7356,6 @@ Latin for “be well / hello”.
 Package:
 
 ```
-Code
-
 @salve/core
 ```
 
@@ -7723,8 +7695,6 @@ However:
 To be **certain**, you should check it programmatically, for example using:
 
 ```
-Code
-
 npx name-exists asalva
 ```
 
@@ -7810,8 +7780,6 @@ Scoped packages have these advantages:
 Example:
 
 ```
-Code
-
 npm publish @salve/core --access public
 ```
 
@@ -7948,8 +7916,6 @@ Section title:
 Example (German secular user, 1 Shawwal):
 
 ```
-Code
-
 🇹🇷 Turkish Muslim friends:  
   → Bayramınız kutlu olsun!  
   
@@ -7987,8 +7953,6 @@ For a German secular user:
 ### 2️⃣ “Today’s Namedays”
 
 ```
-Code
-
 📅 Today’s namedays (Greece):  
   Ιωάννης (Giannis)  
   Ιωάννα  
@@ -8031,8 +7995,6 @@ This is very strong UX value.
 Under the greeting:
 
 ```
-Code
-
 Today is:  
   
 Gregorian: 3 October 2026  
@@ -8062,8 +8024,6 @@ It visually demonstrates depth.
 Expandable explanation:
 
 ```
-Code
-
 Active events today:  
   \[90\] Eid al-Fitr  
   \[80\] German Unity Day  
@@ -8093,8 +8053,6 @@ This is developer candy.
 Add a quick dropdown:
 
 ```
-Code
-
 Simulate residence:   
   Germany | Greece | Turkey | UK | USA | China
 ```
@@ -8119,8 +8077,6 @@ This demonstrates:
 If event supports multiple scripts:
 
 ```
-Code
-
 Arabic:  
   عيد مبارك  
   
@@ -8149,8 +8105,6 @@ This highlights:
 If inside Ramadan:
 
 ```
-Code
-
 🌙 Ramadan is ongoing (Day 14 of 30)  
   
 Evening greeting suggestion:  
@@ -8160,8 +8114,6 @@ Evening greeting suggestion:
 If inside Chinese New Year period:
 
 ```
-Code
-
 🧧 Spring Festival (Day 3 of 15)  
   
 Traditional blessing:  
@@ -8177,8 +8129,6 @@ This shows duration handling.
 ### 8️⃣ Upcoming Celebrations
 
 ```
-Code
-
 Next upcoming celebrations for you:  
   
   24 Dec – Christmas Eve  
@@ -8203,8 +8153,6 @@ This demonstrates:
 ### 9️⃣ Repetition Awareness
 
 ```
-Code
-
 You already received:  
   New Year greeting (2026-01-01)  
   Monthly greeting (March 2026)  
@@ -8229,8 +8177,6 @@ This shows:
 ### 🔟 Formal vs Informal Toggle
 
 ```
-Code
-
 Informal:  
   Guten Morgen, Mehmet!  
   
@@ -8254,8 +8200,6 @@ Shows:
 ### 11️⃣ Zodiac Banner
 
 ```
-Code
-
 🐉 Year of the Dragon  
   
 Traditional blessing:  
@@ -8278,8 +8222,6 @@ Demonstrates:
 For Greek:
 
 ```
-Code
-
 Canonical: Ιωάννης  
 Vocative: Γιάννη  
 Greeting:  
@@ -8302,8 +8244,6 @@ This proves:
 For Easter:
 
 ```
-Code
-
 Western:  
   Happy Easter  
   
@@ -8350,8 +8290,6 @@ This makes the project feel large-scale.
 Under the greeting:
 
 ```
-Code
-
 In Turkey, Eid greetings are often accompanied by:  
   • Handshake  
   • Visiting elders  
@@ -9069,16 +9007,12 @@ Do NOT use names as primary keys.
 Use:
 
 ```
-Code
-
 saintId = stable, language-neutral identifier
 ```
 
 Example:
 
 ```
-Code
-
 saint.john.baptist  
 saint.john.apostle  
 saint.mary.magdalene
@@ -9151,8 +9085,6 @@ Before matching:
 Example:
 
 ```
-Code
-
 Γιάννης → giannis  
 Ioánnis → ioannis  
 Yannis → yannis  
@@ -9185,8 +9117,6 @@ Instead:
 For Greek namedays pack:
 
 ```
-Code
-
 /aliases/j.json
 ```
 
@@ -9221,8 +9151,6 @@ We do NOT match Jan → Giannis.
 We match:
 
 ```
-Code
-
 Jan → saint.john.baptist  
 saint.john.baptist → Greek localized form → Ιωάννης
 ```
@@ -9285,8 +9213,6 @@ Correct partitioning is:
 ### A) Date Map (small, always included)
 
 ```
-Code
-
 MM-DD → saintIds\[\]
 ```
 
@@ -9297,8 +9223,6 @@ This is tiny.
 ### B) Alias Index (partitioned by first letter or hash)
 
 ```
-Code
-
 aliases/a.json  
 aliases/b.json  
 ...  
@@ -9312,8 +9236,6 @@ Only load relevant partition during onboarding.
 ### C) Saint Definitions (small)
 
 ```
-Code
-
 saints.json
 ```
 
@@ -9514,8 +9436,6 @@ Instead of:
 We shift to:
 
 ```
-Code
-
 \[ Header \]  
 \[ Hero Greeting \]  
 \[ Interactive Timeline \]  
@@ -9572,8 +9492,6 @@ This is your strongest differentiator.
 Example:
 
 ```
-Code
-
 Today | Oct 3 🇩🇪 | Dec 25 🎄 | Jan 1 🎆 | Feb 10 🧧 | Apr 12 ✝
 ```
 
@@ -9644,8 +9562,6 @@ Color coding example:
 Under the hero, a compact line:
 
 ```
-Code
-
 Context:  
 de-DE | islam + civil | tr-TR (latin) | 3 Oct 2026 | Mode: Opening
 ```
@@ -9713,8 +9629,6 @@ When enabled:
 Below the greeting, show:
 
 ```
-Code
-
 Selected Event: german\_unity\_day  
 Priority: 80  
 Calendar: gregorian (fixed date)  
@@ -9734,8 +9648,6 @@ Instead of large panels:
 Add a small “Also Today” strip:
 
 ```
-Code
-
 Also today:  
 🇹🇷 Bayramınız kutlu olsun  
 🇬🇷 Καλημέρα  
@@ -9796,8 +9708,6 @@ No explanation needed.
 # 11️⃣ Revised Demo Page Layout
 
 ```
-Code
-
 ────────────────────────  
 SALVE  
   
@@ -12414,8 +12324,6 @@ Do not invent your own region tags.
 Use:
 
 ```
-Code
-
 de-AT  
 de-DE  
 de-DE-u-rg-byzzzz  
@@ -12428,8 +12336,6 @@ For cultural regions like Bavaria or Texas:
 Use Unicode locale extensions:
 
 ```
-Code
-
 de-DE-u-rg-deby  
 en-US-u-rg-ustx
 ```
@@ -12441,8 +12347,6 @@ This is critical.
 Do not invent:
 
 ```
-Code
-
 culturalRegion: bavaria
 ```
 
@@ -12457,8 +12361,6 @@ Respect BCP 47.
 CLDR inheritance works like this:
 
 ```
-Code
-
 de-AT  
   inherits from de  
     inherits from root
@@ -12476,8 +12378,6 @@ So Salve data should:
 Example:
 
 ```
-Code
-
 de.xml  
   <baselineGreetings>  
     <greeting type="informal">Hallo</greeting>  
@@ -12603,8 +12503,6 @@ JSON
 Not:
 
 ```
-Code
-
 "julianOffset": 13
 ```
 
@@ -12685,8 +12583,6 @@ If Salve aligns structurally,
 Unicode could theoretically adopt:
 
 ```
-Code
-
 <greetings>  
   ...  
 </greetings>
@@ -13368,8 +13264,6 @@ Example:
 Pattern:
 
 ```
-Code
-
 \[Greeting\], \[Herr/Frau\] \[AcademicTitle(s)\] \[LastName\]
 ```
 
@@ -13395,8 +13289,6 @@ In Germany:
 Pattern:
 
 ```
-Code
-
 \[Greeting\], \[Title\] \[LastName\]
 ```
 
@@ -13416,8 +13308,6 @@ No stacking convention like Germany.
 Pattern:
 
 ```
-Code
-
 \[Greeting\], \[Monsieur/Madame\] \[Title\] \[LastName\]
 ```
 
@@ -13455,8 +13345,6 @@ Example:
 German:
 
 ```
-Code
-
 judge → Herr Vorsitzender  
 academic → Herr Professor  
 police → Herr Wachtmeister
@@ -13465,8 +13353,6 @@ police → Herr Wachtmeister
 English:
 
 ```
-Code
-
 judge → Your Honor  
 police → Officer  
 academic → Professor
@@ -13863,16 +13749,12 @@ Example (Germany conceptual logic):
 Formal:
 
 ```
-Code
-
 Herr + titles + lastName
 ```
 
 Informal:
 
 ```
-Code
-
 firstName
 ```
 
@@ -13881,16 +13763,12 @@ English:
 Formal:
 
 ```
-Code
-
 Title + lastName
 ```
 
 Informal:
 
 ```
-Code
-
 firstName
 ```
 
@@ -13899,8 +13777,6 @@ French:
 Formal:
 
 ```
-Code
-
 Monsieur/Madame + roleTitle + lastName
 ```
 
@@ -14238,8 +14114,6 @@ Currently, greeting selection is event-driven.
 You now need a second resolver:
 
 ```
-Code
-
 GreetingResolver  
 AddressResolver  
 TemplateComposer
@@ -14248,8 +14122,6 @@ TemplateComposer
 Where:
 
 ```
-Code
-
 Greeting: "Guten Morgen"  
 Address: "Herr Professor Müller"  
 Final: "Guten Morgen, Herr Professor Müller."
@@ -14264,8 +14136,6 @@ This separation is essential.
 Add a new domain classification:
 
 ```
-Code
-
 domain: "address"
 ```
 
@@ -14358,8 +14228,6 @@ Add:
 Show:
 
 ```
-Code
-
 {  
   locale: "de-DE",  
   formality: "formal",  
@@ -14588,7 +14456,6 @@ Key additions in this updated demo page:
 Here is the updated, self-contained standalone HTML file:
 
 Download salve-landing-page-v2-salutations.html
-
 
 You: 
 

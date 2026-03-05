@@ -84,10 +84,42 @@ This document outlines the detailed, staged implementation plan for the Salve Un
         - `en-US`/`en-GB`: Civil holidays and Thanksgiving.
         - `de-DE`: High-formality address protocols.
         - `ar-SA`: Hijri calendar integration demonstration.
-- **M8.3: Launch Logistics**
+
+## Milestone 9: Salve v1 Advanced Architecture & Modularization
+*(Derived from chat transcript 014546)*
+
+- **M9.1: Monorepo Package Extraction**
+    - Split Salve into focused, tree-shakeable packages: `@salve/core`, `@salve/runtime`, `@salve/schema`, etc.
+    - Implement plugin architecture with 4 main kinds: `pack.locale`, `pack.protocol`, `provider.holiday`, and `provider.nameday`.
+- **M9.2: Greeting Ontology & Canonical Schemas**
+    - Centralize JSON schemas (`greeting-rule.schema.json`, `locale-pack.schema.json`, etc.).
+    - Implement the formal Greeting Ontology defining rules by `act` (salutation, valediction, etc.), `form` (email_opening, address_only), and `anchor` (time, event, social).
+- **M9.3: Global Event Namespace Registry**
+    - Create a deterministic Event Registry (`salve.event.domain.region.name`).
+    - Support domains: `bank`, `civil`, `religious`, `personal`, `seasonal`, `protocol`, `affinity`.
+- **M9.4: The Salve Context Normalization Algorithm (SCNA)**
+    - Introduce pre-processing of API inputs into a unified `SalveContextV1`.
+    - Automatically derive region from locale, resolve missing timezones, and enforce BCP-47 strictness.
+    - Establish strict separation between explicit `memberships` (identities) and soft `affinities` (interests/reminders).
+    - Implement optional, low-confidence Gender Inference from given names as a non-authoritative hint.
+- **M9.5: Deterministic Resolution Pipeline & Scoring**
+    - Refactor engine loop: Context Normalization -> Locale Fallback -> Event Collection -> Candidate Enumeration -> Scoring -> Address Resolution -> Style Rendering -> Composition.
+    - Implement the `ScoreTuple` for strict tie-breaking: `(DomainRank, EventRank, PackPrecedence, RulePriority, LocaleMatch, StableTieBreak)`.
+- **M9.6: Greeting Style Engine (Rhetorical Register)**
+    - Introduce structural style modes: `neutral`, `formal`, `ceremonial`, `poetic`, `playful`, `historic`, `liturgical`.
+    - Enable fallback routing (e.g., `ceremonial` -> `formal` -> `neutral`) to transform base greetings.
+- **M9.7: Subculture Protocol Packs & Affinity Providers**
+    - Isolate socio-political and institutional greetings into Opt-In Protocol Packs (`@salve/protocol-*`).
+    - Implement "Affinity Reminders" (e.g., reminding a user in Belgium of a Japanese festival if they have an affinity for Japan).
+- **M9.8: Provider Integrations**
+    - Wrap `date-holidays` into `@salve/provider-date-holidays` for global bank holidays.
+    - Standardize Nameday remote fetching via `@salve/provider-namedays-*` (Date -> Saint -> Names).
+- **M9.9: Demo Integration & Developer Trace API**
+    - Output `SalveOutputV1` featuring primary greeting, secondary extras (affinities), and full scoring trace metadata.
+    - Update the Demo UI with Style toggles, Affinity selections, and visual trace logs to build developer trust.
+
+## Milestone 10: Salve v1 Launch 
+- **M10.1: Launch Logistics**
     - [ ] Final npm publish of all packages (v1.0.0).
     - [ ] GitHub Release creation with detailed changelog.
     - [ ] Public announcement and social sharing (inc. dedication).
-
----
-*Roadmap Version 1.0.0*

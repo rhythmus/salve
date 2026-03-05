@@ -414,10 +414,69 @@ An implementation is compliant if:
 -   It supports modular pack loading.
 -   It implements saint-based nameday pivot.
 -   It provides deterministic resolution.
+-   (v1) It implements the SCNA normalization algorithm.
+-   (v1) It uses ontology-aware greeting rules.
+-   (v1) It resolves greetings via the deterministic ScoreTuple model.
 
 ------------------------------------------------------------------------
 
-# 25. Future Considerations
+# 25. Advanced Architecture (v1)
+
+## 25.1 Greeting Ontology
+
+Greeting rules MUST declare a speech-act type (`act`), structural form
+(`form`), and rhetorical style (`style`). The ontology provides:
+
+-   **Acts**: salutation, valediction, welcome, congratulation,
+    observance, acclamation, address\_only, checkin, acknowledge.
+-   **Forms**: greeting\_only, address\_only, salutation, email\_opening,
+    email\_closing.
+-   **Styles**: neutral, formal, ceremonial, liturgical, poetic,
+    playful, archaic, bureaucratic, minimal.
+
+## 25.2 Context Model (SalveContextV1)
+
+The v1 context MUST be structured into six sections:
+
+1.  `env` — Temporal and locale environment (now, locale, timeZone,
+    region, outputLocale).
+2.  `interaction` — Phase, setting, role, relationship, formality,
+    style.
+3.  `person` — Person being addressed (names, gender, titles, birthday,
+    nameday).
+4.  `memberships` — Declared identities (traditions, subcultures).
+5.  `affinities` — Declared interests (locales, tags).
+6.  `policy` — Engine behavior constraints (allowed domains, extras,
+    gender inference, repetition windows).
+
+## 25.3 Context Normalization Algorithm (SCNA)
+
+The SCNA MUST convert partial developer input into a fully resolved
+`NormalizedContext` through 11 sequential steps including BCP-47
+normalization, region derivation, timezone resolution, day period
+computation, and safe policy defaults.
+
+## 25.4 Event Namespace Registry
+
+Events MUST follow the deterministic pattern
+`salve.event.<domain>.<region?>.<event_name>`. The registry MUST support
+alias resolution and domain-based filtering.
+
+## 25.5 Deterministic Scoring (ScoreTuple)
+
+Candidate greeting rules MUST be scored using a 6-field lexicographic
+tuple: `(domainRank, eventRank, packPrecedence, rulePriority,
+localeMatchScore, stableTieBreak)`.
+
+## 25.6 Style Engine
+
+Style rendering MUST use a family tree for fallback
+(e.g., ceremonial → formal → neutral). Style packs MAY provide template
+overrides for specific rule IDs.
+
+------------------------------------------------------------------------
+
+# 26. Future Considerations
 
 Potential extensions include:
 
@@ -426,6 +485,7 @@ Potential extensions include:
 -   Advanced phonetic name matching
 -   Server-side pack optimization tools
 -   Binary pack compression formats
+-   Gender inference from given names (low-confidence hint model)
 
 ------------------------------------------------------------------------
 
@@ -439,3 +499,4 @@ deterministic, culturally intelligent greetings while maintaining
 payload efficiency and architectural clarity.
 
 ------------------------------------------------------------------------
+
