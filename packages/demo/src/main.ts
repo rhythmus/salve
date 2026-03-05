@@ -1,6 +1,5 @@
 import './style.css';
 import { SalveEngine } from '@salve/core';
-import { SalveDevTools } from '@salve/devtools';
 import { GregorianCalendarPlugin } from '@salve/calendars-gregorian';
 import { HijriCalendarPlugin } from '@salve/calendars-hijri';
 import { PaschaCalendarPlugin } from '@salve/calendars-pascha';
@@ -37,8 +36,6 @@ engine.registerHonorifics({
   },
 });
 
-const devTools = new SalveDevTools(engine);
-
 const $ = (id: string) => document.getElementById(id)!;
 const pad2 = (n: number) => String(n).padStart(2, '0');
 const fmtISO = (d: Date) =>
@@ -62,6 +59,27 @@ let autoTimer: ReturnType<typeof setInterval> | null = null;
 let autoIndex = 0;
 let resumeTimer: ReturnType<typeof setTimeout> | null = null;
 
+// Persistent state for invisible controls
+const state = {
+  now: new Date(),
+  timezone: 'auto',
+  mode: 'opening',
+  formality: 'informal' as 'formal' | 'informal',
+  residenceLocale: 'de-DE',
+  greetingLanguage: 'de-DE',
+  scriptPref: 'latin',
+  names: ['Jan', 'Mehmet', 'Giannis'],
+  surname: 'Müller',
+  gender: 'male',
+  titleRole: 'dr',
+  outputMode: 'salutation',
+  relationship: 'stranger',
+  setting: 'ui',
+  civilParticipation: true,
+  namedaysEnabled: true,
+  scenario: '',
+};
+
 interface TimelineItem {
   date: Date;
   key: string;
@@ -69,74 +87,31 @@ interface TimelineItem {
   type: string;
   eventId?: string;
   domain?: string;
-  calendar?: string;
 }
 let timelineItems: TimelineItem[] = [];
 
-function stateSnapshot() {
-  const tzSel = ($('timezone') as HTMLSelectElement).value;
-  const tz =
-    tzSel === 'auto'
-      ? Intl.DateTimeFormat().resolvedOptions().timeZone
-      : tzSel;
-
-  const dateStr = ($('date') as HTMLInputElement).value || fmtISO(new Date());
-  const timeStr = ($('time') as HTMLInputElement).value || '12:00';
-  const m = timeStr.match(/^(\d{1,2}):(\d{2})$/);
-  const hh = m ? Math.min(23, Math.max(0, parseInt(m[1], 10))) : 12;
-  const mm = m ? Math.min(59, Math.max(0, parseInt(m[2], 10))) : 0;
-  const now = new Date(dateStr + 'T' + pad2(hh) + ':' + pad2(mm) + ':00');
-
-  const namesRaw = ($('givenNames') as HTMLInputElement).value.trim();
-  const names = namesRaw ? namesRaw.split(';').map((s) => s.trim()).filter(Boolean) : [];
-  const primaryName = names[0] || '';
-
-  const birthdayISO = ($('birthday') as HTMLInputElement).value || null;
-
-  return {
-    now,
-    timezone: tz,
-    mode: ($('mode') as HTMLSelectElement).value,
-    formality: ($('formality') as HTMLSelectElement).value as 'formal' | 'informal',
-    residenceLocale: ($('residenceLocale') as HTMLSelectElement).value,
-    greetingLanguage: ($('greetingLanguage') as HTMLSelectElement).value,
-    scriptPref: ($('scriptPref') as HTMLSelectElement).value,
-    affiliations: Array.from(selectedAff),
-    names,
-    primaryName,
-    surname: ($('surname') as HTMLInputElement).value.trim(),
-    gender: ($('gender') as HTMLSelectElement).value,
-    titleRole: ($('titleRole') as HTMLSelectElement).value,
-    birthdayISO,
-    outputMode: ($('outputMode') as HTMLSelectElement).value,
-    relationship: ($('relationship') as HTMLSelectElement).value,
-    setting: ($('setting') as HTMLSelectElement).value,
-    civilParticipation: ($('civilParticipation') as HTMLInputElement).checked,
-    namedaysEnabled: ($('namedaysEnabled') as HTMLInputElement).checked,
-  };
-}
-
-function buildContext(state: ReturnType<typeof stateSnapshot>): Record<string, unknown> {
+function buildContext(): Record<string, unknown> {
+  const tz = state.timezone === 'auto' ? Intl.DateTimeFormat().resolvedOptions().timeZone : state.timezone;
   return {
     now: state.now,
     locale: state.greetingLanguage,
     formality: state.formality,
-    affiliations: state.affiliations,
+    affiliations: Array.from(selectedAff),
     relationship: state.relationship,
     setting: state.setting === 'ui' ? 'direct_address' : state.setting === 'chat' ? 'chat_message' : 'email_opening',
     phase: state.mode === 'opening' ? 'open' : 'close',
     profile: {
-      firstName: state.primaryName || undefined,
+      firstName: state.names[0] || undefined,
       lastName: state.surname || undefined,
       gender: state.gender !== 'unknown' ? state.gender : undefined,
       academicTitles: state.titleRole === 'dr' ? ['Dr.']
         : state.titleRole === 'prof' ? ['Prof.']
-        : state.titleRole === 'prof_dr' ? ['Prof.', 'Dr.']
-        : undefined,
+          : state.titleRole === 'prof_dr' ? ['Prof.', 'Dr.']
+            : undefined,
       professionalRole: state.titleRole === 'judge' ? 'judge'
         : state.titleRole === 'police' ? 'police'
-        : state.titleRole === 'clergy' ? 'clergy'
-        : undefined,
+          : state.titleRole === 'clergy' ? 'clergy'
+            : undefined,
     },
   };
 }
@@ -167,21 +142,16 @@ function mkOpts(pairs: [string, string][], sel: string) {
   return pairs.map(([v, l]) => `<option value="${v}"${sel === v ? ' selected' : ''}>${l}</option>`).join('');
 }
 
-async function updateFromUI(opts = { setMemory: true }) {
-  const state = stateSnapshot();
-  const ctx = buildContext(state);
-
+async function updateFromUI() {
+  const ctx = buildContext();
   let result;
   try {
     result = await engine.resolve(ctx as any);
   } catch (e) {
     console.error('Engine resolve failed:', e);
     $('heroGreeting').textContent = 'Hello!';
-    $('plainExplain').textContent = 'Engine error — see console.';
     return;
   }
-
-  devTools.updateTrace(result);
 
   $('heroGreeting').textContent = result.salutation || result.greeting || 'Hello!';
 
@@ -194,15 +164,6 @@ async function updateFromUI(opts = { setMemory: true }) {
   $('metaWhy').textContent = `priority ${score} · ${domain}`;
   $('metaLang').textContent = `${locale} / ${state.scriptPref}`;
   $('metaKey').textContent = `pack: ${locale}`;
-
-  const devBadge = document.getElementById('devBadge');
-  if (devBadge) devBadge.textContent = ev;
-  const devTrace = document.getElementById('devTrace');
-  if (devTrace) devTrace.textContent = JSON.stringify(result.metadata?.trace ?? result.metadata, null, 2);
-  const devContext = document.getElementById('devContext');
-  if (devContext) devContext.textContent = JSON.stringify(ctx, null, 2);
-  const devCandidates = document.getElementById('devCandidates');
-  if (devCandidates) devCandidates.textContent = JSON.stringify({ greeting: result.greeting, address: result.address, salutation: result.salutation }, null, 2);
 
   const dateIso = fmtISO(state.now);
   const timeIso = `${pad2(state.now.getHours())}:${pad2(state.now.getMinutes())}`;
@@ -219,62 +180,57 @@ async function updateFromUI(opts = { setMemory: true }) {
   const regionLang = state.residenceLocale.split('-')[0] || 'en';
   const localRegion = safeDisplayName(regionLang, 'region', regionCode);
 
-  const tzDisplay = state.timezone;
-  const scenarioSel = ($('scenario') as HTMLSelectElement).value;
-  const namesDisplay = state.primaryName || '—';
-
   const scenarioLabels: Record<string, string> = {
-    '': '—', de_secular: 'German secular', de_doctor: 'German: Herr Doktor', en_judge: 'English: Your Honor',
-    tr_muslim_de: 'Turkish Muslim in Germany', el_orthodox: 'Greek Orthodox',
-    zh_diaspora: 'Chinese diaspora', dev_mixed: 'Mixed: English + Arabic Eid',
+    '': '—', de_secular: 'sculptor from Berlin', de_doctor: 'academic from Munich', en_judge: 'formal judge',
+    tr_muslim_de: 'Turkish diaspora', el_orthodox: 'Greek Orthodox',
+    zh_diaspora: 'Chinese diaspora', dev_mixed: 'Mixed cultural context',
   };
 
-  const tzOpts = mkOpts([['auto', 'auto'], ['UTC', 'UTC'], ['Europe/Berlin', 'Europe/Berlin'], ['Europe/Brussels', 'Europe/Brussels'], ['Europe/Athens', 'Europe/Athens'], ['Asia/Istanbul', 'Asia/Istanbul'], ['Asia/Shanghai', 'Asia/Shanghai']], ($('timezone') as HTMLSelectElement).value);
-  const langOpts = mkOpts([['de-DE', 'de-DE'], ['en-GB', 'en-GB'], ['el-GR', 'el-GR'], ['tr-TR', 'tr-TR'], ['ar', 'ar'], ['zh-CN', 'zh-CN'], ['zh-TW', 'zh-TW']], state.greetingLanguage);
+  const tzOpts = mkOpts([['auto', 'auto'], ['UTC', 'UTC'], ['Europe/Berlin', 'Europe/Berlin'], ['Europe/Brussels', 'Europe/Brussels'], ['Europe/Athens', 'Europe/Athens'], ['Asia/Istanbul', 'Asia/Istanbul'], ['Asia/Shanghai', 'Asia/Shanghai']], state.timezone);
+  const langOpts = mkOpts([['de-DE', 'German'], ['en-GB', 'English'], ['el-GR', 'Greek'], ['tr-TR', 'Turkish'], ['ar', 'Arabic'], ['zh-CN', 'Chinese (Simp)'], ['zh-TW', 'Chinese (Trad)']], state.greetingLanguage);
   const scriptOpts = mkOpts([['latin', 'latin'], ['native', 'native'], ['arabic', 'arabic'], ['simplified', 'simplified'], ['traditional', 'traditional']], state.scriptPref);
-  const regionOpts = mkOpts([['de-DE', 'de-DE'], ['nl-BE', 'nl-BE'], ['el-GR', 'el-GR'], ['tr-TR', 'tr-TR'], ['en-GB', 'en-GB'], ['zh-CN', 'zh-CN']], state.residenceLocale);
+  const regionOpts = mkOpts([['de-DE', 'Germany'], ['nl-BE', 'Belgium'], ['el-GR', 'Greece'], ['tr-TR', 'Turkey'], ['en-GB', 'United Kingdom'], ['zh-CN', 'China']], state.residenceLocale);
   const formalityOpts = mkOpts([['informal', 'informal'], ['formal', 'formal']], state.formality);
   const modeOpts = mkOpts([['opening', 'opening'], ['closing', 'closing']], state.mode);
-  const scenarioOpts = mkOpts([['', '—'], ['de_secular', 'de_secular'], ['de_doctor', 'de_doctor'], ['en_judge', 'en_judge'], ['tr_muslim_de', 'tr_muslim_de'], ['el_orthodox', 'el_orthodox'], ['zh_diaspora', 'zh_diaspora'], ['dev_mixed', 'dev_mixed']], scenarioSel);
-  const outOpts = mkOpts([['salutation', 'salutation'], ['greeting', 'greeting'], ['address', 'address']], state.outputMode);
+  const scenarioOpts = mkOpts([['', '—'], ['de_secular', 'German secular'], ['de_doctor', 'German academic'], ['en_judge', 'British judge'], ['tr_muslim_de', 'Turkish Muslim'], ['el_orthodox', 'Greek Orthodox'], ['zh_diaspora', 'Chinese diaspora'], ['dev_mixed', 'Mixed Eid/English']], state.scenario);
+  const outOpts = mkOpts([['salutation', 'full salutation'], ['greeting', 'greeting only'], ['address', 'address only']], state.outputMode);
   const relOpts = mkOpts([['stranger', 'stranger'], ['acquaintance', 'acquaintance'], ['friend', 'friend'], ['family', 'family'], ['superior', 'superior'], ['subordinate', 'subordinate']], state.relationship);
-  const setOpts = mkOpts([['ui', 'ui'], ['chat', 'chat'], ['email', 'email']], state.setting);
-  const genderOpts = mkOpts([['unknown', 'unknown'], ['male', 'male'], ['female', 'female'], ['nonbinary', 'nonbinary']], state.gender);
-  const titleOpts = mkOpts([['none', 'none'], ['mr', 'mr'], ['mrs', 'mrs'], ['ms', 'ms'], ['mx', 'mx'], ['dr', 'dr'], ['prof', 'prof'], ['prof_dr', 'prof_dr'], ['judge', 'judge'], ['police', 'police'], ['clergy', 'clergy']], state.titleRole);
+  const setOpts = mkOpts([['ui', 'app UI'], ['chat', 'chat bubble'], ['email', 'email template']], state.setting);
+  const genderOpts = mkOpts([['unknown', 'unknown'], ['male', 'male'], ['female', 'female'], ['nonbinary', 'non-binary']], state.gender);
+  const titleOpts = mkOpts([['none', 'no title'], ['mr', 'Mr'], ['mrs', 'Mrs'], ['ms', 'Ms'], ['mx', 'Mx'], ['dr', 'Doctor'], ['prof', 'Professor'], ['prof_dr', 'Prof. Dr.'], ['judge', 'Judge'], ['police', 'Officer'], ['clergy', 'Reverend']], state.titleRole);
 
   const activeAffs = AFFILIATIONS.filter((a) => selectedAff.has(a.id));
   const activeChipsHtml = activeAffs.map((a) => `<span class="aff-chip on" data-aff="${a.id}">${a.label}</span>`).join(' ');
   const allChipsHtml = AFFILIATIONS.map((a) => `<span class="aff-chip${selectedAff.has(a.id) ? ' on' : ''}" data-aff="${a.id}">${a.label}</span>`).join(' ');
   const affHtml = `<span id="affActive">${activeChipsHtml} <span class="aff-chip" id="affToggle">+</span></span><span id="affAll" style="display:none">${allChipsHtml} <span class="aff-chip" id="affCollapse">\u2212</span></span>`;
 
-  const namedaysLbl = state.namedaysEnabled ? 'celebrate namedays' : 'do not celebrate namedays';
-  const civilLbl = state.civilParticipation ? 'participate in residence civil holidays' : 'do not participate in residence civil holidays';
+  const namedaysLbl = state.namedaysEnabled ? 'celebrate namedays' : 'ignore namedays';
+  const civilLbl = state.civilParticipation ? 'observe civil holidays' : 'ignore civil holidays';
 
   const p =
-    `Today is ${iVar(esc(localDate), iInpCtrl('inlineDate', 'date', dateIso))}; ` +
-    `it is ${iVar(esc(localTime), iInpCtrl('inlineTime', 'time', timeIso))} in ${iVar(esc(tzDisplay), iSelCtrl('inlineTZ', tzOpts))}. ` +
-    `Your user is a ${iVar(esc(scenarioLabels[scenarioSel] || '—'), iSelCtrl('inlineScenario', scenarioOpts))}: ` +
-    `they speak ${iVar(esc(langEndonym), iSelCtrl('inlineLang', langOpts))}, ` +
-    `read in ${iVar(esc(state.scriptPref), iSelCtrl('inlineScript', scriptOpts))} script, ` +
-    `and reside in ${iVar(esc(localRegion), iSelCtrl('inlineRegion', regionOpts))}. ` +
-    `They identify culturally as ${affHtml}, ` +
-    `<label style="cursor:pointer"><input type="checkbox" id="inlineNamedays"${state.namedaysEnabled ? ' checked' : ''}> ${namedaysLbl}</label>, ` +
-    `and <label style="cursor:pointer"><input type="checkbox" id="inlineCivil"${state.civilParticipation ? ' checked' : ''}> ${civilLbl}</label>. ` +
-    `They are ${iVar(esc(state.titleRole), iSelCtrl('inlineTitleRole', titleOpts))} ` +
-    `${iVar(esc(state.surname || '—'), iInpCtrl('inlineSurname', 'text', state.surname, ' placeholder="surname" style="width:140px"'))} ` +
-    `(${iVar(esc(state.gender), iSelCtrl('inlineGender', genderOpts))}), ` +
-    `and are called ${iVar(esc(namesDisplay), iInpCtrl('inlineName', 'text', state.names.join('; '), ' placeholder="name(s)" style="width:140px"'))}. ` +
+    `It is ${iVar(esc(localTime), iInpCtrl('inlineTime', 'time', timeIso))} on a ` +
+    `${iVar(esc(localDate), iInpCtrl('inlineDate', 'date', dateIso))} in ` +
+    `${iVar(esc(state.timezone), iSelCtrl('inlineTZ', tzOpts))}. ` +
+    `Your user, a ${iVar(esc(scenarioLabels[state.scenario] || 'person'), iSelCtrl('inlineScenario', scenarioOpts))}, ` +
+    `speaks ${iVar(esc(langEndonym), iSelCtrl('inlineLang', langOpts))} and prefers the ` +
+    `${iVar(esc(state.scriptPref), iSelCtrl('inlineScript', scriptOpts))} script. ` +
+    `They live in ${iVar(esc(localRegion), iSelCtrl('inlineRegion', regionOpts))} and identify with ` +
+    `${affHtml} cultures. They ${iVar(namedaysLbl, `<input type="checkbox" id="inlineNamedays"${state.namedaysEnabled ? ' checked' : ''}>`)} ` +
+    `and ${iVar(civilLbl, `<input type="checkbox" id="inlineCivil"${state.civilParticipation ? ' checked' : ''}>`)}. ` +
+    `This person is ${iVar(esc(state.titleRole === 'none' ? 'not titled' : state.titleRole), iSelCtrl('inlineTitleRole', titleOpts))}, ` +
+    `has the surname ${iVar(esc(state.surname || '—'), iInpCtrl('inlineSurname', 'text', state.surname, ' placeholder="surname" style="width:140px"'))}, ` +
+    `identifies as ${iVar(esc(state.gender), iSelCtrl('inlineGender', genderOpts))}, and goes by ` +
+    `${iVar(esc(state.names.join('; ') || '—'), iInpCtrl('inlineName', 'text', state.names.join('; '), ' placeholder="name(s)" style="width:140px"'))}. ` +
     `You are greeting them ${iVar(esc(state.mode), iSelCtrl('inlineMode', modeOpts))} ` +
     `as a ${iVar(esc(state.relationship), iSelCtrl('inlineRelationship', relOpts))} ` +
-    `via ${iVar(esc(state.setting), iSelCtrl('inlineSetting', setOpts))}, ` +
-    `and want ${iVar(state.formality === 'formal' ? 'formal' : 'informal', iSelCtrl('inlineFormality', formalityOpts))} address. ` +
-    `Output is ${iVar(esc(state.outputMode), iSelCtrl('inlineOutputMode', outOpts))}. ` +
-    `Therefore you should greet them with:`;
+    `inside a ${iVar(esc(state.setting), iSelCtrl('inlineSetting', setOpts))}. ` +
+    `The interaction should be ${iVar(state.formality, iSelCtrl('inlineFormality', formalityOpts))}, ` +
+    `delivering a ${iVar(esc(state.outputMode), iSelCtrl('inlineOutputMode', outOpts))}.`;
 
   const pe = $('plainExplain');
   pe.innerHTML = p;
   wireInlineControls(pe);
-  renderAlsoStrip(state);
+  renderAlsoStrip();
 }
 
 function wireInlineControls(pe: HTMLElement) {
@@ -288,51 +244,95 @@ function wireInlineControls(pe: HTMLElement) {
     ctrl.addEventListener('blur', () => { setTimeout(() => { ve.style.display = 'none'; vd.style.display = 'inline'; }, 150); });
   });
 
-  const bind = (inlineId: string, drawerId: string) => {
-    const a = document.getElementById(inlineId) as HTMLInputElement | HTMLSelectElement | null;
-    const b = document.getElementById(drawerId) as HTMLInputElement | HTMLSelectElement | null;
-    if (!a || !b) return;
-    a.onchange = () => { b.value = a.value; pauseAuto(); rebuildTimelineAndUpdate(true); };
+  const bind = (id: string, key: keyof typeof state) => {
+    const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null;
+    if (!el) return;
+    el.onchange = () => {
+      (state as any)[key] = el.value;
+      if (key === 'now') { /* handled by date/time separately */ }
+      pauseAuto();
+      rebuildTimelineAndUpdate();
+    };
   };
-  bind('inlineDate', 'date'); bind('inlineTime', 'time'); bind('inlineTZ', 'timezone');
-  bind('inlineLang', 'greetingLanguage'); bind('inlineScript', 'scriptPref'); bind('inlineRegion', 'residenceLocale');
-  bind('inlineFormality', 'formality'); bind('inlineMode', 'mode'); bind('inlineName', 'givenNames');
-  bind('inlineSurname', 'surname'); bind('inlineOutputMode', 'outputMode'); bind('inlineRelationship', 'relationship');
-  bind('inlineSetting', 'setting'); bind('inlineGender', 'gender'); bind('inlineTitleRole', 'titleRole');
+
+  const bindDate = () => {
+    const d = document.getElementById('inlineDate') as HTMLInputElement | null;
+    const t = document.getElementById('inlineTime') as HTMLInputElement | null;
+    if (!d || !t) return;
+    const update = () => {
+      state.now = new Date(d.value + 'T' + t.value + ':00');
+      pauseAuto();
+      rebuildTimelineAndUpdate();
+    };
+    d.onchange = update;
+    t.onchange = update;
+  };
+  bindDate();
+  bind('inlineTZ', 'timezone');
+  bind('inlineLang', 'greetingLanguage');
+  bind('inlineScript', 'scriptPref');
+  bind('inlineRegion', 'residenceLocale');
+  bind('inlineFormality', 'formality');
+  bind('inlineMode', 'mode');
+
+  const inlineName = document.getElementById('inlineName') as HTMLInputElement | null;
+  if (inlineName) {
+    inlineName.onchange = () => {
+      state.names = inlineName.value.split(';').map(s => s.trim()).filter(Boolean);
+      pauseAuto();
+      rebuildTimelineAndUpdate();
+    };
+  }
+
+  bind('inlineSurname', 'surname');
+  bind('inlineOutputMode', 'outputMode');
+  bind('inlineRelationship', 'relationship');
+  bind('inlineSetting', 'setting');
+  bind('inlineGender', 'gender');
+  bind('inlineTitleRole', 'titleRole');
 
   const inlineScenario = document.getElementById('inlineScenario') as HTMLSelectElement | null;
   if (inlineScenario) {
-    inlineScenario.onchange = () => { pauseAuto(); ($('scenario') as HTMLSelectElement).value = inlineScenario.value; if (inlineScenario.value) applyScenario(inlineScenario.value); };
+    inlineScenario.onchange = () => {
+      state.scenario = inlineScenario.value;
+      pauseAuto();
+      if (state.scenario) applyScenario(state.scenario);
+      rebuildTimelineAndUpdate();
+    };
   }
 
-  const bindChk = (inlineId: string, drawerId: string) => {
-    const a = document.getElementById(inlineId) as HTMLInputElement | null;
-    const b = document.getElementById(drawerId) as HTMLInputElement | null;
-    if (!a || !b) return;
-    a.onchange = () => { b.checked = a.checked; pauseAuto(); rebuildTimelineAndUpdate(true); };
+  const bindChk = (id: string, key: keyof typeof state) => {
+    const el = document.getElementById(id) as HTMLInputElement | null;
+    if (!el) return;
+    el.onchange = () => {
+      (state as any)[key] = el.checked;
+      pauseAuto();
+      rebuildTimelineAndUpdate();
+    };
   };
-  bindChk('inlineNamedays', 'namedaysEnabled'); bindChk('inlineCivil', 'civilParticipation');
+  bindChk('inlineNamedays', 'namedaysEnabled');
+  bindChk('inlineCivil', 'civilParticipation');
 
   const affToggle = document.getElementById('affToggle');
   const affCollapse = document.getElementById('affCollapse');
   const affActiveEl = document.getElementById('affActive');
   const affAllEl = document.getElementById('affAll');
-  if (affToggle && affActiveEl && affAllEl) affToggle.onclick = () => { affActiveEl.style.display = 'none'; affAllEl!.style.display = 'inline'; };
-  if (affCollapse && affActiveEl && affAllEl) affCollapse.onclick = () => { affAllEl.style.display = 'none'; affActiveEl!.style.display = 'inline'; };
+  if (affToggle && affActiveEl && affAllEl) affToggle.onclick = (e) => { e.stopPropagation(); affActiveEl.style.display = 'none'; affAllEl!.style.display = 'inline'; };
+  if (affCollapse && affActiveEl && affAllEl) affCollapse.onclick = (e) => { e.stopPropagation(); affAllEl.style.display = 'none'; affActiveEl!.style.display = 'inline'; };
 
   pe.querySelectorAll('.aff-chip[data-aff]').forEach((chip) => {
-    (chip as HTMLElement).onclick = () => {
+    (chip as HTMLElement).onclick = (e) => {
+      e.stopPropagation();
       pauseAuto();
       const aid = (chip as HTMLElement).dataset.aff!;
       if (selectedAff.has(aid)) selectedAff.delete(aid); else selectedAff.add(aid);
       if (selectedAff.size === 0) selectedAff.add('civil');
-      renderAffChips();
-      rebuildTimelineAndUpdate(true);
+      rebuildTimelineAndUpdate();
     };
   });
 }
 
-function renderAlsoStrip(state: ReturnType<typeof stateSnapshot>) {
+function renderAlsoStrip() {
   const host = $('alsoStrip');
   host.innerHTML = '';
   const samples = [
@@ -347,13 +347,13 @@ function renderAlsoStrip(state: ReturnType<typeof stateSnapshot>) {
     div.className = 'chip';
     div.innerHTML = `${s.flag} <span class="mono">…</span>`;
     host.appendChild(div);
-    engine.resolve({ ...buildContext(state), locale: s.lang } as any).then((r) => {
+    engine.resolve({ ...buildContext(), locale: s.lang } as any).then((r) => {
       div.innerHTML = `${s.flag} <span class="mono">${esc(r.salutation || r.greeting || '—')}</span>`;
-    }).catch(() => {});
+    }).catch(() => { });
   }
 }
 
-async function computeTimeline(state: ReturnType<typeof stateSnapshot>): Promise<TimelineItem[]> {
+async function computeTimeline(): Promise<TimelineItem[]> {
   const items: TimelineItem[] = [];
   const base = new Date(state.now.getFullYear(), state.now.getMonth(), state.now.getDate(), state.now.getHours(), state.now.getMinutes());
 
@@ -363,7 +363,7 @@ async function computeTimeline(state: ReturnType<typeof stateSnapshot>): Promise
   for (let i = 1; i <= 365; i++) {
     const dt = new Date(base.getFullYear(), base.getMonth(), base.getDate() + i, 12, 0);
     try {
-      const ctx = { ...buildContext(state), now: dt };
+      const ctx = { ...buildContext(), now: dt };
       const res = await engine.resolve(ctx as any);
       const eid = res.metadata?.eventId;
       const dom = res.metadata?.domain;
@@ -386,7 +386,7 @@ async function computeTimeline(state: ReturnType<typeof stateSnapshot>): Promise
 function renderTimeline(selectedKey: string) {
   const track = $('timelineTrack');
   track.innerHTML = '';
-  const loc = (document.getElementById('residenceLocale') as HTMLSelectElement)?.value || 'en-GB';
+  const loc = state.residenceLocale || 'en-GB';
   for (const it of timelineItems) {
     const node = document.createElement('div');
     node.className = 'node' + (it.key === selectedKey ? ' sel' : '');
@@ -398,8 +398,8 @@ function renderTimeline(selectedKey: string) {
       `<div><span class="badge ${badgeClass(it.type)}">${badgeLabel(it.type)}</span></div>`;
     node.onclick = () => {
       restartAuto();
-      setDateInUI(it.date);
-      updateFromUI({ setMemory: false });
+      state.now = new Date(it.date);
+      updateFromUI();
       highlightTimeline(it.key, true);
     };
     track.appendChild(node);
@@ -417,19 +417,14 @@ function highlightTimeline(key: string, scrollIntoView: boolean) {
   });
 }
 
-function setDateInUI(d: Date) {
-  ($('date') as HTMLInputElement).value = fmtISO(d);
-  ($('time') as HTMLInputElement).value = `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
-}
-
 function startAuto() {
   if (autoTimer) clearInterval(autoTimer);
   autoTimer = setInterval(() => {
     if (timelineItems.length <= 1) return;
     autoIndex = (autoIndex + 1) % timelineItems.length;
     const it = timelineItems[autoIndex];
-    setDateInUI(it.date);
-    updateFromUI({ setMemory: false });
+    state.now = new Date(it.date);
+    updateFromUI();
     highlightTimeline(it.key, true);
   }, 3500);
 }
@@ -444,150 +439,77 @@ function pauseAuto() {
   resumeTimer = setTimeout(() => { resumeTimer = null; startAuto(); }, 15000);
 }
 
-async function rebuildTimelineAndUpdate(isUserAction = false) {
-  const state = stateSnapshot();
-  timelineItems = await computeTimeline(state);
+async function rebuildTimelineAndUpdate() {
+  timelineItems = await computeTimeline();
   const match = timelineItems[0];
   renderTimeline(match?.key || '');
   autoIndex = 0;
-  await updateFromUI({ setMemory: !isUserAction });
-}
-
-function renderAffChips() {
-  const host = $('affChips');
-  host.innerHTML = '';
-  for (const a of AFFILIATIONS) {
-    const chip = document.createElement('div');
-    chip.className = 'a ' + (selectedAff.has(a.id) ? 'on' : '');
-    chip.textContent = a.label;
-    chip.onclick = () => {
-      if (selectedAff.has(a.id)) selectedAff.delete(a.id); else selectedAff.add(a.id);
-      if (selectedAff.size === 0) selectedAff.add('civil');
-      renderAffChips();
-      rebuildTimelineAndUpdate(true);
-    };
-    host.appendChild(chip);
-  }
+  await updateFromUI();
 }
 
 function applyScenario(id: string) {
   const s: Record<string, () => void> = {
     de_secular: () => {
-      ($('surname') as HTMLInputElement).value = 'Müller'; ($('gender') as HTMLSelectElement).value = 'male';
-      ($('titleRole') as HTMLSelectElement).value = 'none'; ($('relationship') as HTMLSelectElement).value = 'stranger';
-      ($('setting') as HTMLSelectElement).value = 'ui'; ($('outputMode') as HTMLSelectElement).value = 'salutation';
-      ($('residenceLocale') as HTMLSelectElement).value = 'de-DE'; ($('greetingLanguage') as HTMLSelectElement).value = 'de-DE';
-      ($('scriptPref') as HTMLSelectElement).value = 'latin'; selectedAff = new Set(['civil']);
-      ($('givenNames') as HTMLInputElement).value = 'Johannes'; ($('namedaysEnabled') as HTMLInputElement).checked = false;
-      ($('civilParticipation') as HTMLInputElement).checked = true;
+      state.surname = 'Müller'; state.gender = 'male';
+      state.titleRole = 'none'; state.relationship = 'stranger';
+      state.setting = 'ui'; state.outputMode = 'salutation';
+      state.residenceLocale = 'de-DE'; state.greetingLanguage = 'de-DE';
+      state.scriptPref = 'latin'; selectedAff = new Set(['civil']);
+      state.names = ['Johannes']; state.namedaysEnabled = false;
+      state.civilParticipation = true;
     },
     de_doctor: () => {
-      ($('residenceLocale') as HTMLSelectElement).value = 'de-DE'; ($('greetingLanguage') as HTMLSelectElement).value = 'de-DE';
-      ($('scriptPref') as HTMLSelectElement).value = 'latin'; selectedAff = new Set(['civil']);
-      ($('givenNames') as HTMLInputElement).value = 'Hans'; ($('surname') as HTMLInputElement).value = 'Müller';
-      ($('gender') as HTMLSelectElement).value = 'male'; ($('titleRole') as HTMLSelectElement).value = 'dr';
-      ($('relationship') as HTMLSelectElement).value = 'stranger'; ($('formality') as HTMLSelectElement).value = 'formal';
-      ($('setting') as HTMLSelectElement).value = 'ui'; ($('outputMode') as HTMLSelectElement).value = 'salutation';
+      state.residenceLocale = 'de-DE'; state.greetingLanguage = 'de-DE';
+      state.scriptPref = 'latin'; selectedAff = new Set(['civil']);
+      state.names = ['Hans']; state.surname = 'Müller';
+      state.gender = 'male'; state.titleRole = 'dr';
+      state.relationship = 'stranger'; state.formality = 'formal';
+      state.setting = 'ui'; state.outputMode = 'salutation';
     },
     en_judge: () => {
-      ($('residenceLocale') as HTMLSelectElement).value = 'en-GB'; ($('greetingLanguage') as HTMLSelectElement).value = 'en-GB';
-      ($('scriptPref') as HTMLSelectElement).value = 'latin'; selectedAff = new Set(['civil']);
-      ($('givenNames') as HTMLInputElement).value = 'Alex'; ($('surname') as HTMLInputElement).value = '';
-      ($('gender') as HTMLSelectElement).value = 'unknown'; ($('titleRole') as HTMLSelectElement).value = 'judge';
-      ($('relationship') as HTMLSelectElement).value = 'subordinate'; ($('formality') as HTMLSelectElement).value = 'formal';
+      state.residenceLocale = 'en-GB'; state.greetingLanguage = 'en-GB';
+      state.scriptPref = 'latin'; selectedAff = new Set(['civil']);
+      state.names = ['Alex']; state.surname = '';
+      state.gender = 'unknown'; state.titleRole = 'judge';
+      state.relationship = 'subordinate'; state.formality = 'formal';
     },
     tr_muslim_de: () => {
-      ($('residenceLocale') as HTMLSelectElement).value = 'de-DE'; ($('greetingLanguage') as HTMLSelectElement).value = 'tr-TR';
-      ($('scriptPref') as HTMLSelectElement).value = 'latin'; selectedAff = new Set(['civil', 'islamic']);
-      ($('givenNames') as HTMLInputElement).value = 'Mehmet';
+      state.residenceLocale = 'de-DE'; state.greetingLanguage = 'tr-TR';
+      state.scriptPref = 'latin'; selectedAff = new Set(['civil', 'islamic']);
+      state.names = ['Mehmet'];
     },
     el_orthodox: () => {
-      ($('residenceLocale') as HTMLSelectElement).value = 'el-GR'; ($('greetingLanguage') as HTMLSelectElement).value = 'el-GR';
-      ($('scriptPref') as HTMLSelectElement).value = 'native'; selectedAff = new Set(['civil', 'orthodox']);
-      ($('givenNames') as HTMLInputElement).value = 'Γιάννης'; ($('namedaysEnabled') as HTMLInputElement).checked = true;
+      state.residenceLocale = 'el-GR'; state.greetingLanguage = 'el-GR';
+      state.scriptPref = 'native'; selectedAff = new Set(['civil', 'orthodox']);
+      state.names = ['Γιάννης']; state.namedaysEnabled = true;
     },
     zh_diaspora: () => {
-      ($('residenceLocale') as HTMLSelectElement).value = 'de-DE'; ($('greetingLanguage') as HTMLSelectElement).value = 'zh-CN';
-      ($('scriptPref') as HTMLSelectElement).value = 'simplified'; selectedAff = new Set(['civil', 'chinese_traditional']);
-      ($('givenNames') as HTMLInputElement).value = 'Wei';
+      state.residenceLocale = 'de-DE'; state.greetingLanguage = 'zh-CN';
+      state.scriptPref = 'simplified'; selectedAff = new Set(['civil', 'chinese_traditional']);
+      state.names = ['Wei'];
     },
     dev_mixed: () => {
-      ($('residenceLocale') as HTMLSelectElement).value = 'en-GB'; ($('greetingLanguage') as HTMLSelectElement).value = 'ar';
-      ($('scriptPref') as HTMLSelectElement).value = 'arabic'; selectedAff = new Set(['islamic']);
-      ($('givenNames') as HTMLInputElement).value = 'Amina';
+      state.residenceLocale = 'en-GB'; state.greetingLanguage = 'ar';
+      state.scriptPref = 'arabic'; selectedAff = new Set(['islamic']);
+      state.names = ['Amina'];
     },
   };
   if (s[id]) s[id]();
-  renderAffChips();
-  rebuildTimelineAndUpdate(true);
-}
-
-function openDrawer() {
-  document.getElementById('drawer')?.classList.add('open');
-  document.getElementById('overlay')?.classList.add('show');
-}
-
-function closeDrawer() {
-  document.getElementById('drawer')?.classList.remove('open');
-  document.getElementById('overlay')?.classList.remove('show');
-}
-
-function wireDrawer() {
-  $('btnSettings')?.addEventListener('click', openDrawer);
-  $('btnClose')?.addEventListener('click', closeDrawer);
-  $('overlay')?.addEventListener('click', closeDrawer);
-}
-
-function wireInputs() {
-  const ids = ['mode', 'formality', 'outputMode', 'relationship', 'setting', 'gender', 'surname', 'titleRole', 'date', 'time', 'timezone', 'givenNames', 'birthday', 'residenceLocale', 'greetingLanguage', 'scriptPref', 'civilParticipation', 'namedaysEnabled'];
-  ids.forEach((id) => {
-    $(id)?.addEventListener('change', () => { pauseAuto(); rebuildTimelineAndUpdate(true); });
-  });
-  $('scenario')?.addEventListener('change', (e) => {
-    const v = (e.target as HTMLSelectElement).value;
-    if (v) applyScenario(v);
-  });
-
-  $('timelineTrack')?.addEventListener('wheel', () => restartAuto(), { passive: true });
-  $('timelineTrack')?.addEventListener('touchstart', () => restartAuto(), { passive: true });
 }
 
 async function init() {
-  devTools.mount();
-  devTools.setOnContextChange((newCtx: Partial<{ now: Date; formality: string }>) => {
-    if (newCtx.now) setDateInUI(newCtx.now);
-    if (newCtx.formality) ($('formality') as HTMLSelectElement).value = newCtx.formality;
-    rebuildTimelineAndUpdate(true);
-  });
-
   const now = new Date();
-  setDateInUI(now);
-  ($('timezone') as HTMLSelectElement).value = 'auto';
+  state.now = now;
 
   const nav = (navigator.language || 'en-GB').toLowerCase();
   const residence = nav.startsWith('el') ? 'el-GR' : nav.startsWith('tr') ? 'tr-TR' : nav.startsWith('zh') ? 'zh-CN' : nav.startsWith('nl') ? 'nl-BE' : nav.startsWith('de') ? 'de-DE' : 'de-DE';
-  ($('residenceLocale') as HTMLSelectElement).value = residence;
-  ($('greetingLanguage') as HTMLSelectElement).value = residence === 'nl-BE' ? 'de-DE' : residence;
+  state.residenceLocale = residence;
+  state.greetingLanguage = residence === 'nl-BE' ? 'de-DE' : residence;
 
-  ($('givenNames') as HTMLInputElement).value = 'Jan; Mehmet; Giannis';
-  ($('surname') as HTMLInputElement).value = 'Müller';
-  ($('gender') as HTMLSelectElement).value = 'male';
-  ($('titleRole') as HTMLSelectElement).value = 'dr';
-  ($('relationship') as HTMLSelectElement).value = 'stranger';
-  ($('setting') as HTMLSelectElement).value = 'ui';
-  ($('outputMode') as HTMLSelectElement).value = 'salutation';
-  ($('mode') as HTMLSelectElement).value = 'opening';
-  ($('formality') as HTMLSelectElement).value = 'informal';
+  $('timelineTrack')?.addEventListener('wheel', () => restartAuto(), { passive: true });
+  $('timelineTrack')?.addEventListener('touchstart', () => restartAuto(), { passive: true });
 
-  selectedAff = new Set(['civil', 'islamic', 'orthodox', 'chinese_traditional']);
-  renderAffChips();
-  wireDrawer();
-  wireInputs();
-
-  const devPacks = document.getElementById('devPacks');
-  if (devPacks) devPacks.textContent = JSON.stringify(DEMO_PACKS, null, 2);
-
-  await rebuildTimelineAndUpdate(false);
+  await rebuildTimelineAndUpdate();
   startAuto();
 }
 
