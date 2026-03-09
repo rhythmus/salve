@@ -7,11 +7,12 @@ interface GreetingEntry {
     text: string | string[];
     eventRef?: string;
     timeOfDay?: string | string[];
+    audience?: string;
     audienceSize?: string;
     locale?: string | string[];
     expectedResponse?: string;
     formality?: "informal" | "highly informal" | "formal" | "hyperformal" | "neutral";
-    phase?: "open" | "close";
+    phase?: string | string[];
     role?: "initiator" | "responder";
     relationship?: string[];
     setting?: string[];
@@ -47,7 +48,7 @@ interface NormalizedGreetingEntry {
     locale?: string | string[];
     expectedResponse?: string;
     formality?: "informal" | "highly informal" | "formal" | "hyperformal" | "neutral";
-    phase?: "open" | "close";
+    phase?: string | string[];
     role?: "initiator" | "responder";
     relationship?: string[];
     setting?: string[];
@@ -203,7 +204,8 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
                 normalizedGreetings.push({
                     ...g,
                     id,
-                    text
+                    text,
+                    audienceSize: g.audience || g.audienceSize,
                 } as NormalizedGreetingEntry);
             });
         }
@@ -218,8 +220,8 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
     return { packs: normalizedPacks, regions: allRegions };
 }
 
-function escapeString(s: string): string {
-    return s.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n");
+function escapeString(s: any): string {
+    return String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n");
 }
 
 function greetingToTS(g: NormalizedGreetingEntry, indent: string): string {
@@ -239,7 +241,10 @@ function greetingToTS(g: NormalizedGreetingEntry, indent: string): string {
     }
     if (g.expectedResponse) lines.push(`${indent}  expectedResponse: "${escapeString(g.expectedResponse)}",`);
     if (g.formality) lines.push(`${indent}  formality: "${g.formality}" as const,`);
-    if (g.phase) lines.push(`${indent}  phase: "${g.phase}",`);
+    if (g.phase) {
+        const val = Array.isArray(g.phase) ? `[${g.phase.map(p => `"${p}"`).join(", ")}]` : `"${g.phase}"`;
+        lines.push(`${indent}  phase: ${val},`);
+    }
     if (g.role) lines.push(`${indent}  role: "${g.role}",`);
     if (g.relationship) lines.push(`${indent}  relationship: [${g.relationship.map(r => `"${r}"`).join(", ")}],`);
     if (g.setting) lines.push(`${indent}  setting: [${g.setting.map(s => `"${s}"`).join(", ")}],`);
