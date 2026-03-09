@@ -37,19 +37,30 @@
             "type": "object",
             "description": "A single greeting string with optional context constraints",
             "required": [
-                "id",
                 "text"
             ],
             "properties": {
                 "id": {
                     "type": "string",
-                    "description": "Stable unique identifier within this pack (e.g. 'de_morning')",
+                    "description": "Stable unique identifier within this pack (e.g. 'de_morning'). If omitted in YAML, it will be auto-generated.",
                     "pattern": "^[a-z][a-z0-9_]*$"
                 },
                 "text": {
-                    "type": "string",
-                    "description": "The greeting phrase in the locale's native script",
-                    "minLength": 1
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "minLength": 1
+                            },
+                            "minItems": 1
+                        }
+                    ],
+                    "description": "The greeting phrase or an array of variants"
                 },
                 "eventRef": {
                     "type": "string",
@@ -63,10 +74,58 @@
                     "type": "string",
                     "enum": [
                         "informal",
+                        "highly informal",
                         "formal",
+                        "hyperformal",
                         "neutral"
                     ],
                     "description": "Formality constraint"
+                },
+                "timeOfDay": {
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "enum": [
+                                "morning",
+                                "midday",
+                                "afternoon",
+                                "evening",
+                                "night"
+                            ]
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "morning",
+                                    "midday",
+                                    "afternoon",
+                                    "evening",
+                                    "night"
+                                ]
+                            }
+                        }
+                    ],
+                    "description": "Chronemic constraints"
+                },
+                "audienceSize": {
+                    "type": "string",
+                    "description": "Numerical or computable audience size constraint (e.g. '>4', '2', '1')"
+                },
+                "locale": {
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "description": "Optional BCP 47 compliant language/dialect tag(s) for this specific greeting"
                 },
                 "phase": {
                     "type": "string",
@@ -113,6 +172,24 @@
                         ]
                     },
                     "description": "Applicable interaction settings"
+                },
+                "notes": {
+                    "type": "string",
+                    "description": "Internal developer notes or context"
+                },
+                "sources": {
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "description": "Source URL(s) or bibliographic reference(s)"
                 }
             },
             "additionalProperties": false
