@@ -1,0 +1,40 @@
+tradition: orthodox
+greetings:
+  # --- Moveable Feasts ---
+
+  # Clean Monday (Kathara Deftera)
+  - text: Καλή Καθαρά Δευτέρα!
+    locale: el-GR
+    eventRef: salve.event.religious.orthodox.clean_monday
+    notes: 'Greek: Happy Clean Monday'
+  - text: Καλή Σαρακοστή!
+    locale: el-GR
+    eventRef: salve.event.religious.orthodox.clean_monday
+    notes: 'Greek: Happy Lent! (Wishing someone well for the 40-day fast starting on Clean Monday)'
+
+  # Good Friday
+  - text: Καλή Ανάσταση!
+    locale: el-GR
+    eventRef: salve.event.religious.orthodox.good_friday
+    notes: 'Greek: Happy Resurrection! (Wishing for the upcoming celebration)'
+
+  # Easter Sunday
+  - text: Χριστός Ανέστη!
+    locale: el-GR
+    eventRef: salve.event.religious.orthodox.easter
+    expectedResponse: Αληθώς Ανέστη!
+    formality: neutral
+    notes: 'Greek: Christ is Risen!'
+    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
+  - text: Christos Anesti!
+    locale: el-Latn
+    eventRef: salve.event.religious.orthodox.easter
+    expectedResponse: Alithos Anesti!
+    formality: neutral
+    notes: 'Greek (Transliterated): Christ is Risen!'
+
+  # Holy Spirit Monday
+  - text: Χρόνια Πολλά!
+    locale: el-GR
+    eventRef: salve.event.religious.orthodox.holy_spirit_monday
+    notes: 'Greek: Many years!'

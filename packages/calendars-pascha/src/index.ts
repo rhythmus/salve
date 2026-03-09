@@ -33,6 +33,34 @@ export class PaschaCalendarPlugin implements CalendarPlugin {
             events.push({ id: "orthodox-easter", domain: "religious", tradition: "orthodox" });
         }
 
+        // Orthodox Good Friday (-2 days)
+        const orthodoxGoodFriday = new Date(orthodoxEaster);
+        orthodoxGoodFriday.setDate(orthodoxEaster.getDate() - 2);
+        if (this.isSameDay(now, orthodoxGoodFriday)) {
+            events.push({ id: "orthodox-good-friday", domain: "religious", tradition: "orthodox" });
+        }
+
+        // Orthodox Easter Monday (+1 day)
+        const orthodoxEasterMonday = new Date(orthodoxEaster);
+        orthodoxEasterMonday.setDate(orthodoxEaster.getDate() + 1);
+        if (this.isSameDay(now, orthodoxEasterMonday)) {
+            events.push({ id: "orthodox-easter-monday", domain: "religious", tradition: "orthodox" });
+        }
+
+        // Clean Monday (Orthodox Lent start, -48 days)
+        const cleanMonday = new Date(orthodoxEaster);
+        cleanMonday.setDate(orthodoxEaster.getDate() - 48);
+        if (this.isSameDay(now, cleanMonday)) {
+            events.push({ id: "orthodox-clean-monday", domain: "religious", tradition: "orthodox" });
+        }
+
+        // Holy Spirit Monday (Pentecost Monday, +50 days)
+        const holySpiritMonday = new Date(orthodoxEaster);
+        holySpiritMonday.setDate(orthodoxEaster.getDate() + 50);
+        if (this.isSameDay(now, holySpiritMonday)) {
+            events.push({ id: "orthodox-holy-spirit-monday", domain: "religious", tradition: "orthodox" });
+        }
+
         return events;
     }
 
