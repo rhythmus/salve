@@ -1,0 +1,30 @@
+{
+    "$schema": "../greeting-pack.schema.json",
+    "locale": "tr-TR",
+    "greetings": [
+        {
+            "id": "tr_eid",
+            "text": "Bayramınız kutlu olsun!",
+            "eventRef": "eid_al_fitr"
+        },
+        {
+            "id": "tr_ramadan",
+            "text": "Hayırlı Ramazanlar!",
+            "eventRef": "ramadan_start"
+        },
+        {
+            "id": "tr_morning",
+            "text": "Günaydın",
+            "eventRef": "morning"
+        },
+        {
+            "id": "tr_afternoon",
+            "text": "İyi günler",
+            "eventRef": "afternoon"
+        },
+        {
+            "id": "tr_fallback",
+            "text": "Merhaba"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "$schema": "../greeting-pack.schema.json",
+    "locale": "zh-CN",
+    "greetings": [
+        {
+            "id": "zh_cny",
+            "text": "新年快乐！",
+            "eventRef": "chinese_new_year"
+        },
+        {
+            "id": "zh_lantern",
+            "text": "元宵节快乐！",
+            "eventRef": "lantern_festival"
+        },
+        {
+            "id": "zh_fallback",
+            "text": "你好"
+        }
+    ]
+}
