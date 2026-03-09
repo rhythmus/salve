@@ -1,29 +1,203 @@
 # Greek Greeting Pack (Greece)
 locale: el-GR
 greetings:
-  # --- Temporal ---
+  # --- 1. Saying Hello ---
+  - id: "el_ya_informal"
+    text: "Γεια!"
+    locale: el-GR
+    formality: informal
+    notes: "Basic 'Hi/Hello'. Often short for Γεια σου/σας."
+
+  - id: "el_ya_su"
+    text: "Γεια σου!"
+    locale: el-GR
+    formality: informal
+    notes: "Informal 'Hello' to one person."
+
+  - id: "el_ya_sas"
+    text: "Γεια σας!"
+    locale: el-GR
+    formality: formal
+    notes: "Formal 'Hello' to one person or informal to a group."
+
+  - id: "el_herete"
+    text: "Χαίρετε!"
+    locale: el-GR
+    formality: formal
+    notes: "Polite/Formal 'Hello'. Can sound slightly old-fashioned to young people."
+
+  # --- 2. Saying Goodbye ---
+  - id: "el_ya_bye"
+    text: "Γεια!"
+    locale: el-GR
+    phase: close
+    notes: "'Bye!'. Note: Γεια also means Hello."
+
+  - id: "el_ta_leme"
+    text: "Τα λέμε!"
+    locale: el-GR
+    phase: close
+    notes: "See you!"
+
+  - id: "el_adio"
+    text: "Αντίο"
+    locale: el-GR
+    phase: close
+    formality: formal
+    notes: "Goodbye. Used for permanent or long-term separation."
+
+  - id: "el_epanidin"
+    text: "Εις το επανιδείν!"
+    locale: el-GR
+    phase: close
+    formality: formal
+    notes: "Farewell. More sophisticated version of 'See you again'."
+
+  # --- 3. Time of Day ---
   - id: "el_morning"
-    text: "Καλημέρα"
+    text: "Καλημέρα!"
+    locale: el-GR
     eventRef: "salve.event.temporal.morning"
+    notes: "Good morning! (Usually until 12pm)"
 
   - id: "el_afternoon"
-    text: "Καλησπέρα"
+    text: "Καλησπέρα!"
+    locale: el-GR
     eventRef: "salve.event.temporal.afternoon"
+    notes: "Good afternoon! (12pm until late evening)"
 
-  - id: "el_evening"
-    text: "Καλησπέρα"
-    eventRef: "salve.event.temporal.evening"
+  - id: "el_kalo_apogevma"
+    text: "Καλό απόγευμα!"
+    locale: el-GR
+    phase: close
+    notes: "Have a good afternoon! (Used when parting)"
+
+  - id: "el_kalo_vradi"
+    text: "Καλό βράδυ!"
+    locale: el-GR
+    phase: close
+    notes: "Have a good evening! (Used when parting)"
 
   - id: "el_night"
-    text: "Καληνύχτα"
+    text: "Καληνύχτα!"
+    locale: el-GR
     eventRef: "salve.event.temporal.night"
+    notes: "Goodnight!"
+
+  - id: "el_onira_glika"
+    text: "Όνειρα γλυκά"
+    locale: el-GR
+    formality: informal
+    notes: "Sweet dreams. Usually follows Καληνύχτα."
+
+  # --- 4. Slang & Special ---
+  - id: "el_ya_hara"
+    text: "Γεια χαρά!"
+    locale: el-GR
+    formality: highly informal
+    notes: "Hey! (Slang)"
+
+  - id: "el_yo"
+    text: "Γιο!"
+    locale: el-GR
+    formality: highly informal
+    notes: "Yo! (Slang)"
+
+  - id: "el_hronia_ke_zamania"
+    text: "Χρόνια και ζαμάνια!"
+    locale: el-GR
+    notes: "Long time no see!"
+
+  # --- 5. Meeting New People ---
+  - id: "el_hero_poli"
+    text: "Χαίρω πολύ!"
+    locale: el-GR
+    notes: "Pleased to meet you!"
+
+  - id: "el_harika"
+    text: "Χάρηκα!"
+    locale: el-GR
+    notes: "Pleased (to have met you)!"
+
+  - id: "el_herome_gnorimia"
+    text: "Χαίρομαι για τη γνωριμία!"
+    locale: el-GR
+    notes: "Pleased to make your acquaintance!"
+
+  # --- 6. Phone ---
+  - id: "el_phone_ne"
+    text: "Ναι;"
+    locale: el-GR
+    setting: ["chat"]
+    notes: "Answering phone: 'Yes?' (Informal)"
+
+  - id: "el_phone_parakalo"
+    text: "Παρακαλώ;"
+    locale: el-GR
+    setting: ["chat"]
+    notes: "Answering phone: 'Please?' (Universal)"
+
+  - id: "el_phone_legete"
+    text: "Λέγετε"
+    locale: el-GR
+    setting: ["chat"]
+    notes: "Answering phone: 'Speak' (Standard)"
 
   # --- Civil / National ---
   - id: "el_independence"
     text: "Χρόνια Πολλά!"
+    locale: el-GR
     eventRef: "salve.event.civil.national.gr.independence_day"
-    notes: "Greek Independence Day / Anniversary"
+    notes: "Greek Independence Day / Anniversary. Literal: 'Many years!'"
 
   # --- Fallback ---
   - id: "el_fallback"
     text: "Γεια σας"
+    locale: el-GR
+    notes: "Standard respectful greeting."
+
+# --- Transliterations (el-Latn) ---
+  - id: "el_latn_ya"
+    text: "Ya!"
+    locale: el-Latn
+    formality: informal
+
+  - id: "el_latn_ya_su"
+    text: "Ya su!"
+    locale: el-Latn
+    formality: informal
+
+  - id: "el_latn_ya_sas"
+    text: "Ya sas!"
+    locale: el-Latn
+    formality: formal
+
+  - id: "el_latn_kalimera"
+    text: "Kalimera!"
+    locale: el-Latn
+    eventRef: "salve.event.temporal.morning"
+
+  - id: "el_latn_kalispera"
+    text: "Kalispera!"
+    locale: el-Latn
+    eventRef: "salve.event.temporal.afternoon"
+
+  - id: "el_latn_kalinihta"
+    text: "Kaliníhta!"
+    locale: el-Latn
+    eventRef: "salve.event.temporal.night"
+
+  - id: "el_latn_ta_leme"
+    text: "Ta leme!"
+    locale: el-Latn
+    phase: close
+
+  - id: "el_latn_adio"
+    text: "Adio"
+    locale: el-Latn
+    phase: close
+
+  - id: "el_latn_harika"
+    text: "Harika!"
+    locale: el-Latn
+    notes: "Pleased to meet you"
