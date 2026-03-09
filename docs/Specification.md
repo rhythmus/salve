@@ -814,11 +814,12 @@ single source of truth from which all downstream artifacts —
 TypeScript packs, published npm modules, and remote JSON
 distributions — are generated.
 
-Each modular pack in "data/packs/" SHALL follow a dual-file naming
-convention based on its content type:
- 
-    -  `[locale].greetings.yaml`:  Contains lexicon and rules.
-    -  `[locale].regions.yaml`:  Contains geographic boundaries.
+    -  `[locale].greetings.yaml`:  Contains lexicon and rules for a
+       specific language.
+    -  `[locale].regions.yaml`:  Contains geographic boundaries for a
+       specific area.
+    -  `[tradition].events.yaml`:  Contains greetings for shared
+       celebrations across multiple locales (e.g., `christian.events.yaml`).
 
 ### 17.2.  Pack Structure
 

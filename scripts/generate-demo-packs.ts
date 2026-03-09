@@ -80,12 +80,13 @@ function slugify(text: string): string {
 
 function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinition[] } {
     const files = fs.readdirSync(PACKS_DIR).filter(f => f.endsWith(".json") || f.endsWith(".yaml")).sort();
-    const packs: NormalizedGreetingPack[] = [];
+    const rawPacksByLocale = new Map<string, { extends?: string, greetings: GreetingEntry[] }>();
     let allRegions: RegionDefinition[] = [];
 
     for (const file of files) {
         const raw = fs.readFileSync(path.join(PACKS_DIR, file), "utf-8");
         const isRegions = file.includes(".regions.");
+        const isEvents = file.includes(".events.");
 
         let parsed: any;
         try {
@@ -107,22 +108,54 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
             continue;
         }
 
-        const pack = parsed as GreetingPack;
-        // Basic validation
-        if (!pack.locale || !Array.isArray(pack.greetings) || pack.greetings.length === 0) {
-            console.error(`❌ Invalid pack ${file}: must have "locale" and non-empty "greetings" array`);
+        if (isEvents) {
+            if (parsed && Array.isArray(parsed.greetings)) {
+                for (const g of parsed.greetings) {
+                    if (!g.locale) {
+                        console.error(`❌ Event greeting in ${file} missing "locale"`);
+                        process.exit(1);
+                    }
+                    const locales = Array.isArray(g.locale) ? g.locale : [g.locale];
+                    for (const loc of locales) {
+                        let pack = rawPacksByLocale.get(loc);
+                        if (!pack) {
+                            pack = { greetings: [] };
+                            rawPacksByLocale.set(loc, pack);
+                        }
+                        pack.greetings.push(g);
+                    }
+                }
+                console.log(`  ✓ ${file} — ${parsed.greetings.length} event-centric greetings`);
+            }
+            continue;
+        }
+
+        const packData = parsed as GreetingPack;
+        if (!packData.locale || !Array.isArray(packData.greetings)) {
+            console.error(`❌ Invalid pack ${file}: must have "locale" and "greetings" array`);
             process.exit(1);
         }
 
+        let existing = rawPacksByLocale.get(packData.locale);
+        if (!existing) {
+            existing = { extends: packData.extends, greetings: [] };
+            rawPacksByLocale.set(packData.locale, existing);
+        } else if (packData.extends && !existing.extends) {
+            existing.extends = packData.extends;
+        }
+
+        existing.greetings = existing.greetings.concat(packData.greetings);
+        console.log(`  ✓ ${file} — ${packData.greetings.length} greetings (${packData.locale})`);
+    }
+
+    // Pass 2: Normalize everything
+    const normalizedPacks: NormalizedGreetingPack[] = [];
+
+    for (const [locale, data] of rawPacksByLocale) {
         const normalizedGreetings: NormalizedGreetingEntry[] = [];
         const seenIds = new Set<string>();
 
-        for (const g of pack.greetings) {
-            if (!g.text) {
-                console.error(`❌ Invalid greeting in ${file}: must have "text"`);
-                process.exit(1);
-            }
-
+        for (const g of data.greetings) {
             const texts = Array.isArray(g.text) ? g.text : [g.text];
 
             texts.forEach((text, index) => {
@@ -135,7 +168,7 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
                 }
 
                 // Ensure ID starts with a safe prefix based on locale (pack or entry level)
-                const currentLocale = g.locale || pack.locale;
+                const currentLocale = g.locale || locale;
                 const firstLocale = Array.isArray(currentLocale) ? currentLocale[0] : currentLocale;
                 const prefix = firstLocale.replace(/-/g, "_").toLowerCase() + "_";
 
@@ -156,16 +189,14 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
             });
         }
 
-        packs.push({
-            locale: pack.locale,
-            extends: pack.extends,
+        normalizedPacks.push({
+            locale,
+            extends: data.extends,
             greetings: normalizedGreetings
         });
-
-        console.log(`  ✓ ${file} — ${normalizedGreetings.length} greetings (${pack.locale})`);
     }
 
-    return { packs, regions: allRegions };
+    return { packs: normalizedPacks, regions: allRegions };
 }
 
 function escapeString(s: string): string {

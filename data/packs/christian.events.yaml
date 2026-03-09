@@ -1,0 +1,48 @@
+# Christian Celebrations (Christmas, Easter, etc.) across multiple locales
+tradition: christian
+greetings:
+  # --- Christmas ---
+  - text: "Kala Christougenna!"
+    locale: el
+    eventRef: "salve.event.religious.christian.christmas"
+    formality: neutral
+    notes: "Greek: Merry Christmas"
+
+  - text: "Zalig Kerstmis!"
+    locale: nl
+    eventRef: "salve.event.religious.christian.christmas"
+    formality: neutral
+    notes: "Dutch: Blessed Christmas"
+
+  - text: "Merry Christmas!"
+    locale: en
+    eventRef: "salve.event.religious.christian.christmas"
+    formality: neutral
+
+  - text: "Frohe Weihnachten!"
+    locale: de
+    eventRef: "salve.event.religious.christian.christmas"
+    formality: neutral
+
+  # --- Easter ---
+  - text: "Christos Anesti!"
+    locale: el
+    eventRef: "salve.event.religious.christian.easter"
+    expectedResponse: "Alithos Anesti!"
+    formality: neutral
+    notes: "Greek: Christ is Risen!"
+
+  - text: "Zalig Pasen!"
+    locale: nl
+    eventRef: "salve.event.religious.christian.easter"
+    formality: neutral
+
+  - text: "Happy Easter!"
+    locale: en
+    eventRef: "salve.event.religious.christian.easter"
+    formality: neutral
+
+  - text: "Frohe Ostern!"
+    locale: de
+    eventRef: "salve.event.religious.christian.easter"
+    formality: neutral
