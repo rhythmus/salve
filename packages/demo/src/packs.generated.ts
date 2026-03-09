@@ -1,7 +1,7 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.{greetings,regions}.{json,yaml} by scripts/generate-demo-packs.ts
- * Generated at: 2026-03-09T12:31:27.627Z
+ * Generated at: 2026-03-09T12:34:33.127Z
  */
 
 import type { GreetingPack, RegionDefinition } from "@salve/types";
@@ -56,6 +56,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         formality: "informal" as const,
         notes: "Basic 'Hi/Hello'. Often short for Γεια σου/σας.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_ya_su",
@@ -63,6 +64,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         formality: "informal" as const,
         notes: "Informal 'Hello' to one person.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_ya_sas",
@@ -70,6 +72,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         formality: "formal" as const,
         notes: "Formal 'Hello' to one person or informal to a group.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_herete",
@@ -77,6 +80,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         formality: "formal" as const,
         notes: "Polite/Formal 'Hello'. Can sound slightly old-fashioned to young people.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_ya_bye",
@@ -84,6 +88,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         phase: "close",
         notes: "'Bye!'. Note: Γεια also means Hello.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_ta_leme",
@@ -91,6 +96,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         phase: "close",
         notes: "See you!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_adio",
@@ -99,6 +105,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         formality: "formal" as const,
         phase: "close",
         notes: "Goodbye. Used for permanent or long-term separation.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_epanidin",
@@ -107,6 +114,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         formality: "formal" as const,
         phase: "close",
         notes: "Farewell. More sophisticated version of 'See you again'.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_morning",
@@ -114,6 +122,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.temporal.morning",
         locale: "el-GR",
         notes: "Good morning! (Usually until 12pm)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_afternoon",
@@ -121,6 +130,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.temporal.afternoon",
         locale: "el-GR",
         notes: "Good afternoon! (12pm until late evening)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_kalo_apogevma",
@@ -128,6 +138,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         phase: "close",
         notes: "Have a good afternoon! (Used when parting)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_kalo_vradi",
@@ -135,6 +146,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         phase: "close",
         notes: "Have a good evening! (Used when parting)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_night",
@@ -142,6 +154,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.temporal.night",
         locale: "el-GR",
         notes: "Goodnight!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_onira_glika",
@@ -149,6 +162,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         formality: "informal" as const,
         notes: "Sweet dreams. Usually follows Καληνύχτα.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_ya_hara",
@@ -156,6 +170,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         formality: "highly informal" as const,
         notes: "Hey! (Slang)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_yo",
@@ -163,30 +178,35 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         formality: "highly informal" as const,
         notes: "Yo! (Slang)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_hronia_ke_zamania",
         text: "Χρόνια και ζαμάνια!",
         locale: "el-GR",
         notes: "Long time no see!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_hero_poli",
         text: "Χαίρω πολύ!",
         locale: "el-GR",
         notes: "Pleased to meet you!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_harika",
         text: "Χάρηκα!",
         locale: "el-GR",
         notes: "Pleased (to have met you)!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_herome_gnorimia",
         text: "Χαίρομαι για τη γνωριμία!",
         locale: "el-GR",
         notes: "Pleased to make your acquaintance!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_phone_ne",
@@ -194,6 +214,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         setting: ["chat"],
         notes: "Answering phone: 'Yes?' (Informal)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_phone_parakalo",
@@ -201,6 +222,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         setting: ["chat"],
         notes: "Answering phone: 'Please?' (Universal)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_phone_legete",
@@ -208,6 +230,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         setting: ["chat"],
         notes: "Answering phone: 'Speak' (Standard)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_independence",
@@ -227,54 +250,63 @@ export const DEMO_PACKS: GreetingPack[] = [
         text: "Ya!",
         locale: "el-Latn",
         formality: "informal" as const,
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_latn_ya_su",
         text: "Ya su!",
         locale: "el-Latn",
         formality: "informal" as const,
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_latn_ya_sas",
         text: "Ya sas!",
         locale: "el-Latn",
         formality: "formal" as const,
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_latn_kalimera",
         text: "Kalimera!",
         eventRef: "salve.event.temporal.morning",
         locale: "el-Latn",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_latn_kalispera",
         text: "Kalispera!",
         eventRef: "salve.event.temporal.afternoon",
         locale: "el-Latn",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_latn_kalinihta",
         text: "Kaliníhta!",
         eventRef: "salve.event.temporal.night",
         locale: "el-Latn",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_latn_ta_leme",
         text: "Ta leme!",
         locale: "el-Latn",
         phase: "close",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_latn_adio",
         text: "Adio",
         locale: "el-Latn",
         phase: "close",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_latn_harika",
         text: "Harika!",
         locale: "el-Latn",
         notes: "Pleased to meet you",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
     ],
   },

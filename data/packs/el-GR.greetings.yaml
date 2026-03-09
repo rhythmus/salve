@@ -7,24 +7,28 @@ greetings:
     locale: el-GR
     formality: informal
     notes: "Basic 'Hi/Hello'. Often short for Γεια σου/σας."
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_ya_su"
     text: "Γεια σου!"
     locale: el-GR
     formality: informal
     notes: "Informal 'Hello' to one person."
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_ya_sas"
     text: "Γεια σας!"
     locale: el-GR
     formality: formal
     notes: "Formal 'Hello' to one person or informal to a group."
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_herete"
     text: "Χαίρετε!"
     locale: el-GR
     formality: formal
     notes: "Polite/Formal 'Hello'. Can sound slightly old-fashioned to young people."
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   # --- 2. Saying Goodbye ---
   - id: "el_ya_bye"
@@ -32,12 +36,14 @@ greetings:
     locale: el-GR
     phase: close
     notes: "'Bye!'. Note: Γεια also means Hello."
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_ta_leme"
     text: "Τα λέμε!"
     locale: el-GR
     phase: close
     notes: "See you!"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_adio"
     text: "Αντίο"
@@ -45,6 +51,7 @@ greetings:
     phase: close
     formality: formal
     notes: "Goodbye. Used for permanent or long-term separation."
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_epanidin"
     text: "Εις το επανιδείν!"
@@ -52,6 +59,7 @@ greetings:
     phase: close
     formality: formal
     notes: "Farewell. More sophisticated version of 'See you again'."
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   # --- 3. Time of Day ---
   - id: "el_morning"
@@ -59,36 +67,42 @@ greetings:
     locale: el-GR
     eventRef: "salve.event.temporal.morning"
     notes: "Good morning! (Usually until 12pm)"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_afternoon"
     text: "Καλησπέρα!"
     locale: el-GR
     eventRef: "salve.event.temporal.afternoon"
     notes: "Good afternoon! (12pm until late evening)"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_kalo_apogevma"
     text: "Καλό απόγευμα!"
     locale: el-GR
     phase: close
     notes: "Have a good afternoon! (Used when parting)"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_kalo_vradi"
     text: "Καλό βράδυ!"
     locale: el-GR
     phase: close
     notes: "Have a good evening! (Used when parting)"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_night"
     text: "Καληνύχτα!"
     locale: el-GR
     eventRef: "salve.event.temporal.night"
     notes: "Goodnight!"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_onira_glika"
     text: "Όνειρα γλυκά"
     locale: el-GR
     formality: informal
     notes: "Sweet dreams. Usually follows Καληνύχτα."
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   # --- 4. Slang & Special ---
   - id: "el_ya_hara"
@@ -96,33 +110,39 @@ greetings:
     locale: el-GR
     formality: highly informal
     notes: "Hey! (Slang)"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_yo"
     text: "Γιο!"
     locale: el-GR
     formality: highly informal
     notes: "Yo! (Slang)"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_hronia_ke_zamania"
     text: "Χρόνια και ζαμάνια!"
     locale: el-GR
     notes: "Long time no see!"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   # --- 5. Meeting New People ---
   - id: "el_hero_poli"
     text: "Χαίρω πολύ!"
     locale: el-GR
     notes: "Pleased to meet you!"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_harika"
     text: "Χάρηκα!"
     locale: el-GR
     notes: "Pleased (to have met you)!"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_herome_gnorimia"
     text: "Χαίρομαι για τη γνωριμία!"
     locale: el-GR
     notes: "Pleased to make your acquaintance!"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   # --- 6. Phone ---
   - id: "el_phone_ne"
@@ -130,18 +150,21 @@ greetings:
     locale: el-GR
     setting: ["chat"]
     notes: "Answering phone: 'Yes?' (Informal)"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_phone_parakalo"
     text: "Παρακαλώ;"
     locale: el-GR
     setting: ["chat"]
     notes: "Answering phone: 'Please?' (Universal)"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_phone_legete"
     text: "Λέγετε"
     locale: el-GR
     setting: ["chat"]
     notes: "Answering phone: 'Speak' (Standard)"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   # --- Civil / National ---
   - id: "el_independence"
@@ -161,43 +184,52 @@ greetings:
     text: "Ya!"
     locale: el-Latn
     formality: informal
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_latn_ya_su"
     text: "Ya su!"
     locale: el-Latn
     formality: informal
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_latn_ya_sas"
     text: "Ya sas!"
     locale: el-Latn
     formality: formal
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_latn_kalimera"
     text: "Kalimera!"
     locale: el-Latn
     eventRef: "salve.event.temporal.morning"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_latn_kalispera"
     text: "Kalispera!"
     locale: el-Latn
     eventRef: "salve.event.temporal.afternoon"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_latn_kalinihta"
     text: "Kaliníhta!"
     locale: el-Latn
     eventRef: "salve.event.temporal.night"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_latn_ta_leme"
     text: "Ta leme!"
     locale: el-Latn
     phase: close
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_latn_adio"
     text: "Adio"
     locale: el-Latn
     phase: close
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "el_latn_harika"
     text: "Harika!"
     locale: el-Latn
     notes: "Pleased to meet you"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
