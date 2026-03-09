@@ -8,7 +8,17 @@ import { DEMO_PACKS } from './packs';
 
 const engine = new SalveEngine();
 
-engine.registerPlugin(new GregorianCalendarPlugin());
+const gregorian = new GregorianCalendarPlugin();
+// Register Greek National & Religious Holidays (Fixed Dates)
+gregorian.addFixedDate('salve.event.religious.christian.theophany', 1, 6);
+gregorian.addFixedDate('salve.event.civil.national.gr.independence_day', 3, 25);
+gregorian.addFixedDate('salve.event.civil.national.gr.labour_day', 5, 1);
+gregorian.addFixedDate('salve.event.religious.christian.assumption', 8, 15);
+gregorian.addFixedDate('salve.event.civil.national.gr.ohi_day', 10, 28);
+gregorian.addFixedDate('salve.event.civil.national.gr.polytechneio', 11, 17);
+gregorian.addFixedDate('salve.event.religious.christian.christmas_day_2', 12, 26);
+
+engine.registerPlugin(gregorian);
 engine.registerPlugin(new HijriCalendarPlugin());
 engine.registerPlugin(new PaschaCalendarPlugin());
 engine.registerPlugin(new SpecialtyCalendarPlugin());

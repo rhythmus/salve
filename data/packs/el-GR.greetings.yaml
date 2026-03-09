@@ -172,13 +172,6 @@ greetings:
     notes: 'Answering phone: ''Speak'' (Standard)'
     sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
-  # --- Civil / National ---
-  - text: Χρόνια Πολλά!
-    locale: el-GR
-    phase: encounter
-    eventRef: salve.event.civil.national.gr.independence_day
-    notes: 'Greek Independence Day / Anniversary. Literal: ''Many years!'''
-
   # --- Fallback ---
   - text: Γεια σας
     locale: el-GR

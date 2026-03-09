@@ -1,5 +1,9 @@
 tradition: muslim
 greetings:
+
+    # Eid al-Fitr
+    # ===========
+
   - text: عيد مبارك
     locale: ar
     eventRef: salve.event.religious.muslim.eid_al_fitr
@@ -14,6 +18,10 @@ greetings:
     locale: en-GB
     eventRef: salve.event.religious.muslim.eid_al_fitr
     sources: 'https://en.wikipedia.org/wiki/Eid_Mubarak'
+
+    # Ramadan
+    # =======
+
   - text: رمضان كريم
     locale: ar
     eventRef: salve.event.religious.muslim.ramadan_start

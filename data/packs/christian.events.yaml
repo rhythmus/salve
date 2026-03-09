@@ -1,5 +1,10 @@
 tradition: christian
 greetings:
+
+    # Christmas
+    # =========
+
+    # Greek
   - text: Καλά Χριστούγεννα!
     locale: el-GR
     eventRef: salve.event.religious.christian.christmas
@@ -12,20 +17,55 @@ greetings:
     formality: neutral
     notes: 'Greek (Transliterated): Merry Christmas'
     sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
+  - text: Χρόνια Πολλά!
+    locale: el-GR
+    eventRef: salve.event.religious.christian.christmas_day_2
+    notes: 'Greek: Many years! (St. Stephen / Synaxis of Mother of God)'
+
+    # Theophany / Epiphany
+  - text: Καλή Φώτιση!
+    locale: el-GR
+    eventRef: salve.event.religious.christian.theophany
+    notes: 'Greek: Happy Enlightenment!'
+  - text: Χρόνια Πολλά!
+    locale: el-GR
+    eventRef: salve.event.religious.christian.theophany
+    notes: 'Greek: Many years!'
+
+    # Assumption of Mary
+  - text: Καλή Παναγιά!
+    locale: el-GR
+    eventRef: salve.event.religious.christian.assumption
+    notes: 'Greek: Happy Panagia! (Used in the lead-up to and on the Assumption)'
+  - text: Χρόνια Πολλά!
+    locale: el-GR
+    eventRef: salve.event.religious.christian.assumption
+    notes: 'Greek: Many years!'
+
+    # Dutch
   - text: Zalig Kerstmis!
     locale: nl
     eventRef: salve.event.religious.christian.christmas
     formality: neutral
     notes: 'Dutch: Blessed Christmas'
     sources: 'https://nl.wikipedia.org/wiki/Kerstmis#Begroeting'
+
+    # English
   - text: Merry Christmas!
     locale: en-GB
     eventRef: salve.event.religious.christian.christmas
     formality: neutral
+
+    # German
   - text: Frohe Weihnachten!
     locale: de-DE
     eventRef: salve.event.religious.christian.christmas
     formality: neutral
+
+
+    # Easter
+    # ======
+
   - text: Χριστός Ανέστη!
     locale: el-GR
     eventRef: salve.event.religious.christian.easter
@@ -40,6 +80,8 @@ greetings:
     formality: neutral
     notes: 'Greek (Transliterated): Christ is Risen!'
     sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
+
+    # Dutch
   - text: Zalig Pasen!
     locale: nl
     eventRef: salve.event.religious.christian.easter
@@ -53,6 +95,8 @@ greetings:
     notes: Dutch Eastern Orthodox Easter greeting
     sources: 'https://nl.wikipedia.org/wiki/Pasen#Gebruiken'
     formality: neutral
+
+    # English
   - text: Happy Easter!
     locale: en-GB
     eventRef: salve.event.religious.christian.easter
@@ -63,6 +107,8 @@ greetings:
     expectedResponse: 'Indeed, He is Risen!'
     notes: English Eastern Orthodox Easter greeting
     formality: neutral
+
+    # German
   - text: Frohe Ostern!
     locale: de-DE
     eventRef: salve.event.religious.christian.easter
