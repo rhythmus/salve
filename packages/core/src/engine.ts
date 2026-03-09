@@ -269,7 +269,7 @@ export class SalveEngine {
                 now: ctx.env.now,
                 locale: ctx.env.locale,
                 affiliations: ctx.memberships.traditions,
-                phase: ctx.interaction.phase === "opening" ? "open" : "close",
+                phase: ctx.interaction.phase === "encounter" ? "encounter" : "parting",
             });
 
             // Convert CelebrationEvent → SalveEvent
@@ -324,7 +324,8 @@ export class SalveEngine {
 
             // Phase filter
             if (rule.when?.phase) {
-                if (rule.when.phase !== ctx.interaction.phase) continue;
+                const phases = Array.isArray(rule.when.phase) ? rule.when.phase : [rule.when.phase];
+                if (!phases.includes(ctx.interaction.phase)) continue;
             }
 
             // Day period filter
@@ -371,7 +372,7 @@ export class SalveEngine {
             const ruleLocale = allRuleEntries.find(
                 (re: { packId: string; precedence: number; rule: GreetingRule }) => re.rule === rule
             )!;
-            const packInfo = this.registry.greetingRules["packs" as any]?.get(entry.packId);
+            const packInfo = this.registry.greetingRules.getPackInfo(ruleLocale.packId);
             const ruleLocaleStr = packInfo?.locale ?? ctx.localeChain[ctx.localeChain.length - 1];
 
             const tuple = computeScoreTuple(

@@ -160,6 +160,13 @@ export class GreetingRuleRegistry {
 
         return result;
     }
+
+    /** Get metadata for a specific pack */
+    getPackInfo(packId: string): { locale: string; precedence: number } | undefined {
+        const pack = this.packs.get(packId);
+        if (!pack) return undefined;
+        return { locale: pack.locale, precedence: pack.precedence };
+    }
 }
 
 /**

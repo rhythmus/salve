@@ -105,7 +105,7 @@ const DEFAULT_POLICY: Required<SalvePolicy> = {
 // ── Default Interaction ─────────────────────────────────────────
 
 const DEFAULT_INTERACTION: Required<SalveInteraction> = {
-    phase: "opening",
+    phase: "encounter",
     setting: "ui",
     role: "initiator",
     relationship: "stranger",
@@ -194,6 +194,7 @@ export function normalizeContext(input: SalveContextV1, locationResolver?: Locat
             region,
             timeZone,
             dayPeriod,
+            location: input.env.location,
         },
         interaction,
         person,
@@ -266,6 +267,6 @@ function normalizePerson(person: SalvePerson | null): SalvePerson | null {
         preferredName,
         gender: person.gender ?? "unknown",
         genderSource: person.genderSource ?? (person.gender ? "explicit" : "unknown"),
-        titles: person.titles?.map((t: { system: string; code: string }) => ({ ...t, code: t.code.toLowerCase() })),
+        titles: person.titles?.map((t: any) => ({ ...t, code: t.code.toLowerCase() })),
     };
 }
