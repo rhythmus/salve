@@ -2,47 +2,88 @@
 tradition: christian
 greetings:
   # --- Christmas ---
-  - text: "Kala Christougenna!"
-    locale: el
+  - id: "christmas_el"
+    text: "Καλά Χριστούγεννα!"
+    locale: el-GR
     eventRef: "salve.event.religious.christian.christmas"
     formality: neutral
     notes: "Greek: Merry Christmas"
 
-  - text: "Zalig Kerstmis!"
+  - id: "christmas_el_latn"
+    text: "Kala Christougenna!"
+    locale: el-Latn
+    eventRef: "salve.event.religious.christian.christmas"
+    formality: neutral
+    notes: "Greek (Transliterated): Merry Christmas"
+
+  - id: "christmas_nl"
+    text: "Zalig Kerstmis!"
     locale: nl
     eventRef: "salve.event.religious.christian.christmas"
     formality: neutral
     notes: "Dutch: Blessed Christmas"
 
-  - text: "Merry Christmas!"
-    locale: en
+  - id: "christmas_en"
+    text: "Merry Christmas!"
+    locale: en-GB
     eventRef: "salve.event.religious.christian.christmas"
     formality: neutral
 
-  - text: "Frohe Weihnachten!"
-    locale: de
+  - id: "christmas_de"
+    text: "Frohe Weihnachten!"
+    locale: de-DE
     eventRef: "salve.event.religious.christian.christmas"
     formality: neutral
 
-  # --- Easter ---
-  - text: "Christos Anesti!"
-    locale: el
+  # --- Easter (Pascha) ---
+  - id: "easter_el"
+    text: "Χριστός Ανέστη!"
+    locale: el-GR
     eventRef: "salve.event.religious.christian.easter"
-    expectedResponse: "Alithos Anesti!"
+    expectedResponse: "Αληθώς Ανέστη!"
     formality: neutral
     notes: "Greek: Christ is Risen!"
 
-  - text: "Zalig Pasen!"
+  - id: "easter_el_latn"
+    text: "Christos Anesti!"
+    locale: el-Latn
+    eventRef: "salve.event.religious.christian.easter"
+    expectedResponse: "Alithos Anesti!"
+    formality: neutral
+    notes: "Greek (Transliterated): Christ is Risen!"
+
+  - id: "easter_nl"
+    text: "Zalig Pasen!"
     locale: nl
     eventRef: "salve.event.religious.christian.easter"
     formality: neutral
+    notes: "General Dutch Easter greeting"
 
-  - text: "Happy Easter!"
-    locale: en
+  - id: "easter_nl_orthodox"
+    text: "Christus is verrezen!"
+    locale: nl
+    eventRef: "salve.event.religious.christian.easter"
+    expectedResponse: "Hij is waarlijk verrezen!"
+    notes: "Dutch Eastern Orthodox Easter greeting"
+    formality: neutral
+
+  - id: "easter_en"
+    text: "Happy Easter!"
+    locale: en-GB
     eventRef: "salve.event.religious.christian.easter"
     formality: neutral
 
-  - text: "Frohe Ostern!"
-    locale: de
+  - id: "easter_en_orthodox"
+    text: "Christ is Risen!"
+    locale: en-GB
+    eventRef: "salve.event.religious.christian.easter"
+    expectedResponse: "Indeed, He is Risen!"
+    notes: "English Eastern Orthodox Easter greeting"
+    formality: neutral
+
+  - id: "easter_de"
+    text: "Frohe Ostern!"
+    locale: de-DE
     eventRef: "salve.event.religious.christian.easter"
     formality: neutral
+    notes: "German: Happy Easter"

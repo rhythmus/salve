@@ -1,7 +1,7 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.{greetings,regions}.{json,yaml} by scripts/generate-demo-packs.ts
- * Generated at: 2026-03-09T12:02:24.769Z
+ * Generated at: 2026-03-09T12:13:22.427Z
  */
 
 import type { GreetingPack, RegionDefinition } from "@salve/types";
@@ -27,24 +27,75 @@ export const DEMO_PACKS: GreetingPack[] = [
     ],
   },
   {
-    locale: "el",
+    locale: "el-GR",
     greetings: [
       {
-        id: "el_kala_christougenna",
-        text: "Kala Christougenna!",
+        id: "el_gr_christmas_el",
+        text: "Καλά Χριστούγεννα!",
         eventRef: "salve.event.religious.christian.christmas",
-        locale: "el",
+        locale: "el-GR",
         formality: "neutral" as const,
         notes: "Greek: Merry Christmas",
       },
       {
-        id: "el_christos_anesti",
-        text: "Christos Anesti!",
+        id: "el_gr_easter_el",
+        text: "Χριστός Ανέστη!",
         eventRef: "salve.event.religious.christian.easter",
-        locale: "el",
-        expectedResponse: "Alithos Anesti!",
+        locale: "el-GR",
+        expectedResponse: "Αληθώς Ανέστη!",
         formality: "neutral" as const,
         notes: "Greek: Christ is Risen!",
+      },
+      {
+        id: "el_gr_el_morning",
+        text: "Καλημέρα",
+        eventRef: "morning",
+      },
+      {
+        id: "el_gr_el_afternoon",
+        text: "Καλησπέρα",
+        eventRef: "afternoon",
+      },
+      {
+        id: "el_gr_el_evening",
+        text: "Καλησπέρα",
+        eventRef: "evening",
+      },
+      {
+        id: "el_gr_el_night",
+        text: "Καληνύχτα",
+        eventRef: "night",
+      },
+      {
+        id: "el_gr_el_independence",
+        text: "Χρόνια Πολλά!",
+        eventRef: "gr_independence_day",
+      },
+      {
+        id: "el_gr_el_fallback",
+        text: "Γεια σας",
+      },
+    ],
+  },
+  {
+    locale: "el-Latn",
+    greetings: [
+      {
+        id: "el_latn_christmas_el_latn",
+        text: "Kala Christougenna!",
+        eventRef: "salve.event.religious.christian.christmas",
+        locale: "el-Latn",
+        formality: "neutral" as const,
+        notes: "Greek (Transliterated): Merry Christmas",
+      },
+      {
+        id: "el_latn_easter_el_latn",
+        text: "Christos Anesti!",
+        eventRef: "salve.event.religious.christian.easter",
+        locale: "el-Latn",
+        expectedResponse: "Alithos Anesti!",
+        formality: "neutral" as const,
+        notes: "Greek (Transliterated): Christ is Risen!",
       },
     ],
   },
@@ -52,7 +103,7 @@ export const DEMO_PACKS: GreetingPack[] = [
     locale: "nl",
     greetings: [
       {
-        id: "nl_zalig_kerstmis",
+        id: "nl_christmas_nl",
         text: "Zalig Kerstmis!",
         eventRef: "salve.event.religious.christian.christmas",
         locale: "nl",
@@ -60,11 +111,21 @@ export const DEMO_PACKS: GreetingPack[] = [
         notes: "Dutch: Blessed Christmas",
       },
       {
-        id: "nl_zalig_pasen",
+        id: "nl_easter_nl",
         text: "Zalig Pasen!",
         eventRef: "salve.event.religious.christian.easter",
         locale: "nl",
         formality: "neutral" as const,
+        notes: "General Dutch Easter greeting",
+      },
+      {
+        id: "nl_easter_nl_orthodox",
+        text: "Christus is verrezen!",
+        eventRef: "salve.event.religious.christian.easter",
+        locale: "nl",
+        expectedResponse: "Hij is waarlijk verrezen!",
+        formality: "neutral" as const,
+        notes: "Dutch Eastern Orthodox Easter greeting",
       },
       {
         id: "nl_welkom",
@@ -554,46 +615,90 @@ export const DEMO_PACKS: GreetingPack[] = [
     ],
   },
   {
-    locale: "en",
+    locale: "en-GB",
     greetings: [
       {
-        id: "en_merry_christmas",
+        id: "en_gb_christmas_en",
         text: "Merry Christmas!",
         eventRef: "salve.event.religious.christian.christmas",
-        locale: "en",
+        locale: "en-GB",
         formality: "neutral" as const,
       },
       {
-        id: "en_happy_easter",
+        id: "en_gb_easter_en",
         text: "Happy Easter!",
         eventRef: "salve.event.religious.christian.easter",
-        locale: "en",
-        formality: "neutral" as const,
-      },
-    ],
-  },
-  {
-    locale: "de",
-    greetings: [
-      {
-        id: "de_frohe_weihnachten",
-        text: "Frohe Weihnachten!",
-        eventRef: "salve.event.religious.christian.christmas",
-        locale: "de",
+        locale: "en-GB",
         formality: "neutral" as const,
       },
       {
-        id: "de_frohe_ostern",
-        text: "Frohe Ostern!",
+        id: "en_gb_easter_en_orthodox",
+        text: "Christ is Risen!",
         eventRef: "salve.event.religious.christian.easter",
-        locale: "de",
+        locale: "en-GB",
+        expectedResponse: "Indeed, He is Risen!",
         formality: "neutral" as const,
+        notes: "English Eastern Orthodox Easter greeting",
+      },
+      {
+        id: "en_gb_en_morning",
+        text: "Good morning",
+        eventRef: "morning",
+      },
+      {
+        id: "en_gb_en_afternoon",
+        text: "Good afternoon",
+        eventRef: "afternoon",
+      },
+      {
+        id: "en_gb_en_evening",
+        text: "Good evening",
+        eventRef: "evening",
+      },
+      {
+        id: "en_gb_en_eid",
+        text: "Eid Mubarak!",
+        eventRef: "eid_al_fitr",
+      },
+      {
+        id: "en_gb_en_ramadan",
+        text: "Ramadan Kareem!",
+        eventRef: "ramadan_start",
+      },
+      {
+        id: "en_gb_en_cny",
+        text: "Happy Chinese New Year!",
+        eventRef: "chinese_new_year",
+      },
+      {
+        id: "en_gb_en_christmas",
+        text: "Merry Christmas!",
+        eventRef: "christmas",
+      },
+      {
+        id: "en_gb_en_fallback",
+        text: "Hello",
       },
     ],
   },
   {
     locale: "de-DE",
     greetings: [
+      {
+        id: "de_de_christmas_de",
+        text: "Frohe Weihnachten!",
+        eventRef: "salve.event.religious.christian.christmas",
+        locale: "de-DE",
+        formality: "neutral" as const,
+      },
+      {
+        id: "de_de_easter_de",
+        text: "Frohe Ostern!",
+        eventRef: "salve.event.religious.christian.easter",
+        locale: "de-DE",
+        formality: "neutral" as const,
+        notes: "German: Happy Easter",
+      },
       {
         id: "de_de_de_unity",
         text: "Alles Gute zum Tag der Deutschen Einheit!",
@@ -644,84 +749,6 @@ export const DEMO_PACKS: GreetingPack[] = [
       {
         id: "de_de_de_fallback",
         text: "Hallo",
-      },
-    ],
-  },
-  {
-    locale: "el-GR",
-    greetings: [
-      {
-        id: "el_gr_el_morning",
-        text: "Καλημέρα",
-        eventRef: "morning",
-      },
-      {
-        id: "el_gr_el_afternoon",
-        text: "Καλησπέρα",
-        eventRef: "afternoon",
-      },
-      {
-        id: "el_gr_el_evening",
-        text: "Καλησπέρα",
-        eventRef: "evening",
-      },
-      {
-        id: "el_gr_el_night",
-        text: "Καληνύχτα",
-        eventRef: "night",
-      },
-      {
-        id: "el_gr_el_independence",
-        text: "Χρόνια Πολλά!",
-        eventRef: "gr_independence_day",
-      },
-      {
-        id: "el_gr_el_fallback",
-        text: "Γεια σας",
-      },
-    ],
-  },
-  {
-    locale: "en-GB",
-    greetings: [
-      {
-        id: "en_gb_en_morning",
-        text: "Good morning",
-        eventRef: "morning",
-      },
-      {
-        id: "en_gb_en_afternoon",
-        text: "Good afternoon",
-        eventRef: "afternoon",
-      },
-      {
-        id: "en_gb_en_evening",
-        text: "Good evening",
-        eventRef: "evening",
-      },
-      {
-        id: "en_gb_en_eid",
-        text: "Eid Mubarak!",
-        eventRef: "eid_al_fitr",
-      },
-      {
-        id: "en_gb_en_ramadan",
-        text: "Ramadan Kareem!",
-        eventRef: "ramadan_start",
-      },
-      {
-        id: "en_gb_en_cny",
-        text: "Happy Chinese New Year!",
-        eventRef: "chinese_new_year",
-      },
-      {
-        id: "en_gb_en_christmas",
-        text: "Merry Christmas!",
-        eventRef: "christmas",
-      },
-      {
-        id: "en_gb_en_fallback",
-        text: "Hello",
       },
     ],
   },
