@@ -12,7 +12,7 @@ export type Formality = "informal" | "highly informal" | "formal" | "hyperformal
 
 export type TimeOfDay = "morning" | "midday" | "afternoon" | "evening" | "night";
 
-export type GreetingPhase = "open" | "close";
+export type GreetingPhase = "encounter" | "parting";
 
 export type InteractionRole = "initiator" | "responder";
 
@@ -97,6 +97,7 @@ export interface GreetingLexiconEntry {
     locale?: string | string[];
     notes?: string;
     sources?: string | string[];
+    transliterations?: Record<string, string>;
 }
 
 /**
@@ -157,6 +158,7 @@ export interface HonorificPack {
 export interface GreetingPack {
     locale: string;
     extends?: string;
+    sources?: string | string[];
     greetings: GreetingLexiconEntry[];
 }
 /**
@@ -252,7 +254,7 @@ export type EventDomainV1 =
 export interface GreetingRuleWhen {
     eventRef?: string;
     dayPeriod?: DayPeriod;
-    phase?: "opening" | "closing";
+    phase?: GreetingPhase | GreetingPhase[];
     setting?: ("ui" | "chat" | "email")[];
     relationship?: RelationshipContext[];
     formality?: Formality;
@@ -276,6 +278,7 @@ export interface GreetingRule {
     locale?: string | string[];
     notes?: string;
     sources?: string | string[];
+    transliterations?: Record<string, string>;
     metadata?: Record<string, unknown>;
 }
 
@@ -330,7 +333,7 @@ export interface SalveEnv {
 
 /** Interaction frame */
 export interface SalveInteraction {
-    phase?: "opening" | "closing";
+    phase?: GreetingPhase;
     setting?: "ui" | "chat" | "email";
     role?: "initiator" | "responder";
     relationship?: RelationshipContext;
@@ -399,7 +402,11 @@ export interface SalveContextV1 {
 
 /** Fully resolved context — all fields present, no optionals */
 export interface NormalizedContext {
-    env: Required<SalveEnv> & { dayPeriod: DayPeriod; location?: { lat: number; lng: number } };
+    env: Omit<Required<SalveEnv>, "location" | "outputLocale"> & {
+        dayPeriod: DayPeriod;
+        location?: { lat: number; lng: number };
+        outputLocale: string;
+    };
     interaction: Required<SalveInteraction>;
     person: SalvePerson | null;
     memberships: Required<SalveMemberships>;

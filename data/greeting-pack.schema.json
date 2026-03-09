@@ -22,6 +22,20 @@
             "type": "string",
             "description": "Optional parent locale for inheritance (e.g. 'de' for 'de-AT')"
         },
+        "sources": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "description": "Default source URL(s) or bibliographic reference(s) for all greetings in this pack"
+        },
         "greetings": {
             "type": "array",
             "description": "Ordered list of greeting entries for this locale",
@@ -42,8 +56,7 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "description": "Stable unique identifier within this pack (e.g. 'de_morning'). If omitted in YAML, it will be auto-generated.",
-                    "pattern": "^[a-z][a-z0-9_]*$"
+                    "description": "Stable unique identifier within this pack (e.g. 'de_morning'). If omitted in YAML, it will be auto-generated."
                 },
                 "text": {
                     "oneOf": [
@@ -130,8 +143,8 @@
                 "phase": {
                     "type": "string",
                     "enum": [
-                        "open",
-                        "close"
+                        "encounter",
+                        "parting"
                     ],
                     "description": "Session phase constraint"
                 },
@@ -192,7 +205,9 @@
                     "description": "Source URL(s) or bibliographic reference(s)"
                 }
             },
-            "additionalProperties": false
+            "additionalProperties": {
+                "type": "string"
+            }
         }
     }
 }
