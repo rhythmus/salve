@@ -18,11 +18,13 @@ interface GreetingEntry {
     setting?: string[];
     notes?: string;
     sources?: string | string[];
+    [key: string]: any;
 }
 
 interface GreetingPack {
     locale: string;
     extends?: string;
+    sources?: string | string[];
     greetings: GreetingEntry[];
 }
 
@@ -54,11 +56,13 @@ interface NormalizedGreetingEntry {
     setting?: string[];
     notes?: string;
     sources?: string | string[];
+    transliterations?: Record<string, string>;
 }
 
 interface NormalizedGreetingPack {
     locale: string;
     extends?: string;
+    sources?: string | string[];
     greetings: NormalizedGreetingEntry[];
 }
 
@@ -81,7 +85,7 @@ function slugify(text: string): string {
 
 function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinition[] } {
     const files = fs.readdirSync(PACKS_DIR).filter(f => f.endsWith(".json") || f.endsWith(".yaml")).sort();
-    const rawPacksByLocale = new Map<string, { extends?: string, greetings: GreetingEntry[] }>();
+    const rawPacksByLocale = new Map<string, { extends?: string, sources?: string | string[], greetings: GreetingEntry[] }>();
     let allRegions: RegionDefinition[] = [];
 
     for (const file of files) {
@@ -139,10 +143,11 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
 
         let existing = rawPacksByLocale.get(packData.locale);
         if (!existing) {
-            existing = { extends: packData.extends, greetings: [] };
+            existing = { extends: packData.extends, sources: packData.sources, greetings: [] };
             rawPacksByLocale.set(packData.locale, existing);
-        } else if (packData.extends && !existing.extends) {
-            existing.extends = packData.extends;
+        } else {
+            if (packData.extends && !existing.extends) existing.extends = packData.extends;
+            if (packData.sources && !existing.sources) existing.sources = packData.sources;
         }
 
         existing.greetings = existing.greetings.concat(packData.greetings);
@@ -201,11 +206,24 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
                 id = finalId;
                 seenIds.add(id);
 
+                // Collect transliterations
+                const transliterations: Record<string, string> = {};
+                const knownKeys = ["id", "text", "eventRef", "timeOfDay", "audience", "audienceSize", "locale", "expectedResponse", "formality", "phase", "role", "relationship", "setting", "notes", "sources"];
+
+                Object.keys(g).forEach(key => {
+                    if (!knownKeys.includes(key) && /^[a-z]{2,3}(-[A-Z]{2})?(-[A-Za-z0-9]+)*$/.test(key)) {
+                        transliterations[key] = g[key];
+                    }
+                });
+
                 normalizedGreetings.push({
                     ...g,
                     id,
                     text,
+                    locale: g.locale || locale,
+                    sources: g.sources || data.sources,
                     audienceSize: g.audience || g.audienceSize,
+                    transliterations: Object.keys(transliterations).length > 0 ? transliterations : undefined,
                 } as NormalizedGreetingEntry);
             });
         }
@@ -213,6 +231,7 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
         normalizedPacks.push({
             locale,
             extends: data.extends,
+            sources: data.sources,
             greetings: normalizedGreetings
         });
     }
@@ -253,6 +272,13 @@ function greetingToTS(g: NormalizedGreetingEntry, indent: string): string {
         const val = Array.isArray(g.sources) ? `[${g.sources.map(s => `"${escapeString(s)}"`).join(", ")}]` : `"${escapeString(g.sources)}"`;
         lines.push(`${indent}  sources: ${val},`);
     }
+    if (g.transliterations) {
+        lines.push(`${indent}  transliterations: {`);
+        Object.entries(g.transliterations).forEach(([lang, text]) => {
+            lines.push(`${indent}    "${lang}": "${escapeString(text)}",`);
+        });
+        lines.push(`${indent}  },`);
+    }
     lines.push(`${indent}},`);
     return lines.join("\n");
 }
@@ -273,6 +299,10 @@ function generate(packs: NormalizedGreetingPack[], regions: RegionDefinition[]):
         lines.push("  {");
         lines.push(`    locale: "${escapeString(pack.locale)}",`);
         if (pack.extends) lines.push(`    extends: "${escapeString(pack.extends)}",`);
+        if (pack.sources) {
+            const val = Array.isArray(pack.sources) ? `[${pack.sources.map(s => `"${escapeString(s)}"`).join(", ")}]` : `"${escapeString(pack.sources)}"`;
+            lines.push(`    sources: ${val},`);
+        }
         lines.push("    greetings: [");
         for (const g of pack.greetings) {
             lines.push(greetingToTS(g, "      "));
