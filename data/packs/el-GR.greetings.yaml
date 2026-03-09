@@ -1,242 +1,158 @@
 locale: el-GR
+sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
+
 greetings:
   # --- 1. Saying Hello & Goodbye ---
   - text: Γεια!
-    locale: el-GR
+    el-Latn: Ya!
     phase: [encounter, parting]
     formality: informal
     notes: Basic 'Hi/Hello'. Often short for Γεια σου/σας.
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Γεια σου!
-    locale: el-GR
+    el-Latn: Ya su!
     phase: [encounter, parting]
     formality: informal
     audience: 1
     notes: Informal 'Hello' to one person.
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Γεια σας!
-    locale: el-GR
+    el-Latn: Ya sas!
     phase: [encounter, parting]
     formality: formal
     audience: 1
     notes: Formal 'Hello' to one person.
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Γεια σας!
-    locale: el-GR
+    el-Latn: Ya sas!
     phase: [encounter, parting]
     formality: informal
     audience: ">1"
     notes: Informal 'Hello' to a group.
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Χαίρετε!
-    locale: el-GR
+    el-Latn: Khairete!
     phase: encounter
     formality: formal
     audience: 1
     notes: Polite/Formal 'Hello' to one person.
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Χαίρετε!
-    locale: el-GR
+    el-Latn: Khairete!
     phase: encounter
     formality: neutral
     audience: ">1"
     notes: Formal/Neutral 'Hello' to a group.
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   # --- 2. Parting Specifically ---
   - text: Τα λέμε!
-    locale: el-GR
+    el-Latn: Ta leme!
     phase: parting
     notes: See you!
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Αντίο
-    locale: el-GR
+    el-Latn: Adio
     phase: parting
     formality: formal
     notes: Goodbye. Used for permanent or long-term separation.
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Εις το επανιδείν!
-    locale: el-GR
+    el-Latn: Eis to epanidein!
     phase: parting
     formality: formal
     notes: Farewell. More sophisticated version of 'See you again'.
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   # --- 3. Time of Day ---
   - text: Καλημέρα!
-    locale: el-GR
+    el-Latn: Kalimera!
     phase: encounter
     eventRef: salve.event.temporal.morning
     notes: Good morning! (Usually until 12pm)
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Καλησπέρα!
-    locale: el-GR
+    el-Latn: Kalispera!
     phase: encounter
     eventRef: salve.event.temporal.afternoon
     notes: Good afternoon! (12pm until late evening)
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Καλό απόγευμα!
-    locale: el-GR
+    el-Latn: Kalo apogevma!
     phase: parting
     notes: Have a good afternoon! (Used when parting)
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Καλό βράδυ!
-    locale: el-GR
+    el-Latn: Kalo vradi!
     phase: parting
     notes: Have a good evening! (Used when parting)
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Καληνύχτα!
-    locale: el-GR
+    el-Latn: Kaliníhta!
     phase: parting
     eventRef: salve.event.temporal.night
     notes: Goodnight!
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Όνειρα γλυκά
-    locale: el-GR
+    el-Latn: Oneira glyka!
     phase: parting
     formality: informal
     notes: Sweet dreams. Usually follows Καληνύχτα.
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   # --- 4. Slang & Special ---
   - text: Γεια χαρά!
-    locale: el-GR
+    el-Latn: Ya khara!
     phase: encounter
     formality: highly informal
     notes: Hey! (Slang)
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Γιο!
-    locale: el-GR
+    el-Latn: Yo!
     phase: encounter
     formality: highly informal
     notes: Yo! (Slang)
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Χρόνια και ζαμάνια!
-    locale: el-GR
+    el-Latn: Khronia kai zamania!
     phase: encounter
     notes: Long time no see!
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   # --- 5. Meeting New People ---
   - text: Χαίρω πολύ!
-    locale: el-GR
+    el-Latn: Khaire poli!
     phase: encounter
     notes: Pleased to meet you!
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Χάρηκα!
-    locale: el-GR
+    el-Latn: Kharika!
     phase: encounter
     notes: Pleased (to have met you)!
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Χαίρομαι για τη γνωριμία!
-    locale: el-GR
+    el-Latn: Khairemai gia ti gnorimia!
     phase: encounter
     notes: Pleased to make your acquaintance!
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   # --- 6. Phone ---
   - text: Ναι;
-    locale: el-GR
+    el-Latn: Nai?
     phase: encounter
     setting: [chat]
     notes: 'Answering phone: ''Yes?'' (Informal)'
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   - text: Παρακαλώ;
-    locale: el-GR
+    el-Latn: Parakalo?
     phase: encounter
     setting: [chat]
     notes: 'Answering phone: ''Please?'' (Universal)'
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
-  - text: Λέγετε
-    locale: el-GR
+  - text: Λέγετε!
+    el-Latn: Legete!
     phase: encounter
     setting: [chat]
     notes: 'Answering phone: ''Speak'' (Standard)'
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
   # --- Fallback ---
   - text: Γεια σας
-    locale: el-GR
+    el-Latn: Ya sas!
     phase: [encounter, parting]
     audience: ">1"
     notes: Standard respectful greeting for groups.
-
-  # --- Transliterations (el-Latn) ---
-  - text: Ya!
-    locale: el-Latn
-    phase: [encounter, parting]
-    formality: informal
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
-
-  - text: Ya su!
-    locale: el-Latn
-    phase: [encounter, parting]
-    formality: informal
-    audience: 1
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
-
-  - text: Ya sas!
-    locale: el-Latn
-    phase: [encounter, parting]
-    formality: formal
-    audience: 1
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
-
-  - text: Ya sas!
-    locale: el-Latn
-    phase: [encounter, parting]
-    formality: informal
-    audience: ">1"
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
-
-  - text: Kalimera!
-    locale: el-Latn
-    phase: encounter
-    eventRef: salve.event.temporal.morning
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
-
-  - text: Kalispera!
-    locale: el-Latn
-    phase: encounter
-    eventRef: salve.event.temporal.afternoon
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
-
-  - text: Kaliníhta!
-    locale: el-Latn
-    phase: parting
-    eventRef: salve.event.temporal.night
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
-
-  - text: Ta leme!
-    locale: el-Latn
-    phase: parting
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
-
-  - text: Adio
-    locale: el-Latn
-    phase: parting
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
-
-  - text: Harika!
-    locale: el-Latn
-    phase: encounter
-    notes: Pleased to meet you
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'

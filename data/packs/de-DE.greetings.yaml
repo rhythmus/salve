@@ -1,22 +1,41 @@
 locale: de-DE
+# No top-level sources for DE yet
 greetings:
+  # 1. National & Seasonal Events
   - text: Alles Gute zum Tag der Deutschen Einheit!
-    eventRef: salve.event.civil.national.de.unity_day
+    eventRef: salve.event.bank.de.tag_der_deutschen_einheit
     notes: German Unity Day
   - text: Einen schönen Tag der Deutschen Einheit.
-    eventRef: salve.event.civil.national.de.unity_day
+    eventRef: salve.event.bank.de.tag_der_deutschen_einheit
     formality: formal
   - text: Frohes neues Jahr!
-    eventRef: salve.event.temporal.new_year
+    eventRef: salve.event.religious.christian.christmas
+
+  # 2. Time-of-Day Greetings (Encounter)
   - text: Guten Morgen
     eventRef: salve.event.temporal.morning
+    phase: encounter
   - text: Mahlzeit
     eventRef: salve.event.temporal.midday
     formality: informal
+    phase: encounter
   - text: Guten Tag
     eventRef: salve.event.temporal.afternoon
+    phase: encounter
   - text: Guten Abend
     eventRef: salve.event.temporal.evening
+    phase: encounter
+  - text: Hallo
+    phase: encounter
+    formality: informal
+
+  # 3. Farewell Greetings (Parting)
   - text: Gute Nacht
     eventRef: salve.event.temporal.night
-  - text: Hallo
+    phase: parting
+  - text: Auf Wiedersehen
+    phase: parting
+    formality: formal
+  - text: Tschüss
+    phase: parting
+    formality: informal

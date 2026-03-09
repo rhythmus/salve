@@ -1,30 +1,72 @@
 locale: nl
+# Sources can be defined at top level for inheritance
+sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
+
 greetings:
+  # --- 1. Standard Greetings (Encounter) ---
   - text: Welkom
-    phase: open
+    phase: encounter
     notes: een ontvangende groet
   - text: '{greeter} heet u welkom'
-    phase: open
+    phase: encounter
     notes: 'meestal schriftelijk (op borden e.d.), met een anders verouderde betekenis van heten (benoemen, bevelen, wensen, niet als gewoon genoemd worden)'
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text: Weest welgekomen
-    phase: open
+    phase: encounter
     formality: hyperformal
+
+  # --- 2. Temporal Greetings (Encounter) ---
   - text:
       - Goedendag
       - Goeiendag
-    timeOfDay:
-      - morning
-      - midday
-      - afternoon
-    phase: open
+    eventRef:
+      - salve.event.temporal.morning
+      - salve.event.temporal.midday
+      - salve.event.temporal.afternoon
+    phase: encounter
     formality: formal
     notes: 'Een algemene begroeting met een middeleeuws verleden toen zij voluit luidde: God geve u een goede dag! Met ''goeder dag'' werd ''geluk'' bedoeld'
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
+  - text: Goedemorgen
+    eventRef: salve.event.temporal.morning
+    phase: encounter
+    formality: formal
+  - text: Goeiemorgen
+    eventRef: salve.event.temporal.morning
+    phase: encounter
+    formality: informal
+  - text: Goedemiddag
+    eventRef:
+      - salve.event.temporal.midday
+      - salve.event.temporal.afternoon
+    phase: encounter
+    formality: formal
+  - text: Goeiemiddag
+    eventRef:
+      - salve.event.temporal.midday
+      - salve.event.temporal.afternoon
+    phase: encounter
+    formality: informal
+  - text: Goedenavond
+    eventRef: salve.event.temporal.evening
+    phase: encounter
+    formality: formal
+  - text: Goeieavond
+    eventRef: salve.event.temporal.evening
+    phase: encounter
+    formality: informal
+  - text: Goedenacht
+    eventRef: salve.event.temporal.night
+    phase: encounter
+    formality: formal
+  - text: Goeienacht
+    eventRef: salve.event.temporal.night
+    phase: encounter
+    formality: informal
+
+  # --- 3. Informal & Audience Selection (Encounter) ---
   - text:
       - Hallo
       - Dag
-    phase: open
+    phase: encounter
     formality: informal
   - text:
       - Gedag
@@ -32,66 +74,32 @@ greetings:
       - Hoi
       - Hé
       - Hey
-    phase: open
+    phase: encounter
     formality: highly informal
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text:
       - Dag allemaal!
       - Dag iedereen!
       - Hallo allemaal!
       - Hallo iedereen!
     audienceSize: '>4'
-    phase: open
-  - text: Goedemorgen
-    timeOfDay: morning
-    phase: open
-    formality: formal
-  - text: Goeiemorgen
-    timeOfDay: morning
-    phase: open
-    formality: informal
-  - text: Goedemiddag
-    timeOfDay:
-      - midday
-      - afternoon
-    phase: open
-    formality: formal
-  - text: Goeiemiddag
-    timeOfDay:
-      - midday
-      - afternoon
-    phase: open
-    formality: informal
-  - text: Goedenavond
-    timeOfDay: evening
-    phase: open
-    formality: formal
-  - text: Goeieavond
-    timeOfDay: evening
-    phase: open
-    formality: informal
-  - text: Goedenacht
-    timeOfDay: night
-    phase: open
-    formality: formal
-  - text: Goeienacht
-    timeOfDay: night
-    phase: open
-    formality: informal
+    phase: encounter
+
+  # --- 4. Farewell Greetings (Parting) ---
   - text: Een fijne dag nog
-    phase: close
+    phase: parting
   - text: Tot ziens
+    phase: parting
     notes: 'Alternatieven: Doeg, Doei, Later, Aju'
-    phase: close
   - text: Vaarwel
+    phase: parting
     notes: 'enigszins formele afscheidsgroet, bijvoorbeeld bij de marine'
-    phase: close
   - text: Welterusten
-    timeOfDay: night
-    phase: close
+    eventRef: salve.event.temporal.night
+    phase: parting
+
+  # --- 5. Email Closings ---
   - text: Hoogachtend
-    setting:
-      - email_closing
+    setting: [email_closing]
     notes: 'formeel en schriftelijk, boven de handtekening op een brief'
   - text:
       - Met collegiale groet
@@ -99,124 +107,99 @@ greetings:
       - Collegiale groeten
       - Collegiale groet
     formality: formal
-    setting:
-      - email_closing
+    setting: [email_closing]
     notes: between colleagues
-    relationship:
-      - subordinate
-      - superior
+    relationship: [subordinate, superior]
   - text:
       - Met vriendelijke groet
       - Met vriendelijke groeten
       - Vriendelijke groeten
       - Vriendelijke groet
-    setting:
-      - email_closing
+    setting: [email_closing]
   - text:
       - Met beleefde groeten
       - Met beleefde groet
-    setting:
-      - email_closing
+    setting: [email_closing]
+
+  # --- 6. Regional Greetings (Mixed) ---
   - text: Adieë wa
     locale: li-NL-x-kerkraads
     formality: highly informal
-    phase: close
+    phase: parting
     notes: 'regionale (uit het Kerkraads dialect afkomstig) Limburgse afscheidsgroet, veel gebruikt in Zuid-Limburg'
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text:
       - Ajiu
       - Ajuus
     locale: nl-BE
     formality: highly informal
     notes: informele verbastering van àdieu
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text: Doeg
     locale: nl-NL-x-zaans
     formality: highly informal
+    phase: parting
     notes: 'regionale afscheidsgroet, veel gebruikt in de Zaanstreek'
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text: Dzjuir
     locale: nl-BE-x-oostvlaams
     formality: highly informal
     notes: centraal Oost-Vlaamse verbastering van het Franse Bonjour
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text:
       - Haije
       - Haije wah
     locale: li
     formality: highly informal
-    phase: close
+    phase: parting
     notes: regionale Limburgse afscheidsgroet
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text: Houje
-    locale:
-      - li-NL
-      - nl-NL-x-brabants
+    locale: [li-NL, nl-NL-x-brabants]
     formality: highly informal
     notes: 'rondom Nijmegen gebruikt men meestal Houje, als mengvorm tussen Brabants en Limburgs'
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text:
       - Harre
       - Ha goeie
     locale: fy-NL
     formality: highly informal
     notes: in delen van Friesland
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text: Houdoe
-    locale:
-      - nl-NL-x-brabants
-      - nds-NL-x-gelders
+    locale: [nl-NL-x-brabants, nds-NL-x-gelders]
     formality: highly informal
-    phase: close
+    phase: parting
     notes: regionale afscheidsgroet in Noord-Brabant en het zuiden van Gelderland
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text: Joehoe
     formality: highly informal
     notes: een uitroep om iemands aandacht te krijgen tijdens de begroeting
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text:
       - Milguh
       - Mellguh
     locale: nl-NL-x-rijnmond
     formality: highly informal
     notes: regionale groet bij jongeren uit de regio Rijnmond (verbastering van het woord Môguh)
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text: Moaj
     formality: highly informal
     notes: regionale groet in West-Friesland (waarschijnlijk afkomstig uit het Nedersaksisch)
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text:
       - Môh
       - Môguh
     locale: nl-NL-x-westland
     formality: highly informal
     notes: 'West-Nederland, Westland'
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text: Moi
     locale: nl-NL-noordoost
     formality: highly informal
     notes: regionale groet in Noord- en Oostelijk Nederland en goedgaon bij het afscheid
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text: Morrie
     formality: highly informal
     notes: regionale groet in West-Friesland
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text: No heui
     locale: fy-NL
     formality: highly informal
     notes: regionale groet in West-Friesland
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text:
       - Salut
       - Salukes
-    locale:
-      - nl-BE-x-antwerps
-      - nl-BE-x-kempens
-      - nl-BE-x-mechels
-      - nl-BE-x-leuvens
+    locale: [nl-BE-x-antwerps, nl-BE-x-kempens, nl-BE-x-mechels, nl-BE-x-leuvens]
     formality: highly informal
+    phase: parting
     notes: Vlaamse en (oost) Zeeuws-Vlaamse afscheidsgroet (afkomstig uit het Frans)
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text:
       - Tjeu
       - Tjo
@@ -225,11 +208,9 @@ greetings:
       - de mazzel
     locale: nl-NL
     formality: highly informal
-    phase: close
+    phase: parting
     notes: bij afscheid (lokaal)
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
   - text: Zjeur
     locale: nl-BE-x-aalsters
     formality: highly informal
     notes: 'Aalsters: informele verbastering van het Franse Bonjour'
-    sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
