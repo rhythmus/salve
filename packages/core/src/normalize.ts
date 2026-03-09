@@ -115,12 +115,22 @@ const DEFAULT_INTERACTION: Required<SalveInteraction> = {
 
 // ── Main Normalization Function ─────────────────────────────────
 
+import { LocationResolver } from "./location";
+
 /**
  * Normalize a partial SalveContextV1 into a fully resolved NormalizedContext.
  */
-export function normalizeContext(input: SalveContextV1): NormalizedContext {
+export function normalizeContext(input: SalveContextV1, locationResolver?: LocationResolver): NormalizedContext {
     // Step 1 — Normalize locale (BCP-47 casing)
-    const locale = normalizeLocale(input.env.locale);
+    let locale = normalizeLocale(input.env.locale);
+
+    // Step 1.1 — Geographic locale resolution (M9.1)
+    if (input.env.location && locationResolver) {
+        const resolvedLocale = locationResolver.resolveLocale(input.env.location.lat, input.env.location.lng);
+        if (resolvedLocale) {
+            locale = resolvedLocale;
+        }
+    }
 
     // Step 2 — Derive region
     const region = input.env.region?.toUpperCase() ?? deriveRegion(locale);

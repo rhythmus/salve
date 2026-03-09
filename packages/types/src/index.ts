@@ -8,7 +8,9 @@ export interface TransformPlugin {
     transform(value: string, key: string, profile: AddressProfile): string;
 }
 
-export type Formality = "informal" | "formal" | "neutral";
+export type Formality = "informal" | "highly informal" | "formal" | "hyperformal" | "neutral";
+
+export type TimeOfDay = "morning" | "midday" | "afternoon" | "evening" | "night";
 
 export type GreetingPhase = "open" | "close";
 
@@ -55,6 +57,7 @@ export interface AddressProfile {
 export interface GreetingContext {
     now: Date;
     locale: string; // BCP 47
+    location?: { lat: number; lng: number };
     affiliations?: string[]; // e.g., ["orthodox", "islamic"]
     relationship?: RelationshipContext;
     setting?: InteractionSetting;
@@ -89,6 +92,11 @@ export interface GreetingLexiconEntry {
     phase?: GreetingPhase;
     role?: InteractionRole;
     eventRef?: string; // Links to a CelebrationEvent ID
+    timeOfDay?: TimeOfDay | TimeOfDay[];
+    audienceSize?: string;
+    locale?: string | string[];
+    notes?: string;
+    sources?: string | string[];
 }
 
 /**
@@ -263,6 +271,11 @@ export interface GreetingRule {
     when?: GreetingRuleWhen;
     expectedResponseTemplate?: string;
     addressTemplate?: string;
+    timeOfDay?: TimeOfDay | TimeOfDay[];
+    audienceSize?: string;
+    locale?: string | string[];
+    notes?: string;
+    sources?: string | string[];
     metadata?: Record<string, unknown>;
 }
 
@@ -309,6 +322,7 @@ export interface ScoreTuple {
 export interface SalveEnv {
     now: Date;
     timeZone?: string;
+    location?: { lat: number; lng: number };
     locale: string;          // BCP-47
     outputLocale?: string;   // BCP-47 (defaults to locale)
     region?: string;         // ISO-3166-1 alpha-2
@@ -385,7 +399,7 @@ export interface SalveContextV1 {
 
 /** Fully resolved context — all fields present, no optionals */
 export interface NormalizedContext {
-    env: Required<SalveEnv> & { dayPeriod: DayPeriod };
+    env: Required<SalveEnv> & { dayPeriod: DayPeriod; location?: { lat: number; lng: number } };
     interaction: Required<SalveInteraction>;
     person: SalvePerson | null;
     memberships: Required<SalveMemberships>;

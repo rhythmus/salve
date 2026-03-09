@@ -26,12 +26,14 @@ import {
 import { calculateEventScore, isAffiliated, computeScoreTuple, compareScoreTuples } from "./scoring";
 import { AddressResolver, TransformHook } from "./address";
 import { SalveRegistry, SalveLoader } from "@salve/registry";
+import { LocationResolver, RegionDefinition } from "./location";
 import { normalizeContext } from "./normalize";
 import { applyStyleTransform, StylePack, computeStyleMatchScore } from "./style";
 
 export interface SalveOptions {
     registry?: SalveRegistry;
     memory?: GreetingMemory;
+    regions?: RegionDefinition[];
 }
 
 const DEFAULT_CONTEXT_VALUES = {
@@ -51,12 +53,16 @@ export class SalveEngine {
     private registry: SalveRegistry;
     private loader: SalveLoader;
     private stylePacks: StylePack[] = [];
+    private locationResolver?: LocationResolver;
 
     constructor(options: SalveOptions = {}) {
         this.registry = options.registry || new SalveRegistry();
         this.memory = options.memory;
         this.loader = new SalveLoader(this.registry);
         this.addressResolver = new AddressResolver(this.registry.packs.getAllHonorifics());
+        if (options.regions) {
+            this.locationResolver = new LocationResolver(options.regions);
+        }
         this.registerDefaultTransforms();
     }
 
@@ -229,6 +235,13 @@ export class SalveEngine {
     // ═══════════════════════════════════════════════════════════════
 
     /**
+     * Register geographic regions for locale resolution
+     */
+    public registerRegions(regions: RegionDefinition[]): void {
+        this.locationResolver = new LocationResolver(regions);
+    }
+
+    /**
      * Resolve a greeting using the v1 pipeline.
      *
      * Pipeline stages:
@@ -243,7 +256,7 @@ export class SalveEngine {
      */
     public async resolveV1(input: SalveContextV1): Promise<SalveOutputV1> {
         // ── Stage 1 & 2: Context Normalization ──────────────────
-        const ctx = normalizeContext(input);
+        const ctx = normalizeContext(input, this.locationResolver);
         const traceEntries: SalveTraceEntry[] = [];
         const usedEvents: string[] = [];
 
