@@ -102,10 +102,12 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
 - **M9.1: Monorepo Package Extraction** (Not Started)
     - [ ] Split Salve into focused, tree-shakeable packages: `@salve/runtime`, `@salve/schema`, etc.
     - [ ] Implement plugin architecture with 4 main kinds: `pack.locale`, `pack.protocol`, `provider.holiday`, and `provider.nameday`.
-- **M9.2: Greeting Ontology & Canonical Schemas** (Partially Complete)
+- **M9.2: Greeting Ontology & Canonical Schemas** (Completed)
     - [x] Create `greeting-pack.schema.json` (JSON Schema Draft 2020-12) for locale pack validation.
-    - [ ] Centralize remaining JSON schemas (`greeting-rule.schema.json`, etc.).
+    - [x] Implement "Smart Inheritance" for `locale` and `sources` at the pack level to reduce redundancy.
     - [x] Implement the formal Greeting Ontology defining rules by `act` (salutation, valediction, etc.), `form` (email_opening, address_only), and `style` (neutral, formal, ceremonial, etc.) — types and `GreetingRule` defined in `@salve/types`.
+    - [x] Shift phase terminology from session-based (`open`/`close`) to interaction-based (`encounter`/`parting`) across the entire stack.
+    - [x] Support multi-script greetings via embedded transliteration keys in YAML data packs.
 - **M9.3: Global Event Namespace Registry** (Completed)
     - [x] Create a deterministic Event Registry (`salve.event.domain.region.name`) with alias support.
     - [x] Support domains: `bank`, `civil`, `religious`, `personal`, `seasonal`, `protocol`, `affinity`.

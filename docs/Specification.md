@@ -318,7 +318,7 @@ following attributes in addition to the fields listed in
 Section 17.2:
 
    -  "type":  The speech-act category of the greeting.
-   -  "phase":  Session phase ("open" for arrivals, "close" for
+   -  "phase":  Interaction phase ("encounter" for arrivals, "parting" for
       departures).
    -  "role":  Interaction role ("initiator" or "responder").
    -  "relationship":  Applicable social relationship contexts.
@@ -743,6 +743,19 @@ Rendering MUST:
    -  Apply locale-specific punctuation rules (e.g., comma placement
       between greeting and address).
 
+### 15.3.  Embedded Transliterations (Multi-Script)
+
+To simplify data maintenance for multi-script locales, Salve
+supports embedding transliterations directly within a greeting
+entry. When a greeting pack entry contains keys that match a
+BCP 47 locale pattern (e.g., "el-Latn", "sr-Cyrl"), the generator
+collects these into a structured "transliterations" object in the
+resulting registry.
+
+This mechanism allows a single rule to govern multiple script
+representations of the same greeting, ensuring that formality,
+phase, and other metadata remain synchronized across all scripts.
+
 The system SHOULD use CLDR-compatible Intl APIs (Intl.DateTimeFormat,
 Intl.PluralRules) for date and number formatting where available.
 
@@ -835,6 +848,12 @@ A `[locale].regions.yaml` Pack MUST include:
  
 Each Pack MAY include:
 
+    -  "locale":  A BCP 47 locale identifier. If present, it acts as
+       the default locale for all greetings in the pack.
+    -  "sources":  A string or array of strings providing source 
+       information. If present, it acts as the default source for 
+       all greetings unless explicitly overridden.
+
    -  "extends":  A parent locale identifier for inheritance
       (e.g., "de" for "de-AT").
 
@@ -850,7 +869,7 @@ Each greeting entry MAY include:
    -  "expectedResponse":  The prescribed reply for call-response
       greeting patterns (see Section 6.8).
    -  "formality":  A constraint ("informal", "formal", or "neutral").
-   -  "phase":  A session phase constraint ("open" or "close").
+   -  "phase":  An interaction phase constraint ("encounter" or "parting").
    -  "role":  An interaction role ("initiator" or "responder").
    -  "relationship":  An array of applicable relationship contexts
       ("stranger", "acquaintance", "friend", "family", "superior",
@@ -902,8 +921,11 @@ these guidelines when creating new packs:
       of the same greeting where the target culture distinguishes
       register levels.
    -  Script Variants:  If a language uses multiple scripts (e.g.,
-      Serbian Latin vs. Cyrillic), differentiate entries using the
-      "script" property.
+      Greek native vs. Latin transliteration), contributors SHOULD
+      use embedded transliteration keys (e.g., "el-Latn") directly
+      within the greeting entry. This allows the primary "text" to 
+      remain the native script while providing alternatives without
+      duplicating metadata. See Section 15.3 for technical details.
 
 ### 17.7.  Hybrid Event Distribution Model
 
@@ -1200,7 +1222,7 @@ The v1 context MUST be structured into six sections:
           derived from locale if omitted.
 
    2.  "interaction" (OPTIONAL):  Interaction frame.
-       -  "phase":  "opening" or "closing" (default: "opening").
+       -  "phase":  "encounter" or "parting" (default: "encounter").
        -  "setting":  "ui", "chat", or "email" (default: "ui").
        -  "role":  "initiator" or "responder" (default: "initiator").
        -  "relationship":  One of "stranger", "acquaintance",
@@ -1288,7 +1310,7 @@ NormalizedContext through the following eleven sequential steps:
 
    Step 7 — Apply interaction defaults:  For each interaction field
       not provided by the consumer, apply the default values:
-      phase="opening", setting="ui", role="initiator",
+      phase="encounter", setting="ui", role="initiator",
       relationship="stranger", formality="neutral", style="neutral".
 
    Step 8 — Normalize person:  Trim whitespace from all name fields.
@@ -1340,7 +1362,7 @@ matches all values for that dimension):
    2.  dayPeriod:  If present, the rule only matches if the
        normalized context's dayPeriod equals this value.
 
-   3.  phase:  If present ("opening" or "closing"), the rule only
+   3.  phase:  If present ("encounter" or "parting"), the rule only
        matches if the interaction phase matches.
 
    4.  setting:  If present (array of "ui", "chat", "email"), the
