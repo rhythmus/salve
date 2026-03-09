@@ -161,24 +161,43 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
             texts.forEach((text, index) => {
                 let id = g.id;
 
-                // Auto-generate ID if missing or if expanding an array
-                if (!id || texts.length > 1) {
-                    const baseId = id || slugify(text);
-                    id = texts.length > 1 ? `${baseId}_${index + 1}` : baseId;
+                // Auto-generate ID if missing
+                if (!id) {
+                    const textSlug = slugify(text);
+                    if (textSlug && textSlug.length > 1) {
+                        id = textSlug;
+                    } else if (g.eventRef) {
+                        // Use event name (e.g., "salve.event.temporal.morning" -> "morning")
+                        id = slugify(g.eventRef.split(".").pop() || "");
+                    } else if (g.notes) {
+                        // Try to extract from notes (e.g., "Greek: Hello" -> "hello")
+                        const noteSlug = slugify(g.notes.replace(/^[^:]+:\s*/, ""));
+                        id = noteSlug || "item";
+                    } else {
+                        id = "item";
+                    }
                 }
 
-                // Ensure ID starts with a safe prefix based on locale (pack or entry level)
-                const currentLocale = g.locale || locale;
-                const firstLocale = Array.isArray(currentLocale) ? currentLocale[0] : currentLocale;
-                const prefix = firstLocale.replace(/-/g, "_").toLowerCase() + "_";
+                // Handle array expansion
+                if (texts.length > 1) {
+                    id = `${id}_${index + 1}`;
+                }
+
+                // Ensure ID starts with a safe prefix based on locale
+                const currentLocale = (g.locale && !Array.isArray(g.locale)) ? g.locale : locale;
+                const prefix = currentLocale.replace(/-/g, "_").toLowerCase() + "_";
 
                 if (!id.startsWith(prefix)) {
                     id = prefix + id;
                 }
 
-                if (seenIds.has(id)) {
-                    id = `${id}_${Math.random().toString(36).substr(2, 5)}`;
+                // Final collision check
+                let finalId = id;
+                let counter = 1;
+                while (seenIds.has(finalId)) {
+                    finalId = `${id}_${counter++}`;
                 }
+                id = finalId;
                 seenIds.add(id);
 
                 normalizedGreetings.push({

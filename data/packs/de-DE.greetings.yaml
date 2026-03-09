@@ -1,43 +1,22 @@
-# German Greeting Pack (Germany)
 locale: de-DE
 greetings:
-  # --- Civil / National ---
-  - id: "de_unity"
-    text: "Alles Gute zum Tag der Deutschen Einheit!"
-    eventRef: "salve.event.civil.national.de.unity_day"
-    notes: "German Unity Day"
-
-  - id: "de_unity_formal"
-    text: "Einen schönen Tag der Deutschen Einheit."
-    eventRef: "salve.event.civil.national.de.unity_day"
+  - text: Alles Gute zum Tag der Deutschen Einheit!
+    eventRef: salve.event.civil.national.de.unity_day
+    notes: German Unity Day
+  - text: Einen schönen Tag der Deutschen Einheit.
+    eventRef: salve.event.civil.national.de.unity_day
     formality: formal
-
-  # --- Temporal ---
-  - id: "de_newyear"
-    text: "Frohes neues Jahr!"
-    eventRef: "salve.event.temporal.new_year"
-
-  - id: "de_morning"
-    text: "Guten Morgen"
-    eventRef: "salve.event.temporal.morning"
-
-  - id: "de_midday"
-    text: "Mahlzeit"
-    eventRef: "salve.event.temporal.midday"
+  - text: Frohes neues Jahr!
+    eventRef: salve.event.temporal.new_year
+  - text: Guten Morgen
+    eventRef: salve.event.temporal.morning
+  - text: Mahlzeit
+    eventRef: salve.event.temporal.midday
     formality: informal
-
-  - id: "de_afternoon"
-    text: "Guten Tag"
-    eventRef: "salve.event.temporal.afternoon"
-
-  - id: "de_evening"
-    text: "Guten Abend"
-    eventRef: "salve.event.temporal.evening"
-
-  - id: "de_night"
-    text: "Gute Nacht"
-    eventRef: "salve.event.temporal.night"
-
-  # --- Fallback ---
-  - id: "de_fallback"
-    text: "Hallo"
+  - text: Guten Tag
+    eventRef: salve.event.temporal.afternoon
+  - text: Guten Abend
+    eventRef: salve.event.temporal.evening
+  - text: Gute Nacht
+    eventRef: salve.event.temporal.night
+  - text: Hallo

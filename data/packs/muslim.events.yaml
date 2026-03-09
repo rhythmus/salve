@@ -1,42 +1,28 @@
-# Muslim Celebrations (Eid al-Fitr, Ramadan, etc.) across multiple locales
 tradition: muslim
 greetings:
-  # --- Eid al-Fitr ---
-  - id: "eid_ar"
-    text: "عيد مبارك"
+  - text: عيد مبارك
     locale: ar
-    eventRef: "salve.event.religious.muslim.eid_al_fitr"
-    notes: "Arabic: Eid Mubarak"
-    sources: "https://en.wikipedia.org/wiki/Eid_Mubarak"
-
-  - id: "eid_tr"
-    text: "Bayramınız kutlu olsun!"
+    eventRef: salve.event.religious.muslim.eid_al_fitr
+    notes: 'Arabic: Eid Mubarak'
+    sources: 'https://en.wikipedia.org/wiki/Eid_Mubarak'
+  - text: Bayramınız kutlu olsun!
     locale: tr-TR
-    eventRef: "salve.event.religious.muslim.eid_al_fitr"
-    notes: "Turkish: Holiday greetings"
-    sources: "https://en.wikipedia.org/wiki/Eid_Mubarak"
-
-  - id: "eid_en"
-    text: "Eid Mubarak!"
+    eventRef: salve.event.religious.muslim.eid_al_fitr
+    notes: 'Turkish: Holiday greetings'
+    sources: 'https://en.wikipedia.org/wiki/Eid_Mubarak'
+  - text: Eid Mubarak!
     locale: en-GB
-    eventRef: "salve.event.religious.muslim.eid_al_fitr"
-    sources: "https://en.wikipedia.org/wiki/Eid_Mubarak"
-
-  # --- Ramadan ---
-  - id: "ramadan_ar"
-    text: "رمضان كريم"
+    eventRef: salve.event.religious.muslim.eid_al_fitr
+    sources: 'https://en.wikipedia.org/wiki/Eid_Mubarak'
+  - text: رمضان كريم
     locale: ar
-    eventRef: "salve.event.religious.muslim.ramadan_start"
-    sources: "https://en.wikipedia.org/wiki/Ramadan"
-
-  - id: "ramadan_tr"
-    text: "Hayırlı Ramazanlar!"
+    eventRef: salve.event.religious.muslim.ramadan_start
+    sources: 'https://en.wikipedia.org/wiki/Ramadan'
+  - text: Hayırlı Ramazanlar!
     locale: tr-TR
-    eventRef: "salve.event.religious.muslim.ramadan_start"
-    sources: "https://en.wikipedia.org/wiki/Ramadan"
-
-  - id: "ramadan_en"
-    text: "Ramadan Kareem!"
+    eventRef: salve.event.religious.muslim.ramadan_start
+    sources: 'https://en.wikipedia.org/wiki/Ramadan'
+  - text: Ramadan Kareem!
     locale: en-GB
-    eventRef: "salve.event.religious.muslim.ramadan_start"
-    sources: "https://en.wikipedia.org/wiki/Ramadan"
+    eventRef: salve.event.religious.muslim.ramadan_start
+    sources: 'https://en.wikipedia.org/wiki/Ramadan'

@@ -1,7 +1,7 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.{greetings,regions}.{json,yaml} by scripts/generate-demo-packs.ts
- * Generated at: 2026-03-09T12:35:41.258Z
+ * Generated at: 2026-03-09T12:47:37.043Z
  */
 
 import type { GreetingPack, RegionDefinition } from "@salve/types";
@@ -11,12 +11,12 @@ export const DEMO_PACKS: GreetingPack[] = [
     locale: "ar",
     greetings: [
       {
-        id: "ar_fallback",
+        id: "ar_general_welcome_hello",
         text: "مرحباً",
         notes: "General welcome / hello",
       },
       {
-        id: "ar_eid_ar",
+        id: "ar_eid_al_fitr",
         text: "عيد مبارك",
         eventRef: "salve.event.religious.muslim.eid_al_fitr",
         locale: "ar",
@@ -24,7 +24,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://en.wikipedia.org/wiki/Eid_Mubarak",
       },
       {
-        id: "ar_ramadan_ar",
+        id: "ar_ramadan_start",
         text: "رمضان كريم",
         eventRef: "salve.event.religious.muslim.ramadan_start",
         locale: "ar",
@@ -36,7 +36,7 @@ export const DEMO_PACKS: GreetingPack[] = [
     locale: "el-GR",
     greetings: [
       {
-        id: "el_gr_christmas_el",
+        id: "el_gr_christmas",
         text: "Καλά Χριστούγεννα!",
         eventRef: "salve.event.religious.christian.christmas",
         locale: "el-GR",
@@ -45,7 +45,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_easter_el",
+        id: "el_gr_easter",
         text: "Χριστός Ανέστη!",
         eventRef: "salve.event.religious.christian.easter",
         locale: "el-GR",
@@ -55,7 +55,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_ya_informal",
+        id: "el_gr_basic_hi_hello_often_short_for",
         text: "Γεια!",
         locale: "el-GR",
         formality: "informal" as const,
@@ -63,7 +63,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_ya_su",
+        id: "el_gr_informal_hello_to_one_person",
         text: "Γεια σου!",
         locale: "el-GR",
         formality: "informal" as const,
@@ -71,7 +71,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_ya_sas",
+        id: "el_gr_formal_hello_to_one_person_or_in",
         text: "Γεια σας!",
         locale: "el-GR",
         formality: "formal" as const,
@@ -79,7 +79,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_herete",
+        id: "el_gr_polite_formal_hello_can_sound_sl",
         text: "Χαίρετε!",
         locale: "el-GR",
         formality: "formal" as const,
@@ -87,7 +87,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_ya_bye",
+        id: "el_gr_also_means_hello",
         text: "Γεια!",
         locale: "el-GR",
         phase: "close",
@@ -95,7 +95,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_ta_leme",
+        id: "el_gr_see_you",
         text: "Τα λέμε!",
         locale: "el-GR",
         phase: "close",
@@ -103,7 +103,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_adio",
+        id: "el_gr_goodbye_used_for_permanent_or_lo",
         text: "Αντίο",
         locale: "el-GR",
         formality: "formal" as const,
@@ -112,7 +112,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_epanidin",
+        id: "el_gr_farewell_more_sophisticated_vers",
         text: "Εις το επανιδείν!",
         locale: "el-GR",
         formality: "formal" as const,
@@ -121,7 +121,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_morning",
+        id: "el_gr_morning",
         text: "Καλημέρα!",
         eventRef: "salve.event.temporal.morning",
         locale: "el-GR",
@@ -129,7 +129,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_afternoon",
+        id: "el_gr_afternoon",
         text: "Καλησπέρα!",
         eventRef: "salve.event.temporal.afternoon",
         locale: "el-GR",
@@ -137,7 +137,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_kalo_apogevma",
+        id: "el_gr_have_a_good_afternoon_used_when_",
         text: "Καλό απόγευμα!",
         locale: "el-GR",
         phase: "close",
@@ -145,7 +145,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_kalo_vradi",
+        id: "el_gr_have_a_good_evening_used_when_pa",
         text: "Καλό βράδυ!",
         locale: "el-GR",
         phase: "close",
@@ -153,7 +153,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_night",
+        id: "el_gr_night",
         text: "Καληνύχτα!",
         eventRef: "salve.event.temporal.night",
         locale: "el-GR",
@@ -161,7 +161,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_onira_glika",
+        id: "el_gr_sweet_dreams_usually_follows",
         text: "Όνειρα γλυκά",
         locale: "el-GR",
         formality: "informal" as const,
@@ -169,7 +169,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_ya_hara",
+        id: "el_gr_hey_slang",
         text: "Γεια χαρά!",
         locale: "el-GR",
         formality: "highly informal" as const,
@@ -177,7 +177,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_yo",
+        id: "el_gr_yo_slang",
         text: "Γιο!",
         locale: "el-GR",
         formality: "highly informal" as const,
@@ -185,35 +185,35 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_hronia_ke_zamania",
+        id: "el_gr_long_time_no_see",
         text: "Χρόνια και ζαμάνια!",
         locale: "el-GR",
         notes: "Long time no see!",
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_hero_poli",
+        id: "el_gr_pleased_to_meet_you",
         text: "Χαίρω πολύ!",
         locale: "el-GR",
         notes: "Pleased to meet you!",
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_harika",
+        id: "el_gr_pleased_to_have_met_you",
         text: "Χάρηκα!",
         locale: "el-GR",
         notes: "Pleased (to have met you)!",
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_herome_gnorimia",
+        id: "el_gr_pleased_to_make_your_acquaintanc",
         text: "Χαίρομαι για τη γνωριμία!",
         locale: "el-GR",
         notes: "Pleased to make your acquaintance!",
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_phone_ne",
+        id: "el_gr_yes_informal",
         text: "Ναι;",
         locale: "el-GR",
         setting: ["chat"],
@@ -221,7 +221,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_phone_parakalo",
+        id: "el_gr_please_universal",
         text: "Παρακαλώ;",
         locale: "el-GR",
         setting: ["chat"],
@@ -229,7 +229,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_phone_legete",
+        id: "el_gr_speak_standard",
         text: "Λέγετε",
         locale: "el-GR",
         setting: ["chat"],
@@ -237,14 +237,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_el_independence",
+        id: "el_gr_independence_day",
         text: "Χρόνια Πολλά!",
         eventRef: "salve.event.civil.national.gr.independence_day",
         locale: "el-GR",
         notes: "Greek Independence Day / Anniversary. Literal: 'Many years!'",
       },
       {
-        id: "el_gr_el_fallback",
+        id: "el_gr_standard_respectful_greeting",
         text: "Γεια σας",
         locale: "el-GR",
         notes: "Standard respectful greeting.",
@@ -318,7 +318,7 @@ export const DEMO_PACKS: GreetingPack[] = [
     locale: "el-Latn",
     greetings: [
       {
-        id: "el_latn_christmas_el_latn",
+        id: "el_latn_kala_christougenna",
         text: "Kala Christougenna!",
         eventRef: "salve.event.religious.christian.christmas",
         locale: "el-Latn",
@@ -327,7 +327,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_latn_easter_el_latn",
+        id: "el_latn_christos_anesti",
         text: "Christos Anesti!",
         eventRef: "salve.event.religious.christian.easter",
         locale: "el-Latn",
@@ -342,7 +342,7 @@ export const DEMO_PACKS: GreetingPack[] = [
     locale: "nl",
     greetings: [
       {
-        id: "nl_christmas_nl",
+        id: "nl_zalig_kerstmis",
         text: "Zalig Kerstmis!",
         eventRef: "salve.event.religious.christian.christmas",
         locale: "nl",
@@ -351,7 +351,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://nl.wikipedia.org/wiki/Kerstmis#Begroeting",
       },
       {
-        id: "nl_easter_nl",
+        id: "nl_zalig_pasen",
         text: "Zalig Pasen!",
         eventRef: "salve.event.religious.christian.easter",
         locale: "nl",
@@ -360,7 +360,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://nl.wikipedia.org/wiki/Pasen#Gebruiken",
       },
       {
-        id: "nl_easter_nl_orthodox",
+        id: "nl_christus_is_verrezen",
         text: "Christus is verrezen!",
         eventRef: "salve.event.religious.christian.easter",
         locale: "nl",
@@ -684,7 +684,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen",
       },
       {
-        id: "li_nl_houje",
+        id: "nl_houje",
         text: "Houje",
         locale: ["li-NL", "nl-NL-x-brabants"],
         formality: "highly informal" as const,
@@ -708,7 +708,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen",
       },
       {
-        id: "nl_nl_x_brabants_houdoe",
+        id: "nl_houdoe",
         text: "Houdoe",
         locale: ["nl-NL-x-brabants", "nds-NL-x-gelders"],
         formality: "highly informal" as const,
@@ -786,7 +786,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen",
       },
       {
-        id: "nl_be_x_antwerps_salut_1",
+        id: "nl_salut_1",
         text: "Salut",
         locale: ["nl-BE-x-antwerps", "nl-BE-x-kempens", "nl-BE-x-mechels", "nl-BE-x-leuvens"],
         formality: "highly informal" as const,
@@ -794,7 +794,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen",
       },
       {
-        id: "nl_be_x_antwerps_salukes_2",
+        id: "nl_salukes_2",
         text: "Salukes",
         locale: ["nl-BE-x-antwerps", "nl-BE-x-kempens", "nl-BE-x-mechels", "nl-BE-x-leuvens"],
         formality: "highly informal" as const,
@@ -860,21 +860,21 @@ export const DEMO_PACKS: GreetingPack[] = [
     locale: "en-GB",
     greetings: [
       {
-        id: "en_gb_christmas_en",
+        id: "en_gb_merry_christmas",
         text: "Merry Christmas!",
         eventRef: "salve.event.religious.christian.christmas",
         locale: "en-GB",
         formality: "neutral" as const,
       },
       {
-        id: "en_gb_easter_en",
+        id: "en_gb_happy_easter",
         text: "Happy Easter!",
         eventRef: "salve.event.religious.christian.easter",
         locale: "en-GB",
         formality: "neutral" as const,
       },
       {
-        id: "en_gb_easter_en_orthodox",
+        id: "en_gb_christ_is_risen",
         text: "Christ is Risen!",
         eventRef: "salve.event.religious.christian.easter",
         locale: "en-GB",
@@ -883,40 +883,40 @@ export const DEMO_PACKS: GreetingPack[] = [
         notes: "English Eastern Orthodox Easter greeting",
       },
       {
-        id: "en_gb_en_morning",
+        id: "en_gb_good_morning",
         text: "Good morning",
         eventRef: "salve.event.temporal.morning",
       },
       {
-        id: "en_gb_en_afternoon",
+        id: "en_gb_good_afternoon",
         text: "Good afternoon",
         eventRef: "salve.event.temporal.afternoon",
       },
       {
-        id: "en_gb_en_evening",
+        id: "en_gb_good_evening",
         text: "Good evening",
         eventRef: "salve.event.temporal.evening",
       },
       {
-        id: "en_gb_en_fallback",
+        id: "en_gb_hello",
         text: "Hello",
       },
       {
-        id: "en_gb_eid_en",
+        id: "en_gb_eid_mubarak",
         text: "Eid Mubarak!",
         eventRef: "salve.event.religious.muslim.eid_al_fitr",
         locale: "en-GB",
         sources: "https://en.wikipedia.org/wiki/Eid_Mubarak",
       },
       {
-        id: "en_gb_ramadan_en",
+        id: "en_gb_ramadan_kareem",
         text: "Ramadan Kareem!",
         eventRef: "salve.event.religious.muslim.ramadan_start",
         locale: "en-GB",
         sources: "https://en.wikipedia.org/wiki/Ramadan",
       },
       {
-        id: "en_gb_cny_en",
+        id: "en_gb_happy_chinese_new_year",
         text: "Happy Chinese New Year!",
         eventRef: "salve.event.civil.secular.chinese_new_year",
         locale: "en-GB",
@@ -928,14 +928,14 @@ export const DEMO_PACKS: GreetingPack[] = [
     locale: "de-DE",
     greetings: [
       {
-        id: "de_de_christmas_de",
+        id: "de_de_frohe_weihnachten",
         text: "Frohe Weihnachten!",
         eventRef: "salve.event.religious.christian.christmas",
         locale: "de-DE",
         formality: "neutral" as const,
       },
       {
-        id: "de_de_easter_de",
+        id: "de_de_frohe_ostern",
         text: "Frohe Ostern!",
         eventRef: "salve.event.religious.christian.easter",
         locale: "de-DE",
@@ -943,50 +943,50 @@ export const DEMO_PACKS: GreetingPack[] = [
         notes: "German: Happy Easter",
       },
       {
-        id: "de_de_de_unity",
+        id: "de_de_alles_gute_zum_tag_der_deutschen",
         text: "Alles Gute zum Tag der Deutschen Einheit!",
         eventRef: "salve.event.civil.national.de.unity_day",
         notes: "German Unity Day",
       },
       {
-        id: "de_de_de_unity_formal",
+        id: "de_de_einen_schonen_tag_der_deutschen_",
         text: "Einen schönen Tag der Deutschen Einheit.",
         eventRef: "salve.event.civil.national.de.unity_day",
         formality: "formal" as const,
       },
       {
-        id: "de_de_de_newyear",
+        id: "de_de_frohes_neues_jahr",
         text: "Frohes neues Jahr!",
         eventRef: "salve.event.temporal.new_year",
       },
       {
-        id: "de_de_de_morning",
+        id: "de_de_guten_morgen",
         text: "Guten Morgen",
         eventRef: "salve.event.temporal.morning",
       },
       {
-        id: "de_de_de_midday",
+        id: "de_de_mahlzeit",
         text: "Mahlzeit",
         eventRef: "salve.event.temporal.midday",
         formality: "informal" as const,
       },
       {
-        id: "de_de_de_afternoon",
+        id: "de_de_guten_tag",
         text: "Guten Tag",
         eventRef: "salve.event.temporal.afternoon",
       },
       {
-        id: "de_de_de_evening",
+        id: "de_de_guten_abend",
         text: "Guten Abend",
         eventRef: "salve.event.temporal.evening",
       },
       {
-        id: "de_de_de_night",
+        id: "de_de_gute_nacht",
         text: "Gute Nacht",
         eventRef: "salve.event.temporal.night",
       },
       {
-        id: "de_de_de_fallback",
+        id: "de_de_hallo",
         text: "Hallo",
       },
     ],
@@ -995,7 +995,7 @@ export const DEMO_PACKS: GreetingPack[] = [
     locale: "tr-TR",
     greetings: [
       {
-        id: "tr_tr_eid_tr",
+        id: "tr_tr_bayram_n_z_kutlu_olsun",
         text: "Bayramınız kutlu olsun!",
         eventRef: "salve.event.religious.muslim.eid_al_fitr",
         locale: "tr-TR",
@@ -1003,24 +1003,24 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://en.wikipedia.org/wiki/Eid_Mubarak",
       },
       {
-        id: "tr_tr_ramadan_tr",
+        id: "tr_tr_hay_rl_ramazanlar",
         text: "Hayırlı Ramazanlar!",
         eventRef: "salve.event.religious.muslim.ramadan_start",
         locale: "tr-TR",
         sources: "https://en.wikipedia.org/wiki/Ramadan",
       },
       {
-        id: "tr_tr_tr_morning",
+        id: "tr_tr_gunayd_n",
         text: "Günaydın",
         eventRef: "salve.event.temporal.morning",
       },
       {
-        id: "tr_tr_tr_afternoon",
+        id: "tr_tr_iyi_gunler",
         text: "İyi günler",
         eventRef: "salve.event.temporal.afternoon",
       },
       {
-        id: "tr_tr_tr_fallback",
+        id: "tr_tr_merhaba",
         text: "Merhaba",
       },
     ],
@@ -1029,21 +1029,21 @@ export const DEMO_PACKS: GreetingPack[] = [
     locale: "zh-CN",
     greetings: [
       {
-        id: "zh_cn_cny_zh",
+        id: "zh_cn_chinese_new_year",
         text: "新年快乐！",
         eventRef: "salve.event.civil.secular.chinese_new_year",
         locale: "zh-CN",
         sources: "https://en.wikipedia.org/wiki/Chinese_New_Year#Greetings",
       },
       {
-        id: "zh_cn_lantern_zh",
+        id: "zh_cn_lantern_festival",
         text: "元宵节快乐！",
         eventRef: "salve.event.civil.secular.lantern_festival",
         locale: "zh-CN",
         sources: "https://en.wikipedia.org/wiki/Lantern_Festival",
       },
       {
-        id: "zh_cn_zh_fallback",
+        id: "zh_cn_general_welcome_hello",
         text: "你好",
         notes: "General welcome / hello",
       },

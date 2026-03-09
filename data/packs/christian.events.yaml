@@ -1,96 +1,70 @@
-# Christian Celebrations (Christmas, Easter, etc.) across multiple locales
 tradition: christian
 greetings:
-  # --- Christmas ---
-  - id: "christmas_el"
-    text: "Καλά Χριστούγεννα!"
+  - text: Καλά Χριστούγεννα!
     locale: el-GR
-    eventRef: "salve.event.religious.christian.christmas"
+    eventRef: salve.event.religious.christian.christmas
     formality: neutral
-    notes: "Greek: Merry Christmas"
-    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
-
-  - id: "christmas_el_latn"
-    text: "Kala Christougenna!"
+    notes: 'Greek: Merry Christmas'
+    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
+  - text: Kala Christougenna!
     locale: el-Latn
-    eventRef: "salve.event.religious.christian.christmas"
+    eventRef: salve.event.religious.christian.christmas
     formality: neutral
-    notes: "Greek (Transliterated): Merry Christmas"
-    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
-
-  - id: "christmas_nl"
-    text: "Zalig Kerstmis!"
+    notes: 'Greek (Transliterated): Merry Christmas'
+    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
+  - text: Zalig Kerstmis!
     locale: nl
-    eventRef: "salve.event.religious.christian.christmas"
+    eventRef: salve.event.religious.christian.christmas
     formality: neutral
-    notes: "Dutch: Blessed Christmas"
-    sources: "https://nl.wikipedia.org/wiki/Kerstmis#Begroeting"
-
-  - id: "christmas_en"
-    text: "Merry Christmas!"
+    notes: 'Dutch: Blessed Christmas'
+    sources: 'https://nl.wikipedia.org/wiki/Kerstmis#Begroeting'
+  - text: Merry Christmas!
     locale: en-GB
-    eventRef: "salve.event.religious.christian.christmas"
+    eventRef: salve.event.religious.christian.christmas
     formality: neutral
-
-  - id: "christmas_de"
-    text: "Frohe Weihnachten!"
+  - text: Frohe Weihnachten!
     locale: de-DE
-    eventRef: "salve.event.religious.christian.christmas"
+    eventRef: salve.event.religious.christian.christmas
     formality: neutral
-
-  # --- Easter (Pascha) ---
-  - id: "easter_el"
-    text: "Χριστός Ανέστη!"
+  - text: Χριστός Ανέστη!
     locale: el-GR
-    eventRef: "salve.event.religious.christian.easter"
-    expectedResponse: "Αληθώς Ανέστη!"
+    eventRef: salve.event.religious.christian.easter
+    expectedResponse: Αληθώς Ανέστη!
     formality: neutral
-    notes: "Greek: Christ is Risen!"
-    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
-
-  - id: "easter_el_latn"
-    text: "Christos Anesti!"
+    notes: 'Greek: Christ is Risen!'
+    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
+  - text: Christos Anesti!
     locale: el-Latn
-    eventRef: "salve.event.religious.christian.easter"
-    expectedResponse: "Alithos Anesti!"
+    eventRef: salve.event.religious.christian.easter
+    expectedResponse: Alithos Anesti!
     formality: neutral
-    notes: "Greek (Transliterated): Christ is Risen!"
-    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
-
-  - id: "easter_nl"
-    text: "Zalig Pasen!"
+    notes: 'Greek (Transliterated): Christ is Risen!'
+    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
+  - text: Zalig Pasen!
     locale: nl
-    eventRef: "salve.event.religious.christian.easter"
+    eventRef: salve.event.religious.christian.easter
     formality: neutral
-    notes: "General Dutch Easter greeting"
-    sources: "https://nl.wikipedia.org/wiki/Pasen#Gebruiken"
-
-  - id: "easter_nl_orthodox"
-    text: "Christus is verrezen!"
+    notes: General Dutch Easter greeting
+    sources: 'https://nl.wikipedia.org/wiki/Pasen#Gebruiken'
+  - text: Christus is verrezen!
     locale: nl
-    eventRef: "salve.event.religious.christian.easter"
-    expectedResponse: "Hij is waarlijk verrezen!"
-    notes: "Dutch Eastern Orthodox Easter greeting"
-    sources: "https://nl.wikipedia.org/wiki/Pasen#Gebruiken"
+    eventRef: salve.event.religious.christian.easter
+    expectedResponse: Hij is waarlijk verrezen!
+    notes: Dutch Eastern Orthodox Easter greeting
+    sources: 'https://nl.wikipedia.org/wiki/Pasen#Gebruiken'
     formality: neutral
-
-  - id: "easter_en"
-    text: "Happy Easter!"
+  - text: Happy Easter!
     locale: en-GB
-    eventRef: "salve.event.religious.christian.easter"
+    eventRef: salve.event.religious.christian.easter
     formality: neutral
-
-  - id: "easter_en_orthodox"
-    text: "Christ is Risen!"
+  - text: Christ is Risen!
     locale: en-GB
-    eventRef: "salve.event.religious.christian.easter"
-    expectedResponse: "Indeed, He is Risen!"
-    notes: "English Eastern Orthodox Easter greeting"
+    eventRef: salve.event.religious.christian.easter
+    expectedResponse: 'Indeed, He is Risen!'
+    notes: English Eastern Orthodox Easter greeting
     formality: neutral
-
-  - id: "easter_de"
-    text: "Frohe Ostern!"
+  - text: Frohe Ostern!
     locale: de-DE
-    eventRef: "salve.event.religious.christian.easter"
+    eventRef: salve.event.religious.christian.easter
     formality: neutral
-    notes: "German: Happy Easter"
+    notes: 'German: Happy Easter'
