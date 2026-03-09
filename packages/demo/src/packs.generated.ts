@@ -1,7 +1,7 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.{greetings,regions}.{json,yaml} by scripts/generate-demo-packs.ts
- * Generated at: 2026-03-09T12:53:39.363Z
+ * Generated at: 2026-03-09T16:16:27.180Z
  */
 
 import type { GreetingPack, RegionDefinition } from "@salve/types";
@@ -45,6 +45,41 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
+        id: "el_gr_christmas_day_2",
+        text: "Χρόνια Πολλά!",
+        eventRef: "salve.event.religious.christian.christmas_day_2",
+        locale: "el-GR",
+        notes: "Greek: Many years! (St. Stephen / Synaxis of Mother of God)",
+      },
+      {
+        id: "el_gr_theophany",
+        text: "Καλή Φώτιση!",
+        eventRef: "salve.event.religious.christian.theophany",
+        locale: "el-GR",
+        notes: "Greek: Happy Enlightenment!",
+      },
+      {
+        id: "el_gr_theophany_1",
+        text: "Χρόνια Πολλά!",
+        eventRef: "salve.event.religious.christian.theophany",
+        locale: "el-GR",
+        notes: "Greek: Many years!",
+      },
+      {
+        id: "el_gr_assumption",
+        text: "Καλή Παναγιά!",
+        eventRef: "salve.event.religious.christian.assumption",
+        locale: "el-GR",
+        notes: "Greek: Happy Panagia! (Used in the lead-up to and on the Assumption)",
+      },
+      {
+        id: "el_gr_assumption_1",
+        text: "Χρόνια Πολλά!",
+        eventRef: "salve.event.religious.christian.assumption",
+        locale: "el-GR",
+        notes: "Greek: Many years!",
+      },
+      {
         id: "el_gr_easter",
         text: "Χριστός Ανέστη!",
         eventRef: "salve.event.religious.christian.easter",
@@ -53,6 +88,80 @@ export const DEMO_PACKS: GreetingPack[] = [
         formality: "neutral" as const,
         notes: "Greek: Christ is Risen!",
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_clean_monday",
+        text: "Καλή Καθαρά Δευτέρα!",
+        eventRef: "salve.event.religious.orthodox.clean_monday",
+        locale: "el-GR",
+        notes: "Greek: Happy Clean Monday",
+      },
+      {
+        id: "el_gr_clean_monday_1",
+        text: "Καλή Σαρακοστή!",
+        eventRef: "salve.event.religious.orthodox.clean_monday",
+        locale: "el-GR",
+        notes: "Greek: Happy Lent! (Wishing someone well for the 40-day fast starting on Clean Monday)",
+      },
+      {
+        id: "el_gr_good_friday",
+        text: "Καλή Ανάσταση!",
+        eventRef: "salve.event.religious.orthodox.good_friday",
+        locale: "el-GR",
+        notes: "Greek: Happy Resurrection! (Wishing for the upcoming celebration)",
+      },
+      {
+        id: "el_gr_easter_1",
+        text: "Χριστός Ανέστη!",
+        eventRef: "salve.event.religious.orthodox.easter",
+        locale: "el-GR",
+        expectedResponse: "Αληθώς Ανέστη!",
+        formality: "neutral" as const,
+        notes: "Greek: Christ is Risen!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_holy_spirit_monday",
+        text: "Χρόνια Πολλά!",
+        eventRef: "salve.event.religious.orthodox.holy_spirit_monday",
+        locale: "el-GR",
+        notes: "Greek: Many years!",
+      },
+      {
+        id: "el_gr_independence_day",
+        text: "Χρόνια Πολλά!",
+        eventRef: "salve.event.civil.national.gr.independence_day",
+        locale: "el-GR",
+        phase: "encounter",
+        notes: "Greek Independence Day / Anniversary. Literal: 'Many years!'",
+      },
+      {
+        id: "el_gr_ohi_day",
+        text: "Χρόνια Πολλά!",
+        eventRef: "salve.event.civil.national.gr.ohi_day",
+        locale: "el-GR",
+        phase: "encounter",
+        notes: "Ohi Day (October 28). Anniversary of the refusal to the Italian ultimatum.",
+      },
+      {
+        id: "el_gr_labour_day",
+        text: "Καλή Πρωτομαγιά!",
+        eventRef: "salve.event.civil.national.gr.labour_day",
+        locale: "el-GR",
+        notes: "Greek: Happy May Day!",
+      },
+      {
+        id: "el_gr_labour_day_1",
+        text: "Χρόνια Πολλά!",
+        eventRef: "salve.event.civil.national.gr.labour_day",
+        locale: "el-GR",
+      },
+      {
+        id: "el_gr_observed_commemoration",
+        text: "(observed commemoration)",
+        eventRef: "salve.event.civil.national.gr.polytechneio",
+        locale: "el-GR",
+        notes: "Polytechneio: Commemoration of the Athens Polytechnic uprising.",
       },
       {
         id: "el_gr_basic_hi_hello_often_short_for",
@@ -269,14 +378,6 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_independence_day",
-        text: "Χρόνια Πολλά!",
-        eventRef: "salve.event.civil.national.gr.independence_day",
-        locale: "el-GR",
-        phase: "encounter",
-        notes: "Greek Independence Day / Anniversary. Literal: 'Many years!'",
-      },
-      {
         id: "el_gr_standard_respectful_greeting_for",
         text: "Γεια σας",
         audienceSize: ">1",
@@ -388,6 +489,15 @@ export const DEMO_PACKS: GreetingPack[] = [
         formality: "neutral" as const,
         notes: "Greek (Transliterated): Christ is Risen!",
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_latn_christos_anesti_1",
+        text: "Christos Anesti!",
+        eventRef: "salve.event.religious.orthodox.easter",
+        locale: "el-Latn",
+        expectedResponse: "Alithos Anesti!",
+        formality: "neutral" as const,
+        notes: "Greek (Transliterated): Christ is Risen!",
       },
     ],
   },
