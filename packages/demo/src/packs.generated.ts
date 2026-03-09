@@ -1,7 +1,7 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.{greetings,regions}.{json,yaml} by scripts/generate-demo-packs.ts
- * Generated at: 2026-03-09T12:34:33.127Z
+ * Generated at: 2026-03-09T12:35:41.258Z
  */
 
 import type { GreetingPack, RegionDefinition } from "@salve/types";
@@ -21,12 +21,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.religious.muslim.eid_al_fitr",
         locale: "ar",
         notes: "Arabic: Eid Mubarak",
+        sources: "https://en.wikipedia.org/wiki/Eid_Mubarak",
       },
       {
         id: "ar_ramadan_ar",
         text: "رمضان كريم",
         eventRef: "salve.event.religious.muslim.ramadan_start",
         locale: "ar",
+        sources: "https://en.wikipedia.org/wiki/Ramadan",
       },
     ],
   },
@@ -40,6 +42,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-GR",
         formality: "neutral" as const,
         notes: "Greek: Merry Christmas",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_easter_el",
@@ -49,6 +52,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         expectedResponse: "Αληθώς Ανέστη!",
         formality: "neutral" as const,
         notes: "Greek: Christ is Risen!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_gr_el_ya_informal",
@@ -320,6 +324,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "el-Latn",
         formality: "neutral" as const,
         notes: "Greek (Transliterated): Merry Christmas",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
         id: "el_latn_easter_el_latn",
@@ -329,6 +334,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         expectedResponse: "Alithos Anesti!",
         formality: "neutral" as const,
         notes: "Greek (Transliterated): Christ is Risen!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
     ],
   },
@@ -342,6 +348,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "nl",
         formality: "neutral" as const,
         notes: "Dutch: Blessed Christmas",
+        sources: "https://nl.wikipedia.org/wiki/Kerstmis#Begroeting",
       },
       {
         id: "nl_easter_nl",
@@ -350,6 +357,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "nl",
         formality: "neutral" as const,
         notes: "General Dutch Easter greeting",
+        sources: "https://nl.wikipedia.org/wiki/Pasen#Gebruiken",
       },
       {
         id: "nl_easter_nl_orthodox",
@@ -359,6 +367,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         expectedResponse: "Hij is waarlijk verrezen!",
         formality: "neutral" as const,
         notes: "Dutch Eastern Orthodox Easter greeting",
+        sources: "https://nl.wikipedia.org/wiki/Pasen#Gebruiken",
       },
       {
         id: "nl_welkom",
@@ -897,18 +906,21 @@ export const DEMO_PACKS: GreetingPack[] = [
         text: "Eid Mubarak!",
         eventRef: "salve.event.religious.muslim.eid_al_fitr",
         locale: "en-GB",
+        sources: "https://en.wikipedia.org/wiki/Eid_Mubarak",
       },
       {
         id: "en_gb_ramadan_en",
         text: "Ramadan Kareem!",
         eventRef: "salve.event.religious.muslim.ramadan_start",
         locale: "en-GB",
+        sources: "https://en.wikipedia.org/wiki/Ramadan",
       },
       {
         id: "en_gb_cny_en",
         text: "Happy Chinese New Year!",
         eventRef: "salve.event.civil.secular.chinese_new_year",
         locale: "en-GB",
+        sources: "https://en.wikipedia.org/wiki/Chinese_New_Year#Greetings",
       },
     ],
   },
@@ -988,12 +1000,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.religious.muslim.eid_al_fitr",
         locale: "tr-TR",
         notes: "Turkish: Holiday greetings",
+        sources: "https://en.wikipedia.org/wiki/Eid_Mubarak",
       },
       {
         id: "tr_tr_ramadan_tr",
         text: "Hayırlı Ramazanlar!",
         eventRef: "salve.event.religious.muslim.ramadan_start",
         locale: "tr-TR",
+        sources: "https://en.wikipedia.org/wiki/Ramadan",
       },
       {
         id: "tr_tr_tr_morning",
@@ -1019,12 +1033,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         text: "新年快乐！",
         eventRef: "salve.event.civil.secular.chinese_new_year",
         locale: "zh-CN",
+        sources: "https://en.wikipedia.org/wiki/Chinese_New_Year#Greetings",
       },
       {
         id: "zh_cn_lantern_zh",
         text: "元宵节快乐！",
         eventRef: "salve.event.civil.secular.lantern_festival",
         locale: "zh-CN",
+        sources: "https://en.wikipedia.org/wiki/Lantern_Festival",
       },
       {
         id: "zh_cn_zh_fallback",

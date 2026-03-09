@@ -8,6 +8,7 @@ greetings:
     eventRef: "salve.event.religious.christian.christmas"
     formality: neutral
     notes: "Greek: Merry Christmas"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "christmas_el_latn"
     text: "Kala Christougenna!"
@@ -15,6 +16,7 @@ greetings:
     eventRef: "salve.event.religious.christian.christmas"
     formality: neutral
     notes: "Greek (Transliterated): Merry Christmas"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "christmas_nl"
     text: "Zalig Kerstmis!"
@@ -22,6 +24,7 @@ greetings:
     eventRef: "salve.event.religious.christian.christmas"
     formality: neutral
     notes: "Dutch: Blessed Christmas"
+    sources: "https://nl.wikipedia.org/wiki/Kerstmis#Begroeting"
 
   - id: "christmas_en"
     text: "Merry Christmas!"
@@ -43,6 +46,7 @@ greetings:
     expectedResponse: "Αληθώς Ανέστη!"
     formality: neutral
     notes: "Greek: Christ is Risen!"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "easter_el_latn"
     text: "Christos Anesti!"
@@ -51,6 +55,7 @@ greetings:
     expectedResponse: "Alithos Anesti!"
     formality: neutral
     notes: "Greek (Transliterated): Christ is Risen!"
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/"
 
   - id: "easter_nl"
     text: "Zalig Pasen!"
@@ -58,6 +63,7 @@ greetings:
     eventRef: "salve.event.religious.christian.easter"
     formality: neutral
     notes: "General Dutch Easter greeting"
+    sources: "https://nl.wikipedia.org/wiki/Pasen#Gebruiken"
 
   - id: "easter_nl_orthodox"
     text: "Christus is verrezen!"
@@ -65,6 +71,7 @@ greetings:
     eventRef: "salve.event.religious.christian.easter"
     expectedResponse: "Hij is waarlijk verrezen!"
     notes: "Dutch Eastern Orthodox Easter greeting"
+    sources: "https://nl.wikipedia.org/wiki/Pasen#Gebruiken"
     formality: neutral
 
   - id: "easter_en"
