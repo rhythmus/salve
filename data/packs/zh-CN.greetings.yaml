@@ -1,0 +1,6 @@
+# Chinese Greeting Pack (Simplified)
+locale: zh-CN
+greetings:
+  - id: "zh_fallback"
+    text: "你好"
+    notes: "General welcome / hello"

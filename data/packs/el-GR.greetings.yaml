@@ -1,0 +1,29 @@
+# Greek Greeting Pack (Greece)
+locale: el-GR
+greetings:
+  # --- Temporal ---
+  - id: "el_morning"
+    text: "Καλημέρα"
+    eventRef: "salve.event.temporal.morning"
+
+  - id: "el_afternoon"
+    text: "Καλησπέρα"
+    eventRef: "salve.event.temporal.afternoon"
+
+  - id: "el_evening"
+    text: "Καλησπέρα"
+    eventRef: "salve.event.temporal.evening"
+
+  - id: "el_night"
+    text: "Καληνύχτα"
+    eventRef: "salve.event.temporal.night"
+
+  # --- Civil / National ---
+  - id: "el_independence"
+    text: "Χρόνια Πολλά!"
+    eventRef: "salve.event.civil.national.gr.independence_day"
+    notes: "Greek Independence Day / Anniversary"
+
+  # --- Fallback ---
+  - id: "el_fallback"
+    text: "Γεια σας"

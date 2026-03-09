@@ -81,11 +81,11 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
     - [x] **"Explain Why" Visualization**: Render a narrative reasoning paragraph with inline editable variables and expose scoring trace.
     - [x] **Static Showcase Build**: Produce a single self-contained `website/index.html` (all JS and CSS inlined) suitable for `file://` usage and GitHub Pages.
     - [ ] Polish typography and microcopy for the landing page hero and explanation text.
-- **M8.2: Ecosystem Seeding (Data Packs)** (Partially Complete)
-    - [x] Establish modular "Source of Truth" architecture: `[locale].greetings.yaml` and `[locale].regions.yaml`.
+- **M8.2: Ecosystem Seeding (Modular & Event Packs)** (Completed)
+    - [x] Establish modular "Source of Truth" architecture: `*.greetings.yaml`, `*.regions.yaml`, and `*.events.yaml`.
     - [x] Create JSON Schema for pack validation (`data/greeting-pack.schema.json`).
-    - [x] Create generator pipeline (`scripts/generate-demo-packs.ts`) to aggregate modular packs into bundled TypeScript registries.
-    - [x] Seed and standardize 7 locale packs: `ar`, `de-DE`, `el-GR`, `en-GB`, `tr-TR`, `zh-CN`, `nl`.
+    - [x] Create generator pipeline (`scripts/generate-demo-packs.ts`) to aggregate modular and cross-locale event packs into bundled TypeScript registries.
+    - [x] Seed and standardize 7 locale packs and 1 cross-locale event pack (Christian).
 - **M8.3: Geographic Locale Mapping** (Completed)
     - [x] Implement `LocationResolver` with point-in-polygon support.
     - [x] Add hierarchical resolution logic (Priority-based specificity).

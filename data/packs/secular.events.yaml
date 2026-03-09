@@ -1,0 +1,19 @@
+# Secular and Cultural Celebrations across multiple locales
+tradition: secular
+greetings:
+  # --- Chinese New Year ---
+  - id: "cny_zh"
+    text: "新年快乐！"
+    locale: zh-CN
+    eventRef: "salve.event.civil.secular.chinese_new_year"
+
+  - id: "cny_en"
+    text: "Happy Chinese New Year!"
+    locale: en-GB
+    eventRef: "salve.event.civil.secular.chinese_new_year"
+
+  # --- Lantern Festival ---
+  - id: "lantern_zh"
+    text: "元宵节快乐！"
+    locale: zh-CN
+    eventRef: "salve.event.civil.secular.lantern_festival"

@@ -1,0 +1,19 @@
+# British English Greeting Pack
+locale: en-GB
+greetings:
+  # --- Temporal ---
+  - id: "en_morning"
+    text: "Good morning"
+    eventRef: "salve.event.temporal.morning"
+
+  - id: "en_afternoon"
+    text: "Good afternoon"
+    eventRef: "salve.event.temporal.afternoon"
+
+  - id: "en_evening"
+    text: "Good evening"
+    eventRef: "salve.event.temporal.evening"
+
+  # --- Fallback ---
+  - id: "en_fallback"
+    text: "Hello"

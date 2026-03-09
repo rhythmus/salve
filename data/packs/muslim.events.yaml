@@ -1,0 +1,36 @@
+# Muslim Celebrations (Eid al-Fitr, Ramadan, etc.) across multiple locales
+tradition: muslim
+greetings:
+  # --- Eid al-Fitr ---
+  - id: "eid_ar"
+    text: "عيد مبارك"
+    locale: ar
+    eventRef: "salve.event.religious.muslim.eid_al_fitr"
+    notes: "Arabic: Eid Mubarak"
+
+  - id: "eid_tr"
+    text: "Bayramınız kutlu olsun!"
+    locale: tr-TR
+    eventRef: "salve.event.religious.muslim.eid_al_fitr"
+    notes: "Turkish: Holiday greetings"
+
+  - id: "eid_en"
+    text: "Eid Mubarak!"
+    locale: en-GB
+    eventRef: "salve.event.religious.muslim.eid_al_fitr"
+
+  # --- Ramadan ---
+  - id: "ramadan_ar"
+    text: "رمضان كريم"
+    locale: ar
+    eventRef: "salve.event.religious.muslim.ramadan_start"
+
+  - id: "ramadan_tr"
+    text: "Hayırlı Ramazanlar!"
+    locale: tr-TR
+    eventRef: "salve.event.religious.muslim.ramadan_start"
+
+  - id: "ramadan_en"
+    text: "Ramadan Kareem!"
+    locale: en-GB
+    eventRef: "salve.event.religious.muslim.ramadan_start"

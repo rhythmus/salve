@@ -1,7 +1,7 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.{greetings,regions}.{json,yaml} by scripts/generate-demo-packs.ts
- * Generated at: 2026-03-09T12:13:22.427Z
+ * Generated at: 2026-03-09T12:21:09.182Z
  */
 
 import type { GreetingPack, RegionDefinition } from "@salve/types";
@@ -11,18 +11,22 @@ export const DEMO_PACKS: GreetingPack[] = [
     locale: "ar",
     greetings: [
       {
-        id: "ar_eid",
-        text: "عيد مبارك",
-        eventRef: "eid_al_fitr",
-      },
-      {
-        id: "ar_ramadan",
-        text: "رمضان كريم",
-        eventRef: "ramadan_start",
-      },
-      {
         id: "ar_fallback",
         text: "مرحباً",
+        notes: "General welcome / hello",
+      },
+      {
+        id: "ar_eid_ar",
+        text: "عيد مبارك",
+        eventRef: "salve.event.religious.muslim.eid_al_fitr",
+        locale: "ar",
+        notes: "Arabic: Eid Mubarak",
+      },
+      {
+        id: "ar_ramadan_ar",
+        text: "رمضان كريم",
+        eventRef: "salve.event.religious.muslim.ramadan_start",
+        locale: "ar",
       },
     ],
   },
@@ -49,27 +53,28 @@ export const DEMO_PACKS: GreetingPack[] = [
       {
         id: "el_gr_el_morning",
         text: "Καλημέρα",
-        eventRef: "morning",
+        eventRef: "salve.event.temporal.morning",
       },
       {
         id: "el_gr_el_afternoon",
         text: "Καλησπέρα",
-        eventRef: "afternoon",
+        eventRef: "salve.event.temporal.afternoon",
       },
       {
         id: "el_gr_el_evening",
         text: "Καλησπέρα",
-        eventRef: "evening",
+        eventRef: "salve.event.temporal.evening",
       },
       {
         id: "el_gr_el_night",
         text: "Καληνύχτα",
-        eventRef: "night",
+        eventRef: "salve.event.temporal.night",
       },
       {
         id: "el_gr_el_independence",
         text: "Χρόνια Πολλά!",
-        eventRef: "gr_independence_day",
+        eventRef: "salve.event.civil.national.gr.independence_day",
+        notes: "Greek Independence Day / Anniversary",
       },
       {
         id: "el_gr_el_fallback",
@@ -643,41 +648,39 @@ export const DEMO_PACKS: GreetingPack[] = [
       {
         id: "en_gb_en_morning",
         text: "Good morning",
-        eventRef: "morning",
+        eventRef: "salve.event.temporal.morning",
       },
       {
         id: "en_gb_en_afternoon",
         text: "Good afternoon",
-        eventRef: "afternoon",
+        eventRef: "salve.event.temporal.afternoon",
       },
       {
         id: "en_gb_en_evening",
         text: "Good evening",
-        eventRef: "evening",
-      },
-      {
-        id: "en_gb_en_eid",
-        text: "Eid Mubarak!",
-        eventRef: "eid_al_fitr",
-      },
-      {
-        id: "en_gb_en_ramadan",
-        text: "Ramadan Kareem!",
-        eventRef: "ramadan_start",
-      },
-      {
-        id: "en_gb_en_cny",
-        text: "Happy Chinese New Year!",
-        eventRef: "chinese_new_year",
-      },
-      {
-        id: "en_gb_en_christmas",
-        text: "Merry Christmas!",
-        eventRef: "christmas",
+        eventRef: "salve.event.temporal.evening",
       },
       {
         id: "en_gb_en_fallback",
         text: "Hello",
+      },
+      {
+        id: "en_gb_eid_en",
+        text: "Eid Mubarak!",
+        eventRef: "salve.event.religious.muslim.eid_al_fitr",
+        locale: "en-GB",
+      },
+      {
+        id: "en_gb_ramadan_en",
+        text: "Ramadan Kareem!",
+        eventRef: "salve.event.religious.muslim.ramadan_start",
+        locale: "en-GB",
+      },
+      {
+        id: "en_gb_cny_en",
+        text: "Happy Chinese New Year!",
+        eventRef: "salve.event.civil.secular.chinese_new_year",
+        locale: "en-GB",
       },
     ],
   },
@@ -702,49 +705,45 @@ export const DEMO_PACKS: GreetingPack[] = [
       {
         id: "de_de_de_unity",
         text: "Alles Gute zum Tag der Deutschen Einheit!",
-        eventRef: "german_unity_day",
+        eventRef: "salve.event.civil.national.de.unity_day",
+        notes: "German Unity Day",
       },
       {
         id: "de_de_de_unity_formal",
         text: "Einen schönen Tag der Deutschen Einheit.",
-        eventRef: "german_unity_day",
+        eventRef: "salve.event.civil.national.de.unity_day",
         formality: "formal" as const,
       },
       {
         id: "de_de_de_newyear",
         text: "Frohes neues Jahr!",
-        eventRef: "new_year",
+        eventRef: "salve.event.temporal.new_year",
       },
       {
         id: "de_de_de_morning",
         text: "Guten Morgen",
-        eventRef: "morning",
+        eventRef: "salve.event.temporal.morning",
       },
       {
         id: "de_de_de_midday",
         text: "Mahlzeit",
-        eventRef: "midday",
+        eventRef: "salve.event.temporal.midday",
         formality: "informal" as const,
       },
       {
         id: "de_de_de_afternoon",
         text: "Guten Tag",
-        eventRef: "afternoon",
+        eventRef: "salve.event.temporal.afternoon",
       },
       {
         id: "de_de_de_evening",
         text: "Guten Abend",
-        eventRef: "evening",
+        eventRef: "salve.event.temporal.evening",
       },
       {
         id: "de_de_de_night",
         text: "Gute Nacht",
-        eventRef: "night",
-      },
-      {
-        id: "de_de_de_christmas",
-        text: "Frohe Weihnachten!",
-        eventRef: "christmas",
+        eventRef: "salve.event.temporal.night",
       },
       {
         id: "de_de_de_fallback",
@@ -756,24 +755,27 @@ export const DEMO_PACKS: GreetingPack[] = [
     locale: "tr-TR",
     greetings: [
       {
-        id: "tr_tr_tr_eid",
+        id: "tr_tr_eid_tr",
         text: "Bayramınız kutlu olsun!",
-        eventRef: "eid_al_fitr",
+        eventRef: "salve.event.religious.muslim.eid_al_fitr",
+        locale: "tr-TR",
+        notes: "Turkish: Holiday greetings",
       },
       {
-        id: "tr_tr_tr_ramadan",
+        id: "tr_tr_ramadan_tr",
         text: "Hayırlı Ramazanlar!",
-        eventRef: "ramadan_start",
+        eventRef: "salve.event.religious.muslim.ramadan_start",
+        locale: "tr-TR",
       },
       {
         id: "tr_tr_tr_morning",
         text: "Günaydın",
-        eventRef: "morning",
+        eventRef: "salve.event.temporal.morning",
       },
       {
         id: "tr_tr_tr_afternoon",
         text: "İyi günler",
-        eventRef: "afternoon",
+        eventRef: "salve.event.temporal.afternoon",
       },
       {
         id: "tr_tr_tr_fallback",
@@ -785,18 +787,21 @@ export const DEMO_PACKS: GreetingPack[] = [
     locale: "zh-CN",
     greetings: [
       {
-        id: "zh_cn_zh_cny",
+        id: "zh_cn_cny_zh",
         text: "新年快乐！",
-        eventRef: "chinese_new_year",
+        eventRef: "salve.event.civil.secular.chinese_new_year",
+        locale: "zh-CN",
       },
       {
-        id: "zh_cn_zh_lantern",
+        id: "zh_cn_lantern_zh",
         text: "元宵节快乐！",
-        eventRef: "lantern_festival",
+        eventRef: "salve.event.civil.secular.lantern_festival",
+        locale: "zh-CN",
       },
       {
         id: "zh_cn_zh_fallback",
         text: "你好",
+        notes: "General welcome / hello",
       },
     ],
   },

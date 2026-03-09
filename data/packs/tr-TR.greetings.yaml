@@ -1,0 +1,15 @@
+# Turkish Greeting Pack (Turkey)
+locale: tr-TR
+greetings:
+  # --- Temporal ---
+  - id: "tr_morning"
+    text: "Günaydın"
+    eventRef: "salve.event.temporal.morning"
+
+  - id: "tr_afternoon"
+    text: "İyi günler"
+    eventRef: "salve.event.temporal.afternoon"
+
+  # --- Fallback ---
+  - id: "tr_fallback"
+    text: "Merhaba"

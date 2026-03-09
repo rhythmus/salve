@@ -1,0 +1,6 @@
+# Arabic Greeting Pack
+locale: ar
+greetings:
+  - id: "ar_fallback"
+    text: "مرحباً"
+    notes: "General welcome / hello"
