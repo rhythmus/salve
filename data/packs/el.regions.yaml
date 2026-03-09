@@ -1,0 +1,15 @@
+# Geographic Region Definitions for Greek
+# $schema: "./regions.schema.json"
+
+regions:
+  - id: grc_macro
+    name: Greece
+    locale: el-GR
+    priority: 100
+    # Rough bound box for Greece mainland + major islands
+    polygon:
+      - [41.8, 19.3]
+      - [41.8, 28.5]
+      - [34.7, 28.5]
+      - [34.7, 19.3]
+      - [41.8, 19.3]
