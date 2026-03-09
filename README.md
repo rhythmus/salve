@@ -199,6 +199,14 @@ This project is dedicated to my younger brother, Pieter, at the occasion of Salv
 
 Pieter has been my teacher and mentor in coding, instilling in me a deep enthusiasm for engineering and the craft of building beautiful, useful software. This dedication is a tribute to the years-long road we have walked together.
 
+```
+
+## Data Sources & Accountability
+
+Salve is built upon a foundation of shared cultural knowledge. We maintain a comprehensive bibliography of all data sources — including hundreds of Wikipedia articles, cultural podcasts, and linguistic research — to ensure accountability and academic fairness.
+
+See [data/data-sources.bib](./data/data-sources.bib) for the full BibTeX bibliography.
+
 ## Citation
 
 If you use Salve in your research or project, please cite it using the metadata in `CITATION.cff` or as follows:
