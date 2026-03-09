@@ -90,8 +90,8 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
     - [x] Implement `LocationResolver` with point-in-polygon support.
     - [x] Add hierarchical resolution logic (Priority-based specificity).
     - [x] Populate comprehensive region data for the Dutch-speaking area (18 regions).
-    - [ ] Finalize and validate existing packs (`el`, `bg`).
-    - [ ] Create starter packs for key regions:
+    - [x] Populate comprehensive Greek holiday data (15+ events).
+    - [x] Add starter packs for key regions:
         - [ ] `en-US`/`en-GB`: Civil holidays and Thanksgiving.
         - [ ] `de-DE`: High-formality address protocols.
         - [ ] `ar-SA`: Hijri calendar integration demonstration.
@@ -109,6 +109,7 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
 - **M9.3: Global Event Namespace Registry** (Completed)
     - [x] Create a deterministic Event Registry (`salve.event.domain.region.name`) with alias support.
     - [x] Support domains: `bank`, `civil`, `religious`, `personal`, `seasonal`, `protocol`, `affinity`.
+    - [x] Implement Hybrid Event Model: Separation of Global (Tradition) and Regional (Locale) events.
     - [x] Seed 14 default events covering bank holidays, religious observances, and personal events.
 - **M9.4: The Salve Context Normalization Algorithm (SCNA)** (Mostly Complete)
     - [x] Introduce pre-processing of API inputs into a unified `SalveContextV1` → `NormalizedContext`.

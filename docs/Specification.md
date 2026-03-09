@@ -905,6 +905,26 @@ these guidelines when creating new packs:
       Serbian Latin vs. Cyrillic), differentiate entries using the
       "script" property.
 
+### 17.7.  Hybrid Event Distribution Model
+
+Salve MUST distinguish between global and regional event greetings
+using a hybrid storage model:
+
+   1.  Tradition-Based (Global):  Greetings for cross-cultural
+       celebrations (e.g., Christmas, Eid al-Fitr, Lunar New Year)
+       MUST be stored in tradition-specific files (e.g.,
+       "christian.events.yaml"). These files contain greetings for
+       multiple locales sharing the same tradition.
+
+   2.  Locale-Based (Regional):  Greetings for events unique to a
+       specific geography or nation (e.g., Greek Independence Day,
+       Dutch King's Day) MUST be stored in locale-specific event
+       files (e.g., "el-GR.events.yaml").
+
+This separation ensures that common religious or secular lexicon 
+is centralized while regional cultural milestones remain 
+isolated to their specific locales.
+
 ## 18.  Pack Distribution and Registry
 
 A Pack Registry MUST:
@@ -1642,7 +1662,7 @@ Potential extensions include:
 
 ## 32.  References
 
-### 31.1.  Normative References
+### 32.1.  Normative References
 
    [BCP47]    Phillips, A., Ed. and M. Davis, Ed., "Tags for
               Identifying Languages", BCP 47, RFC 5646,
@@ -1657,7 +1677,11 @@ Potential extensions include:
               RFC 2119 Key Words", BCP 14, RFC 8174, May 2017,
               <https://www.rfc-editor.org/info/rfc8174>.
 
-### 31.2.  Informative References
+### 32.2.  Informative References
+
+   [BIB]      Soudan, W., "Salve Data Sources Bibliography",
+              Salve Project, 2026,
+              <data/data-sources.bib>.
 
    [CLDR]     Unicode Consortium, "Unicode Common Locale Data
               Repository (CLDR)", <https://cldr.unicode.org/>.
