@@ -1,15 +1,14 @@
 module.exports = {
-    preset: 'ts-jest',
+    preset: 'ts-jest/presets/default-esm',
     testEnvironment: 'node',
     testMatch: ['**/test/**/*.test.ts'],
     moduleNameMapper: {
         '^@salve/(.*)$': '<rootDir>/packages/$1/src',
     },
     transform: {
-        '^.+\\.tsx?$': ['ts-jest', { useESM: true }],
+        '^.+\\.ts$': 'ts-jest',
     },
     transformIgnorePatterns: [
-        'node_modules/(?!(bg-name-days)/)',
-    ],
-    extensionsToTreatAsEsm: ['.ts'],
+        'node_modules/(?!(bg-name-days|greek-namedays|@desquared)/)',
+    ]
 };
