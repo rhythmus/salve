@@ -4,6 +4,10 @@ dist/
 .DS_Store
 
 # TypeScript compilation output (in-place builds)
+packages/*/*.js
+packages/*/*.d.ts
+packages/*/*.js.map
+packages/*/*.d.ts.map
 packages/*/src/**/*.js
 packages/*/src/**/*.d.ts
 packages/*/src/**/*.js.map

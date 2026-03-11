@@ -319,7 +319,7 @@ Section 17.2:
 
    -  "type":  The speech-act category of the greeting.
    -  "phase":  Interaction phase ("encounter" for arrivals, "parting" for
-      departures).
+      departures, or "making acquaintance" for introductions).
    -  "role":  Interaction role ("initiator" or "responder").
    -  "relationship":  Applicable social relationship contexts.
    -  "setting":  Applicable interaction settings (e.g., "chat",
@@ -868,15 +868,19 @@ Each greeting entry MAY include:
    -  "eventRef":  A reference to a CelebrationEvent identifier.
    -  "expectedResponse":  The prescribed reply for call-response
       greeting patterns (see Section 6.8).
-   -  "formality":  A constraint ("informal", "formal", or "neutral").
-   -  "phase":  An interaction phase constraint ("encounter" or "parting").
+   -  "formality":  A constraint ("highly informal", "informal", "neutral", "formal", or "hyperformal").
+   -  "phase":  An interaction phase constraint ("encounter", "parting", or "making acquaintance").
    -  "role":  An interaction role ("initiator" or "responder").
    -  "relationship":  An array of applicable relationship contexts
       ("stranger", "acquaintance", "friend", "family", "superior",
-      or "subordinate").
    -  "setting":  An array of applicable interaction settings
       ("direct_address", "group_address", "public_announcement",
-      "chat_message", "email_opening", or "email_closing").
+      "chat_message", "email_opening", "email_closing", "ui",
+      "chat", "email", or "phone").
+   -  "metadata": A free-form key-value dictionary (Record<string, unknown>)
+      for storing pack-specific supplementary data (e.g., custom flags,
+      WikiData references, or legacy string mappings) not governed by
+      core engine constraints.
 
 ### 17.3.  JSON Schema Validation
 
@@ -1222,14 +1226,16 @@ The v1 context MUST be structured into six sections:
           derived from locale if omitted.
 
    2.  "interaction" (OPTIONAL):  Interaction frame.
-       -  "phase":  "encounter" or "parting" (default: "encounter").
-       -  "setting":  "ui", "chat", or "email" (default: "ui").
+       -  "phase":  "encounter", "parting", or "making acquaintance" (default: "encounter").
+       -  "setting":  "direct_address", "group_address", "public_announcement",
+          "chat_message", "email_opening", "email_closing", "ui", "chat",
+          "email", or "phone" (default: "ui").
        -  "role":  "initiator" or "responder" (default: "initiator").
        -  "relationship":  One of "stranger", "acquaintance",
-          "friend", "family", "superior", or "subordinate"
+          "friend", "family", "superior", "subordinate", or "intimate"
           (default: "stranger").
-       -  "formality":  "informal", "formal", or "neutral"
-          (default: "neutral").
+       -  "formality":  "highly informal", "informal", "neutral", "formal",
+          or "hyperformal" (default: "neutral").
        -  "style":  A GreetingStyle value (default: "neutral").
 
    3.  "person" (OPTIONAL):  Person being addressed.
@@ -1362,10 +1368,12 @@ matches all values for that dimension):
    2.  dayPeriod:  If present, the rule only matches if the
        normalized context's dayPeriod equals this value.
 
-   3.  phase:  If present ("encounter" or "parting"), the rule only
+   3.  phase:  If present ("encounter", "parting", or "making acquaintance"), the rule only
        matches if the interaction phase matches.
 
-   4.  setting:  If present (array of "ui", "chat", "email"), the
+   4.  setting:  If present (array of "direct_address", "group_address",
+       "public_announcement", "chat_message", "email_opening",
+       "email_closing", "ui", "chat", "email", or "phone"), the
        rule only matches if the interaction setting is included in
        the array.
 

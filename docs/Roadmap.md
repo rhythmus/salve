@@ -20,6 +20,9 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
 - **M2.3: Anti-Repetition Layer**
     - [x] Define pluggable memory interface (`GreetingMemory`).
     - […] Implement default localStorage provider for browser environments (interface exists, no built-in localStorage adapter).
+- **M2.4: Build & Test Infrastructure** (Completed)
+    - [x] Stabilize ESM monorepo architecture and workspace aliases.
+    - [x] Unify Jest testing environment with `ts-jest` for `import/export` compatibility.
 
 ## Milestone 3: Implementing Calendar Plugins (Completed)
 - **M3.1: Gregorian Plugin**
@@ -75,12 +78,12 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
     - [ ] **Cultural Implementation Guide**: Author a comprehensive guide for pack contributors explaining JSON schemas and specificity scoring.
 
 ## Milestone 8: Final Demo & Public Launch
-- **M8.1: The "Salve" Showcase (Demo App)** (In Progress)
+- **M8.1: The "Salve" Showcase (Demo App)** (Completed)
     - [x] Refine `packages/demo` into a polished web experience powered by the real `@salve/core` engine and calendar plugins.
     - [x] **Interactive Playground**: Add controls for Locale, Time, and User Attributes to see real-time resolution, including presets for multiple cultural scenarios.
     - [x] **"Explain Why" Visualization**: Render a narrative reasoning paragraph with inline editable variables and expose scoring trace.
     - [x] **Static Showcase Build**: Produce a single self-contained `website/index.html` (all JS and CSS inlined) suitable for `file://` usage and GitHub Pages.
-    - [ ] Polish typography and microcopy for the landing page hero and explanation text.
+    - [x] Polish typography and microcopy for the landing page hero by stripping the developer-specific layout (drawer, developer area) to maximize narrative immersion.
 - **M8.2: Ecosystem Seeding (Modular & Event Packs)** (Completed)
     - [x] Establish modular "Source of Truth" architecture: `*.greetings.yaml`, `*.regions.yaml`, and `*.events.yaml`.
     - [x] Create JSON Schema for pack validation (`data/greeting-pack.schema.json`).
@@ -107,7 +110,8 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
     - [x] Implement "Smart Inheritance" for `locale` and `sources` at the pack level to reduce redundancy.
     - [x] Implement the formal Greeting Ontology defining rules by `act` (salutation, valediction, etc.), `form` (email_opening, address_only), and `style` (neutral, formal, ceremonial, etc.) — types and `GreetingRule` defined in `@salve/types`.
     - [x] Shift phase terminology from session-based (`open`/`close`) to interaction-based (`encounter`/`parting`) across the entire stack.
-    - [x] Support multi-script greetings via embedded transliteration keys in YAML data packs.
+    - [x] Expand structural flexibility to natively support array unions for constraints like `phase` and `notes` without duplicating syntax rules.
+    - [x] Support multi-script greetings via embedded transliteration keys (and universal `metadata`) in YAML data packs.
 - **M9.3: Global Event Namespace Registry** (Completed)
     - [x] Create a deterministic Event Registry (`salve.event.domain.region.name`) with alias support.
     - [x] Support domains: `bank`, `civil`, `religious`, `personal`, `seasonal`, `protocol`, `affinity`.
