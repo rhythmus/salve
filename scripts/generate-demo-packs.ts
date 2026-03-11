@@ -116,6 +116,7 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
         if (isEvents) {
             if (parsed && Array.isArray(parsed.greetings)) {
                 for (const g of parsed.greetings) {
+                    g.locale = g.locale || parsed.locale;
                     if (!g.locale) {
                         console.error(`❌ Event greeting in ${file} missing "locale"`);
                         process.exit(1);
@@ -177,7 +178,8 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
                         id = slugify(g.eventRef.split(".").pop() || "");
                     } else if (g.notes) {
                         // Try to extract from notes (e.g., "Greek: Hello" -> "hello")
-                        const noteSlug = slugify(g.notes.replace(/^[^:]+:\s*/, ""));
+                        const noteStr = Array.isArray(g.notes) ? g.notes.join(" ") : g.notes;
+                        const noteSlug = slugify(noteStr.replace(/^[^:]+:\s*/, ""));
                         id = noteSlug || "item";
                     } else {
                         id = "item";
@@ -208,11 +210,11 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
 
                 // Collect transliterations
                 const transliterations: Record<string, string> = {};
-                const knownKeys = ["id", "text", "eventRef", "timeOfDay", "audience", "audienceSize", "locale", "expectedResponse", "formality", "phase", "role", "relationship", "setting", "notes", "sources"];
+                const knownKeys = ["id", "text", "eventRef", "timeOfDay", "audience", "audienceSize", "locale", "expectedResponse", "formality", "phase", "role", "relationship", "setting", "notes", "sources", "WikiData", "date", "metadata"];
 
                 Object.keys(g).forEach(key => {
                     if (!knownKeys.includes(key) && /^[a-z]{2,3}(-[A-Z]{2})?(-[A-Za-z0-9]+)*$/.test(key)) {
-                        transliterations[key] = g[key];
+                        transliterations[key] = Array.isArray(g[key]) ? g[key].join(" ") : g[key];
                     }
                 });
 
@@ -265,12 +267,31 @@ function greetingToTS(g: NormalizedGreetingEntry, indent: string): string {
         lines.push(`${indent}  phase: ${val},`);
     }
     if (g.role) lines.push(`${indent}  role: "${g.role}",`);
-    if (g.relationship) lines.push(`${indent}  relationship: [${g.relationship.map(r => `"${r}"`).join(", ")}],`);
-    if (g.setting) lines.push(`${indent}  setting: [${g.setting.map(s => `"${s}"`).join(", ")}],`);
-    if (g.notes) lines.push(`${indent}  notes: "${escapeString(g.notes)}",`);
+    if (g.relationship) {
+        const val = Array.isArray(g.relationship) ? g.relationship : [g.relationship];
+        lines.push(`${indent}  relationship: [${val.map(r => `"${r}"`).join(", ")}],`);
+    }
+    if (g.setting) {
+        const val = Array.isArray(g.setting) ? g.setting : [g.setting];
+        lines.push(`${indent}  setting: [${val.map(s => `"${s}"`).join(", ")}],`);
+    }
+    if (g.notes) {
+        const val = Array.isArray(g.notes) ? `[${g.notes.map(n => `"${escapeString(n)}"`).join(", ")}]` : `"${escapeString(g.notes)}"`;
+        lines.push(`${indent}  notes: ${val},`);
+    }
     if (g.sources) {
         const val = Array.isArray(g.sources) ? `[${g.sources.map(s => `"${escapeString(s)}"`).join(", ")}]` : `"${escapeString(g.sources)}"`;
         lines.push(`${indent}  sources: ${val},`);
+    }
+    const metaKeys = ["WikiData", "date", "metadata"].filter(k => (g as any)[k] !== undefined);
+    if (metaKeys.length > 0) {
+        lines.push(`${indent}  // @ts-ignore - bypass cached strict type checks`);
+        lines.push(`${indent}  metadata: {`);
+        metaKeys.forEach(mk => {
+            const v = (g as any)[mk];
+            lines.push(`${indent}    "${mk}": ${JSON.stringify(v)},`);
+        });
+        lines.push(`${indent}  },`);
     }
     if (g.transliterations) {
         lines.push(`${indent}  transliterations: {`);
@@ -291,7 +312,7 @@ function generate(packs: NormalizedGreetingPack[], regions: RegionDefinition[]):
     lines.push(` * Generated at: ${new Date().toISOString()}`);
     lines.push(" */");
     lines.push("");
-    lines.push('import type { GreetingPack, RegionDefinition } from "@salve/types";');
+    lines.push('import type { GreetingPack } from "@salve/types";');
     lines.push("");
     lines.push("export const DEMO_PACKS: GreetingPack[] = [");
 
@@ -313,7 +334,11 @@ function generate(packs: NormalizedGreetingPack[], regions: RegionDefinition[]):
 
     lines.push("];");
     lines.push("");
-    lines.push("export const DEMO_REGIONS: RegionDefinition[] = " + JSON.stringify(regions, null, 2) + ";");
+    lines.push("export const DEMO_REGIONS = [");
+    regions.forEach(r => {
+        lines.push(JSON.stringify(r, null, 2).split('\n').map((line, i) => i === 0 ? `  ${line}` : `  ${line}`).join('\n') + ",");
+    });
+    lines.push("];");
     lines.push("");
     return lines.join("\n");
 }

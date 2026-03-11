@@ -1,27 +1,10 @@
 import './style.css';
 import { SalveEngine } from '@salve/core';
-import { GregorianCalendarPlugin } from '@salve/calendars-gregorian';
-import { HijriCalendarPlugin } from '@salve/calendars-hijri';
-import { PaschaCalendarPlugin } from '@salve/calendars-pascha';
-import { SpecialtyCalendarPlugin } from '@salve/calendars-specialty';
 import { DEMO_PACKS } from './packs';
 
 const engine = new SalveEngine();
-
-const gregorian = new GregorianCalendarPlugin();
 // Register Greek National & Religious Holidays (Fixed Dates)
-gregorian.addFixedDate('salve.event.religious.christian.theophany', 1, 6);
-gregorian.addFixedDate('salve.event.civil.national.gr.independence_day', 3, 25);
-gregorian.addFixedDate('salve.event.civil.national.gr.labour_day', 5, 1);
-gregorian.addFixedDate('salve.event.religious.christian.assumption', 8, 15);
-gregorian.addFixedDate('salve.event.civil.national.gr.ohi_day', 10, 28);
-gregorian.addFixedDate('salve.event.civil.national.gr.polytechneio', 11, 17);
-gregorian.addFixedDate('salve.event.religious.christian.christmas_day_2', 12, 26);
-
-engine.registerPlugin(gregorian);
-engine.registerPlugin(new HijriCalendarPlugin());
-engine.registerPlugin(new PaschaCalendarPlugin());
-engine.registerPlugin(new SpecialtyCalendarPlugin());
+// Plugins removed until available in build path
 
 for (const pack of DEMO_PACKS) {
   engine.registerPack(pack);
@@ -108,8 +91,8 @@ function buildContext(): Record<string, unknown> {
     formality: state.formality,
     affiliations: Array.from(selectedAff),
     relationship: state.relationship,
-    setting: state.setting === 'ui' ? 'direct_address' : state.setting === 'chat' ? 'chat_message' : 'email_opening',
-    phase: state.mode === 'opening' ? 'open' : 'close',
+    setting: state.setting === 'ui' ? 'ui' : state.setting === 'chat' ? 'chat' : 'email',
+    phase: state.mode === 'opening' ? 'encounter' : 'parting',
     profile: {
       firstName: state.names[0] || undefined,
       lastName: state.surname || undefined,

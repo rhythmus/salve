@@ -1,6 +1,6 @@
 # Salve!
 
-Greet your users as if you were a native speaker of their language
+Greet your users as if you were a local!
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)
@@ -193,14 +193,6 @@ If you find Salve useful, please consider sponsoring the project to support its 
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-## Gelukkige verjaardag, Pieter!
-
-This project is dedicated to my younger brother, Pieter, at the occasion of Salve’s first public release, on his birthday (March 4th, 2026).
-
-Pieter has been my teacher and mentor in coding, instilling in me a deep enthusiasm for engineering and the craft of building beautiful, useful software. This dedication is a tribute to the years-long road we have walked together.
-
-```
-
 ## Data Sources & Accountability
 
 Salve is built upon a foundation of shared cultural knowledge. We maintain a comprehensive bibliography of all data sources — including hundreds of Wikipedia articles, cultural podcasts, and linguistic research — to ensure accountability and academic fairness.
@@ -220,6 +212,12 @@ If you use Salve in your research or project, please cite it using the metadata 
   year = {2026}
 }
 ```
+
+## Gelukkige verjaardag, Pieter!
+
+This project is dedicated to my younger brother, Pieter, at the occasion of Salve’s first public release, on his birthday (March 4th, 2026).
+
+Pieter has been my teacher and mentor in coding, instilling in me a deep enthusiasm for engineering and the craft of building beautiful, useful software. This dedication is a tribute to the years-long road we have walked together.
 
 ## Contact
 
