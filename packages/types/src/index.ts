@@ -12,7 +12,7 @@ export type Formality = "informal" | "highly informal" | "formal" | "hyperformal
 
 export type TimeOfDay = "morning" | "midday" | "afternoon" | "evening" | "night";
 
-export type GreetingPhase = "encounter" | "parting";
+export type GreetingPhase = "encounter" | "parting" | "making acquaintance";
 
 export type InteractionRole = "initiator" | "responder";
 
@@ -22,7 +22,8 @@ export type RelationshipContext =
     | "friend"
     | "family"
     | "superior"
-    | "subordinate";
+    | "subordinate"
+    | "intimate";
 
 export type InteractionSetting =
     | "direct_address"
@@ -30,7 +31,11 @@ export type InteractionSetting =
     | "public_announcement"
     | "chat_message"
     | "email_opening"
-    | "email_closing";
+    | "email_closing"
+    | "ui"
+    | "chat"
+    | "email"
+    | "phone";
 
 export type EventDomain =
     | "personal"
@@ -87,17 +92,18 @@ export interface GreetingLexiconEntry {
     text: string;
     expectedResponse?: string;
     formality?: Formality;
-    relationship?: RelationshipContext[];
-    setting?: InteractionSetting[];
-    phase?: GreetingPhase;
+    relationship?: RelationshipContext | RelationshipContext[];
+    setting?: InteractionSetting | InteractionSetting[];
+    phase?: GreetingPhase | GreetingPhase[];
     role?: InteractionRole;
     eventRef?: string; // Links to a CelebrationEvent ID
     timeOfDay?: TimeOfDay | TimeOfDay[];
-    audienceSize?: string;
+    audienceSize?: string | number;
     locale?: string | string[];
-    notes?: string;
+    notes?: string | string[];
     sources?: string | string[];
-    transliterations?: Record<string, string>;
+    transliterations?: Record<string, string | string[]>;
+    metadata?: Record<string, unknown>;
 }
 
 /**
@@ -260,6 +266,7 @@ export interface GreetingRuleWhen {
     formality?: Formality;
     affiliationsAny?: string[];
     subculturesAny?: string[];
+    audienceSize?: string | number;
 }
 
 /** A single ontology-aware greeting rule inside a pack */
@@ -276,7 +283,7 @@ export interface GreetingRule {
     timeOfDay?: TimeOfDay | TimeOfDay[];
     audienceSize?: string;
     locale?: string | string[];
-    notes?: string;
+    notes?: string | string[];
     sources?: string | string[];
     transliterations?: Record<string, string>;
     metadata?: Record<string, unknown>;
@@ -339,6 +346,7 @@ export interface SalveInteraction {
     relationship?: RelationshipContext;
     formality?: Formality;
     style?: GreetingStyle;
+    audienceSize?: number;
 }
 
 /** Title on a person profile */
@@ -407,7 +415,7 @@ export interface NormalizedContext {
         location?: { lat: number; lng: number };
         outputLocale: string;
     };
-    interaction: Required<SalveInteraction>;
+    interaction: Required<SalveInteraction> & { audienceSize?: number };
     person: SalvePerson | null;
     memberships: Required<SalveMemberships>;
     affinities: Required<SalveAffinities>;

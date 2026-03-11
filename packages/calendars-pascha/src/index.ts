@@ -94,16 +94,9 @@ export class PaschaCalendarPlugin implements CalendarPlugin {
         const c = year % 7;
         const d = (19 * a + 15) % 30;
         const e = (2 * b + 4 * c + 6 * d + 6) % 7;
-        let day = d + e + 4;
-        let month = 4; // April
-
-        if (day > 30) {
-            day -= 30;
-            month = 5; // May
-        }
-
+        // Calculate Julian Easter as offset from March 22
+        const date = new Date(year, 2, 22 + d + e);
         // Convert from Julian to Gregorian (13 days difference for 1900-2099)
-        const date = new Date(year, month - 1, day);
         date.setDate(date.getDate() + 13);
         return date;
     }

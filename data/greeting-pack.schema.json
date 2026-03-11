@@ -123,7 +123,14 @@
                     "description": "Chronemic constraints"
                 },
                 "audienceSize": {
-                    "type": "string",
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ],
                     "description": "Numerical or computable audience size constraint (e.g. '>4', '2', '1')"
                 },
                 "locale": {
@@ -141,10 +148,24 @@
                     "description": "Optional BCP 47 compliant language/dialect tag(s) for this specific greeting"
                 },
                 "phase": {
-                    "type": "string",
-                    "enum": [
-                        "encounter",
-                        "parting"
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "enum": [
+                                "encounter",
+                                "parting"
+                            ]
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "encounter",
+                                    "parting"
+                                ]
+                            }
+                        }
                     ],
                     "description": "Session phase constraint"
                 },
@@ -157,18 +178,35 @@
                     "description": "Interaction role constraint"
                 },
                 "relationship": {
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "enum": [
-                            "stranger",
-                            "acquaintance",
-                            "friend",
-                            "family",
-                            "superior",
-                            "subordinate"
-                        ]
-                    },
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "enum": [
+                                "stranger",
+                                "acquaintance",
+                                "friend",
+                                "family",
+                                "intimate",
+                                "superior",
+                                "subordinate"
+                            ]
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "stranger",
+                                    "acquaintance",
+                                    "friend",
+                                    "family",
+                                    "intimate",
+                                    "superior",
+                                    "subordinate"
+                                ]
+                            }
+                        }
+                    ],
                     "description": "Applicable relationship contexts"
                 },
                 "setting": {
@@ -181,13 +219,24 @@
                             "public_announcement",
                             "chat_message",
                             "email_opening",
-                            "email_closing"
+                            "email_closing",
+                            "phone"
                         ]
                     },
                     "description": "Applicable interaction settings"
                 },
                 "notes": {
-                    "type": "string",
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ],
                     "description": "Internal developer notes or context"
                 },
                 "sources": {
@@ -206,7 +255,17 @@
                 }
             },
             "additionalProperties": {
-                "type": "string"
+                "oneOf": [
+                    {
+                        "type": "string"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ]
             }
         }
     }

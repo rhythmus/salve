@@ -23,7 +23,7 @@ describe("SalveEngine.resolveV1", () => {
         style: "neutral",
         priority: 10,
         template: "Good morning",
-        when: { dayPeriod: "morning", phase: "opening" },
+        when: { dayPeriod: "morning", phase: "encounter" },
     };
 
     const neutralFallbackRule: GreetingRule = {
@@ -70,7 +70,7 @@ describe("SalveEngine.resolveV1", () => {
     test("should produce structured SalveOutputV1", async () => {
         const input: SalveContextV1 = {
             env: { now: new Date("2026-06-15T08:00:00Z"), locale: "en", timeZone: "UTC" },
-            interaction: { phase: "opening" },
+            interaction: { phase: "encounter" },
         };
 
         const result = await engine.resolveV1(input);
@@ -85,7 +85,7 @@ describe("SalveEngine.resolveV1", () => {
     test("should fall back to baseline when no day period matches", async () => {
         const input: SalveContextV1 = {
             env: { now: new Date("2026-06-15T15:00:00Z"), locale: "en", timeZone: "UTC" },
-            interaction: { phase: "opening" },
+            interaction: { phase: "encounter" },
         };
 
         const result = await engine.resolveV1(input);
@@ -133,7 +133,7 @@ describe("SalveEngine.resolveV1", () => {
     test("trace includes candidate information", async () => {
         const input: SalveContextV1 = {
             env: { now: new Date("2026-06-15T08:00:00Z"), locale: "en" },
-            interaction: { phase: "opening" },
+            interaction: { phase: "encounter" },
         };
 
         const result = await engine.resolveV1(input);

@@ -11,4 +11,5 @@ export * from "./normalize";
 export * from "./day-period";
 export * from "./locale-chain";
 export * from "./style";
+export * from "./location";
 export { SalveEngine } from "./engine";

@@ -72,7 +72,7 @@ describe("normalizeContext (SCNA)", () => {
     test("interaction defaults to opening/ui/initiator/stranger/neutral", () => {
         const ctx = normalizeContext(baseInput);
 
-        expect(ctx.interaction.phase).toBe("opening");
+        expect(ctx.interaction.phase).toBe("encounter");
         expect(ctx.interaction.setting).toBe("ui");
         expect(ctx.interaction.role).toBe("initiator");
         expect(ctx.interaction.relationship).toBe("stranger");
@@ -83,10 +83,10 @@ describe("normalizeContext (SCNA)", () => {
     test("explicit interaction values override defaults", () => {
         const ctx = normalizeContext({
             ...baseInput,
-            interaction: { phase: "closing", formality: "formal", style: "ceremonial" },
+            interaction: { phase: "parting", formality: "formal", style: "ceremonial" },
         });
 
-        expect(ctx.interaction.phase).toBe("closing");
+        expect(ctx.interaction.phase).toBe("parting");
         expect(ctx.interaction.formality).toBe("formal");
         expect(ctx.interaction.style).toBe("ceremonial");
         // Others still default

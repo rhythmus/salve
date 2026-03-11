@@ -111,6 +111,7 @@ const DEFAULT_INTERACTION: Required<SalveInteraction> = {
     relationship: "stranger",
     formality: "neutral",
     style: "neutral" as GreetingStyle,
+    audienceSize: undefined as unknown as number,
 };
 
 // ── Main Normalization Function ─────────────────────────────────
@@ -159,6 +160,7 @@ export function normalizeContext(input: SalveContextV1, locationResolver?: Locat
         relationship: input.interaction?.relationship ?? DEFAULT_INTERACTION.relationship,
         formality: input.interaction?.formality ?? DEFAULT_INTERACTION.formality,
         style: input.interaction?.style ?? DEFAULT_INTERACTION.style,
+        audienceSize: input.interaction?.audienceSize ?? DEFAULT_INTERACTION.audienceSize,
     };
 
     // Step 8 — Person normalization

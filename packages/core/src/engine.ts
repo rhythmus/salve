@@ -368,6 +368,13 @@ export class SalveEngine {
                 if (!matchedEvent) continue; // Rule requires event that isn't active
             }
 
+            // Audience Size Filter
+            if (rule.when?.audienceSize !== undefined && ctx.interaction.audienceSize !== undefined) {
+                if (!this.matchAudienceSize(rule.when.audienceSize, ctx.interaction.audienceSize)) {
+                    continue;
+                }
+            }
+
             // ── Stage 5: Scoring ────────────────────────────────
             const ruleLocale = allRuleEntries.find(
                 (re: { packId: string; precedence: number; rule: GreetingRule }) => re.rule === rule
@@ -474,17 +481,56 @@ export class SalveEngine {
         context: GreetingContext,
         trace: string[]
     ): GreetingLexiconEntry {
+        // Resolve timeOfDay from context.now
+        const hour = context.now.getHours();
+        let currentPeriod: string;
+        if (hour >= 5 && hour < 12) currentPeriod = "morning";
+        else if (hour >= 12 && hour < 14) currentPeriod = "midday";
+        else if (hour >= 14 && hour < 18) currentPeriod = "afternoon";
+        else if (hour >= 18 && hour < 22) currentPeriod = "evening";
+        else currentPeriod = "night";
+
         // Filter lexicon by event, phase, role, formality, etc.
         const candidates = pack.greetings.filter(g => {
             const eventMatch = event ? g.eventRef === event.id : !g.eventRef;
-            const phaseMatch = !g.phase || g.phase === context.phase;
+
+            let phaseMatch = true;
+            if (g.phase) {
+                const phases = Array.isArray(g.phase) ? g.phase : [g.phase];
+                phaseMatch = context.phase ? phases.includes(context.phase) : true;
+            }
+
             const roleMatch = !g.role || g.role === context.role;
             const formalityMatch = !g.formality || g.formality === context.formality;
+
+            let relationshipMatch = true;
+            if (g.relationship) {
+                const rels = Array.isArray(g.relationship) ? g.relationship : [g.relationship];
+                relationshipMatch = context.relationship ? rels.includes(context.relationship) : true;
+            }
+
+            let settingMatch = true;
+            if (g.setting) {
+                const settings = Array.isArray(g.setting) ? g.setting : [g.setting];
+                settingMatch = context.setting ? settings.includes(context.setting) : true;
+            }
+
+            let timeMatch = true;
+            if (g.timeOfDay) {
+                const times = Array.isArray(g.timeOfDay) ? g.timeOfDay : [g.timeOfDay];
+                timeMatch = times.includes(currentPeriod as any);
+            }
+
+            // Optional audienceSize filter logic (if audienceSize is passed in legacy context)
+            let audienceMatch = true;
+            if (g.audienceSize !== undefined && (context as any).audienceSize !== undefined) {
+                audienceMatch = this.matchAudienceSize(g.audienceSize, (context as any).audienceSize);
+            }
 
             // Anti-repetition check
             const isRemembered = this.memory?.has(`g:${pack.locale}:${g.id}`) ?? false;
 
-            return eventMatch && phaseMatch && roleMatch && formalityMatch && !isRemembered;
+            return eventMatch && phaseMatch && roleMatch && formalityMatch && relationshipMatch && settingMatch && timeMatch && audienceMatch && !isRemembered;
         });
 
         if (candidates.length > 0) {
@@ -526,6 +572,35 @@ export class SalveEngine {
                 trace: trace
             }
         };
+    }
+
+    /**
+     * Evaluates whether a given audience size satisfies an audienceSize constraint string.
+     * Supports exact integers (1), exact strings ("1"), minimums (">=1"), and strictly greater (">1").
+     */
+    private matchAudienceSize(constraint: string | number, actual: number): boolean {
+        if (typeof constraint === "number") {
+            return actual === constraint;
+        }
+
+        const str = constraint.trim();
+        if (str.startsWith(">=")) {
+            const val = parseInt(str.substring(2).trim(), 10);
+            return !isNaN(val) && actual >= val;
+        } else if (str.startsWith(">")) {
+            const val = parseInt(str.substring(1).trim(), 10);
+            return !isNaN(val) && actual > val;
+        } else if (str.startsWith("<=")) {
+            const val = parseInt(str.substring(2).trim(), 10);
+            return !isNaN(val) && actual <= val;
+        } else if (str.startsWith("<")) {
+            const val = parseInt(str.substring(1).trim(), 10);
+            return !isNaN(val) && actual < val;
+        } else {
+            // exact match fallback
+            const val = parseInt(str, 10);
+            return !isNaN(val) && actual === val;
+        }
     }
 }
 

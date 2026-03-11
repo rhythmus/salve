@@ -11,7 +11,7 @@ import {
 } from "../src/types";
 
 describe("SalveEngine", () => {
-    let engine: SalveEngine;
+    let engine: SalveEngine;;
 
     const mockPlugin: CalendarPlugin = {
         id: "test-plugin",
@@ -28,8 +28,8 @@ describe("SalveEngine", () => {
     const mockPack: GreetingPack = {
         locale: "en-US",
         greetings: [
-            { id: "generic-hi", text: "Hello", phase: "open" },
-            { id: "easter-hi", text: "Happy Easter", eventRef: "easter", phase: "open" }
+            { id: "generic-hi", text: "Hello", phase: "encounter" },
+            { id: "easter-hi", text: "Happy Easter", eventRef: "easter", phase: "encounter" }
         ]
     };
 
@@ -51,7 +51,7 @@ describe("SalveEngine", () => {
             now: new Date(2026, 3, 5), // April 5th (Easter in mock)
             locale: "en-US",
             affiliations: ["christian"],
-            phase: "open"
+            phase: "encounter"
         };
 
         const result = await engine.resolve(context);
@@ -66,7 +66,7 @@ describe("SalveEngine", () => {
             now: new Date(2026, 3, 5),
             locale: "en-US",
             affiliations: ["non-christian"], // Different affiliation
-            phase: "open"
+            phase: "encounter"
         };
 
         const result = await engine.resolve(context);
