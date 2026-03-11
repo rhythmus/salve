@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SALVE Test Harness</title>
+<style>
+body { font-family: system-ui, sans-serif; background:#fafafa; margin:40px; }
+h1 { margin-bottom:10px; }
+.container { display:grid; grid-template-columns: 420px 1fr; gap:40px; }
+.panel { padding:20px; border:1px solid #ddd; background:white; }
+label { display:block; margin-top:12px; font-size:14px; }
+select, input { width:100%; padding:6px; margin-top:4px; }
+button { margin-top:15px; padding:8px 14px; }
+.output { font-size:22px; margin-top:20px; font-weight:bold; }
+.expected { margin-top:10px; }
+.match { color:green; }
+.mismatch { color:red; }
+textarea { width:100%; height:120px; margin-top:10px; }
+</style>
+</head>
+
+<body>
+
+<h1>SALVE Greeting Engine Test Harness</h1>
+<p>This UI allows developers to configure a SALVE context and compare the engine output with an expected result.</p>
+
+<div class="container">
+
+<div class="panel">
+
+<h2>Context</h2>
+
+<label>Locale</label>
+<select id="locale">
+<option>el-GR</option>
+<option>de-DE</option>
+<option>de-AT</option>
+<option>nl-NL</option>
+<option>nl-BE</option>
+<option>en-US</option>
+<option>fr-FR</option>
+</select>
+
+<label>Time of day</label>
+<select id="time">
+<option value="09:00">09:00 (morning)</option>
+<option value="15:30">15:30 (afternoon)</option>
+<option value="19:00">19:00 (evening)</option>
+</select>
+
+<label>Relationship</label>
+<select id="relationship">
+<option value="">unknown</option>
+<option>friend</option>
+<option>stranger</option>
+<option>family</option>
+</select>
+
+<label>Formality</label>
+<select id="formality">
+<option value="">neutral</option>
+<option>formal</option>
+<option>informal</option>
+</select>
+
+<label>Given name</label>
+<input id="name" placeholder="Jan">
+
+<label>Surname</label>
+<input id="surname" placeholder="Müller">
+
+<label>Title</label>
+<select id="title">
+<option value="">none</option>
+<option>dr</option>
+<option>judge</option>
+<option>prof</option>
+</select>
+
+<label>Tradition</label>
+<select id="tradition">
+<option value="">none</option>
+<option>orthodox</option>
+<option>muslim</option>
+<option>catholic</option>
+</select>
+
+<label>Date (MM-DD)</label>
+<input id="date" placeholder="05-01">
+
+<button onclick="runTest()">Generate Greeting</button>
+
+</div>
+
+<div class="panel">
+
+<h2>Output</h2>
+
+<div id="result" class="output"></div>
+
+<div class="expected">
+<label>Expected Greeting</label>
+<input id="expected" placeholder="Expected greeting">
+</div>
+
+<div id="comparison"></div>
+
+<h3>Debug Context</h3>
+<textarea id="debug"></textarea>
+
+</div>
+
+</div>
+
+<script>
+
+function resolveGreeting(ctx){
+
+let locale = ctx.locale
+let time = ctx.time
+let greeting = "Hello"
+
+if(locale.startsWith("el")){
+    if(time < "12:00") greeting="Καλημέρα"
+    else greeting="Καλησπέρα"
+}
+
+if(locale.startsWith("de")){
+    if(time < "12:00") greeting="Guten Morgen"
+    else if(time < "18:00") greeting="Guten Tag"
+    else greeting="Guten Abend"
+}
+
+if(locale.startsWith("nl")){
+    if(time < "12:00") greeting="Goedemorgen"
+    else if(time < "18:00") greeting="Goedemiddag"
+    else greeting="Goedenavond"
+}
+
+if(ctx.name){
+    greeting += ", " + ctx.name
+}
+
+if(ctx.title && ctx.surname){
+    if(ctx.title==="dr" && locale.startsWith("de")){
+        greeting="Guten Morgen, Herr Doktor "+ctx.surname
+    }
+}
+
+if(ctx.tradition==="orthodox" && ctx.date==="04-20"){
+    greeting="Χριστός Ανέστη"
+}
+
+if(locale==="nl-BE" && ctx.date==="05-01"){
+    greeting="Fijne Dag van de Arbeid"
+}
+
+return greeting
+}
+
+function runTest(){
+
+let ctx = {
+locale: document.getElementById("locale").value,
+time: document.getElementById("time").value,
+relationship: document.getElementById("relationship").value,
+formality: document.getElementById("formality").value,
+name: document.getElementById("name").value,
+surname: document.getElementById("surname").value,
+title: document.getElementById("title").value,
+tradition: document.getElementById("tradition").value,
+date: document.getElementById("date").value
+}
+
+let result = resolveGreeting(ctx)
+
+document.getElementById("result").innerText=result
+
+let expected=document.getElementById("expected").value
+
+if(expected){
+
+if(expected===result){
+document.getElementById("comparison").innerHTML='<span class="match">✓ Output matches expectation</span>'
+}else{
+document.getElementById("comparison").innerHTML='<span class="mismatch">✗ Output does not match expectation</span>'
+}
+
+}
+
+document.getElementById("debug").value=JSON.stringify(ctx,null,2)
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SALVE Developer Playground — Context Builder, Event Simulator, Test Export</title>
+<style>
+  :root{--bg:#fbfbfb;--fg:#111;--muted:#666;--line:#d9d9d9;--panel:#fff;
+    --mono: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    --sans: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";}
+  html,body{height:100%;}
+  body{margin:24px;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.3;}
+  h1{font-size:22px;margin:0 0 6px 0;letter-spacing:.2px;}
+  .tagline{color:var(--muted);margin:0 0 18px 0;}
+  .grid{display:grid;grid-template-columns:420px 1fr;gap:18px;align-items:start;}
+  .panel{background:var(--panel);border:1px solid var(--line);padding:16px;}
+  .panel h2{font-size:14px;margin:0 0 10px 0;letter-spacing:.12em;text-transform:uppercase;color:#222;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  label{display:block;font-size:12px;color:#222;margin:10px 0 4px;}
+  select,input,textarea{width:100%;border:1px solid var(--line);background:#fff;color:var(--fg);
+    padding:8px 10px;font-size:13px;border-radius:0;outline:none;}
+  textarea{font-family:var(--mono);font-size:12px;min-height:120px;}
+  .mono{font-family:var(--mono);}
+  .btnbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+  button{border:1px solid var(--fg);background:#fff;color:var(--fg);padding:8px 10px;border-radius:0;cursor:pointer;font-size:13px;}
+  button.secondary{border-color:var(--line);}
+  button:active{transform:translateY(1px);}
+  .hero{font-size:40px;letter-spacing:.5px;margin:6px 0 8px;min-height:52px;}
+  .subhero{color:var(--muted);margin:0 0 14px 0;}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .ok{color:#0a7a2f;}
+  .bad{color:#b00020;}
+  .small{font-size:12px;color:var(--muted);}
+  .section{border-top:1px solid var(--line);margin-top:14px;padding-top:14px;}
+  .kv{display:grid;grid-template-columns:120px 1fr;gap:8px;font-size:12px;margin:4px 0;}
+  .kv div:first-child{color:#333;}
+  .kv code{font-family:var(--mono);font-size:12px;}
+  .checkgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .check{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:6px 8px;font-size:12px;user-select:none;}
+  .check input{width:auto;padding:0;margin:0;}
+  .list{border:1px solid var(--line);padding:10px;font-family:var(--mono);font-size:12px;min-height:78px;white-space:pre-wrap;background:#fff;}
+  .suite{max-height:220px;overflow:auto;}
+  .suite-item{border-top:1px solid var(--line);padding:8px 0;font-family:var(--mono);font-size:12px;}
+  .suite-item:first-child{border-top:0;}
+  .suite-item b{font-family:var(--sans);font-size:12px;}
+</style>
+</head>
+<body>
+<h1>SALVE Developer Playground</h1>
+<p class="tagline">Build contexts, simulate events, see trace, and export test vectors (single-case or suite). Self-contained demo runtime included.</p>
+
+<div class="grid">
+  <div class="panel">
+    <h2>Context Builder</h2>
+
+    <div class="row">
+      <div>
+        <label>env.locale (BCP-47)</label>
+        <select id="env_locale">
+          <option>nl-BE</option><option>nl-NL</option><option>de-DE</option><option>de-AT</option>
+          <option>el-GR</option><option>en-US</option><option>en-GB</option><option>fr-FR</option><option>ar-SA</option>
+        </select>
+      </div>
+      <div>
+        <label>env.outputLocale</label>
+        <select id="env_outputLocale">
+          <option value="">(default = env.locale)</option>
+          <option>nl-BE</option><option>nl-NL</option><option>de-DE</option><option>de-AT</option>
+          <option>el-GR</option><option>en-US</option><option>en-GB</option><option>fr-FR</option><option>ar-SA</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>env.region</label>
+        <select id="env_region">
+          <option value="">(derive)</option>
+          <option>BE</option><option>NL</option><option>DE</option><option>AT</option><option>GR</option>
+          <option>US</option><option>GB</option><option>FR</option><option>SA</option>
+        </select>
+      </div>
+      <div>
+        <label>env.timeZone</label>
+        <select id="env_timeZone">
+          <option value="">(derive)</option>
+          <option>Europe/Brussels</option><option>Europe/Amsterdam</option><option>Europe/Berlin</option><option>Europe/Vienna</option>
+          <option>Europe/Athens</option><option>America/New_York</option><option>Europe/London</option><option>Europe/Paris</option><option>Asia/Riyadh</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row3">
+      <div><label>env.date (YYYY-MM-DD)</label><input id="env_date" placeholder="2027-05-01" /></div>
+      <div><label>env.time (HH:MM)</label><input id="env_time" placeholder="15:30" /></div>
+      <div>
+        <label>interaction.phase</label>
+        <select id="interaction_phase"><option>opening</option><option>closing</option></select>
+      </div>
+    </div>
+
+    <div class="row3">
+      <div>
+        <label>interaction.setting</label>
+        <select id="interaction_setting"><option>ui</option><option>chat</option><option>email</option></select>
+      </div>
+      <div>
+        <label>interaction.relationship</label>
+        <select id="interaction_relationship">
+          <option value="">(default: stranger)</option>
+          <option>stranger</option><option>acquaintance</option><option>friend</option><option>family</option><option>superior</option><option>subordinate</option>
+        </select>
+      </div>
+      <div>
+        <label>interaction.formality</label>
+        <select id="interaction_formality">
+          <option value="">neutral</option><option>formal</option><option>informal</option><option>neutral</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>interaction.style</label>
+        <select id="interaction_style">
+          <option value="">neutral</option><option>neutral</option><option>formal</option><option>ceremonial</option>
+          <option>poetic</option><option>playful</option><option>liturgical</option><option>bureaucratic</option><option>minimal</option>
+        </select>
+      </div>
+      <div>
+        <label>interaction.role</label>
+        <select id="interaction_role"><option>initiator</option><option>responder</option></select>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Person</h2>
+      <div class="row">
+        <div><label>person.givenNames (comma-separated)</label><input id="person_given" placeholder="Jan, Giannis" /></div>
+        <div><label>person.surname</label><input id="person_surname" placeholder="Müller" /></div>
+      </div>
+      <div class="row">
+        <div>
+          <label>person.gender</label>
+          <select id="person_gender"><option value="">(unset)</option><option>male</option><option>female</option><option>nonbinary</option><option>unknown</option></select>
+        </div>
+        <div>
+          <label>person.title (one)</label>
+          <select id="person_title">
+            <option value="">none</option>
+            <option value="academic:dr">academic:dr</option>
+            <option value="academic:prof">academic:prof</option>
+            <option value="civil:judge">civil:judge</option>
+            <option value="military:captain">military:captain</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div><label>person.birthday (YYYY-MM-DD)</label><input id="person_birthday" placeholder="1990-03-02" /></div>
+        <div>
+          <label>person.nameday.enabled</label>
+          <select id="person_nameday_enabled"><option value="">(default)</option><option value="true">true</option><option value="false">false</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Memberships</h2>
+      <div class="checkgrid" id="memberships_traditions"></div>
+      <label class="small">Subcultures</label>
+      <div class="checkgrid" id="memberships_subcultures"></div>
+    </div>
+
+    <div class="section">
+      <h2>Affinities (extras only)</h2>
+      <label class="small">Locale affinities</label>
+      <div class="checkgrid" id="affinities_locales"></div>
+      <label class="small">Tag affinities</label>
+      <div class="checkgrid" id="affinities_tags"></div>
+    </div>
+
+    <div class="section">
+      <h2>Policy</h2>
+      <div class="checkgrid" id="policy_checks"></div>
+    </div>
+
+    <div class="btnbar">
+      <button id="btn_run">Run / Resolve</button>
+      <button class="secondary" id="btn_seed_now">Use Now</button>
+      <button class="secondary" id="btn_seed_examples">Load Example</button>
+      <button class="secondary" id="btn_clear">Clear</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Result</h2>
+    <div class="hero" id="hero">—</div>
+    <p class="subhero" id="subhero">Configure a context and click “Run / Resolve”.</p>
+
+    <div class="split">
+      <div>
+        <label>Expected (for test)</label>
+        <input id="expected_primary" placeholder="Type the expected primary output…" />
+        <div style="margin-top:8px;"><span id="cmp" class="small">—</span></div>
+      </div>
+      <div>
+        <label>Extras (computed)</label>
+        <div class="list" id="extras_box">—</div>
+      </div>
+    </div>
+
+    <div class="btnbar">
+      <button id="btn_export_case">Export Test Case</button>
+      <button class="secondary" id="btn_add_suite">Add to Suite</button>
+      <button class="secondary" id="btn_export_suite">Export Suite JSON</button>
+      <button class="secondary" id="btn_export_vitest">Export Vitest Snippet</button>
+    </div>
+
+    <div class="section">
+      <h2>Trace</h2>
+      <div class="kv"><div>normalized localeChain</div><div><code id="trace_localeChain">—</code></div></div>
+      <div class="kv"><div>active events</div><div><code id="trace_events">—</code></div></div>
+      <div class="kv"><div>winner rule</div><div><code id="trace_rule">—</code></div></div>
+      <div class="kv"><div>score tuple</div><div><code id="trace_score">—</code></div></div>
+      <div class="kv"><div>address parts</div><div><code id="trace_addr">—</code></div></div>
+    </div>
+
+    <div class="section">
+      <h2>Test Suite (local)</h2>
+      <div class="suite" id="suite"></div>
+      <div class="small" id="suite_meta">0 cases</div>
+    </div>
+
+    <div class="section">
+      <h2>Context JSON</h2>
+      <textarea id="ctx_json" spellcheck="false"></textarea>
+    </div>
+
+    <div class="section">
+      <h2>Export JSON / Snippet</h2>
+      <textarea id="export_json" spellcheck="false"></textarea>
+    </div>
+  </div>
+</div>
+
+<script>
+const FIX = {
+  traditions:["secular","catholic","lutheran","calvinist","orthodox","muslim"],
+  subcultures:["student_corporation","socialist"],
+  affinityLocales:["ja-JP","es-ES","tr-TR","el-GR"],
+  affinityTags:["anime","japanese_culture","spanish_language_learning"],
+  policyChecks:[
+    ["allowExtras", true, "allow extras (affinity reminders)"],
+    ["allowSubcultureAddressing", false, "allow subculture address terms"],
+    ["allowGenderInference", false, "allow gender inference from name"],
+    ["requireExplicitTraditionsForReligious", true, "require explicit traditions for religious greetings"],
+    ["preferMaxSpecificity", true, "prefer most specific greeting (rich mode)"]
+  ]
+};
+
+function normalizeBCP47(tag){
+  if(!tag) return "";
+  const parts = tag.split("-").filter(Boolean);
+  if(!parts.length) return "";
+  parts[0] = parts[0].toLowerCase();
+  for(let i=1;i<parts.length;i++){
+    if(parts[i].length===2) parts[i]=parts[i].toUpperCase();
+    else parts[i]=parts[i][0].toUpperCase()+parts[i].slice(1);
+  }
+  return parts.join("-");
+}
+
+const DEFAULT_REGION_BY_LANG={nl:"NL",de:"DE",el:"GR",en:"US",fr:"FR",ar:"SA",tr:"TR",es:"ES"};
+const DEFAULT_TZ_BY_REGION={BE:"Europe/Brussels",NL:"Europe/Amsterdam",DE:"Europe/Berlin",AT:"Europe/Vienna",GR:"Europe/Athens",US:"America/New_York",GB:"Europe/London",FR:"Europe/Paris",SA:"Asia/Riyadh",TR:"Europe/Istanbul",ES:"Europe/Madrid"};
+
+function localeChain(tag){
+  const t=normalizeBCP47(tag);
+  if(!t) return ["root"];
+  const parts=t.split("-");
+  const chain=[];
+  if(parts.length>=2) chain.push(parts[0]+"-"+parts[1]);
+  chain.push(parts[0]);
+  chain.push("root");
+  return [...new Set(chain)];
+}
+
+function parseDateTime(env){
+  const d=env.date||"";
+  const t=env.time||"09:00";
+  if(/^\d{4}-\d{2}-\d{2}$/.test(d)) return {yyyy_mm_dd:d,mmdd:d.slice(5),time:t};
+  if(/^\d{2}-\d{2}$/.test(d)) return {yyyy_mm_dd:"",mmdd:d,time:t};
+  return {yyyy_mm_dd:"",mmdd:"",time:t};
+}
+
+function dayPeriodFromTime(hhmm){
+  if(!hhmm||!/^\d{2}:\d{2}$/.test(hhmm)) return "unknown";
+  if(hhmm<"05:00") return "night";
+  if(hhmm<"11:00") return "morning";
+  if(hhmm<"14:00") return "midday";
+  if(hhmm<"18:00") return "afternoon";
+  if(hhmm<"22:00") return "evening";
+  return "lateNight";
+}
+
+function collectEvents(norm){
+  const ev=[];
+  const {mmdd}=parseDateTime(norm.env);
+  const region=norm.env.region;
+
+  if(region==="BE" && mmdd==="05-01") ev.push("salve.event.bank.be.labour_day");
+  if(region==="FR" && mmdd==="07-14") ev.push("salve.event.bank.fr.bastille_day");
+  if(region==="US" && mmdd==="07-04") ev.push("salve.event.bank.us.independence_day");
+
+  const allowRel = !norm.policy.requireExplicitTraditionsForReligious ||
+    (norm.memberships.traditions||[]).some(t=>["orthodox","muslim","catholic","lutheran","calvinist"].includes(t));
+
+  if(allowRel){
+    if((norm.memberships.traditions||[]).includes("orthodox") && mmdd==="04-20") ev.push("salve.event.religious.orthodox.easter");
+    if((norm.memberships.traditions||[]).includes("muslim") && mmdd==="04-10") ev.push("salve.event.religious.islam.eid_al_fitr");
+  }
+
+  if(norm.person?.birthday && norm.person.birthday.slice(5)===mmdd) ev.push("salve.event.personal.birthday");
+
+  const namedayEnabled = (norm.person?.nameday?.enabled ?? true);
+  const given=(norm.person?.givenNames||[]).map(s=>s.toLowerCase());
+  const ioannisSet=new Set(["giannis","yannis","ioannis","jan","john","johannes"]);
+  if(namedayEnabled && mmdd==="01-07" && given.some(n=>ioannisSet.has(n))) ev.push("salve.event.personal.nameday");
+
+  if(norm.policy.allowSubcultureAddressing){
+    if((norm.memberships.subcultures||[]).includes("socialist") && mmdd==="05-01") ev.push("salve.event.protocol.socialist.may_day");
+  }
+
+  if(norm.policy.allowExtras){
+    if((norm.affinities.locales||[]).includes("ja-JP") && mmdd==="07-07") ev.push("salve.event.affinity.jp.tanabata");
+    if((norm.affinities.locales||[]).includes("es-ES") && mmdd==="01-06") ev.push("salve.event.affinity.es.reyes");
+  }
+  return ev;
+}
+
+function inferGenderFromName(norm){
+  if(norm.person?.gender) return {gender:norm.person.gender,source:"explicit"};
+  if(!norm.policy.allowGenderInference) return {gender:undefined,source:"unknown"};
+  const given=(norm.person?.givenNames||[])[0];
+  if(!given) return {gender:undefined,source:"unknown"};
+  const n=given.toLowerCase();
+  const male=new Set(["jan","john","giannis","yannis","ioannis","johannes"]);
+  const female=new Set(["ioanna","margaret","maria","anna"]);
+  if(male.has(n)) return {gender:"male",source:"inferred"};
+  if(female.has(n)) return {gender:"female",source:"inferred"};
+  return {gender:undefined,source:"unknown"};
+}
+
+function normalizeContext(raw){
+  const env=raw.env||{},interaction=raw.interaction||{},person=raw.person||{},memberships=raw.memberships||{},affinities=raw.affinities||{},policy=raw.policy||{};
+  const locale=normalizeBCP47(env.locale||navigator.language||"en-US");
+  const outputLocale=normalizeBCP47(env.outputLocale||locale);
+  const lang=(outputLocale.split("-")[0]||"en").toLowerCase();
+  const region=(env.region||outputLocale.split("-")[1]||DEFAULT_REGION_BY_LANG[lang]||"US").toUpperCase();
+  const tz=env.timeZone||(Intl?.DateTimeFormat?.().resolvedOptions?.().timeZone)||DEFAULT_TZ_BY_REGION[region]||"UTC";
+  const norm={
+    env:{locale,outputLocale,region,timeZone:tz,date:env.date||"",time:env.time||"09:00"},
+    interaction:{phase:interaction.phase||"opening",setting:interaction.setting||"ui",relationship:interaction.relationship||"stranger",
+      formality:interaction.formality||"neutral",style:interaction.style||"neutral",role:interaction.role||"initiator"},
+    person:{givenNames:(person.givenNames||[]).filter(Boolean),surname:person.surname||"",birthday:person.birthday||"",gender:person.gender||undefined,
+      titles:(person.titles||[]).filter(Boolean),nameday:{enabled:(person.nameday?.enabled ?? undefined)}},
+    memberships:{traditions:(memberships.traditions||[]).map(s=>String(s).toLowerCase()),subcultures:(memberships.subcultures||[]).map(s=>String(s).toLowerCase())},
+    affinities:{locales:(affinities.locales||[]).map(normalizeBCP47).filter(Boolean),tags:(affinities.tags||[]).map(s=>String(s).toLowerCase())},
+    policy:{allowExtras:policy.allowExtras ?? false,allowSubcultureAddressing:policy.allowSubcultureAddressing ?? false,allowGenderInference:policy.allowGenderInference ?? false,
+      requireExplicitTraditionsForReligious:policy.requireExplicitTraditionsForReligious ?? true,preferMaxSpecificity:policy.preferMaxSpecificity ?? true}
+  };
+  const g=inferGenderFromName(norm);
+  if(!norm.person.gender && g.gender){norm.person.gender=g.gender;norm.person.genderSource=g.source;}
+  else norm.person.genderSource = norm.person.gender ? "explicit" : "unknown";
+  return norm;
+}
+
+function baseTimeGreeting(outputLocale,dp){
+  const [lang,region=""]=outputLocale.split("-");
+  if(lang==="el"){
+    if(dp==="morning") return "Καλημέρα";
+    if(["midday","afternoon","evening","lateNight"].includes(dp)) return "Καλησπέρα";
+    return "Χαίρετε";
+  }
+  if(lang==="de"){
+    if(region==="AT"){ if(dp==="midday") return "Mahlzeit"; return "Grüß Gott"; }
+    if(dp==="morning") return "Guten Morgen";
+    if(dp==="midday"||dp==="afternoon") return "Guten Tag";
+    if(dp==="evening"||dp==="lateNight") return "Guten Abend";
+    return "Guten Tag";
+  }
+  if(lang==="nl"){
+    if(dp==="morning") return "Goedemorgen";
+    if(dp==="midday"||dp==="afternoon") return "Goedemiddag";
+    if(dp==="evening"||dp==="lateNight") return "Goedenavond";
+    return "Hallo";
+  }
+  if(lang==="fr") return "Bonjour";
+  if(lang==="ar") return "مرحبا";
+  return "Hello";
+}
+
+function applyAddress(norm,text){
+  const lang=norm.env.outputLocale.split("-")[0];
+  const rel=norm.interaction.relationship;
+  const formality=norm.interaction.formality;
+  const given=(norm.person.givenNames||[])[0];
+  const surname=norm.person.surname;
+  const title=(norm.person.titles||[])[0];
+
+  if(norm.interaction.setting==="email"){
+    if(norm.interaction.phase==="opening"){
+      if(lang==="nl" && given) return `Beste ${given},`;
+      if(lang==="de" && given) return `Hallo ${given},`;
+      if(lang==="en" && given) return `Dear ${given},`;
+      return text + ",";
+    }
+    if(norm.interaction.phase==="closing"){
+      if(lang==="nl") return "Met vriendelijke groet,";
+      if(lang==="de") return "Mit freundlichen Grüßen,";
+      if(lang==="en") return "Kind regards,";
+      return text;
+    }
+  }
+
+  if(lang==="el" && (rel==="friend"||rel==="family") && formality!=="formal"){
+    if(text==="Καλησπέρα") text="Καλησπέρα σου";
+    if(text==="Καλημέρα") text="Καλημέρα σου";
+  }
+
+  if(lang==="de" && title && surname && (formality==="formal"||rel==="stranger"||rel==="acquaintance")){
+    if(title==="academic:dr") return `Guten Morgen, Herr Doktor ${surname}`;
+    if(title==="academic:prof") return `Guten Morgen, Herr Professor ${surname}`;
+    if(title==="civil:judge") return `Guten Morgen, Euer Ehren`;
+  }
+
+  if(given){
+    if(lang==="el"){
+      if(given==="Γιάννης") return `${text}, Γιάννη`;
+      return `${text}, ${given}`;
+    }
+    return `${text}, ${given}`;
+  }
+  return text;
+}
+
+function resolveGreeting(norm){
+  const chain=localeChain(norm.env.outputLocale);
+  const dp=dayPeriodFromTime(norm.env.time);
+  const events=collectEvents(norm);
+
+  let winner={ruleId:"time.base",text:baseTimeGreeting(norm.env.outputLocale,dp),domain:"time",score:[5000,0,0,10]};
+
+  if(events.includes("salve.event.bank.be.labour_day")) winner={ruleId:"nl.labour_day",text:"Fijne Dag van de Arbeid",domain:"bank",score:[6500,1,0,60]};
+  if(events.includes("salve.event.bank.fr.bastille_day")) winner={ruleId:"fr.bastille_day",text:"Bonne fête nationale",domain:"bank",score:[6500,1,0,60]};
+  if(events.includes("salve.event.bank.us.independence_day")) winner={ruleId:"en.independence_day",text:"Happy Independence Day",domain:"bank",score:[6500,1,0,60]};
+
+  if(events.includes("salve.event.religious.orthodox.easter")) winner={ruleId:"el.orthodox.easter",text:"Χριστός Ανέστη",domain:"religious",score:[8000,1,0,90]};
+  if(events.includes("salve.event.religious.islam.eid_al_fitr")){
+    const outLang=norm.env.outputLocale.split("-")[0];
+    const txt=(outLang==="ar")?"عيد مبارك":"Eid Mubarak";
+    winner={ruleId:"islam.eid",text:txt,domain:"religious",score:[8000,1,0,85]};
+  }
+
+  if(events.includes("salve.event.personal.birthday")){
+    const outLang=norm.env.outputLocale.split("-")[0];
+    const txt=outLang==="nl"?"Gefeliciteerd":outLang==="de"?"Herzlichen Glückwunsch":outLang==="el"?"Χρόνια πολλά":"Happy Birthday";
+    winner={ruleId:"personal.birthday",text:txt,domain:"personal",score:[7000,1,0,70]};
+  }
+  if(events.includes("salve.event.personal.nameday")){
+    const outLang=norm.env.outputLocale.split("-")[0];
+    const txt=outLang==="el"?"Χρόνια πολλά":"Happy name day";
+    winner={ruleId:"personal.nameday",text:txt,domain:"personal",score:[7000,2,0,75]};
+  }
+
+  const addressed=applyAddress(norm,winner.text);
+
+  const extras=[];
+  if(norm.policy.allowExtras){
+    if(events.includes("salve.event.affinity.jp.tanabata")){
+      const outLang=norm.env.outputLocale.split("-")[0];
+      extras.push(outLang==="nl"?"Vandaag vieren ze Tanabata in Japan":"Today is Tanabata in Japan");
+    }
+    if(events.includes("salve.event.affinity.es.reyes")){
+      const outLang=norm.env.outputLocale.split("-")[0];
+      extras.push(outLang==="nl"?"Vandaag is het Día de los Reyes in Spanje":"Hoy es Día de los Reyes en España");
+    }
+  }
+
+  return {primary:addressed,extras,trace:{
+    localeChain:chain,events,winnerRule:winner.ruleId,score:winner.score,
+    addressParts:{givenName:(norm.person.givenNames||[])[0]||"",surname:norm.person.surname||"",title:(norm.person.titles||[])[0]||"",
+      gender:norm.person.gender||"",genderSource:norm.person.genderSource||""}
+  }};
+}
+
+function mkChecks(containerId,values,target){
+  const el=document.getElementById(containerId);
+  el.innerHTML="";
+  values.forEach(v=>{
+    const id=containerId+"__"+v;
+    const wrap=document.createElement("label");
+    wrap.className="check";
+    wrap.innerHTML=`<input type="checkbox" id="${id}"/><span>${v}</span>`;
+    el.appendChild(wrap);
+    target[v]=id;
+  });
+}
+
+const IDS={traditions:{},subcultures:{},affLoc:{},affTag:{},policy:{}};
+mkChecks("memberships_traditions",FIX.traditions,IDS.traditions);
+mkChecks("memberships_subcultures",FIX.subcultures,IDS.subcultures);
+mkChecks("affinities_locales",FIX.affinityLocales,IDS.affLoc);
+mkChecks("affinities_tags",FIX.affinityTags,IDS.affTag);
+
+(function(){
+  const el=document.getElementById("policy_checks");
+  el.innerHTML="";
+  FIX.policyChecks.forEach(([key,def,label])=>{
+    const id="policy__"+key;
+    IDS.policy[key]=id;
+    const wrap=document.createElement("label");
+    wrap.className="check";
+    wrap.innerHTML=`<input type="checkbox" id="${id}"/><span>${label}</span>`;
+    el.appendChild(wrap);
+    document.addEventListener("DOMContentLoaded",()=>{ const cb=document.getElementById(id); if(cb) cb.checked=!!def; });
+  });
+})();
+
+const suite=[];
+let lastResult=null;
+
+function getChecked(map){ return Object.keys(map).filter(k=>document.getElementById(map[k]).checked); }
+
+function setNow(){
+  const now=new Date();
+  const yyyy=now.getFullYear();
+  const mm=String(now.getMonth()+1).padStart(2,"0");
+  const dd=String(now.getDate()).padStart(2,"0");
+  const hh=String(now.getHours()).padStart(2,"0");
+  const mi=String(now.getMinutes()).padStart(2,"0");
+  document.getElementById("env_date").value=`${yyyy}-${mm}-${dd}`;
+  document.getElementById("env_time").value=`${hh}:${mi}`;
+}
+
+function loadExample(){
+  document.getElementById("env_locale").value="nl-BE";
+  document.getElementById("env_outputLocale").value="";
+  document.getElementById("env_region").value="";
+  document.getElementById("env_timeZone").value="";
+  document.getElementById("env_date").value="2027-05-01";
+  document.getElementById("env_time").value="09:30";
+  document.getElementById("interaction_phase").value="opening";
+  document.getElementById("interaction_setting").value="ui";
+  document.getElementById("interaction_relationship").value="acquaintance";
+  document.getElementById("interaction_formality").value="neutral";
+  document.getElementById("interaction_style").value="ceremonial";
+  document.getElementById("interaction_role").value="initiator";
+  document.getElementById("person_given").value="Jan";
+  document.getElementById("person_surname").value="";
+  document.getElementById("person_gender").value="";
+  document.getElementById("person_title").value="";
+  document.getElementById("person_birthday").value="";
+  document.getElementById("person_nameday_enabled").value="true";
+
+  Object.values(IDS.traditions).forEach(id=>document.getElementById(id).checked=false);
+  Object.values(IDS.subcultures).forEach(id=>document.getElementById(id).checked=false);
+  Object.values(IDS.affLoc).forEach(id=>document.getElementById(id).checked=false);
+  Object.values(IDS.affTag).forEach(id=>document.getElementById(id).checked=false);
+
+  document.getElementById(IDS.traditions["secular"]).checked=true;
+  document.getElementById(IDS.traditions["catholic"]).checked=true;
+  document.getElementById(IDS.subcultures["socialist"]).checked=true;
+  document.getElementById(IDS.affLoc["ja-JP"]).checked=true;
+
+  document.getElementById(IDS.policy["allowExtras"]).checked=true;
+  document.getElementById(IDS.policy["allowSubcultureAddressing"]).checked=false;
+  document.getElementById(IDS.policy["allowGenderInference"]).checked=false;
+  document.getElementById(IDS.policy["requireExplicitTraditionsForReligious"]).checked=true;
+  document.getElementById(IDS.policy["preferMaxSpecificity"]).checked=true;
+
+  document.getElementById("expected_primary").value="Fijne Dag van de Arbeid, Jan";
+}
+
+function clearAll(){
+  document.getElementById("env_locale").value="nl-BE";
+  document.getElementById("env_outputLocale").value="";
+  document.getElementById("env_region").value="";
+  document.getElementById("env_timeZone").value="";
+  document.getElementById("env_date").value="";
+  document.getElementById("env_time").value="";
+  document.getElementById("interaction_phase").value="opening";
+  document.getElementById("interaction_setting").value="ui";
+  document.getElementById("interaction_relationship").value="";
+  document.getElementById("interaction_formality").value="";
+  document.getElementById("interaction_style").value="";
+  document.getElementById("interaction_role").value="initiator";
+  document.getElementById("person_given").value="";
+  document.getElementById("person_surname").value="";
+  document.getElementById("person_gender").value="";
+  document.getElementById("person_title").value="";
+  document.getElementById("person_birthday").value="";
+  document.getElementById("person_nameday_enabled").value="";
+  Object.values(IDS.traditions).forEach(id=>document.getElementById(id).checked=false);
+  Object.values(IDS.subcultures).forEach(id=>document.getElementById(id).checked=false);
+  Object.values(IDS.affLoc).forEach(id=>document.getElementById(id).checked=false);
+  Object.values(IDS.affTag).forEach(id=>document.getElementById(id).checked=false);
+  FIX.policyChecks.forEach(([key,def])=>{ const cb=document.getElementById(IDS.policy[key]); if(cb) cb.checked=!!def; });
+  document.getElementById("expected_primary").value="";
+  document.getElementById("hero").textContent="—";
+  document.getElementById("extras_box").textContent="—";
+  document.getElementById("cmp").textContent="—";
+  document.getElementById("ctx_json").value="";
+  document.getElementById("export_json").value="";
+  document.getElementById("trace_localeChain").textContent="—";
+  document.getElementById("trace_events").textContent="—";
+  document.getElementById("trace_rule").textContent="—";
+  document.getElementById("trace_score").textContent="—";
+  document.getElementById("trace_addr").textContent="—";
+  lastResult=null;
+}
+
+function buildRawContext(){
+  const given=document.getElementById("person_given").value.split(",").map(s=>s.trim()).filter(Boolean);
+  const titleRaw=document.getElementById("person_title").value;
+  const titles=titleRaw?[titleRaw]:[];
+  const namedayEnabledRaw=document.getElementById("person_nameday_enabled").value;
+  const namedayEnabled = namedayEnabledRaw==="" ? undefined : (namedayEnabledRaw==="true");
+
+  const policy={};
+  Object.keys(IDS.policy).forEach(k=>{ policy[k]=!!document.getElementById(IDS.policy[k]).checked; });
+
+  return {
+    env:{
+      locale:document.getElementById("env_locale").value,
+      outputLocale:document.getElementById("env_outputLocale").value||undefined,
+      region:document.getElementById("env_region").value||undefined,
+      timeZone:document.getElementById("env_timeZone").value||undefined,
+      date:document.getElementById("env_date").value||"",
+      time:document.getElementById("env_time").value||"09:00"
+    },
+    interaction:{
+      phase:document.getElementById("interaction_phase").value,
+      setting:document.getElementById("interaction_setting").value,
+      relationship:document.getElementById("interaction_relationship").value||undefined,
+      formality:document.getElementById("interaction_formality").value||undefined,
+      style:document.getElementById("interaction_style").value||undefined,
+      role:document.getElementById("interaction_role").value
+    },
+    person:{
+      givenNames:given,
+      surname:document.getElementById("person_surname").value||undefined,
+      gender:document.getElementById("person_gender").value||undefined,
+      titles,
+      birthday:document.getElementById("person_birthday").value||undefined,
+      nameday:{enabled:namedayEnabled}
+    },
+    memberships:{traditions:getChecked(IDS.traditions),subcultures:getChecked(IDS.subcultures)},
+    affinities:{locales:getChecked(IDS.affLoc),tags:getChecked(IDS.affTag)},
+    policy
+  };
+}
+
+function run(){
+  const raw=buildRawContext();
+  const norm=normalizeContext(raw);
+  const result=resolveGreeting(norm);
+  lastResult=result;
+
+  document.getElementById("hero").textContent=result.primary||"—";
+  document.getElementById("subhero").textContent=`Resolved for outputLocale ${norm.env.outputLocale} (${norm.env.region}), ${norm.env.date||"(no date)"} ${norm.env.time} • dayPeriod=${dayPeriodFromTime(norm.env.time)}`;
+  document.getElementById("extras_box").textContent=result.extras?.length?result.extras.join("\n"):"—";
+
+  const expected=document.getElementById("expected_primary").value.trim();
+  const cmp=document.getElementById("cmp");
+  if(expected.length){
+    cmp.innerHTML = (expected===result.primary) ? `<span class="ok mono">✓ match</span>` : `<span class="bad mono">✗ mismatch</span>`;
+  } else cmp.textContent="—";
+
+  document.getElementById("trace_localeChain").textContent=result.trace.localeChain.join(" → ");
+  document.getElementById("trace_events").textContent=result.trace.events.length?result.trace.events.join(", "):"(none)";
+  document.getElementById("trace_rule").textContent=result.trace.winnerRule;
+  document.getElementById("trace_score").textContent=JSON.stringify(result.trace.score);
+  document.getElementById("trace_addr").textContent=JSON.stringify(result.trace.addressParts);
+
+  document.getElementById("ctx_json").value=JSON.stringify(raw,null,2);
+  document.getElementById("export_json").value=JSON.stringify({context:raw,expected:{primary:expected||result.primary,extras:result.extras?.length?result.extras:undefined}},null,2);
+}
+
+function exportCase(){
+  if(!lastResult) run();
+  const raw=buildRawContext();
+  const expected=document.getElementById("expected_primary").value.trim();
+  const payload={
+    testId:"SALVE_CUSTOM_"+Math.random().toString(36).slice(2,8).toUpperCase(),
+    context:raw,
+    expected:{primary:expected||lastResult.primary,extras:(lastResult.extras&&lastResult.extras.length)?lastResult.extras:undefined}
+  };
+  document.getElementById("export_json").value=JSON.stringify(payload,null,2);
+  try{navigator.clipboard.writeText(document.getElementById("export_json").value);}catch(e){}
+}
+
+function addToSuite(){
+  if(!lastResult) run();
+  const raw=buildRawContext();
+  const expected=document.getElementById("expected_primary").value.trim();
+  suite.push({
+    testId:"SALVE_"+String(suite.length+1).padStart(3,"0"),
+    context:raw,
+    expected:{primary:expected||lastResult.primary,extras:(lastResult.extras&&lastResult.extras.length)?lastResult.extras:undefined}
+  });
+  renderSuite();
+}
+
+function renderSuite(){
+  const host=document.getElementById("suite");
+  host.innerHTML="";
+  suite.forEach(t=>{
+    const div=document.createElement("div");
+    div.className="suite-item";
+    div.innerHTML=`<b>${t.testId}</b>\n${JSON.stringify({context:t.context,expected:t.expected})}`;
+    host.appendChild(div);
+  });
+  document.getElementById("suite_meta").textContent=`${suite.length} cases`;
+}
+
+function download(filename,text,mime="application/json"){
+  const a=document.createElement("a");
+  a.setAttribute("href",`data:${mime};charset=utf-8,`+encodeURIComponent(text));
+  a.setAttribute("download",filename);
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+function exportSuite(){
+  const txt=JSON.stringify(suite.length?suite:[],null,2);
+  document.getElementById("export_json").value=txt;
+  download("salve-test-suite.json",txt);
+}
+
+function exportVitestSnippet(){
+  const cases=suite.length?suite:[];
+  const lines=[];
+  lines.push(`import { describe, it, expect } from "vitest";`);
+  lines.push(`import { salve } from "@salve/core"; // replace with actual API`);
+  lines.push("");
+  lines.push(`const cases = ${JSON.stringify(cases,null,2)};`);
+  lines.push("");
+  lines.push(`describe("SALVE greeting vectors", () => {`);
+  lines.push(`  for (const t of cases) {`);
+  lines.push(`    it(t.testId, () => {`);
+  lines.push(`      const out = salve.greet(t.context);`);
+  lines.push(`      expect(out.primary.text ?? out.primary).toBe(t.expected.primary);`);
+  lines.push(`      if (t.expected.extras) expect(out.extras).toEqual(t.expected.extras);`);
+  lines.push(`    });`);
+  lines.push(`  }`);
+  lines.push(`});`);
+  const txt=lines.join("\n");
+  document.getElementById("export_json").value=txt;
+  download("salve-vitest-snippet.ts",txt,"text/plain");
+}
+
+document.getElementById("btn_run").addEventListener("click",run);
+document.getElementById("btn_export_case").addEventListener("click",exportCase);
+document.getElementById("btn_add_suite").addEventListener("click",addToSuite);
+document.getElementById("btn_export_suite").addEventListener("click",exportSuite);
+document.getElementById("btn_export_vitest").addEventListener("click",exportVitestSnippet);
+document.getElementById("btn_seed_now").addEventListener("click",()=>{setNow();run();});
+document.getElementById("btn_seed_examples").addEventListener("click",()=>{loadExample();run();});
+document.getElementById("btn_clear").addEventListener("click",clearAll);
+
+setNow();
+loadExample();
+run();
+</script>
+</body>
+</html>
