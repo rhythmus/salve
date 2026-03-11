@@ -2,7 +2,9 @@ locale: el-GR
 sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
 greetings:
+
   # --- 1. Saying Hello & Goodbye ---
+
   - text: Γεια!
     el-Latn: Ya!
     phase: [encounter, parting]
@@ -13,93 +15,103 @@ greetings:
     el-Latn: Ya su!
     phase: [encounter, parting]
     formality: informal
-    audience: 1
+    audienceSize: 1
     notes: Informal 'Hello' to one person.
 
   - text: Γεια σας!
     el-Latn: Ya sas!
     phase: [encounter, parting]
     formality: formal
-    audience: 1
+    audienceSize: 1
     notes: Formal 'Hello' to one person.
 
   - text: Γεια σας!
     el-Latn: Ya sas!
     phase: [encounter, parting]
     formality: informal
-    audience: ">1"
+    audienceSize: ">1"
     notes: Informal 'Hello' to a group.
 
   - text: Χαίρετε!
     el-Latn: Khairete!
     phase: encounter
     formality: formal
-    audience: 1
-    notes: Polite/Formal 'Hello' to one person.
-
-  - text: Χαίρετε!
-    el-Latn: Khairete!
-    phase: encounter
-    formality: neutral
-    audience: ">1"
-    notes: Formal/Neutral 'Hello' to a group.
+    audienceSize: ">=1"
+    notes: Polite/Formal 'Hello' to one person or a group.
 
   # --- 2. Parting Specifically ---
+
   - text: Τα λέμε!
     el-Latn: Ta leme!
     phase: parting
     notes: See you!
 
+  - text: ["Γεια! Τα λέμε!", "Γεια, τα λέμε!"]
+    el-Latn: ["Ya! Ta leme!", "Ya, ta leme!"]
+    phase: parting
+    notes: See you!
+
   - text: Αντίο
-    el-Latn: Adio
+    el-Latn: Adío
     phase: parting
     formality: formal
-    notes: Goodbye. Used for permanent or long-term separation.
+    notes: Goodbye. Used for permanent or long-term parting.
 
   - text: Εις το επανιδείν!
-    el-Latn: Eis to epanidein!
+    el-Latn: Eis to epanidín!
     phase: parting
     formality: formal
-    notes: Farewell. More sophisticated version of 'See you again'.
+    style: poetic
+    notes: Farewell. More sophisticated version of 'See you again'. Litt. “To the seeing-each-other-again!”
 
   # --- 3. Time of Day ---
+
   - text: Καλημέρα!
-    el-Latn: Kalimera!
+    el-Latn: Kaliméra!
     phase: encounter
-    eventRef: salve.event.temporal.morning
-    notes: Good morning! (Usually until 12pm)
+    timeOfDay: morning
+    notes:
+      - Good morning! (Usually until 12pm)
+      - "As in English, Καλημέρα consists of two separate words combined into one: Καλή + μέρα (kalí + méra) = “good” + “morning.”"
 
   - text: Καλησπέρα!
-    el-Latn: Kalispera!
+    el-Latn: Kalispéra!
     phase: encounter
-    eventRef: salve.event.temporal.afternoon
-    notes: Good afternoon! (12pm until late evening)
+    timeOfDay: [afternoon, evening]
+    notes:
+      - Good afternoon! (12pm until late evening)
+      - "Καλησπέρα consists of two separate words combined into one: Καλή + (ε)σπέρα (kalí + (e)spéra) = “good” + “afternoon.”"
 
   - text: Καλό απόγευμα!
-    el-Latn: Kalo apogevma!
+    el-Latn: Kaló apóyevma!
     phase: parting
+    timeOfDay: [midday, afternoon]
     notes: Have a good afternoon! (Used when parting)
 
   - text: Καλό βράδυ!
-    el-Latn: Kalo vradi!
+    el-Latn: Kaló vrádi!
     phase: parting
+    timeOfDay: evening
     notes: Have a good evening! (Used when parting)
 
   - text: Καληνύχτα!
     el-Latn: Kaliníhta!
     phase: parting
-    eventRef: salve.event.temporal.night
+    timeOfDay: [evening, night]
     notes: Goodnight!
 
-  - text: Όνειρα γλυκά
+  - text: ["Καληνύχτα! Όνειρα γλυκά!", "Καλό βράδυ! Όνειρα γλυκά!", "Όνειρα γλυκά!"]
     el-Latn: Oneira glyka!
     phase: parting
     formality: informal
+    relationship: intimate
+    timeOfDay: night
     notes: Sweet dreams. Usually follows Καληνύχτα.
 
   # --- 4. Slang & Special ---
+
   - text: Γεια χαρά!
-    el-Latn: Ya khara!
+    el-Latn: Ya hará!
     phase: encounter
     formality: highly informal
     notes: Hey! (Slang)
@@ -110,49 +122,58 @@ greetings:
     formality: highly informal
     notes: Yo! (Slang)
 
-  - text: Χρόνια και ζαμάνια!
-    el-Latn: Khronia kai zamania!
+  - text: ["Χρόνια και ζαμάνια!", "Γεια χαρά! Χρόνια και ζαμάνια!", "Γιο! Χρόνια και ζαμάνια!"]
+    el-Latn: Hrónia ke zamánia!
     phase: encounter
     notes: Long time no see!
 
   # --- 5. Meeting New People ---
+
   - text: Χαίρω πολύ!
-    el-Latn: Khaire poli!
+    el-Latn: Héro Polí!
     phase: encounter
     notes: Pleased to meet you!
 
   - text: Χάρηκα!
-    el-Latn: Kharika!
-    phase: encounter
+    el-Latn: Ηárika!
+    phase: [encounter, parting]
     notes: Pleased (to have met you)!
 
   - text: Χαίρομαι για τη γνωριμία!
-    el-Latn: Khairemai gia ti gnorimia!
+    el-Latn: Hérome ya ti gnorimía!
     phase: encounter
     notes: Pleased to make your acquaintance!
 
   # --- 6. Phone ---
+
   - text: Ναι;
     el-Latn: Nai?
     phase: encounter
-    setting: [chat]
-    notes: 'Answering phone: ''Yes?'' (Informal)'
+    formality: informal
+    relationship: friend
+    setting: [chat_message, phone]
+    notes: 'Answering phone: "Yes?" (Informal)'
 
   - text: Παρακαλώ;
-    el-Latn: Parakalo?
+    el-Latn: Parakaló?
     phase: encounter
-    setting: [chat]
-    notes: 'Answering phone: ''Please?'' (Universal)'
+    setting: [chat_message, phone]
+    notes: 'Answering phone: "Please?"" (Universal)'
 
   - text: Λέγετε!
-    el-Latn: Legete!
+    el-Latn: Légete!
     phase: encounter
-    setting: [chat]
-    notes: 'Answering phone: ''Speak'' (Standard)'
+    setting: [chat_message, phone]
+    notes: 'Answering phone: "Speak" (Standard)'
 
-  # --- Fallback ---
-  - text: Γεια σας
-    el-Latn: Ya sas!
-    phase: [encounter, parting]
-    audience: ">1"
-    notes: Standard respectful greeting for groups.
+  - text: Λέγετε, παρακαλώ!
+    el-Latn: Légete, parakaló!
+    formality: formal
+    phase: encounter
+    setting: [chat_message, phone]
+    notes: 'Answering phone: "Speak, please" (Standard)'
+
+  - text: Εμπρός!
+    el-Latn: Emprós!
+    phase: encounter
+    setting: [chat_message, phone]

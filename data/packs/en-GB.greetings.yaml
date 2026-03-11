@@ -1,9 +1,13 @@
 locale: en-GB
 greetings:
-  - text: Good morning
-    eventRef: salve.event.temporal.morning
-  - text: Good afternoon
-    eventRef: salve.event.temporal.afternoon
-  - text: Good evening
-    eventRef: salve.event.temporal.evening
+
   - text: Hello
+
+  - text: Good morning
+    timeOfDay: morning
+
+  - text: Good afternoon
+    timeOfDay: afternoon
+
+  - text: Good evening
+    timeOfDay: evening

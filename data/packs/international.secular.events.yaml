@@ -1,0 +1,14 @@
+  tradition: [international, secular]
+
+  # TODO: add all from https://www.un.org/en/observances/list-days-weeks
+  
+  greetings:
+
+    # First of May, International Workers' Day
+
+    # Greek
+    - text: Καλή Πρωτομαγιά!
+      locale: el-GR
+      date: 1 May
+      notes: 'Greek: Happy May Day!'
+

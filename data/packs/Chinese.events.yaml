@@ -1,14 +1,19 @@
-tradition: secular
+tradition: Chinese
+locale: zh-CN
+sources: https://en.wikipedia.org/wiki/Chinese_New_Year#Greetings
 greetings:
+
+  # Chinese New Year
+
   - text: 新年快乐！
-    locale: zh-CN
     eventRef: salve.event.civil.secular.chinese_new_year
-    sources: 'https://en.wikipedia.org/wiki/Chinese_New_Year#Greetings'
   - text: Happy Chinese New Year!
     locale: en-GB
     eventRef: salve.event.civil.secular.chinese_new_year
     sources: 'https://en.wikipedia.org/wiki/Chinese_New_Year#Greetings'
+
+  # Lantern Festival
+
   - text: 元宵节快乐！
-    locale: zh-CN
     eventRef: salve.event.civil.secular.lantern_festival
     sources: 'https://en.wikipedia.org/wiki/Lantern_Festival'

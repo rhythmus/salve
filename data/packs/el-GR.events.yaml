@@ -1,26 +1,24 @@
+locale: el-GR
+sources: https://en.wikipedia.org/wiki/Public_holidays_in_Greece
+
 greetings:
-  # --- National ---
-  - text: Χρόνια Πολλά!
-    locale: el-GR
-    phase: encounter
-    eventRef: salve.event.civil.national.gr.independence_day
-    notes: 'Greek Independence Day / Anniversary. Literal: ''Many years!'''
 
   - text: Χρόνια Πολλά!
-    locale: el-GR
     phase: encounter
-    eventRef: salve.event.civil.national.gr.ohi_day
+    WikiData: Q4158275
+    date: 25 March
+    sources: https://en.wikipedia.org/wiki/Celebration_of_the_Greek_Revolution
+    notes: Anniversary of the Greek Independence Day /  Lit. “Many years!”
+
+  - text: Χρόνια Πολλά!
+    phase: encounter
+    WikiData: Q830166
+    date: 28 October
+    sources: https://en.wikipedia.org/wiki/Ohi_Day
     notes: 'Ohi Day (October 28). Anniversary of the refusal to the Italian ultimatum.'
 
-  - text: Καλή Πρωτομαγιά!
-    locale: el-GR
-    eventRef: salve.event.civil.national.gr.labour_day
-    notes: 'Greek: Happy May Day!'
-  - text: Χρόνια Πολλά!
-    locale: el-GR
-    eventRef: salve.event.civil.national.gr.labour_day
-
-  - text: (observed commemoration)
-    locale: el-GR
-    eventRef: salve.event.civil.national.gr.polytechneio
-    notes: 'Polytechneio: Commemoration of the Athens Polytechnic uprising.'
+  - text: Καλό Πολυτεχνείο!
+    phase: encounter
+    WikiData: Q2628742
+    date: 17 November
+    notes: "Polytechneio: Commemoration of the 1973 Athens Polytechnic uprising against the junta of the colonels (1967–1974)."

@@ -1,7 +1,10 @@
 locale: tr-TR
 greetings:
-  - text: Günaydın
-    eventRef: salve.event.temporal.morning
-  - text: İyi günler
-    eventRef: salve.event.temporal.afternoon
+
   - text: Merhaba
+
+  - text: Günaydın
+    timeOfDay: morning
+
+  - text: İyi günler
+    timeOfDay: afternoon

@@ -1,81 +1,85 @@
+# Greetings, sallutations and adresses in Dutch (Flanders in Belgium, The Netherlands)
+
 locale: nl
-# Sources can be defined at top level for inheritance
 sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verbale_begroetingen'
 
 greetings:
-  # --- 1. Standard Greetings (Encounter) ---
+
+  # --- 1. Welcome (encounter) greetings ---
+
   - text: Welkom
     phase: encounter
     notes: een ontvangende groet
+
   - text: '{greeter} heet u welkom'
     phase: encounter
     notes: 'meestal schriftelijk (op borden e.d.), met een anders verouderde betekenis van heten (benoemen, bevelen, wensen, niet als gewoon genoemd worden)'
+
   - text: Weest welgekomen
     phase: encounter
     formality: hyperformal
 
-  # --- 2. Temporal Greetings (Encounter) ---
-  - text:
-      - Goedendag
-      - Goeiendag
-    eventRef:
-      - salve.event.temporal.morning
-      - salve.event.temporal.midday
-      - salve.event.temporal.afternoon
+
+  # --- 2. Encounter greetings, all day long ---
+
+  - text: Goedendag
+    timeOfDay: [morning, midday, afternoon]
     phase: encounter
     formality: formal
-    notes: 'Een algemene begroeting met een middeleeuws verleden toen zij voluit luidde: God geve u een goede dag! Met ''goeder dag'' werd ''geluk'' bedoeld'
-  - text: Goedemorgen
-    eventRef: salve.event.temporal.morning
-    phase: encounter
-    formality: formal
-  - text: Goeiemorgen
-    eventRef: salve.event.temporal.morning
+    notes: 'Een algemene begroeting met een middeleeuws verleden toen zij voluit luidde: God geve u een goede dag! Met "goeder dag" werd "geluk" bedoeld'
+  - text: Goeiendag
+    timeOfDay: [morning, midday, afternoon]
     phase: encounter
     formality: informal
-  - text: Goedemiddag
-    eventRef:
-      - salve.event.temporal.midday
-      - salve.event.temporal.afternoon
-    phase: encounter
-    formality: formal
-  - text: Goeiemiddag
-    eventRef:
-      - salve.event.temporal.midday
-      - salve.event.temporal.afternoon
-    phase: encounter
-    formality: informal
-  - text: Goedenavond
-    eventRef: salve.event.temporal.evening
-    phase: encounter
-    formality: formal
-  - text: Goeieavond
-    eventRef: salve.event.temporal.evening
-    phase: encounter
-    formality: informal
-  - text: Goedenacht
-    eventRef: salve.event.temporal.night
-    phase: encounter
-    formality: formal
-  - text: Goeienacht
-    eventRef: salve.event.temporal.night
+  
+  - text: ["Hallo", "Dag"]
+    time-of-day: [morning, midday, afternoon, evening]
     phase: encounter
     formality: informal
 
-  # --- 3. Informal & Audience Selection (Encounter) ---
-  - text:
-      - Hallo
-      - Dag
-    phase: encounter
-    formality: informal
-  - text:
-      - Gedag
-      - Daag
-      - Hoi
-      - Hé
-      - Hey
+  - text: ["Gedag", "Daag", "Hoi", "Hé", "Hey"]
+    time-of-day: [morning, midday, afternoon, evening]
     phase: encounter
     formality: highly informal
+
+  
+  # --- 3. Temporal Greetings (Encounter), specific time of day ---
+
+  - text: Goedemorgen
+    timeOfDay: morning
+    phase: encounter
+    formality: formal
+  - text: Goeiemorgen
+    timeOfDay: morning
+    phase: encounter
+    formality: informal
+  - text: Goedemiddag
+    timeOfDay: [midday, afternoon]
+    phase: encounter
+    formality: formal
+  - text: Goeiemiddag
+    timeOfDay: [midday, afternoon]
+    phase: encounter
+    formality: informal
+  - text: Goedenavond
+    timeOfDay: evening
+    phase: encounter
+    formality: formal
+  - text: Goeieavond
+    timeOfDay: evening
+    phase: encounter
+    formality: informal
+  - text: Goedenacht
+    timeOfDay: night
+    phase: encounter
+    formality: formal
+  - text: Goeienacht
+    timeOfDay: night
+    phase: encounter
+    formality: informal
+
+  # --- 4. Informal & Audience Selection (Encounter) ---
+  
   - text:
       - Dag allemaal!
       - Dag iedereen!
@@ -84,20 +88,33 @@ greetings:
     audienceSize: '>4'
     phase: encounter
 
-  # --- 4. Farewell Greetings (Parting) ---
+  # --- 5. Farewell Greetings (Parting) ---
+
+  - text: [Dag, Daag]
+    phase: parting
+    formality: informal
+
+  - text: Doei
+    phase: parting
+    formality: highly informal
+
   - text: Een fijne dag nog
     phase: parting
+
   - text: Tot ziens
     phase: parting
     notes: 'Alternatieven: Doeg, Doei, Later, Aju'
+
   - text: Vaarwel
     phase: parting
     notes: 'enigszins formele afscheidsgroet, bijvoorbeeld bij de marine'
+
   - text: Welterusten
-    eventRef: salve.event.temporal.night
+    timeOfDay: [evening, night]
     phase: parting
 
-  # --- 5. Email Closings ---
+  # --- 6. Letter and Email Closing formulas ---
+
   - text: Hoogachtend
     setting: [email_closing]
     notes: 'formeel en schriftelijk, boven de handtekening op een brief'
@@ -119,9 +136,11 @@ greetings:
   - text:
       - Met beleefde groeten
       - Met beleefde groet
+    formality: formal
     setting: [email_closing]
 
-  # --- 6. Regional Greetings (Mixed) ---
+  # --- 7. Regional Greetings (Mixed) ---
+
   - text: Adieë wa
     locale: li-NL-x-kerkraads
     formality: highly informal

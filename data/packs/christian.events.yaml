@@ -1,84 +1,17 @@
 tradition: christian
 greetings:
 
-    # Christmas
-    # =========
+    # Easter Sunday
+    # =============
 
     # Greek
-  - text: Καλά Χριστούγεννα!
-    locale: el-GR
-    eventRef: salve.event.religious.christian.christmas
-    formality: neutral
-    notes: 'Greek: Merry Christmas'
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
-  - text: Kala Christougenna!
-    locale: el-Latn
-    eventRef: salve.event.religious.christian.christmas
-    formality: neutral
-    notes: 'Greek (Transliterated): Merry Christmas'
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
-  - text: Χρόνια Πολλά!
-    locale: el-GR
-    eventRef: salve.event.religious.christian.christmas_day_2
-    notes: 'Greek: Many years! (St. Stephen / Synaxis of Mother of God)'
-
-    # Theophany / Epiphany
-  - text: Καλή Φώτιση!
-    locale: el-GR
-    eventRef: salve.event.religious.christian.theophany
-    notes: 'Greek: Happy Enlightenment!'
-  - text: Χρόνια Πολλά!
-    locale: el-GR
-    eventRef: salve.event.religious.christian.theophany
-    notes: 'Greek: Many years!'
-
-    # Assumption of Mary
-  - text: Καλή Παναγιά!
-    locale: el-GR
-    eventRef: salve.event.religious.christian.assumption
-    notes: 'Greek: Happy Panagia! (Used in the lead-up to and on the Assumption)'
-  - text: Χρόνια Πολλά!
-    locale: el-GR
-    eventRef: salve.event.religious.christian.assumption
-    notes: 'Greek: Many years!'
-
-    # Dutch
-  - text: Zalig Kerstmis!
-    locale: nl
-    eventRef: salve.event.religious.christian.christmas
-    formality: neutral
-    notes: 'Dutch: Blessed Christmas'
-    sources: 'https://nl.wikipedia.org/wiki/Kerstmis#Begroeting'
-
-    # English
-  - text: Merry Christmas!
-    locale: en-GB
-    eventRef: salve.event.religious.christian.christmas
-    formality: neutral
-
-    # German
-  - text: Frohe Weihnachten!
-    locale: de-DE
-    eventRef: salve.event.religious.christian.christmas
-    formality: neutral
-
-
-    # Easter
-    # ======
-
   - text: Χριστός Ανέστη!
     locale: el-GR
+    el-Latn: Christos Anesti!
     eventRef: salve.event.religious.christian.easter
     expectedResponse: Αληθώς Ανέστη!
     formality: neutral
     notes: 'Greek: Christ is Risen!'
-    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
-  - text: Christos Anesti!
-    locale: el-Latn
-    eventRef: salve.event.religious.christian.easter
-    expectedResponse: Alithos Anesti!
-    formality: neutral
-    notes: 'Greek (Transliterated): Christ is Risen!'
     sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
 
     # Dutch
@@ -114,3 +47,58 @@ greetings:
     eventRef: salve.event.religious.christian.easter
     formality: neutral
     notes: 'German: Happy Easter'
+
+
+    # Christmas
+    # =========
+
+    # Greek
+  - text: Καλά Χριστούγεννα!
+    locale: el-GR
+    el-Latn: Kala Kristougenna!
+    eventRef: salve.event.religious.christian.christmas
+    formality: neutral
+    notes: 'Greek: Merry Christmas'
+    sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/'
+  - text: Χρόνια Πολλά!
+    locale: el-GR
+    eventRef: salve.event.religious.christian.christmas_day_2
+    notes: 'Greek: Many years! (St. Stephen / Synaxis of Mother of God)'
+  
+    # Dutch
+  - text: Zalig Kerstmis!
+    locale: nl
+    eventRef: salve.event.religious.christian.christmas
+    formality: neutral
+    notes: 'Dutch: Blessed Christmas'
+    sources: 'https://nl.wikipedia.org/wiki/Kerstmis#Begroeting'
+
+    # English
+  - text: Merry Christmas!
+    locale: en-GB
+    eventRef: salve.event.religious.christian.christmas
+    formality: neutral
+
+    # German
+  - text: Frohe Weihnachten!
+    locale: de-DE
+    eventRef: salve.event.religious.christian.christmas
+    formality: neutral
+
+    # Theophany / Epiphany
+    # ====================
+
+    # Greek
+  - text: Καλή Φώτιση!
+    locale: el-GR
+    eventRef: salve.event.religious.christian.theophany
+    notes: 'Greek: Happy Enlightenment!'
+
+    # Assumption of Mary
+    # ==================
+
+    # Greek
+  - text: Καλή Παναγιά!
+    locale: el-GR
+    eventRef: salve.event.religious.christian.assumption
+    notes: 'Greek: Happy Panagia! (Used in the lead-up to and on the Assumption)'
