@@ -81,6 +81,7 @@ export interface CelebrationEvent {
     domain: EventDomain;
     tradition?: string;
     priority?: number; // Optional override
+    emoji?: string;
     metadata?: Record<string, any>;
 }
 
@@ -100,6 +101,8 @@ export interface GreetingLexiconEntry {
     timeOfDay?: TimeOfDay | TimeOfDay[];
     audienceSize?: string | number;
     locale?: string | string[];
+    professions?: string[];
+    emoji?: string;
     notes?: string | string[];
     sources?: string | string[];
     transliterations?: Record<string, string | string[]>;
@@ -266,6 +269,7 @@ export interface GreetingRuleWhen {
     formality?: Formality;
     affiliationsAny?: string[];
     subculturesAny?: string[];
+    professionsAny?: string[];
     audienceSize?: string | number;
 }
 
@@ -299,6 +303,7 @@ export interface SalveEvent {
     end: string;     // ISO date
     label?: string;
     source?: string;
+    emoji?: string;
     precedence?: number;
     confidence?: number;
     metadata?: Record<string, unknown>;
@@ -310,6 +315,7 @@ export interface EventRegistryEntry {
     domain: EventDomainV1;
     country?: string;
     description?: string;
+    emoji?: string;
     scope?: "global" | "regional" | "local";
     aliases?: string[];
 }
@@ -375,6 +381,7 @@ export interface SalvePerson {
 export interface SalveMemberships {
     traditions?: string[];    // e.g. ["orthodox", "catholic"]
     subcultures?: string[];   // e.g. ["student_corporation"]
+    professions?: string[];   // e.g. ["teacher", "doctor", "developer"]
 }
 
 /** Declared affinities (weak / interest-like) */
@@ -390,6 +397,7 @@ export interface SalvePolicy {
     allowSubcultureAddressing?: boolean;
     requireExplicitTraditionsForReligious?: boolean;
     allowGenderInference?: boolean;
+    showEmojis?: boolean;
     repetition?: {
         windowedGreetings?: boolean;
         maxSameRulePerDays?: number;

@@ -12,4 +12,5 @@ export * from "./day-period";
 export * from "./locale-chain";
 export * from "./style";
 export * from "./location";
+export * from "./fixed-date-plugin";
 export { SalveEngine } from "./engine";

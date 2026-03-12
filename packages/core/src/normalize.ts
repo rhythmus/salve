@@ -96,6 +96,7 @@ const DEFAULT_POLICY: Required<SalvePolicy> = {
     allowSubcultureAddressing: false,
     requireExplicitTraditionsForReligious: true,
     allowGenderInference: false,
+    showEmojis: false,
     repetition: {
         windowedGreetings: false,
         maxSameRulePerDays: 3,
@@ -170,6 +171,7 @@ export function normalizeContext(input: SalveContextV1, locationResolver?: Locat
     const memberships: Required<SalveMemberships> = {
         traditions: (input.memberships?.traditions ?? []).map((s: string) => s.toLowerCase()),
         subcultures: (input.memberships?.subcultures ?? []).map((s: string) => s.toLowerCase()),
+        professions: (input.memberships?.professions ?? []).map((s: string) => s.toLowerCase()),
     };
 
     // Step 10 — Affinities
@@ -185,6 +187,7 @@ export function normalizeContext(input: SalveContextV1, locationResolver?: Locat
         allowSubcultureAddressing: input.policy?.allowSubcultureAddressing ?? DEFAULT_POLICY.allowSubcultureAddressing,
         requireExplicitTraditionsForReligious: input.policy?.requireExplicitTraditionsForReligious ?? DEFAULT_POLICY.requireExplicitTraditionsForReligious,
         allowGenderInference: input.policy?.allowGenderInference ?? DEFAULT_POLICY.allowGenderInference,
+        showEmojis: input.policy?.showEmojis ?? DEFAULT_POLICY.showEmojis,
         repetition: input.policy?.repetition ?? DEFAULT_POLICY.repetition,
     };
 

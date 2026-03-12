@@ -105,6 +105,27 @@ export class SalveEngine {
      */
     public registerPack(pack: GreetingPack): void {
         this.packs.set(pack.locale, pack);
+
+        // Bridge to v1 registry: convert LexiconEntries to GreetingRules
+        const rules: GreetingRule[] = pack.greetings.map(g => ({
+            id: g.id,
+            act: (g.metadata?.act as any) ?? "salutation",
+            form: (g.metadata?.form as any) ?? "greeting_only",
+            style: (g.metadata?.style as any) ?? "neutral",
+            priority: (g.metadata?.priority as any) ?? 1,
+            template: g.text,
+            when: {
+                eventRef: g.eventRef,
+                timeOfDay: g.timeOfDay as any,
+                phase: g.phase as any,
+                setting: (Array.isArray(g.setting) ? g.setting : (g.setting ? [g.setting] : undefined)) as any,
+                relationship: (Array.isArray(g.relationship) ? g.relationship : (g.relationship ? [g.relationship] : undefined)) as any,
+                formality: g.formality,
+                professionsAny: g.professions,
+                audienceSize: g.audienceSize
+            }
+        }));
+        this.registerGreetingRules(`pack_${pack.locale}`, pack.locale, rules, 0);
     }
 
     /**
@@ -282,6 +303,7 @@ export class SalveEngine {
                     end: dateStr,
                     label: le.id,
                     source: plugin.id,
+                    emoji: le.emoji,
                     precedence: le.priority ?? 0,
                 });
             }
@@ -360,6 +382,12 @@ export class SalveEngine {
                 if (!hasMatch) continue;
             }
 
+            // Profession filter
+            if (rule.when?.professionsAny) {
+                const hasMatch = rule.when.professionsAny.some((p: string) => ctx.memberships.professions.includes(p));
+                if (!hasMatch) continue;
+            }
+
             // Event match
             let matchedEvent: SalveEvent | null = null;
             if (rule.when?.eventRef) {
@@ -426,8 +454,16 @@ export class SalveEngine {
         );
 
         // ── Stage 8: Composition & Output ───────────────────────
+        let primaryText = renderedText;
+        if (ctx.policy.showEmojis) {
+            const emojis = Array.from(new Set(filteredEvents.map(e => e.emoji).filter(Boolean)));
+            if (emojis.length > 0) {
+                primaryText = `${emojis.join("")} ${primaryText}`;
+            }
+        }
+
         const primary: SalvePrimaryOutput = {
-            text: renderedText,
+            text: primaryText,
             act: winner.rule.act,
             eventId: winner.event?.id,
             ruleId: winner.rule.id,
@@ -521,10 +557,16 @@ export class SalveEngine {
                 timeMatch = times.includes(currentPeriod as any);
             }
 
-            // Optional audienceSize filter logic (if audienceSize is passed in legacy context)
             let audienceMatch = true;
             if (g.audienceSize !== undefined && (context as any).audienceSize !== undefined) {
                 audienceMatch = this.matchAudienceSize(g.audienceSize, (context as any).audienceSize);
+            }
+
+            let professionMatch = true;
+            if (g.professions && context.profile?.professionalRole) {
+                professionMatch = g.professions.includes(context.profile.professionalRole.toLowerCase());
+            } else if (g.professions) {
+                professionMatch = false; // Rule requires profession but none provided
             }
 
             // Anti-repetition check

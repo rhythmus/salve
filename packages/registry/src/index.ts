@@ -173,20 +173,20 @@ export class GreetingRuleRegistry {
  * Default event entries for the SALVE Event Namespace.
  */
 export const SEED_EVENTS: EventRegistryEntry[] = [
-    { id: "salve.event.bank.be.labour_day", domain: "bank", country: "BE", description: "Dag van de Arbeid", scope: "local" },
-    { id: "salve.event.bank.fr.bastille_day", domain: "bank", country: "FR", description: "National Day of France (14 July)", scope: "local", aliases: ["national_day_france"] },
-    { id: "salve.event.bank.us.independence_day", domain: "bank", country: "US", description: "Independence Day (4 July)", scope: "local" },
-    { id: "salve.event.bank.de.tag_der_deutschen_einheit", domain: "bank", country: "DE", description: "Tag der Deutschen Einheit (3 October)", scope: "local" },
-    { id: "salve.event.religious.christian.christmas", domain: "religious", description: "Christmas (25 December)", scope: "global" },
-    { id: "salve.event.religious.orthodox.easter", domain: "religious", description: "Orthodox Easter (moveable feast)", scope: "global" },
-    { id: "salve.event.religious.islam.eid_al_fitr", domain: "religious", description: "Eid al-Fitr", scope: "global" },
-    { id: "salve.event.religious.islam.eid_al_adha", domain: "religious", description: "Eid al-Adha", scope: "global" },
-    { id: "salve.event.personal.nameday", domain: "personal", description: "Personal name day celebration", scope: "global" },
-    { id: "salve.event.personal.birthday", domain: "personal", description: "Personal birthday", scope: "global" },
-    { id: "salve.event.personal.anniversary", domain: "personal", description: "Personal anniversary", scope: "global" },
-    { id: "salve.event.civil.eu.day_of_europe", domain: "civil", description: "Day of Europe (9 May)", scope: "regional" },
-    { id: "salve.event.civil.un.human_rights_day", domain: "civil", description: "Human Rights Day (10 December)", scope: "global" },
-    { id: "salve.event.seasonal.holiday_season", domain: "seasonal", description: "Holiday season (Dec 20 – Jan 5)", scope: "global" },
+    { id: "salve.event.bank.be.labour_day", domain: "bank", country: "BE", description: "Dag van de Arbeid", scope: "local", emoji: "⚒️" },
+    { id: "salve.event.bank.fr.bastille_day", domain: "bank", country: "FR", description: "National Day of France (14 July)", scope: "local", aliases: ["national_day_france"], emoji: "🇫🇷" },
+    { id: "salve.event.bank.us.independence_day", domain: "bank", country: "US", description: "Independence Day (4 July)", scope: "local", emoji: "🇺🇸" },
+    { id: "salve.event.bank.de.tag_der_deutschen_einheit", domain: "bank", country: "DE", description: "Tag der Deutschen Einheit (3 October)", scope: "local", emoji: "🇩🇪" },
+    { id: "salve.event.religious.christian.christmas", domain: "religious", description: "Christmas (25 December)", scope: "global", emoji: "🎄" },
+    { id: "salve.event.religious.orthodox.easter", domain: "religious", description: "Orthodox Easter (moveable feast)", scope: "global", emoji: "🥚" },
+    { id: "salve.event.religious.islam.eid_al_fitr", domain: "religious", description: "Eid al-Fitr", scope: "global", emoji: "🌙" },
+    { id: "salve.event.religious.islam.eid_al_adha", domain: "religious", description: "Eid al-Adha", scope: "global", emoji: "🕋" },
+    { id: "salve.event.personal.nameday", domain: "personal", description: "Personal name day celebration", scope: "global", emoji: "🎉" },
+    { id: "salve.event.personal.birthday", domain: "personal", description: "Personal birthday", scope: "global", emoji: "🎂" },
+    { id: "salve.event.personal.anniversary", domain: "personal", description: "Personal anniversary", scope: "global", emoji: "🥂" },
+    { id: "salve.event.civil.eu.day_of_europe", domain: "civil", description: "Day of Europe (9 May)", scope: "regional", emoji: "🇪🇺" },
+    { id: "salve.event.civil.un.human_rights_day", domain: "civil", description: "Human Rights Day (10 December)", scope: "global", emoji: "⚖️" },
+    { id: "salve.event.seasonal.holiday_season", domain: "seasonal", description: "Holiday season (Dec 20 – Jan 5)", scope: "global", emoji: "❄️" },
 ];
 
 /**
