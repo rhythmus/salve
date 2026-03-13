@@ -143,3 +143,18 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
     - [ ] Final npm publish of all packages (v1.0.0).
     - [ ] GitHub Release creation with detailed changelog.
     - [ ] Public announcement and social sharing (inc. dedication).
+
+## Milestone 11: High-Quality Cultural Data & Data Procurement Architecture (Completed)
+- **M11.1: Awareness Signaling & Profession Logic**
+    - [x] Implement "Awareness Signaling" via event emojis across the engine.
+    - [x] Extend SCNA and greeting rules to support profession-based filtering (e.g., targeted greetings for teachers).
+    - [x] Implement `FixedDateCalendarPlugin` with precedence support for resolving date overlaps.
+- **M11.2: The Salve Harvester Framework**
+    - [x] Initialized `@salve/harvester` monorepo package.
+    - [x] Refactored legacy scraping scripts into modular `SalveHarvester` classes.
+    - [x] Implemented "Smart Merging" logic to preserve curated greetings during automated authoritative data updates.
+- **M11.3: UN Secular Observances Expansion**
+    - [x] Purged low-quality auto-generated UN greetings.
+    - [x] Mass-populated 247 UN observances with high-quality, WikiData-sourced official labels across 12 languages.
+    - [x] Verified localized idiomatic patterns for professional awareness greetings.
+    - [x] Applied premium formatting and month-heading restoration to the secular events dataset.

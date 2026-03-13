@@ -397,6 +397,7 @@ The repository SHALL include the following packages:
    -  @salve/demo:  Reference demo application.
    -  @salve/devtools:  Developer tools overlay.
    -  @salve/cli:  Command-line interface.
+   -  @salve/harvester:  Data procurement and scraping framework.
 
 Each package SHALL be independently versioned and publishable.
 
@@ -463,6 +464,13 @@ The engine provides the following registration methods:
       Register ontology-aware greeting rules for the v1 pipeline.
    -  use(components):  Auto-categorize and register an array of
       mixed components via the SalveLoader.
+
+### 10.5.  FixedDateCalendarPlugin
+
+The `FixedDateCalendarPlugin` is a built-in module for resolving
+events pinned to specific Gregorian dates (Month/Day). It supports
+precedence hints to resolve overlaps (e.g., when a "Tier A" global
+event occurs on the same day as a "Tier B" regional event).
 
 ## 11.  Calendar Plugin Framework
 
@@ -616,6 +624,19 @@ Memberships and affinities serve distinct roles in event filtering:
    greeting as their primary result, with an optional Japanese
    festival reminder as an extra — never a Japanese greeting as the
    primary output.
+
+### 13.3.  Awareness Signaling (Event Emojis)
+
+Salve supports "Awareness Signaling" through event emojis. Each
+`CelebrationEvent` may carry an `emoji` field. When a greeting is
+successfully resolved to an event, the engine MUST propagate the
+event's emoji to the result.
+
+If multiple events are resolved for the same day (e.g., multiple
+extras or a tie-break scenario), the engine SHALL prioritize emojis
+based on the `DomainPriorityHierarchy`. The primary greeting's
+emoji takes precedence, followed by the emojis of any secondary
+affinity events.
 
 ## 14.  Address Protocol and Honorific Resolution
 
@@ -1391,10 +1412,14 @@ matches all values for that dimension):
        rule only matches if at least one tag appears in the
        context's memberships.subcultures.
 
+    9.  professionsAny:  If present (array of profession tags, e.g.,
+        "teacher", "doctor"), the rule only matches if at least
+        one tag appears in the context's professions array.
+
 All present "when" fields MUST match for the rule to be considered
 a candidate (logical AND).  Within array-typed fields (setting,
-relationship, affiliationsAny, subculturesAny), any single match
-suffices (logical OR).
+relationship, affiliationsAny, subculturesAny, professionsAny), any
+single match suffices (logical OR).
 
 When no rule's "when" conditions match the current context, the
 engine falls back to the nearest ancestor in the locale fallback
@@ -1739,9 +1764,44 @@ Potential extensions include:
 
 ## 33.  Author's Address
 
-   Dr Wouter Soudan
-   Salve Project
+   Wouter Soudan
+   Email: wouter@soudan.be
 
-   Email:   rhythmvs@gmail.com
-   GitHub:  https://github.com/rhythmus
-   Website: https://wso.art
+## 34. Data Procurement & Harvest Architecture (Harvester)
+
+The Salve project maintains authoritative cultural and secular datasets
+through a modular data procurement framework known as the "Harvester."
+
+### 34.1.  Objective
+
+The goal of the Harvester is to decouple data fetching logic from the
+core engine and to provide a reproducible build-time component that
+can refresh project datasets from external sources (e.g., Wikipedia,
+WikiData, official UN listings).
+
+### 34.2.  Modular Harvesters
+
+Every data source MUST be implemented as a modular class following the
+`SalveHarvester` interface. This ensures that new data sources can be
+added without modifying the central runner logic.
+
+### 34.3.  Smart Merging Strategy
+
+To prevent automated updates from regressing human-curated quality (e.g.,
+manually localized greetings, specific event emojis), the Harvester
+MUST implement a non-destructive merging strategy:
+
+   1.  Load existing dataset from disk.
+   2.  Identify matches between existing items and harvested items via
+       canonical identifiers (WikiData QIDs) or stable labels.
+   3.  Update volatile fields (e.g., event dates for movable feasts)
+       while PRESERVING stable, curated fields (e.g., `greetings`,
+       `emoji`, `UN-resolution`).
+   4.  Append new authoritative items that do not yet exist in the local
+       dataset.
+
+### 34.4.  CLI Integration
+
+The `@salve/harvester` package provides a unified CLI (`npm run harvest`)
+to execute the entire procurement pipeline or targeted individual
+harvesters. This component is integral to the Salve project build cycle.
