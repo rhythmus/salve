@@ -1,7 +1,7 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.{greetings,regions}.{json,yaml} by scripts/generate-demo-packs.ts
- * Generated at: 2026-03-13T11:56:21.580Z
+ * Generated at: 2026-03-13T16:51:45.979Z
  */
 
 import type { GreetingPack } from "@salve/types";
@@ -1389,45 +1389,6 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
       },
       {
-        id: "el_gr_anniversary_of_the_greek_indepen",
-        text: "Χρόνια Πολλά!",
-        locale: "el-GR",
-        phase: "encounter",
-        notes: "Anniversary of the Greek Independence Day /  Lit. “Many years!”",
-        sources: "https://en.wikipedia.org/wiki/Celebration_of_the_Greek_Revolution",
-        // @ts-ignore - bypass cached strict type checks
-        metadata: {
-          "WikiData": "Q4158275",
-          "date": "25 March",
-        },
-      },
-      {
-        id: "el_gr_ohi_day_october_28_anniversary_o",
-        text: "Χρόνια Πολλά!",
-        locale: "el-GR",
-        phase: "encounter",
-        notes: "Ohi Day (October 28). Anniversary of the refusal to the Italian ultimatum.",
-        sources: "https://en.wikipedia.org/wiki/Ohi_Day",
-        // @ts-ignore - bypass cached strict type checks
-        metadata: {
-          "WikiData": "Q830166",
-          "date": "28 October",
-        },
-      },
-      {
-        id: "el_gr_commemoration_of_the_1973_athens",
-        text: "Καλό Πολυτεχνείο!",
-        locale: "el-GR",
-        phase: "encounter",
-        notes: "Polytechneio: Commemoration of the 1973 Athens Polytechnic uprising against the junta of the colonels (1967–1974).",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        // @ts-ignore - bypass cached strict type checks
-        metadata: {
-          "WikiData": "Q2628742",
-          "date": "17 November",
-        },
-      },
-      {
         id: "el_gr_basic_hi_hello_often_short_for",
         text: "Γεια!",
         locale: "el-GR",
@@ -1800,6 +1761,45 @@ export const DEMO_PACKS: GreetingPack[] = [
         sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
         transliterations: {
           "el-Latn": "Emprós!",
+        },
+      },
+      {
+        id: "el_gr_anniversary_of_the_greek_indepen",
+        text: "Χρόνια Πολλά!",
+        locale: "el-GR",
+        phase: "encounter",
+        notes: "Anniversary of the Greek Independence Day /  Lit. “Many years!”",
+        sources: "https://en.wikipedia.org/wiki/Celebration_of_the_Greek_Revolution",
+        // @ts-ignore - bypass cached strict type checks
+        metadata: {
+          "WikiData": "Q4158275",
+          "date": "25 March",
+        },
+      },
+      {
+        id: "el_gr_ohi_day_october_28_anniversary_o",
+        text: "Χρόνια Πολλά!",
+        locale: "el-GR",
+        phase: "encounter",
+        notes: "Ohi Day (October 28). Anniversary of the refusal to the Italian ultimatum.",
+        sources: "https://en.wikipedia.org/wiki/Ohi_Day",
+        // @ts-ignore - bypass cached strict type checks
+        metadata: {
+          "WikiData": "Q830166",
+          "date": "28 October",
+        },
+      },
+      {
+        id: "el_gr_commemoration_of_the_1973_athens",
+        text: "Καλό Πολυτεχνείο!",
+        locale: "el-GR",
+        phase: "encounter",
+        notes: "Polytechneio: Commemoration of the 1973 Athens Polytechnic uprising against the junta of the colonels (1967–1974).",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        // @ts-ignore - bypass cached strict type checks
+        metadata: {
+          "WikiData": "Q2628742",
+          "date": "17 November",
         },
       },
       {
@@ -4802,6 +4802,202 @@ export const DEMO_PACKS: GreetingPack[] = [
 ];
 
 export const DEMO_REGIONS = [
+  {
+    "id": "be_flanders",
+    "name": "Flanders",
+    "locale": "nl-BE",
+    "priority": 80,
+    "polygon": [
+      [
+        51.5,
+        2.5
+      ],
+      [
+        51.5,
+        5.9
+      ],
+      [
+        50.7,
+        5.9
+      ],
+      [
+        50.7,
+        2.5
+      ],
+      [
+        51.5,
+        2.5
+      ]
+    ]
+  },
+  {
+    "id": "be_wallonia",
+    "name": "Wallonia",
+    "locale": "fr-BE",
+    "priority": 80,
+    "polygon": [
+      [
+        50.8,
+        2.8
+      ],
+      [
+        50.8,
+        6.4
+      ],
+      [
+        49.5,
+        6.4
+      ],
+      [
+        49.5,
+        2.8
+      ],
+      [
+        50.8,
+        2.8
+      ]
+    ]
+  },
+  {
+    "id": "be_brussels",
+    "name": "Brussels-Capital Region",
+    "locale": "fr-BE",
+    "priority": 70,
+    "polygon": [
+      [
+        50.9,
+        4.3
+      ],
+      [
+        50.9,
+        4.4
+      ],
+      [
+        50.8,
+        4.4
+      ],
+      [
+        50.8,
+        4.3
+      ],
+      [
+        50.9,
+        4.3
+      ]
+    ]
+  },
+  {
+    "id": "be_ostbelgien",
+    "name": "Ostbelgien (East Cantons)",
+    "locale": "de-BE",
+    "priority": 60,
+    "polygon": [
+      [
+        50.7,
+        5.9
+      ],
+      [
+        50.7,
+        6.4
+      ],
+      [
+        50.1,
+        6.4
+      ],
+      [
+        50.1,
+        5.9
+      ],
+      [
+        50.7,
+        5.9
+      ]
+    ]
+  },
+  {
+    "id": "be_antwerpen",
+    "name": "Antwerp (Region)",
+    "locale": "nl-BE-x-antwerps",
+    "priority": 50,
+    "polygon": [
+      [
+        51.5,
+        4.1
+      ],
+      [
+        51.5,
+        4.9
+      ],
+      [
+        51,
+        4.9
+      ],
+      [
+        51,
+        4.1
+      ],
+      [
+        51.5,
+        4.1
+      ]
+    ]
+  },
+  {
+    "id": "be_kempen",
+    "name": "De Kempen",
+    "locale": "nl-BE-x-kempens",
+    "priority": 40,
+    "polygon": [
+      [
+        51.4,
+        4.7
+      ],
+      [
+        51.4,
+        5.3
+      ],
+      [
+        51.1,
+        5.3
+      ],
+      [
+        51.1,
+        4.7
+      ],
+      [
+        51.4,
+        4.7
+      ]
+    ]
+  },
+  {
+    "id": "be_flanders_westhoek",
+    "name": "Westhoek (Parts of Flanders celebrating Saint Martin)",
+    "locale": "nl-BE",
+    "priority": 60,
+    "polygon": [
+      [
+        51.1,
+        2.5
+      ],
+      [
+        51.1,
+        3
+      ],
+      [
+        50.7,
+        3
+      ],
+      [
+        50.7,
+        2.5
+      ],
+      [
+        51.1,
+        2.5
+      ]
+    ]
+  },
   {
     "id": "grc_macro",
     "name": "Greece",
