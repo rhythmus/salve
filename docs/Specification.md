@@ -578,7 +578,7 @@ Event resolution MUST proceed in the following order:
        time from all registered calendar plugins.
    2.  Filter candidates by the user's declared tradition tags
        (e.g., "orthodox", "islam", "civil").
-   3.  Filter candidates by jurisdiction (e.g., "de-DE", "el-GR").
+   3.  Filter candidates by jurisdiction (e.g., "de-DE", "GR").
    4.  Apply user-specific constraints (e.g., birthday, name-day).
    5.  Sort remaining candidates by domain priority (personal >
        religious > civil > seasonal > temporal > cultural_baseline).
