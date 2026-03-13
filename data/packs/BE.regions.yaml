@@ -1,0 +1,81 @@
+# Geographic Region Definitions for Belgium
+# $schema: "./regions.schema.json"
+
+regions:
+
+  - id: be_flanders
+    name: Flanders
+    locale: nl-BE
+    priority: 80
+    polygon:
+      - [51.5, 2.5]
+      - [51.5, 5.9]
+      - [50.7, 5.9]
+      - [50.7, 2.5]
+      - [51.5, 2.5]
+
+  - id: be_wallonia
+    name: Wallonia
+    locale: fr-BE
+    priority: 80
+    polygon:
+      - [50.8, 2.8]
+      - [50.8, 6.4]
+      - [49.5, 6.4]
+      - [49.5, 2.8]
+      - [50.8, 2.8]
+
+  - id: be_brussels
+    name: Brussels-Capital Region
+    locale: fr-BE
+    priority: 70
+    polygon:
+      - [50.9, 4.3]
+      - [50.9, 4.4]
+      - [50.8, 4.4]
+      - [50.8, 4.3]
+      - [50.9, 4.3]
+
+  - id: be_ostbelgien
+    name: Ostbelgien (East Cantons)
+    locale: de-BE
+    priority: 60
+    polygon:
+      - [50.7, 5.9]
+      - [50.7, 6.4]
+      - [50.1, 6.4]
+      - [50.1, 5.9]
+      - [50.7, 5.9]
+
+  - id: be_antwerpen
+    name: Antwerp (Region)
+    locale: nl-BE-x-antwerps
+    priority: 50
+    polygon:
+      - [51.5, 4.1]
+      - [51.5, 4.9]
+      - [51.0, 4.9]
+      - [51.0, 4.1]
+      - [51.5, 4.1]
+
+  - id: be_kempen
+    name: De Kempen
+    locale: nl-BE-x-kempens
+    priority: 40
+    polygon:
+      - [51.4, 4.7]
+      - [51.4, 5.3]
+      - [51.1, 5.3]
+      - [51.1, 4.7]
+      - [51.4, 4.7]
+
+  - id: be_flanders_westhoek
+    name: Westhoek (Parts of Flanders celebrating Saint Martin)
+    locale: nl-BE
+    priority: 60
+    polygon:
+      - [51.1, 2.5]
+      - [51.1, 3.0]
+      - [50.7, 3.0]
+      - [50.7, 2.5]
+      - [51.1, 2.5]
