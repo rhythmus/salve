@@ -3,7 +3,7 @@ sources: 'https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/
 
 greetings:
 
-  # --- 1. Saying Hello & Goodbye ---
+  # Saying Hello & Goodbye
 
   - text: Γεια!
     el-Latn: Ya!
@@ -39,7 +39,7 @@ greetings:
     audienceSize: ">=1"
     notes: Polite/Formal 'Hello' to one person or a group.
 
-  # --- 2. Parting Specifically ---
+  # Parting Specifically
 
   - text: Τα λέμε!
     el-Latn: Ta leme!
@@ -64,7 +64,7 @@ greetings:
     style: poetic
     notes: Farewell. More sophisticated version of 'See you again'. Litt. “To the seeing-each-other-again!”
 
-  # --- 3. Time of Day ---
+  # Time of Day
 
   - text: Καλημέρα!
     el-Latn: Kaliméra!
@@ -108,7 +108,7 @@ greetings:
     timeOfDay: night
     notes: Sweet dreams. Usually follows Καληνύχτα.
 
-  # --- 4. Slang & Special ---
+  # Slang & Special
 
   - text: Γεια χαρά!
     el-Latn: Ya hará!
@@ -127,7 +127,7 @@ greetings:
     phase: encounter
     notes: Long time no see!
 
-  # --- 5. Meeting New People ---
+  # Meeting New People
 
   - text: Χαίρω πολύ!
     el-Latn: Héro Polí!
@@ -144,7 +144,7 @@ greetings:
     phase: encounter
     notes: Pleased to make your acquaintance!
 
-  # --- 6. Phone ---
+  # Phone
 
   - text: Ναι;
     el-Latn: Nai?

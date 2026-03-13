@@ -5,7 +5,7 @@ sources: 'https://nl.wikipedia.org/wiki/Groet_(etiquette)#Nederlandstalige_verba
 
 greetings:
 
-  # --- 1. Welcome (encounter) greetings ---
+  # Welcome (encounter) greetings
 
   - text: Welkom
     phase: encounter
@@ -20,7 +20,7 @@ greetings:
     formality: hyperformal
 
 
-  # --- 2. Encounter greetings, all day long ---
+  # Encounter greetings, all day long
 
   - text: Goedendag
     timeOfDay: [morning, midday, afternoon]
@@ -43,7 +43,7 @@ greetings:
     formality: highly informal
 
   
-  # --- 3. Temporal Greetings (Encounter), specific time of day ---
+  # Temporal Greetings (Encounter), specific time of day
 
   - text: Goedemorgen
     timeOfDay: morning
@@ -78,8 +78,7 @@ greetings:
     phase: encounter
     formality: informal
 
-  # --- 4. Informal & Audience Selection (Encounter) ---
-  
+  # Informal & Audience Selection (Encounter) - 
   - text:
       - Dag allemaal!
       - Dag iedereen!
@@ -88,7 +87,7 @@ greetings:
     audienceSize: '>4'
     phase: encounter
 
-  # --- 5. Farewell Greetings (Parting) ---
+  # Farewell Greetings (Parting)
 
   - text: [Dag, Daag]
     phase: parting
@@ -113,7 +112,7 @@ greetings:
     timeOfDay: [evening, night]
     phase: parting
 
-  # --- 6. Letter and Email Closing formulas ---
+  # Letter and Email Closing formulas
 
   - text: Hoogachtend
     setting: [email_closing]
@@ -139,7 +138,7 @@ greetings:
     formality: formal
     setting: [email_closing]
 
-  # --- 7. Regional Greetings (Mixed) ---
+  # Regional Greetings (Mixed)
 
   - text: Adieë wa
     locale: li-NL-x-kerkraads
