@@ -158,3 +158,14 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
     - [x] Mass-populated 247 UN observances with high-quality, WikiData-sourced official labels across 12 languages.
     - [x] Verified localized idiomatic patterns for professional awareness greetings.
     - [x] Applied premium formatting and month-heading restoration to the secular events dataset.
+## Milestone 12: Event Augmentation & Data Normalization (Completed)
+- [x] **M12.1: Event Augmentation Mechanism**
+    - [x] Implement WikiData-based merging and de-duplication in resolveV1.
+    - [x] Add support for property precedence (promoting categories to official).
+    - [x] Implement ID Stability & Promotion logic for reliable rule matching.
+- [x] **M12.2: Belgian Cultural Data & Harvester**
+    - [x] Develop BelgiumHarvester for automated procurement from Wikipedia.
+    - [x] Populate and verify Belgian regional data (BE.events.yaml, BE.regions.yaml).
+- [x] **M12.3: Data Deduplication & Refinement**
+    - [x] Create international.base.events.yaml to centralize shared holidays.
+    - [x] Refactor regional packs (BE, el-GR) to use WikiData-based augmentation.

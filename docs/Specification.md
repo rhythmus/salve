@@ -437,7 +437,7 @@ and output:
 
 This method executes the eight-stage deterministic pipeline
 described in Section 25.3.  Its structured output is described in
-Section 25.7.
+Section 25.7, and crucially includes the `activeEvents` array containing the final, merged events processed during the session.
 
 ### 10.3.  API Coexistence
 
@@ -585,7 +585,7 @@ Event resolution MUST proceed in the following order:
    6.  Apply suppression rules from the memory store.
    7.  Select the highest-priority unsuppressed candidate.
 
-### 13.1.  Domain Priority Hierarchy
+### 13.1.  Event Augmentation & De-duplication
 
 The following domain priority order is normative, from highest to
 lowest:
