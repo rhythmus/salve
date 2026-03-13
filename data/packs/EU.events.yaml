@@ -1,0 +1,418 @@
+tradition: european-union
+sources:
+  - https://en.wikipedia.org/wiki/Public_holidays_in_the_European_Union
+events:
+    # ─── January ─────────────────────────────────────────────────────
+
+  - date: 1 January
+    category: official
+    WikiData: Q196627
+    label:
+      cs: Nový rok
+      da: nytårsdag
+      de: Neujahrstag
+      el: Πρωτοχρονιά
+      en: New Year's Day
+      es: Día de Año Nuevo
+      et: näärid
+      fi: uudenvuodenpäivä
+      fr: fête du jour de l'An
+      ga: Lá Caille
+      hu: újév napja
+      it: capodanno
+      lv: Jaungada diena
+      nl: nieuwjaarsdag
+      pl: Nowy Rok
+      pt: Dia de Ano Novo
+      ro: Anul Nou
+      sl: novoletni dan
+      sv: Nyårsdagen
+
+  - date: 2 January
+    category: official
+    label:
+      en: Day following New Year's Day
+
+    # ─── April ─────────────────────────────────────────────────────
+
+  - date: pascha:-3
+    category: official
+    WikiData: Q106333
+    label:
+      bg: Велики четвъртък
+      cs: Zelený čtvrtek
+      da: skærtorsdag
+      de: Gründonnerstag
+      el: Μεγάλη Πέμπτη
+      en: Maundy Thursday
+      es: Jueves Santo
+      et: suur neljapäev
+      fi: kiirastorstai
+      fr: Jeudi saint
+      ga: Déardaoin Mandála
+      hr: Veliki četvrtak
+      hu: nagycsütörtök
+      it: giovedì santo
+      lt: Didysis Ketvirtadienis
+      lv: Zaļā ceturtdiena
+      nl: Witte Donderdag
+      pl: Wielki Czwartek
+      pt: Quinta-Feira Santa
+      ro: Joia Mare
+      sk: Štvrtok svätého týždňa
+      sl: veliki četrtek
+      sv: Skärtorsdagen
+
+  - date: pascha:-2
+    category: official
+    WikiData: Q40317
+    label:
+      bg: Разпети петък
+      cs: Velký pátek
+      da: langfredag
+      de: Karfreitag
+      el: Μεγάλη Παρασκευή
+      en: Good Friday
+      es: Viernes Santo
+      et: Suur reede
+      fi: pitkäperjantai
+      fr: Vendredi saint
+      ga: Aoine an Chéasta
+      hr: Veliki petak
+      hu: nagypéntek
+      it: venerdì santo
+      lt: Didysis penktadienis
+      lv: Lielā piektdiena
+      mt: l-għid il-kbir
+      nl: Goede Vrijdag
+      pl: Wielki Piątek
+      pt: Sexta-Feira Santa
+      ro: Vinerea Mare
+      sk: Piatok utrpenia Pána
+      sl: veliki petek
+      sv: Långfredagen
+
+  - date: pascha:1
+    category: official
+    WikiData: Q209663
+    label:
+      cs: Velikonoční pondělí
+      da: 2. påskedag
+      de: Ostermontag
+      el: Δευτέρα του Πάσχα
+      en: Easter Monday
+      es: Lunes de la Octava de Pascua
+      fi: toinen pääsiäispäivä
+      fr: lundi de Pâques
+      ga: Luan Cásca
+      hr: Uskrsni ponedjeljak
+      hu: húsvéthétfő
+      it: lunedì dell'Angelo
+      lt: Antroji Velykų diena
+      nl: paasmaandag
+      pl: Poniedziałek wielkanocny
+      pt: segunda-feira de Páscoa
+      ro: Lunea Luminată
+      sk: Pondelok vo veľkonočnej oktáve
+      sl: velikonočni ponedeljek
+      sv: Annandag påsk
+
+    # ─── May ─────────────────────────────────────────────────────
+
+  - date: 1 May
+    category: official
+    WikiData: Q47499
+    label:
+      bg: Ден на труда и на международната работническа солидарност
+      cs: Svátek práce
+      da: Arbejdernes internationale kampdag
+      de: Erster Mai
+      el: Πρωτομαγιά
+      en: International Workers' Day
+      es: Día del Trabajador
+      et: Töörahvapüha
+      fi: kansainvälinen työläisten juhlapäivä
+      fr: journée internationale des travailleurs
+      ga: Lá Idirnáisiúnta na nOibrithe
+      hr: Praznik rada
+      hu: a munka ünnepe
+      it: festa del lavoro
+      lt: Tarptautinė darbo diena
+      lv: Darba svētki
+      nl: Internationale Dag van de Arbeid
+      pl: Święto Pracy
+      pt: Dia do Trabalhador
+      ro: Ziua Internațională a Muncii
+      sk: Sviatok práce
+      sl: praznik dela
+      sv: Första maj
+
+  - date: 9 May
+    category: official
+    WikiData: Q207811
+    label:
+      bg: Ден на Европа
+      cs: Den Evropy
+      da: Europadagen
+      de: Europatag
+      el: Ημέρα της Ευρώπης
+      en: Europe Day
+      es: Día de Europa
+      et: Euroopa päev
+      fi: Eurooppa-päivä
+      fr: Journée de l'Europe
+      ga: Lá na hEorpa
+      hr: Dan Europe
+      hu: Európa-nap
+      it: giornata dell'Europa
+      lt: Europos diena
+      lv: Eiropas diena
+      mt: Jum l-Ewropa
+      nl: Europadag
+      pl: Dzień Europy
+      pt: Dia da Europa
+      ro: Ziua Europei
+      sk: Deň Európy
+      sl: dan Evrope
+      sv: Europadagen
+
+  - date: pascha:39
+    category: official
+    WikiData: Q51638
+    label:
+      bg: Възнесение Господне
+      cs: Svátek Nanebevstoupení Páně
+      da: Kristi himmelfartsdag
+      de: Christi Himmelfahrt
+      el: Γιορτή της Ανάληψης
+      en: Feast of the Ascension
+      es: Día de la Ascensión
+      et: Taevaminemispüha
+      fi: helatorstai
+      fr: Ascension
+      ga: Deascabháil
+      hr: Uzašašće
+      hu: mennybemenetel ünnepe
+      it: festività dell'Ascensione
+      lt: Šeštinės
+      lv: Debesbraukšanas diena
+      nl: Hemelvaartsdag
+      pl: Wniebowstąpienie Pańskie
+      pt: Ascensão de Jesus
+      ro: Înălțarea Domnului
+      sk: Nanebovstúpenie Krista
+      sl: Gospodov vnebohod
+      sv: Kristi himmelsfärdsdag
+
+  - date: pascha:40
+    category: official
+    label:
+      en: the Friday following Ascension Day
+
+    # ─── June ─────────────────────────────────────────────────────
+
+  - date: pascha:50
+    category: official
+    WikiData: Q2512993
+    label:
+      cs: Svatodušní pondělí
+      da: Anden pinsedag
+      de: Pfingstmontag
+      el: Δευτέρα του Αγίου Πνεύματος
+      en: Whit Monday
+      es: lunes de Pentecostés
+      fr: lundi de Pentecôte
+      ga: Luan Cincíse
+      hr: Duhovski ponedjeljak
+      hu: pünkösdhétfő
+      it: Lunedì di Pentecoste
+      nl: Tweede Pinksterdag
+      pl: Zielone Świątki (dzień 2)
+      pt: Segunda-feira de Pentecostes
+      sl: binkoštni ponedeljek
+      sv: Annandag pingst
+
+    # ─── July ─────────────────────────────────────────────────────
+
+  - date: 21 July
+    category: official
+    WikiData: Q2190144
+    label:
+      da: Belgiens Nationaldag
+      de: Belgischer Nationalfeiertag
+      en: Belgian National Day
+      es: Fiesta nacional de Bélgica
+      et: Belgia rahvuspäev
+      fr: Fête nationale belge
+      it: Festa nazionale del Belgio
+      nl: Nationale feestdag van België
+      ro: Ziua națională a Belgiei
+      sv: Belgiens nationaldag
+
+    # ─── August ─────────────────────────────────────────────────────
+
+  - date: 15 August
+    category: official
+    WikiData: Q162691
+    label:
+      bg: Успение на Пресвета Богородица
+      cs: Nanebevzetí Panny Marie
+      da: Jomfru Marias optagelse i himlen
+      de: Mariä Aufnahme in den Himmel
+      el: Μετάσταση της Θεοτόκου
+      en: Assumption of Mary
+      es: Asunción de María
+      et: Rukkimaarjapäev
+      fi: Neitseen Marian kuolonuneen nukkuminen
+      fr: Assomption de Marie
+      ga: Deastógáil Mhuire
+      hr: Velika Gospa
+      hu: Mária mennybemenetele
+      it: Assunzione di Maria
+      lt: Žolinė
+      lv: Marijas debesbraukšana
+      nl: Maria-Tenhemelopneming
+      pl: Wniebowzięcie Najświętszej Maryi Panny
+      pt: Assunção de Maria
+      ro: Adormirea Maicii Domnului
+      sk: Nanebovzatie Panny Márie
+      sl: Marijino vnebovzetje
+      sv: Jungfru Marie himmelsfärd
+
+    # ─── November ─────────────────────────────────────────────────────
+
+  - date: 1 November
+    category: official
+    WikiData: Q587
+    label:
+      bg: Вси светии
+      cs: Všech svatých
+      da: Allehelgensdag
+      de: Allerheiligen
+      el: Άγιοι Πάντες
+      en: All Saints' Day
+      es: Día de Todos los Santos
+      et: pühakutepäev
+      fi: pyhäinpäivä
+      fr: Toussaint
+      ga: Lá Fhéile na Naomh Uile
+      hr: Svi sveti
+      hu: mindenszentek
+      it: Tutti i Santi
+      lt: Visų šventųjų diena
+      lv: Visu svēto diena
+      nl: Allerheiligen
+      pl: uroczystość Wszystkich Świętych
+      pt: Dia de Todos os Santos
+      ro: Sărbătoarea Tuturor Sfinților
+      sk: Sviatok Všetkých svätých
+      sl: vsi sveti
+      sv: Alla helgons dag
+
+  - date: 2 November
+    category: official
+    WikiData: Q1033140
+    label:
+      cs: Dušičky
+      da: Alle Sjæles Dag
+      de: Allerseelen
+      en: All Souls' Day
+      es: Día de los Fieles Difuntos
+      et: Hingedepäev
+      fr: commémoration de tous les fidèles défunts
+      ga: Lá Fhéile na Marbh
+      hr: Dušni dan
+      hu: halottak napja
+      it: Commemorazione dei defunti
+      lt: Visų mirusiųjų paminėjimas
+      lv: Visu dvēseļu diena
+      nl: Allerzielen
+      pl: Wspomnienie Wszystkich Wiernych Zmarłych
+      pt: Dia dos Fiéis Defuntos
+      ro: Ziua morților
+      sk: Dušičky
+      sl: verne duše
+      sv: Alla själars dag
+
+    # ─── December ─────────────────────────────────────────────────────
+
+  - date: 24 December
+    category: official
+    label:
+      en: End-of-year holiday
+
+  - date: 25 December
+    category: official
+    WikiData: Q19809
+    label:
+      bg: Рождество Христово
+      cs: Vánoce
+      da: jul
+      de: Weihnachten
+      el: Χριστούγεννα
+      en: Christmas
+      es: Navidad
+      et: jõulud
+      fi: joulu
+      fr: Noël
+      ga: An Nollaig
+      hr: Božić
+      hu: karácsony
+      it: Natale
+      lt: Kalėdos
+      lv: Ziemassvētki
+      mt: Il-Milied
+      nl: Kerstmis
+      pl: Boże Narodzenie
+      pt: Natal
+      ro: Crăciun
+      sk: Vianoce
+      sl: božič
+      sv: jul
+
+  - date: 26 December
+    category: official
+    WikiData: Q1366863
+    label:
+      bg: Стефановден
+      cs: Svátek svatého Štěpána
+      de: Stephanitag
+      en: Saint Stephen's Day
+      es: Día de San Esteban
+      et: Tabanipäev
+      fi: tapaninpäivä
+      fr: fête de la Saint-Étienne
+      ga: Lá Fhéile Stiofán
+      hr: Štefanje
+      hu: Szent István vértanú napja
+      it: giorno di Santo Stefano
+      nl: Sint Stefanusdag
+      pl: dzień świętego Szczepana
+      pt: Dia de Santo Estêvão
+      sl: štefanovo
+      sv: Annandag jul
+
+  - date: 27 December
+    category: official
+    label:
+      en: End-of-year holiday
+
+  - date: 28 December
+    category: official
+    label:
+      en: End-of-year holiday
+
+  - date: 29 December
+    category: official
+    label:
+      en: End-of-year holiday
+
+  - date: 30 December
+    category: official
+    label:
+      en: End-of-year holiday
+
+  - date: 31 December
+    category: official
+    label:
+      en: End-of-year holiday

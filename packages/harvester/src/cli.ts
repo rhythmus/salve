@@ -2,6 +2,8 @@ import * as fs from "fs";
 import * as path from "path";
 import { UnObservancesHarvester } from "./harvesters/UnObservancesHarvester";
 import { BelgiumHarvester } from "./harvesters/BelgiumHarvester";
+import { GreeceHarvester } from "./harvesters/GreeceHarvester";
+import { EUHarvester } from "./harvesters/EUHarvester";
 import { SalveHarvester, HarvesterOptions } from "./types";
 import { stringifyYaml } from "./utils/yaml";
 
@@ -71,6 +73,8 @@ async function main() {
     // Register all harvesters
     registry.register(new UnObservancesHarvester({ dryRun, skipWikidata }));
     registry.register(new BelgiumHarvester({ dryRun, skipWikidata }));
+    registry.register(new GreeceHarvester({ dryRun, skipWikidata }));
+    registry.register(new EUHarvester({ dryRun, skipWikidata }));
 
     if (args.includes("--list")) {
         console.log("Available harvesters:", registry.getIds().join(", "));
