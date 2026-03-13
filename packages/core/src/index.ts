@@ -13,4 +13,5 @@ export * from "./locale-chain";
 export * from "./style";
 export * from "./location";
 export * from "./fixed-date-plugin";
+export * from "./rule-based-plugin";
 export { SalveEngine } from "./engine";

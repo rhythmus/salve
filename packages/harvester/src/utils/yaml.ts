@@ -23,41 +23,58 @@ function restoreMonthHeadings(yamlStr: string, events: any[]): string {
     const months = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"];
 
-    let result = yamlStr;
-    const lines = result.split("\n");
+    const lines = yamlStr.split("\n");
     const finalLines: string[] = [];
     let currentMonthIndex = -1;
+    let eventIdx = 0;
+    let inEventsBlock = false;
 
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
-        const labelMatch = line.match(/^\s+-\s+label:\s*'?(.+?)'?\s*$/);
 
-        if (labelMatch) {
-            // Add a blank line before every event except the first one in a block
-            if (finalLines.length > 0 && finalLines[finalLines.length - 1].trim() !== "" && finalLines[finalLines.length - 1].trim() !== "events:") {
-                // But only if we didn't just add a heading (which already has a blank after it)
-                if (!finalLines[finalLines.length - 1].includes("───")) {
-                    finalLines.push("");
-                }
-            }
+        if (line.trim() === "events:") {
+            inEventsBlock = true;
+            finalLines.push(line);
+            continue;
+        }
 
-            // Find the date for this event 
-            const label = labelMatch[1];
-            const eventData = events.find(e => e.label === label);
+        // Detect start of a new top-level event in the list
+        if (inEventsBlock && line.match(/^  - /)) {
+            const eventData = events[eventIdx++];
+
             if (eventData && eventData.date) {
-                const monthMatch = eventData.date.match(/[A-Za-z]+/);
-                if (monthMatch) {
-                    const monthName = monthMatch[0];
-                    const monthIdx = months.indexOf(monthName);
-                    if (monthIdx !== -1 && monthIdx > currentMonthIndex) {
-                        // Add spacer and heading
-                        if (finalLines.length > 0 && finalLines[finalLines.length - 1].trim() !== "" && finalLines[finalLines.length - 1].trim() !== "events:") {
-                            finalLines.push("");
-                        }
-                        finalLines.push(`    # ─── ${monthName} ─────────────────────────────────────────────────────`);
+                const dateStr = eventData.date.toString().toLowerCase();
+                let monthIdx = -1;
+
+                // Handle "D Month" format
+                const monthMatch = dateStr.match(/[a-z]+/);
+                if (monthMatch && months.some(m => m.toLowerCase() === monthMatch[0])) {
+                    monthIdx = months.findIndex(m => m.toLowerCase() === monthMatch[0]);
+                }
+                // Handle "pascha:X" format
+                else if (dateStr.startsWith('pascha:')) {
+                    const offset = parseInt(dateStr.split(':')[1], 10);
+                    if (offset < 39) monthIdx = 3; // April approx
+                    else if (offset < 49) monthIdx = 4; // May approx
+                    else monthIdx = 5; // June approx
+                }
+                // Handle "MM:sun:N" or "MM:DD:next:weekday" formats
+                else if (dateStr.match(/^\d{2}:/)) {
+                    monthIdx = parseInt(dateStr.split(':')[0], 10) - 1;
+                }
+
+                if (monthIdx !== -1 && monthIdx > currentMonthIndex) {
+                    const monthName = months[monthIdx];
+                    // Add spacer before heading if not the very first event in the block
+                    if (finalLines.length > 0 && finalLines[finalLines.length - 1].trim() !== "events:") {
                         finalLines.push("");
-                        currentMonthIndex = monthIdx;
                     }
+                    finalLines.push(`    # ─── ${monthName} ─────────────────────────────────────────────────────`);
+                    finalLines.push("");
+                    currentMonthIndex = monthIdx;
+                } else if (eventIdx > 1) {
+                    // Add a blank line between events in the same month
+                    finalLines.push("");
                 }
             }
         }

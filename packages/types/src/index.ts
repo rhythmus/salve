@@ -37,12 +37,15 @@ export type InteractionSetting =
     | "email"
     | "phone";
 
-export type EventDomain =
+export type EventCategory =
     | "personal"
     | "religious"
-    | "civil"
+    | "official"
+    | "observance"
     | "temporal"
     | "cultural_baseline";
+
+export type EventDomain = EventCategory;
 
 /**
  * Recipient Address Profile for formal salutations
@@ -78,10 +81,13 @@ export interface GreetingContext {
  */
 export interface CelebrationEvent {
     id: string;
-    domain: EventDomain;
+    category: EventCategory;
     tradition?: string;
     priority?: number; // Optional override
     emoji?: string;
+    requiredRegions?: string[];
+    requiredProfessions?: string[];
+    wikiDataId?: string;
     metadata?: Record<string, any>;
 }
 
@@ -243,19 +249,21 @@ export type DayPeriod =
     | "evening"
     | "night";
 
-/** Expanded event domain taxonomy (v1) */
-export type EventDomainV1 =
+/** Expanded event category taxonomy (v1) */
+export type EventCategoryV1 =
+    | "official"
+    | "observance"
     | "bank"
     | "civil"
     | "religious"
     | "personal"
-    | "seasonal"
     | "protocol"
     | "affinity"
     | "custom"
-    // Kept for backward compat with existing packs
     | "temporal"
     | "cultural_baseline";
+
+export type EventDomainV1 = EventCategoryV1;
 
 // ── Greeting Rule (Ontology‐Aware) ──────────────────────────────
 
@@ -295,10 +303,10 @@ export interface GreetingRule {
 
 // ── Namespaced Events ───────────────────────────────────────────
 
-/** A namespaced event emitted by providers (salve.event.domain.region.name) */
+/** A namespaced event emitted by providers (salve.event.category.region.name) */
 export interface SalveEvent {
     id: string;
-    kind: EventDomainV1;
+    category: EventCategoryV1;
     start: string;   // ISO date
     end: string;     // ISO date
     label?: string;
@@ -306,117 +314,70 @@ export interface SalveEvent {
     emoji?: string;
     precedence?: number;
     confidence?: number;
+    requiredRegions?: string[];
+    requiredProfessions?: string[];
+    wikiDataId?: string;
     metadata?: Record<string, unknown>;
 }
 
 /** Entry in the Event Namespace Registry */
 export interface EventRegistryEntry {
-    id: string;
-    domain: EventDomainV1;
-    country?: string;
-    description?: string;
-    emoji?: string;
-    scope?: "global" | "regional" | "local";
-    aliases?: string[];
+    path: string; // e.g. "salve.event.official.be.national_day"
+    event: SalveEvent;
 }
 
-// ── Score Tuple ─────────────────────────────────────────────────
+// ── Context Normalization ───────────────────────────────────────
 
-/** Deterministic scoring tuple for greeting rule selection (v1) */
-export interface ScoreTuple {
-    domainRank: number;
-    eventRank: number;
-    packPrecedence: number;
-    rulePriority: number;
-    localeMatchScore: number;
-    stableTieBreak: string; // packId + ruleId for lexicographic ordering
-}
-
-// ── SalveContext v1 ─────────────────────────────────────────────
-
-/** Temporal & locale environment */
-export interface SalveEnv {
-    now: Date;
-    timeZone?: string;
-    location?: { lat: number; lng: number };
-    locale: string;          // BCP-47
-    outputLocale?: string;   // BCP-47 (defaults to locale)
-    region?: string;         // ISO-3166-1 alpha-2
-}
-
-/** Interaction frame */
-export interface SalveInteraction {
-    phase?: GreetingPhase;
-    setting?: "ui" | "chat" | "email";
-    role?: "initiator" | "responder";
-    relationship?: RelationshipContext;
-    formality?: Formality;
-    style?: GreetingStyle;
-    audienceSize?: number;
-}
-
-/** Title on a person profile */
-export interface SalveTitle {
-    system: "academic" | "civil" | "religious" | "military" | "other";
-    code: string;
-}
-
-/** Person being addressed */
-export interface SalvePerson {
-    givenNames?: string[];
-    surname?: string;
-    preferredName?: string;
-    gender?: "male" | "female" | "nonbinary" | "unknown";
-    genderSource?: "explicit" | "inferred" | "unknown";
-    titles?: SalveTitle[];
-    birthday?: string;       // YYYY-MM-DD
-    nameday?: {
-        enabled?: boolean;
-        locale?: string;
-        saintIds?: string[];
-    };
-}
-
-/** Declared memberships (strong / identity-like) */
+/** Memberships inferred from profile */
 export interface SalveMemberships {
-    traditions?: string[];    // e.g. ["orthodox", "catholic"]
-    subcultures?: string[];   // e.g. ["student_corporation"]
-    professions?: string[];   // e.g. ["teacher", "doctor", "developer"]
+    traditions: string[];
+    professions: string[];
+    subcultures: string[];
 }
 
-/** Declared affinities (weak / interest-like) */
+/** Abstract affinities (configured, not inferred) */
 export interface SalveAffinities {
-    locales?: string[];       // "I learn these locales" e.g. ["ja-JP"]
-    tags?: string[];          // e.g. ["anime", "japanese_culture"]
+    professional: string[];
+    religious: string[];
+    cultural: string[];
 }
 
-/** Policy (what the engine is allowed to emit) */
+/** Privacy and behavioral policy */
 export interface SalvePolicy {
-    allowDomains?: EventDomainV1[];
-    allowExtras?: boolean;
-    allowSubcultureAddressing?: boolean;
-    requireExplicitTraditionsForReligious?: boolean;
-    allowGenderInference?: boolean;
-    showEmojis?: boolean;
-    repetition?: {
-        windowedGreetings?: boolean;
-        maxSameRulePerDays?: number;
-    };
+    allowSubcultureAddressing: boolean;
+    requireExplicitTraditionsForReligious: boolean;
+    showEmojis: boolean;
+    allowExtras: boolean;
+    allowNames: boolean;
 }
 
-/** Unified input context (v1) */
+/** Raw input from consumer */
 export interface SalveContextV1 {
-    env: SalveEnv;
-    interaction?: SalveInteraction;
+    env: {
+        now: Date;
+        locale: string;
+        location?: { lat: number; lng: number };
+        outputLocale?: string;
+    };
+    interaction: {
+        phase: "encounter" | "acquaintance" | "parting";
+        style: "casual" | "polite" | "respectful";
+    };
     person?: SalvePerson;
-    memberships?: SalveMemberships;
-    affinities?: SalveAffinities;
-    policy?: SalvePolicy;
+    policy?: Partial<SalvePolicy>;
 }
 
-// ── Normalized Context ──────────────────────────────────────────
+/** Detailed person metadata (optional) */
+export interface SalvePerson {
+    firstName?: string;
+    lastName?: string;
+    honorific?: string;
+    gender?: "male" | "female" | "nonBinary" | "unspecified";
+    affiliations?: string[];
+    professions?: string[];
+}
 
-/** Fully resolved context — all fields present, no optionals */
+/** Result of normalizeContext */
 export interface NormalizedContext {
     env: Omit<Required<SalveEnv>, "location" | "outputLocale"> & {
         dayPeriod: DayPeriod;
@@ -429,6 +390,22 @@ export interface NormalizedContext {
     affinities: Required<SalveAffinities>;
     policy: Required<SalvePolicy>;
     localeChain: string[];
+    regions: string[];
+}
+
+// ── Internal Normalization Support Types ───────────────────────
+
+export interface SalveEnv {
+    now: Date;
+    locale: string;
+    location?: { lat: number; lng: number };
+    outputLocale?: string;
+}
+
+export interface SalveInteraction {
+    phase: "encounter" | "acquaintance" | "parting";
+    style: "casual" | "polite" | "respectful";
+    audienceSize?: number;
 }
 
 // ── Structured Output ───────────────────────────────────────────
@@ -438,30 +415,36 @@ export interface SalvePrimaryOutput {
     text: string;
     act: GreetingAct;
     eventId?: string;
-    ruleId: string;
+    ruleId?: string;
 }
 
-/** An extra item (e.g. affinity reminder) */
+/** Additional context or secondary greetings */
 export interface SalveExtra {
     text: string;
-    eventId: string;
-    ruleId: string;
-    kind: "affinity" | "info";
+    kind: "affinity" | "context" | "followup";
+    eventId?: string;
+    ruleId?: string;
 }
 
-/** Trace entry for developer mode */
-export interface SalveTraceEntry {
-    ruleId: string;
-    tuple: ScoreTuple;
-}
-
-/** Structured output of the v1 engine */
+/** Complete output for v1 resolution */
 export interface SalveOutputV1 {
     primary: SalvePrimaryOutput;
     extras?: SalveExtra[];
-    trace?: {
+    activeEvents: SalveEvent[];
+    trace: {
         candidates: SalveTraceEntry[];
         usedEvents: string[];
-        normalizedContext?: NormalizedContext;
+        normalizedContext: NormalizedContext;
     };
 }
+
+/** Debugging entry for transparency */
+export interface SalveTraceEntry {
+    packId: string;
+    ruleId: string;
+    eventId?: string;
+    score: number;
+    reasons: string[];
+}
+
+export type ScoreTuple = [number, number, number, number, number];

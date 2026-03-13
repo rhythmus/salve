@@ -235,6 +235,12 @@ export class SalveLoader {
             } else if (first.month && first.day && first.saintQids) {
                 this.registry.packs.registerNameDays(comp);
             }
+        } else if (comp.events && Array.isArray(comp.events)) {
+            // Register YAML-based events with the rule-based calendar if it exists
+            const ruleBased = this.registry.plugins.getCalendar("rule-based") as any;
+            if (ruleBased && typeof ruleBased.registerEvents === 'function') {
+                ruleBased.registerEvents(comp.events);
+            }
         }
     }
 }
