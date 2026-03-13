@@ -1,6 +1,70 @@
 locale: el-GR
 sources: https://en.wikipedia.org/wiki/Public_holidays_in_Greece
 
+events:
+  - date: 1 January
+    WikiData: Q2237444
+    category: official
+  
+  - date: 6 January
+    WikiData: Q167784
+    category: official
+
+  - date: 'pascha:-48' # Clean Monday
+    label:
+      el: Καθαρά Δευτέρα
+      en: Clean Monday
+    category: official
+
+  - date: 25 March
+    WikiData: Q4158275
+    category: official
+
+  - date: 'pascha:-2' # Good Friday
+    label:
+      el: Μεγάλη Παρασκευή
+      en: Good Friday
+    category: official
+
+  - date: 'pascha:-1' # Holy Saturday (often bank holiday)
+    label:
+      el: Μέγα Σάββατο
+    category: official
+
+  - date: 'pascha:0' # Easter Sunday
+    WikiData: Q23674
+    category: official
+
+  - date: 'pascha:1' # Easter Monday
+    WikiData: Q193163
+    category: official
+
+  - date: 1 May
+    WikiData: Q1215449
+    category: official
+
+  - date: 'pascha:50' # Whit Monday (Holy Spirit Day)
+    WikiData: Q2512993
+    category: official
+
+  - date: 15 August
+    WikiData: Q102237
+    category: official
+
+  - date: 28 October
+    WikiData: Q830166
+    category: official
+
+  - date: 25 December
+    WikiData: Q19833
+    category: official
+
+  - date: 26 December
+    label:
+      el: Σύναξη της Θεοτόκου
+      en: Synaxis of the Mother of God
+    category: official
+
 greetings:
 
   - text: Χρόνια Πολλά!

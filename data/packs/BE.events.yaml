@@ -1,0 +1,339 @@
+sources:
+  - 'https://en.wikipedia.org/wiki/Public_holidays_in_Belgium'
+events:
+    # ─── January ─────────────────────────────────────────────────────
+
+  - date: 1 January
+    WikiData: Q2237444
+    category: official
+    greetings:
+      nl:
+        - Gelukkig Nieuwjaar!
+        - Beste wensen!
+        - Gelukkige feestdagen!
+      fr: Bonne année!
+      de: Frohes neues Jahr!
+
+  - date: 6 January
+    WikiData: Q167784
+    category: observance
+    greetings:
+      nl: Gelukkige Driekoningen!
+      fr: Joyeuse Épiphanie!
+      de: Frohe Erscheinung des Herrn!
+
+  - date: '01:06:next:monday'
+    label:
+      nl:
+        - Koppermaandag
+        - Koppertjesmaandag
+        - Raasmaandag
+      en: Koppermaandag
+    greetings:
+      nl: God zegene de kunst!
+      de: Gott grüß die Kunst!
+    WikiData: Q2382689
+    requiredProfessions:
+      - printer
+      - typographer
+      - lithographer
+      - graphic_artist
+    category: observance
+
+  - date: '01:06:next:monday'
+    label:
+      nl:
+        - Verloren Maandag
+        - Verzworen Maandag
+      fr:
+        - Lundi Perdu
+        - Lundi Parjuré
+      de:
+        - Verlorener Montag
+        - Verzworener Montag
+      en: Verloren Maandag
+    greetings:
+      nl: Gezellige Verloren Maandag! Smakelijk!
+    WikiData: Q3267494
+    requiredRegions:
+      - be_antwerpen
+      - be_kempen
+    category: observance
+
+    # ─── February ─────────────────────────────────────────────────────
+
+  - date: 14 February
+    WikiData: Q37587
+    category: observance
+    greetings:
+      nl: Gelukkige Valentijn!
+      fr: Joyeuse Saint-Valentin
+      de: Frohen Valentinstag
+
+    # ─── April ─────────────────────────────────────────────────────
+
+  - date: 7 April
+    label:
+      en: Veterans Day
+      nl: Veteranendag
+      fr: Journée des Vétérans
+      de: Veteranentag
+    greetings:
+      nl: Ingetogen Veteranendag!
+      fr: Journée des Vétérans digne!
+      de: Tag der Veteranen in Würde!
+    WikiData: Q28452875
+    category: observance
+
+  - date: 'pascha:1'
+    label:
+      en: Easter Monday
+      nl: Paasmaandag
+      fr: Lundi de Pâques
+      de: Ostermontag
+    greetings:
+      nl: Zalig Pasen!
+      fr: Joyeuses Pâques!
+      de: Frohe Ostern!
+    WikiData: Q14795170
+    category: official
+
+    # ─── May ─────────────────────────────────────────────────────
+
+  - date: 1 May
+    label:
+      en: Labour Day
+      nl: Dag van de arbeid
+      fr: Fête du Travail
+      de: Tag der Arbeit
+    greetings:
+      nl: Gelukkige Dag van de arbeid!
+      fr: Joyeuse Fête du Travail!
+      de: Frohen Tag der Arbeit!
+    WikiData: Q10901070
+    category: official
+
+  - date: 8 May
+    label:
+      en: Iris Festival
+      nl: Irisfeest
+      fr: Fête de l'Iris
+      de: Iris-Festival
+    WikiData: Q23929903
+    greetings: {}
+    requiredRegions:
+      - be_brussels
+    category: observance
+
+  - date: 'pascha:39'
+    WikiData: Q51638
+    category: official
+    greetings: {}
+
+    # ─── June ─────────────────────────────────────────────────────
+
+  - date: 'pascha:50'
+    WikiData: Q2512993
+    category: official
+    greetings: {}
+
+    # ─── July ─────────────────────────────────────────────────────
+
+  - date: 11 July
+    label:
+      en: Day of the Flemish Community
+      nl: Feest van de Vlaamse Gemeenschap
+      fr: Fête de la Communauté flamande
+      de: Feiertag der Flämischen Gemeinschaft
+    greetings:
+      nl: Vlaanderen de Leeuw!
+    WikiData: Q277589
+    requiredRegions:
+      - be_flanders
+    category: observance
+
+  - date: 21 July
+    label:
+      en: King's Feast
+      nl: Fête du Roi
+      fr: Festtag des Königs
+    WikiData: Q589242
+    greetings: {}
+    category: observance
+
+  - date: 21 July
+    label:
+      en: National Day
+      nl: Nationale Feestdag
+      fr: Fête Nationale
+      de: Nationalfeiertag
+    WikiData: Q57598
+    greetings: {}
+    category: official
+
+    # ─── August ─────────────────────────────────────────────────────
+
+  - date: 9 August
+    label:
+      en: Meyboom
+      nl: Meyboom
+      fr: Meyboom
+      de: Meyboom
+    WikiData: Q83372937
+    greetings: {}
+    category: observance
+
+  - date: 15 August
+    WikiData: Q102237
+    category: official
+    greetings:
+      nl:
+        - Zalige Hemelvaart!
+        - Gelukkige Moederdag!
+      fr: Joyeuse Assomption!
+      de: Frohe Mariä Himmelfahrt!
+
+  - date: 15 August
+    label:
+      en: Mother's Day (Antwerp)
+      nl:
+        - Moederkensdag
+        - Moederdag (Antwerpen)
+    greetings:
+      nl:
+        - Gelukkige Moederdag!
+        - Gelukkig Moederkesdag!
+    WikiData: Q16069165
+    requiredRegions:
+      - be_antwerpen
+      - be_kempen
+    category: observance
+
+    # ─── September ─────────────────────────────────────────────────────
+
+  - date: '09:sun:3'
+    label:
+      en: Day of the Walloon Region
+      nl: Feest van het Waalse Gewest
+      fr: Fête de la Région wallonne
+      de: Festtag der Wallonischen Region
+    greetings: {}
+    requiredRegions:
+      - be_wallonia
+    category: observance
+
+  - date: 27 September
+    label:
+      en: Day of the French Community
+      nl: Feest van de Franse Gemeenschap
+      fr: Fête de la Communauté française
+      de: Tag der Französischen Gemeinschaft
+    greetings: {}
+    requiredRegions:
+      - be_brussels
+      - be_wallonia
+    WikiData: Q2007253
+    category: observance
+
+    # ─── October ─────────────────────────────────────────────────────
+
+  - date: 31 October
+    label:
+      en: Halloween
+      nl: Halloween
+      fr: Halloween
+      de: Halloween
+    WikiData: Q251868
+    greetings: {}
+    category: observance
+
+    # ─── November ─────────────────────────────────────────────────────
+
+  - date: 1 November
+    WikiData: Q42220
+    category: official
+    greetings: {}
+
+  - date: 11 November
+    WikiData: Q161242
+    category: official
+    greetings: {}
+
+  - date: 1 November
+    label:
+      en: Saint Martin's Day
+      nl: Sint-Maarten
+      fr: Saint-Martin
+      de: Sankt Martin
+    WikiData: Q21617001
+    greetings: {}
+    requiredRegions:
+      - be_ostbelgien
+      - be_flanders_westhoek
+    category: observance
+
+  - date: 2 November
+    label:
+      en: All Souls' Day
+      nl: Allerzielen
+      fr: Jour des morts
+      de: Allerseelen
+    WikiData: Q1033140
+    greetings: {}
+    category: observance
+
+  - date: 15 November
+    label:
+      en: Day of the German-speaking Community
+      nl: Dag van de Duitstalige Gemeenschap
+      fr: Fête de la Communauté germanophone
+      de: Tag der Deutschsprachigen Gemeinschaft
+    WikiData: Q463802
+    greetings: {}
+    requiredRegions:
+      - be_ostbelgien
+    category: observance
+
+  - date: 20 November
+    label:
+      en: Saint Verhaegen
+      nl: Sint-Verhaegen
+      fr: Saint-Verhaegen
+      de: Sankt Verhaegen
+    WikiData: Q3463486
+    greetings: {}
+    category: observance
+
+    # ─── December ─────────────────────────────────────────────────────
+
+  - date: 6 December
+    label:
+      en: Saint Nicholas Day
+      nl: Sinterklaas
+      fr: Saint-Nicolas
+      de: Sankt Nikolaus
+    WikiData: Q760225
+    greetings: {}
+    category: observance
+
+  - date: 25 December
+    WikiData: Q19833
+    category: official
+    greetings:
+      nl:
+        - Zalig Kerstmis!
+        - Gelukkige Kerstdagen!
+      fr:
+        - Joyeux Noël!
+      de:
+        - Frohe Weihnachten!
+
+  - date: 26 December
+    label:
+      en: Second Day of Christmas
+      nl: Tweede kerstdag
+      fr: Lendemain de Noël
+      de: 2. Weihnachtstag
+    WikiData: Q15113728
+    greetings: {}
+    category: observance

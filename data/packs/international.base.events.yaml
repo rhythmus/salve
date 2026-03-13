@@ -1,0 +1,125 @@
+# Shared International & Transnational Celebrations
+# Used as base definitions for regional augmentation
+
+events:
+  # ─── New Year ─────────────────────────────────────────────────────
+  - id: salve.event.secular.new_year
+    date: 1 January
+    WikiData: Q2237444
+    label:
+      en: New Year's Day
+      nl: Nieuwjaar
+      fr: Nouvel An
+      de: Neujahr
+      el: Πρωτοχρονιά
+      es: Año Nuevo
+      it: Capodanno
+    emoji: "🎆"
+
+  # ─── Epiphany ─────────────────────────────────────────────────────
+  - id: salve.event.religious.christian.epiphany
+    date: 6 January
+    WikiData: Q167784
+    label:
+      en: Epiphany
+      nl: Driekoningen
+      fr: Épiphanie
+      de: Erscheinung des Herrn
+      el: Θεοφάνεια
+    emoji: "👑"
+
+  # ─── Valentine's Day ──────────────────────────────────────────────
+  - id: salve.event.secular.valentine
+    date: 14 February
+    WikiData: Q37587
+    label:
+      en: Valentine's Day
+      nl: Valentijnsdag
+      fr: Saint-Valentin
+      de: Valentinstag
+      el: Ημέρα του Αγίου Βαλεντίνου
+    emoji: "💘"
+
+  # ─── Labour Day ───────────────────────────────────────────────────
+  - id: salve.event.secular.labour_day
+    date: 1 May
+    WikiData: Q1215449
+    label:
+      en: Labour Day
+      nl: Dag van de Arbeid
+      fr: Fête du Travail
+      de: Tag der Arbeit
+      el: Εργατική Πρωτομαγιά
+    emoji: "⚒️"
+
+  # ─── Assumption of Mary ───────────────────────────────────────────
+  - id: salve.event.religious.christian.assumption
+    date: 15 August
+    WikiData: Q162691
+    label:
+      en: Assumption of Mary
+      nl: Onze-Lieve-Vrouw Hemelvaart
+      fr: Assomption
+      de: Mariä Himmelfahrt
+      el: Κοίμηση της Θεοτόκου
+    emoji: "☁️"
+
+  # ─── All Saints' Day ──────────────────────────────────────────────
+  - id: salve.event.religious.christian.all_saints
+    date: 1 November
+    WikiData: Q42220
+    label:
+      en: All Saints' Day
+      nl: Allerheiligen
+      fr: Toussaint
+      de: Allerheiligen
+      el: Αγίων Πάντων
+    emoji: "🕯️"
+
+  # ─── Christmas Day ───────────────────────────────────────────────
+  - id: salve.event.religious.christian.christmas
+    date: 25 December
+    WikiData: Q19833
+    label:
+      en: Christmas Day
+      nl: Kerstmis
+      fr: Noël
+      de: Weihnachten
+      el: Χριστούγεννα
+    emoji: "🎄"
+
+  # ─── Easter Monday ───────────────────────────────────────────────
+  - id: salve.event.religious.christian.easter_monday
+    date: 'pascha:1'
+    WikiData: Q193163
+    label:
+      en: Easter Monday
+      nl: Paasmaandag
+      fr: Lundi de Pâques
+      de: Ostermontag
+      el: Δευτέρα του Πάσχα
+    emoji: "🥚"
+
+  # ─── Ascension Day ───────────────────────────────────────────────
+  - id: salve.event.religious.christian.ascension
+    date: 'pascha:39'
+    WikiData: Q51638
+    label:
+      en: Ascension Day
+      nl: O.L.V. Hemelvaart
+      fr: Ascension
+      de: Christi Himmelfahrt
+      el: Ανάληψη του Χριστού
+    emoji: "☁️"
+
+  # ─── Whit Monday (Pentecost Monday) ───────────────────────────────
+  - id: salve.event.religious.christian.whit_monday
+    date: 'pascha:50'
+    WikiData: Q48983
+    label:
+      en: Whit Monday
+      nl: Pinkstermaandag
+      fr: Lundi de Pentecôte
+      de: Pfingstmontag
+      el: Δευτέρα του Αγίου Πνεύματος
+    emoji: "🕊️"
