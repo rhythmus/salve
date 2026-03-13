@@ -1,0 +1,46 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://salve.dev/schemas/locale-registry.schema.json",
+    "title": "Salve Locale Registry",
+    "description": "Linguistic geography data defining regions where a language/dialect is spoken.",
+    "type": "object",
+    "required": [
+        "regions"
+    ],
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "locale": {
+            "type": "string"
+        },
+        "regions": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "label": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "timezone": {
+                        "type": "string"
+                    },
+                    "WikiData": {
+                        "type": "string",
+                        "pattern": "^Q[0-9]+$"
+                    }
+                },
+                "additionalProperties": true
+            }
+        }
+    }
+}

@@ -1,6 +1,8 @@
 import * as fs from "fs";
 import * as path from "path";
 const yaml = require("js-yaml");
+const Ajv = require("ajv/dist/2020");
+const ajv = new Ajv({ allErrors: true, allowUnionTypes: true });
 
 interface GreetingEntry {
     id?: string;
@@ -72,6 +74,21 @@ interface NormalizedGreetingPack {
 const ROOT = path.resolve(__dirname, "..");
 const PACKS_DIR = path.join(ROOT, "data", "packs");
 const OUTPUT_FILE = path.join(ROOT, "packages", "demo", "src", "packs.generated.ts");
+const SCHEMAS_DIR = path.join(ROOT, "data", "schemas");
+
+const schemas = {
+    lexicon: JSON.parse(fs.readFileSync(path.join(SCHEMAS_DIR, "lexicon.schema.json"), "utf8")),
+    events: JSON.parse(fs.readFileSync(path.join(SCHEMAS_DIR, "event-registry.schema.json"), "utf8")),
+    regions: JSON.parse(fs.readFileSync(path.join(SCHEMAS_DIR, "region-registry.schema.json"), "utf8")),
+    locales: JSON.parse(fs.readFileSync(path.join(SCHEMAS_DIR, "locale-registry.schema.json"), "utf8")),
+};
+
+const validators = {
+    lexicon: ajv.compile(schemas.lexicon),
+    events: ajv.compile(schemas.events),
+    regions: ajv.compile(schemas.regions),
+    locales: ajv.compile(schemas.locales),
+};
 
 /**
  * Generates a stable ID from text if missing.
@@ -108,6 +125,20 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
             process.exit(1);
         }
 
+        // ── Schema Validation ───────────────────────────────────────
+        let validator;
+        if (file.includes(".greetings.")) validator = validators.lexicon;
+        else if (file.includes(".events.")) validator = validators.events;
+        else if (file.includes(".regions.")) validator = validators.regions;
+        else if (file.includes(".locales.")) validator = validators.locales;
+
+        if (validator && !validator(parsed)) {
+            console.error(`❌ Validation failed for ${file}:`);
+            console.error(ajv.errorsText(validator.errors));
+            process.exit(1);
+        }
+
+
         if (isRegions) {
             if (parsed && Array.isArray(parsed.regions)) {
                 allRegions = allRegions.concat(parsed.regions);
@@ -143,7 +174,8 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
                             if (event.id) {
                                 g.eventRef = event.id;
                             } else if (event.label) {
-                                g.eventRef = `salve.event.civil.un.${slugify(event.label)}`;
+                                const labelStr = typeof event.label === "string" ? event.label : (event.label.en || Object.values(event.label)[0] as string);
+                                g.eventRef = `salve.event.civil.un.${slugify(labelStr)}`;
                             }
                         }
                         const locales = Array.isArray(g.locale) ? g.locale : [g.locale];

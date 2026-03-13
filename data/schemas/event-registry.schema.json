@@ -1,0 +1,210 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://salve.dev/schemas/event-registry.schema.json",
+    "title": "Salve Event Registry",
+    "description": "A collection of event definitions (regional or tradition-based) with optional nested greetings.",
+    "type": "object",
+    "oneOf": [
+        {
+            "required": [
+                "events"
+            ]
+        },
+        {
+            "required": [
+                "greetings"
+            ]
+        }
+    ],
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "country": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+        },
+        "tradition": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "sources": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "events": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "date"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string"
+                    },
+                    "label": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "WikiData": {
+                        "type": "string",
+                        "pattern": "^Q[0-9]+$"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "sources": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        ]
+                    },
+                    "notes": {
+                        "type": "string"
+                    },
+                    "emoji": {
+                        "type": "string"
+                    },
+                    "UN-resolution": {
+                        "type": "string"
+                    },
+                    "duration": {
+                        "type": "string"
+                    },
+                    "greetings": {
+                        "oneOf": [
+                            {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/$defs/GreetingEntry"
+                                }
+                            },
+                            {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/$defs/GreetingEntry"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "additionalProperties": true
+            }
+        },
+        "greetings": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/GreetingEntry"
+            }
+        }
+    },
+    "$defs": {
+        "GreetingEntry": {
+            "type": "object",
+            "required": [
+                "text"
+            ],
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "locale": {
+                    "type": "string"
+                },
+                "eventRef": {
+                    "type": "string"
+                },
+                "phase": {
+                    "type": "string",
+                    "enum": [
+                        "encounter",
+                        "parting"
+                    ]
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "sources": {
+                    "type": "string"
+                },
+                "expectedResponse": {
+                    "type": "string"
+                },
+                "formality": {
+                    "type": "string"
+                },
+                "professions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "additionalProperties": true
+        }
+    }
+}
