@@ -37,6 +37,12 @@ Follow this format consistently for all commits.
 
 ## 🏷️ Naming Conventions
 
+## 📚 Data Bibliography & Sources
+
+All cultural, linguistic, and calendar data sources — whether procured manually or through automated harvesting scripts — MUST be documented in `data/data-sources.bib`. This ensures complete transparency, accountability, and traceability for all Salve datasets.
+
+When adding a new dataset, manually populating greetings, or implementing a new modular harvester, you MUST promptly add a corresponding entry (`@online`, `@book`, `@article`, etc.) to the bibliography with the authoritative URL and a descriptive note.
+
 ## 📄 RFC Specification Authoring
 
 The Salve specification (`docs/salve-rfc-specification.md`) follows the RFC authoring guidelines defined in RFC 7322 ("RFC Style Guide") and its web companion.  All updates to the specification MUST comply with the rules below.
