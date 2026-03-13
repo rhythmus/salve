@@ -40,4 +40,13 @@ export class LocationResolver {
 
         return null;
     }
+
+    /**
+     * Resolves all matching region IDs for a given coordinate.
+     */
+    resolveRegions(lat: number, lng: number): string[] {
+        return this.regions
+            .filter(region => isPointInPolygon([lat, lng], region.polygon))
+            .map(region => region.id);
+    }
 }

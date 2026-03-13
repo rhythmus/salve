@@ -127,7 +127,9 @@ export function normalizeContext(input: SalveContextV1, locationResolver?: Locat
     let locale = normalizeLocale(input.env.locale);
 
     // Step 1.1 — Geographic locale resolution (M9.1)
+    let regions: string[] = [];
     if (input.env.location && locationResolver) {
+        regions = locationResolver.resolveRegions(input.env.location.lat, input.env.location.lng);
         const resolvedLocale = locationResolver.resolveLocale(input.env.location.lat, input.env.location.lng);
         if (resolvedLocale) {
             locale = resolvedLocale;
@@ -207,6 +209,7 @@ export function normalizeContext(input: SalveContextV1, locationResolver?: Locat
         affinities,
         policy,
         localeChain,
+        regions,
     };
 }
 
