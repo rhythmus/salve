@@ -29,6 +29,7 @@ import { SalveRegistry, SalveLoader } from "@salve/registry";
 import { LocationResolver, RegionDefinition } from "./location";
 import { normalizeContext } from "./normalize";
 import { applyStyleTransform, StylePack, computeStyleMatchScore } from "./style";
+import { RuleBasedCalendarPlugin } from "./rule-based-plugin";
 
 export interface SalveOptions {
     registry?: SalveRegistry;
@@ -63,6 +64,7 @@ export class SalveEngine {
         if (options.regions) {
             this.locationResolver = new LocationResolver(options.regions);
         }
+        this.registerPlugin(new RuleBasedCalendarPlugin());
         this.registerDefaultTransforms();
     }
 
@@ -235,14 +237,15 @@ export class SalveEngine {
             salutation = `${salutation}${separator}${address}`;
         }
 
-        const result = {
+        const result: GreetingResult = {
             greeting: candidate.text,
             address: address,
             salutation: salutation,
             expectedResponse: candidate.expectedResponse,
             metadata: {
                 eventId: bestEvent?.id,
-                domain: bestEvent?.domain,
+                category: bestEvent?.category,
+                domain: bestEvent?.category as any, // Deprecated
                 locale: context.locale,
                 score: highestScore,
                 trace: trace
@@ -294,33 +297,96 @@ export class SalveEngine {
             });
 
             // Convert CelebrationEvent → SalveEvent
-            for (const le of legacyEvents) {
+            for (const le of legacyEvents as any[]) {
                 const dateStr = ctx.env.now.toISOString().split("T")[0];
                 activeEvents.push({
                     id: le.id,
-                    kind: this.mapLegacyDomain(le.domain),
+                    category: this.mapLegacyDomain(le.domain || le.category),
                     start: dateStr,
                     end: dateStr,
                     label: le.id,
                     source: plugin.id,
                     emoji: le.emoji,
                     precedence: le.priority ?? 0,
+                    requiredRegions: le.requiredRegions,
+                    requiredProfessions: le.requiredProfessions,
+                    wikiDataId: le.wikiDataId || le.WikiData
                 });
             }
         }
 
+        // Deduplicate and Merge events by wikiDataId
+        const mergedEvents = new Map<string, SalveEvent>();
+        const noWikiDataEvents: SalveEvent[] = [];
+
+        for (const e of activeEvents) {
+            // Ensure every event has an ID, even if synthetic
+            if (!e.id) {
+                e.id = e.wikiDataId ? `salve.wiki.${e.wikiDataId}` : `salve.anon.${Math.random().toString(36).substr(2, 9)}`;
+            }
+
+            if (!e.wikiDataId) {
+                noWikiDataEvents.push(e);
+                continue;
+            }
+
+            if (!mergedEvents.has(e.wikiDataId)) {
+                mergedEvents.set(e.wikiDataId, e);
+            } else {
+                const existing = mergedEvents.get(e.wikiDataId)!;
+                // Merge logic:
+
+                // 1. ID Promotion: prefer 'salve.event.*' over others
+                if (!existing.id.startsWith('salve.event.') && e.id.startsWith('salve.event.')) {
+                    existing.id = e.id;
+                }
+
+                // 2. prefer 'official' category
+                if (e.category === 'official') existing.category = 'official';
+
+                // 3. merge requiredRegions (unique values)
+                if (e.requiredRegions) {
+                    existing.requiredRegions = Array.from(new Set([...(existing.requiredRegions || []), ...e.requiredRegions]));
+                }
+
+                // 4. merge requiredProfessions
+                if (e.requiredProfessions) {
+                    existing.requiredProfessions = Array.from(new Set([...(existing.requiredProfessions || []), ...e.requiredProfessions]));
+                }
+
+                // 5. pick emoji if existing doesn't have one
+                if (!existing.emoji && e.emoji) existing.emoji = e.emoji;
+
+                // 6. precedence: take max
+                existing.precedence = Math.max(existing.precedence || 0, e.precedence || 0);
+            }
+        }
+        const finalActiveEvents = [...noWikiDataEvents, ...mergedEvents.values()];
+
         // Filter events by policy
-        const filteredEvents = activeEvents.filter((e: SalveEvent) => {
-            // Domain allowed?
-            if (!ctx.policy.allowDomains.includes(e.kind)) return false;
+        const filteredEvents = finalActiveEvents.filter((e: SalveEvent) => {
+            // Category allowed?
+            if (!ctx.policy.allowDomains.includes(e.category)) return false;
 
             // Religious events need explicit traditions
-            if (e.kind === "religious" && ctx.policy.requireExplicitTraditionsForReligious) {
+            if (e.category === "religious" && ctx.policy.requireExplicitTraditionsForReligious) {
                 if (ctx.memberships.traditions.length === 0) return false;
             }
 
             // Protocol events need subculture addressing
-            if (e.kind === "protocol" && !ctx.policy.allowSubcultureAddressing) return false;
+            if (e.category === "protocol" && !ctx.policy.allowSubcultureAddressing) return false;
+
+            // Geographic Filtering
+            if (e.requiredRegions && e.requiredRegions.length > 0) {
+                const hasMatchingRegion = e.requiredRegions.some(rid => ctx.regions.includes(rid));
+                if (!hasMatchingRegion) return false;
+            }
+
+            // Professional Filtering
+            if (e.requiredProfessions && e.requiredProfessions.length > 0) {
+                const hasMatchingProfession = e.requiredProfessions.some(p => ctx.memberships.professions.includes(p.toLowerCase()));
+                if (!hasMatchingProfession) return false;
+            }
 
             return true;
         });
@@ -392,7 +458,11 @@ export class SalveEngine {
             let matchedEvent: SalveEvent | null = null;
             if (rule.when?.eventRef) {
                 const resolvedId = this.registry.events.resolveId(rule.when.eventRef);
-                matchedEvent = filteredEvents.find((e: SalveEvent) => e.id === resolvedId || e.id === rule.when!.eventRef!) ?? null;
+                matchedEvent = filteredEvents.find((e: SalveEvent) =>
+                    e.id === resolvedId ||
+                    e.id === rule.when!.eventRef! ||
+                    (e.wikiDataId && e.wikiDataId === rule.when!.eventRef!)
+                ) ?? null;
                 if (!matchedEvent) continue; // Rule requires event that isn't active
             }
 
@@ -487,6 +557,7 @@ export class SalveEngine {
         return {
             primary,
             extras: extras.length > 0 ? extras : undefined,
+            activeEvents: finalActiveEvents,
             trace: {
                 candidates: traceEntries,
                 usedEvents,
@@ -505,6 +576,8 @@ export class SalveEngine {
             civil: "civil",
             cultural_baseline: "cultural_baseline",
             temporal: "temporal",
+            official: "official",
+            observance: "observance",
         };
         return map[domain] ?? "cultural_baseline";
     }
@@ -582,7 +655,7 @@ export class SalveEngine {
 
         trace.push(`No exact matches in pack [${pack.locale}]. Falling back.`);
         // Fallback to generic greeting within the pack if event-specific fails
-        return pack.greetings.find(g => !g.eventRef) || { id: "err", text: "Hello" };
+        return pack.greetings.find(g => !g.eventRef) || { id: "err", text: "Hello", category: "personal" as any };
     }
 
     private resolveAddress(context: GreetingContext): string {
@@ -608,7 +681,8 @@ export class SalveEngine {
             salutation: `Hello, ${address}`.replace(/,\s*$/, ""),
             metadata: {
                 eventId: event?.id || "emergency-fallback",
-                domain: event?.domain || "cultural_baseline",
+                category: event?.category || ("cultural_baseline" as any),
+                domain: (event?.category || "cultural_baseline") as any,
                 locale: context.locale,
                 score: 0,
                 trace: trace
