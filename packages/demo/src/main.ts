@@ -104,7 +104,8 @@ function buildContext(): Record<string, unknown> {
       professionalRole: state.titleRole === 'judge' ? 'judge'
         : state.titleRole === 'police' ? 'police'
           : state.titleRole === 'clergy' ? 'clergy'
-            : undefined,
+            : state.titleRole === 'teacher' ? 'teacher'
+              : undefined,
     },
   };
 }
@@ -177,6 +178,7 @@ async function updateFromUI() {
     '': '—', de_secular: 'sculptor from Berlin', de_doctor: 'academic from Munich', en_judge: 'formal judge',
     tr_muslim_de: 'Turkish diaspora', el_orthodox: 'Greek Orthodox',
     zh_diaspora: 'Chinese diaspora', dev_mixed: 'Mixed cultural context',
+    el_teacher: 'teacher from Athens',
   };
 
   const tzOpts = mkOpts([['auto', 'auto'], ['UTC', 'UTC'], ['Europe/Berlin', 'Europe/Berlin'], ['Europe/Brussels', 'Europe/Brussels'], ['Europe/Athens', 'Europe/Athens'], ['Asia/Istanbul', 'Asia/Istanbul'], ['Asia/Shanghai', 'Asia/Shanghai']], state.timezone);
@@ -185,12 +187,12 @@ async function updateFromUI() {
   const regionOpts = mkOpts([['de-DE', 'Germany'], ['nl-BE', 'Belgium'], ['el-GR', 'Greece'], ['tr-TR', 'Turkey'], ['en-GB', 'United Kingdom'], ['zh-CN', 'China']], state.residenceLocale);
   const formalityOpts = mkOpts([['informal', 'informal'], ['formal', 'formal']], state.formality);
   const modeOpts = mkOpts([['opening', 'opening'], ['closing', 'closing']], state.mode);
-  const scenarioOpts = mkOpts([['', '—'], ['de_secular', 'German secular'], ['de_doctor', 'German academic'], ['en_judge', 'British judge'], ['tr_muslim_de', 'Turkish Muslim'], ['el_orthodox', 'Greek Orthodox'], ['zh_diaspora', 'Chinese diaspora'], ['dev_mixed', 'Mixed Eid/English']], state.scenario);
+  const scenarioOpts = mkOpts([['', '—'], ['de_secular', 'German secular'], ['de_doctor', 'German academic'], ['en_judge', 'British judge'], ['tr_muslim_de', 'Turkish Muslim'], ['el_orthodox', 'Greek Orthodox'], ['el_teacher', 'Greek Teacher'], ['zh_diaspora', 'Chinese diaspora'], ['dev_mixed', 'Mixed Eid/English']], state.scenario);
   const outOpts = mkOpts([['salutation', 'full salutation'], ['greeting', 'greeting only'], ['address', 'address only']], state.outputMode);
   const relOpts = mkOpts([['stranger', 'stranger'], ['acquaintance', 'acquaintance'], ['friend', 'friend'], ['family', 'family'], ['superior', 'superior'], ['subordinate', 'subordinate']], state.relationship);
   const setOpts = mkOpts([['ui', 'app UI'], ['chat', 'chat bubble'], ['email', 'email template']], state.setting);
   const genderOpts = mkOpts([['unknown', 'unknown'], ['male', 'male'], ['female', 'female'], ['nonbinary', 'non-binary']], state.gender);
-  const titleOpts = mkOpts([['none', 'no title'], ['mr', 'Mr'], ['mrs', 'Mrs'], ['ms', 'Ms'], ['mx', 'Mx'], ['dr', 'Doctor'], ['prof', 'Professor'], ['prof_dr', 'Prof. Dr.'], ['judge', 'Judge'], ['police', 'Officer'], ['clergy', 'Reverend']], state.titleRole);
+  const titleOpts = mkOpts([['none', 'no title'], ['mr', 'Mr'], ['mrs', 'Mrs'], ['ms', 'Ms'], ['mx', 'Mx'], ['dr', 'Doctor'], ['prof', 'Professor'], ['prof_dr', 'Prof. Dr.'], ['teacher', 'Teacher'], ['judge', 'Judge'], ['police', 'Officer'], ['clergy', 'Reverend']], state.titleRole);
 
   const activeAffs = AFFILIATIONS.filter((a) => selectedAff.has(a.id));
   const activeChipsHtml = activeAffs.map((a) => `<span class="aff-chip on" data-aff="${a.id}">${a.label}</span>`).join(' ');
@@ -481,11 +483,13 @@ function applyScenario(id: string) {
       state.scriptPref = 'simplified'; selectedAff = new Set(['civil', 'chinese_traditional']);
       state.names = ['Wei'];
     },
-    dev_mixed: () => {
-      state.residenceLocale = 'en-GB'; state.greetingLanguage = 'ar';
-      state.scriptPref = 'arabic'; selectedAff = new Set(['islamic']);
-      state.names = ['Amina'];
-    },
+    el_teacher: () => {
+      state.residenceLocale = 'el-GR'; state.greetingLanguage = 'el-GR';
+      state.scriptPref = 'native'; selectedAff = new Set(['civil']);
+      state.names = ['Eleni']; state.surname = 'Papadopoulou';
+      state.gender = 'female'; state.titleRole = 'teacher';
+      state.now = new Date('2026-01-24T10:00:00'); // International Day of Education
+    }
   };
   if (s[id]) s[id]();
 }

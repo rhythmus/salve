@@ -16,6 +16,7 @@ interface GreetingEntry {
     role?: "initiator" | "responder";
     relationship?: string[];
     setting?: string[];
+    professions?: string[];
     notes?: string;
     sources?: string | string[];
     [key: string]: any;
@@ -45,6 +46,7 @@ interface NormalizedGreetingEntry {
     id: string;
     text: string;
     eventRef?: string;
+    emoji?: string;
     timeOfDay?: string | string[];
     audienceSize?: string;
     locale?: string | string[];
@@ -54,6 +56,7 @@ interface NormalizedGreetingEntry {
     role?: "initiator" | "responder";
     relationship?: string[];
     setting?: string[];
+    professions?: string[];
     notes?: string;
     sources?: string | string[];
     transliterations?: Record<string, string>;
@@ -114,6 +117,57 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
         }
 
         if (isEvents) {
+            // ── Path A: events with per-event nested greetings ──────────
+            // e.g. international.secular.events.yaml:
+            //   events:
+            //     - label: International Women's Day
+            //       greetings:
+            //         - text: 'Χρόνια Πολλά!'
+            //           locale: el-GR
+            if (parsed && Array.isArray(parsed.events)) {
+                let count = 0;
+                for (const event of parsed.events) {
+                    if (!Array.isArray(event.greetings)) continue; // skip events without greetings
+                    for (const g of event.greetings) {
+                        g.locale = g.locale || parsed.locale;
+                        if (!g.locale) {
+                            console.error(`❌ Event greeting for "${event.label}" in ${file} missing "locale"`);
+                            process.exit(1);
+                        }
+                        // Carry over emoji from event if not explicitly set on greeting
+                        if (event.emoji && !g.emoji) {
+                            g.emoji = event.emoji;
+                        }
+                        // Carry over or generate eventRef
+                        if (!g.eventRef) {
+                            if (event.id) {
+                                g.eventRef = event.id;
+                            } else if (event.label) {
+                                g.eventRef = `salve.event.civil.un.${slugify(event.label)}`;
+                            }
+                        }
+                        const locales = Array.isArray(g.locale) ? g.locale : [g.locale];
+                        for (const loc of locales) {
+                            let pack = rawPacksByLocale.get(loc);
+                            if (!pack) {
+                                pack = { greetings: [] };
+                                rawPacksByLocale.set(loc, pack);
+                            }
+                            pack.greetings.push(g);
+                        }
+                        count++;
+                    }
+                }
+                if (count > 0) {
+                    console.log(`  ✓ ${file} — ${count} event-nested greetings`);
+                }
+            }
+
+            // ── Path B: top-level greetings array ───────────────────────
+            // e.g. christian.events.yaml:
+            //   greetings:
+            //     - text: 'Χριστός Ανέστη!'
+            //       locale: el-GR
             if (parsed && Array.isArray(parsed.greetings)) {
                 for (const g of parsed.greetings) {
                     g.locale = g.locale || parsed.locale;
@@ -210,7 +264,7 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
 
                 // Collect transliterations
                 const transliterations: Record<string, string> = {};
-                const knownKeys = ["id", "text", "eventRef", "timeOfDay", "audience", "audienceSize", "locale", "expectedResponse", "formality", "phase", "role", "relationship", "setting", "notes", "sources", "WikiData", "date", "metadata"];
+                const knownKeys = ["id", "text", "eventRef", "emoji", "timeOfDay", "audience", "audienceSize", "locale", "expectedResponse", "formality", "phase", "role", "relationship", "setting", "professions", "notes", "sources", "WikiData", "date", "metadata"];
 
                 Object.keys(g).forEach(key => {
                     if (!knownKeys.includes(key) && /^[a-z]{2,3}(-[A-Z]{2})?(-[A-Za-z0-9]+)*$/.test(key)) {
@@ -251,6 +305,7 @@ function greetingToTS(g: NormalizedGreetingEntry, indent: string): string {
     lines.push(`${indent}  id: "${escapeString(g.id)}",`);
     lines.push(`${indent}  text: "${escapeString(g.text)}",`);
     if (g.eventRef) lines.push(`${indent}  eventRef: "${escapeString(g.eventRef)}",`);
+    if (g.emoji) lines.push(`${indent}  emoji: "${escapeString(g.emoji)}",`);
     if (g.timeOfDay) {
         const val = Array.isArray(g.timeOfDay) ? `[${g.timeOfDay.map(t => `"${t}"`).join(", ")}]` : `"${g.timeOfDay}"`;
         lines.push(`${indent}  timeOfDay: ${val},`);
@@ -274,6 +329,10 @@ function greetingToTS(g: NormalizedGreetingEntry, indent: string): string {
     if (g.setting) {
         const val = Array.isArray(g.setting) ? g.setting : [g.setting];
         lines.push(`${indent}  setting: [${val.map(s => `"${s}"`).join(", ")}],`);
+    }
+    if (g.professions) {
+        const val = Array.isArray(g.professions) ? g.professions : [g.professions];
+        lines.push(`${indent}  professions: [${val.map(p => `"${p}"`).join(", ")}],`);
     }
     if (g.notes) {
         const val = Array.isArray(g.notes) ? `[${g.notes.map(n => `"${escapeString(n)}"`).join(", ")}]` : `"${escapeString(g.notes)}"`;
