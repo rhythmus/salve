@@ -1,0 +1,177 @@
+# Netherlands (NL) public holidays and observances
+# Official and customary holidays. Bevrijdingsdag is not always a mandatory day off.
+# Sources: https://en.wikipedia.org/wiki/Public_holidays_in_the_Netherlands
+
+country: NL
+sources:
+  - 'https://en.wikipedia.org/wiki/Public_holidays_in_the_Netherlands'
+  - 'https://government.nl/topics/working-hours/question-and-answer/public-holidays-in-the-netherlands'
+
+events:
+
+  # ─── January ─────────────────────────────────────────────────────
+
+  - date: 1 January
+    label:
+      en: New Year's Day
+      nl: Nieuwjaarsdag
+      el: Πρωτοχρονιά
+    WikiData: Q2237444
+    category: official
+    greetings:
+      nl:
+        - Gelukkig Nieuwjaar!
+        - Beste wensen!
+      en:
+        - Happy New Year!
+      el: Καλή χρονιά!
+
+  # ─── April ─────────────────────────────────────────────────────
+
+  - date: pascha:-2
+    label:
+      en: Good Friday
+      nl: Goede Vrijdag
+      el: Μεγάλη Παρασκευή
+    WikiData: Q133247
+    category: official
+    greetings:
+      nl: Stille Goede Vrijdag.
+      en: (Observance; greetings optional)
+      el: Καλή Ανάσταση
+
+  - date: pascha:0
+    label:
+      en: Easter Sunday
+      nl: Eerste paasdag
+      el: Κυριακή του Πάσχα
+    WikiData: Q23674
+    category: official
+    greetings:
+      nl:
+        - Zalig Pasen!
+        - Gelukkig Pasen!
+      en: Happy Easter!
+      el: Καλή Ανάσταση!
+
+  - date: pascha:1
+    label:
+      en: Easter Monday
+      nl: Tweede paasdag
+      el: Δευτέρα του Πάσχα
+    WikiData: Q193163
+    category: official
+    greetings:
+      nl: Zalig Pasen!
+      en: Happy Easter!
+      el: Καλή Ανάσταση!
+
+  - date: 27 April
+    label:
+      en: King's Day
+      nl: Koningsdag
+      el: Ημέρα του Βασιλιά
+    WikiData: Q1193524
+    category: official
+    notes: If 27 April falls on a Sunday, observed on 26 April in the Netherlands.
+    greetings:
+      nl:
+        - Fijne Koningsdag!
+        - Oranje boven!
+      en: Happy King's Day!
+      el: Χρόνια Πολλά!
+
+  # ─── May ─────────────────────────────────────────────────────
+
+  - date: 5 May
+    label:
+      en: Liberation Day
+      nl: Bevrijdingsdag
+      el: Ημέρα Απελευθέρωσης
+    WikiData: Q2640187
+    category: observance
+    notes: National holiday; not always a mandatory paid day off (often every 5 years).
+    greetings:
+      nl: Fijne Bevrijdingsdag!
+      en: Happy Liberation Day!
+      el: Καλή Ημέρα Απελευθέρωσης!
+
+  - date: pascha:39
+    label:
+      en: Ascension Day
+      nl: Hemelvaartsdag
+      el: Αναλήψεως
+    WikiData: Q51638
+    category: official
+    greetings:
+      nl: Zalige Hemelvaart!
+      en: Happy Ascension Day!
+      el: Καλή Ανάληψη!
+
+  - date: pascha:50
+    label:
+      en: Whit Monday
+      nl: Tweede pinksterdag
+      el: Δευτέρα του Αγίου Πνεύματος
+    WikiData: Q2512993
+    category: official
+    greetings:
+      nl: Zalig Pinksteren!
+      en: Happy Whit Monday!
+      el: Καλή Πεντηκοστή!
+
+  - date: 1 May
+    label:
+      en: Labour Day
+      nl: Dag van de arbeid
+      el: Πρωτομαγιά
+    WikiData: Q1215449
+    category: observance
+    notes: Not an official public holiday in the Netherlands; some unions observe.
+    greetings:
+      nl: Gelukkige Dag van de arbeid!
+      en: Happy Labour Day!
+      el: Καλή Πρωτομαγιά!
+
+  # ─── December ───────────────────────────────────────────────────
+
+  - date: 5 December
+    label:
+      en: Sinterklaas Eve / Saint Nicholas Eve
+      nl: Sinterklaasavond / Pakjesavond
+      el: Απόγευμα Αγίου Νικολάου
+    WikiData: Q760225
+    category: observance
+    notes: Main celebration of Sinterklaas in the Netherlands (eve of 6 December).
+    greetings:
+      nl:
+        - Fijne Sinterklaasavond!
+        - Prettige Sinterklaas!
+      en: Happy Sinterklaas!
+      el: Καλή γιορτή Αγίου Νικολάου!
+
+  - date: 25 December
+    label:
+      en: Christmas Day
+      nl: Eerste kerstdag
+      el: Χριστούγεννα
+    WikiData: Q19833
+    category: official
+    greetings:
+      nl:
+        - Zalig Kerstmis!
+        - Gelukkige Kerstdagen!
+      en: Merry Christmas!
+      el: Καλά Χριστούγεννα!
+
+  - date: 26 December
+    label:
+      en: Boxing Day / Second Day of Christmas
+      nl: Tweede kerstdag
+      el: Δεύτερη μέρα Χριστουγέννων
+    WikiData: Q15113728
+    category: official
+    greetings:
+      nl: Zalig Kerstmis!
+      en: Happy Boxing Day!
+      el: Καλά Χριστούγεννα!

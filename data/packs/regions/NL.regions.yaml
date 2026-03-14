@@ -1,0 +1,92 @@
+# Netherlands (NL) political and regional subdivisions
+# Used for region-scoped events and geographic resolution.
+# $schema: "../schemas/region-registry.schema.json"
+
+country: NL
+sources:
+  - 'https://en.wikipedia.org/wiki/Provinces_of_the_Netherlands'
+
+regions:
+  - id: nl_noord_holland
+    label:
+      en: North Holland
+      nl: Noord-Holland
+      el: Βόρεια Ολλανδία
+    WikiData: Q701
+
+  - id: nl_zuid_holland
+    label:
+      en: South Holland
+      nl: Zuid-Holland
+      el: Νότια Ολλανδία
+    WikiData: Q692
+
+  - id: nl_utrecht
+    label:
+      en: Utrecht
+      nl: Utrecht
+      el: Ουτρέχτη
+    WikiData: Q776
+
+  - id: nl_noord_brabant
+    label:
+      en: North Brabant
+      nl: Noord-Brabant
+      el: Βόρεια Βραβάντη
+    WikiData: Q823
+
+  - id: nl_gelderland
+    label:
+      en: Gelderland
+      nl: Gelderland
+      el: Χέλντερλαντ
+    WikiData: Q775
+
+  - id: nl_limburg
+    label:
+      en: Limburg
+      nl: Limburg
+      el: Λιμβουργία
+    WikiData: Q1093
+
+  - id: nl_overijssel
+    label:
+      en: Overijssel
+      nl: Overijssel
+      el: Όβεραϊσελ
+    WikiData: Q773
+
+  - id: nl_flevoland
+    label:
+      en: Flevoland
+      nl: Flevoland
+      el: Φλέβολαντ
+    WikiData: Q1094
+
+  - id: nl_friesland
+    label:
+      en: Friesland
+      nl: Friesland
+      el: Φρίσλαντ
+    WikiData: Q770
+
+  - id: nl_groningen
+    label:
+      en: Groningen
+      nl: Groningen
+      el: Γκρόνινγκεν
+    WikiData: Q774
+
+  - id: nl_drenthe
+    label:
+      en: Drenthe
+      nl: Drenthe
+      el: Ντρενθέ
+    WikiData: Q772
+
+  - id: nl_zeeland
+    label:
+      en: Zeeland
+      nl: Zeeland
+      el: Ζηλανδία
+    WikiData: Q705
