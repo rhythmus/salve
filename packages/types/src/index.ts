@@ -250,20 +250,17 @@ export type DayPeriod =
     | "night";
 
 /** Expanded event category taxonomy (v1) */
-export type EventCategoryV1 =
-    | "official"
-    | "observance"
+export type EventDomainV1 =
     | "bank"
     | "civil"
     | "religious"
     | "personal"
+    | "seasonal"
     | "protocol"
     | "affinity"
     | "custom"
     | "temporal"
     | "cultural_baseline";
-
-export type EventDomainV1 = EventCategoryV1;
 
 // ── Greeting Rule (Ontology‐Aware) ──────────────────────────────
 
@@ -303,10 +300,10 @@ export interface GreetingRule {
 
 // ── Namespaced Events ───────────────────────────────────────────
 
-/** A namespaced event emitted by providers (salve.event.category.region.name) */
+/** A namespaced event emitted by providers (salve.event.domain.region.name) */
 export interface SalveEvent {
     id: string;
-    category: EventCategoryV1;
+    kind: EventDomainV1;
     start: string;   // ISO date
     end: string;     // ISO date
     label?: string;
@@ -314,9 +311,6 @@ export interface SalveEvent {
     emoji?: string;
     precedence?: number;
     confidence?: number;
-    requiredRegions?: string[];
-    requiredProfessions?: string[];
-    wikiDataId?: string;
     metadata?: Record<string, unknown>;
 }
 
@@ -330,51 +324,61 @@ export interface EventRegistryEntry {
 
 /** Memberships inferred from profile */
 export interface SalveMemberships {
-    traditions: string[];
-    professions: string[];
-    subcultures: string[];
+    traditions?: string[];
+    professions?: string[];
+    subcultures?: string[];
 }
 
 /** Abstract affinities (configured, not inferred) */
 export interface SalveAffinities {
-    professional: string[];
-    religious: string[];
-    cultural: string[];
+    locales?: string[];
+    tags?: string[];
 }
 
 /** Privacy and behavioral policy */
 export interface SalvePolicy {
-    allowSubcultureAddressing: boolean;
-    requireExplicitTraditionsForReligious: boolean;
-    showEmojis: boolean;
-    allowExtras: boolean;
-    allowNames: boolean;
+    allowDomains?: EventDomainV1[];
+    allowExtras?: boolean;
+    allowSubcultureAddressing?: boolean;
+    requireExplicitTraditionsForReligious?: boolean;
+    allowGenderInference?: boolean;
+    showEmojis?: boolean;
+    repetition?: {
+        windowedGreetings?: boolean;
+        maxSameRulePerDays?: number;
+    };
 }
 
-/** Raw input from consumer */
+/** Unified input context (v1) */
 export interface SalveContextV1 {
-    env: {
-        now: Date;
-        locale: string;
-        location?: { lat: number; lng: number };
-        outputLocale?: string;
-    };
-    interaction: {
-        phase: "encounter" | "acquaintance" | "parting";
-        style: "casual" | "polite" | "respectful";
-    };
+    env: SalveEnv;
+    interaction?: SalveInteraction;
     person?: SalvePerson;
-    policy?: Partial<SalvePolicy>;
+    memberships?: SalveMemberships;
+    affinities?: SalveAffinities;
+    policy?: SalvePolicy;
 }
 
-/** Detailed person metadata (optional) */
+/** Title on a person profile */
+export interface SalveTitle {
+    system: "academic" | "civil" | "religious" | "military" | "other";
+    code: string;
+}
+
+/** Person being addressed */
 export interface SalvePerson {
-    firstName?: string;
-    lastName?: string;
-    honorific?: string;
-    gender?: "male" | "female" | "nonBinary" | "unspecified";
-    affiliations?: string[];
-    professions?: string[];
+    givenNames?: string[];
+    surname?: string;
+    preferredName?: string;
+    gender?: "male" | "female" | "nonbinary" | "unknown";
+    genderSource?: "explicit" | "inferred" | "unknown";
+    titles?: SalveTitle[];
+    birthday?: string;
+    nameday?: {
+        enabled?: boolean;
+        locale?: string;
+        saintIds?: string[];
+    };
 }
 
 /** Result of normalizeContext */
@@ -398,13 +402,19 @@ export interface NormalizedContext {
 export interface SalveEnv {
     now: Date;
     locale: string;
+    timeZone?: string;
     location?: { lat: number; lng: number };
     outputLocale?: string;
+    region?: string;
 }
 
 export interface SalveInteraction {
-    phase: "encounter" | "acquaintance" | "parting";
-    style: "casual" | "polite" | "respectful";
+    phase?: GreetingPhase;
+    setting?: "ui" | "chat" | "email";
+    role?: "initiator" | "responder";
+    relationship?: RelationshipContext;
+    formality?: Formality;
+    style?: GreetingStyle;
     audienceSize?: number;
 }
 

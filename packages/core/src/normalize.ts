@@ -167,7 +167,7 @@ export function normalizeContext(input: SalveContextV1, locationResolver?: Locat
     };
 
     // Step 8 — Person normalization
-    const person = normalizePerson(input.person ?? null);
+    const person = normalizePerson(input.person ?? null, input.policy?.allowGenderInference ?? DEFAULT_POLICY.allowGenderInference);
 
     // Step 9 — Memberships
     const memberships: Required<SalveMemberships> = {
@@ -259,22 +259,43 @@ function getLocalHour(date: Date, timeZone: string): number {
 }
 
 /**
- * Normalize a person profile: trim names, set defaults.
+ * Normalize a person profile: trim names, set defaults and infer gender if allowed.
  */
-function normalizePerson(person: SalvePerson | null): SalvePerson | null {
+function normalizePerson(person: SalvePerson | null, allowInference: boolean = false): SalvePerson | null {
     if (!person) return null;
 
     const givenNames = person.givenNames?.map((n: string) => n.trim()).filter((n: string) => n.length > 0);
     const surname = person.surname?.trim() || undefined;
     const preferredName = person.preferredName?.trim() || givenNames?.[0] || undefined;
 
+    let gender = person.gender ?? "unknown";
+    let genderSource = person.genderSource ?? (person.gender && person.gender !== "unknown" ? "explicit" : "unknown");
+
+    // M9.4: Simple low-confidence gender inference
+    if (allowInference && (gender === "unknown" || !gender)) {
+        const first = givenNames?.[0]?.toLowerCase();
+        if (first) {
+            // Very basic heuristic for demo purposes
+            const femaleEndings = ["a", "ia", "ine", "ette", "elle"];
+            const maleEndings = ["o", "us", "ard", "bert", "rick"];
+
+            if (femaleEndings.some(e => first.endsWith(e))) {
+                gender = "female";
+                genderSource = "inferred";
+            } else if (maleEndings.some(e => first.endsWith(e))) {
+                gender = "male";
+                genderSource = "inferred";
+            }
+        }
+    }
+
     return {
         ...person,
         givenNames: givenNames && givenNames.length > 0 ? givenNames : undefined,
         surname,
         preferredName,
-        gender: person.gender ?? "unknown",
-        genderSource: person.genderSource ?? (person.gender ? "explicit" : "unknown"),
+        gender,
+        genderSource,
         titles: person.titles?.map((t: any) => ({ ...t, code: t.code.toLowerCase() })),
     };
 }

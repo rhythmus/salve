@@ -113,4 +113,35 @@ describe("normalizeContext (SCNA)", () => {
         });
         expect(ctx.env.outputLocale).toBe("fr-BE");
     });
+
+    test("low-confidence gender inference when policy allowed", () => {
+        const ctx = normalizeContext({
+            ...baseInput,
+            person: { givenNames: ["Maria"] },
+            policy: { allowGenderInference: true },
+        });
+
+        expect(ctx.person?.gender).toBe("female");
+        expect(ctx.person?.genderSource).toBe("inferred");
+
+        const ctx2 = normalizeContext({
+            ...baseInput,
+            person: { givenNames: ["Leonardo"] },
+            policy: { allowGenderInference: true },
+        });
+
+        expect(ctx2.person?.gender).toBe("male");
+        expect(ctx2.person?.genderSource).toBe("inferred");
+    });
+
+    test("no gender inference when policy disallowed", () => {
+        const ctx = normalizeContext({
+            ...baseInput,
+            person: { givenNames: ["Maria"] },
+            policy: { allowGenderInference: false },
+        });
+
+        expect(ctx.person?.gender).toBe("unknown");
+        expect(ctx.person?.genderSource).toBe("unknown");
+    });
 });
