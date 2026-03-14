@@ -184,6 +184,9 @@ For all work on datasets in `data/packs/` including greetings, events,
 honorifics, address packs, protocol packs, regions, locales, and
 namedays, see the
 [Salve Data Authoring Guide](./docs/Data-Authoring-Guide.md).
+Integrators needing complete coverage for a fixed set of languages
+(e.g. Dutch, Greek, English) should also see the
+[Coverage Plan (NL/EL/EN)](./docs/Coverage-Plan-NL-EL-EN.md).
 
 1.  Fork the repository.
 2.  Create your feature branch (`git checkout -b feat/amazing-feature`).

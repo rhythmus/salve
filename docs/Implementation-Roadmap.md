@@ -98,8 +98,16 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
     - [x] Populate comprehensive region data for the Dutch-speaking area (18 regions).
     - [x] Populate comprehensive Greek holiday data (15+ events).
     - [x] Add starter packs for key regions:
-        - [ ] `en-US`/`en-GB`: Civil holidays and Thanksgiving.
-        - [ ] `de-DE`: High-formality address protocols.
+        - [x] `en-GB`: Exhaustive greetings pack; `en.locales.yaml` for
+          English locale geography; `UK.events.yaml` and `US.events.yaml`
+          for British and US public holidays (including Thanksgiving).
+        - [x] Complete NL/EL/EN coverage for integrators (e.g.
+          Dutch–Greek vocabulary apps): `NL.events.yaml`,
+          `NL.regions.yaml`, `GR.regions.yaml`, Greek and English
+          academic protocol, trilingual labels/greetings in BE/GR/NL/UK/US
+          events.  See `docs/Coverage-Plan-NL-EL-EN.md`.
+        - [ ] `de-DE`: High-formality address protocols (existing
+          `de.protocol.academic.yaml`; further expansion if needed).
         - [ ] `ar-SA`: Hijri calendar integration demonstration.
 
 ## Milestone 9: Salve v1 Advanced Architecture & Modularization

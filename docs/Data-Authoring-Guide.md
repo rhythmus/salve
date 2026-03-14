@@ -183,6 +183,21 @@ Future tooling can consume this index to assemble low-payload bundles
 for targeted developer use cases without parsing filenames or walking
 the directory tree at build time.
 
+### Coverage and integrator guidance
+
+Integrators who need complete, exhaustive support for a fixed set of
+languages (e.g. Dutch, Greek, and English for a vocabulary or
+learning app) should consult `docs/Coverage-Plan-NL-EL-EN.md`.  That
+document lists which pack families exist for each language, what was
+added to achieve parity (e.g. `en.locales.yaml`, exhaustive
+`en-GB.greetings.yaml`, `NL.events.yaml`, UK/US event packs,
+`NL.regions.yaml`, `GR.regions.yaml`, Greek and English academic
+protocol), and the rationale for trilingual labels and greetings (nl,
+el, en) in country event packs.  The Technical Specification
+(Section 17.1.3) and this guide are the canonical references for pack
+layout and authoring; the coverage plan is the entry point for
+targeted bundle design.
+
 ## Pack Categories
 
 Salve currently maintains the following pack families under
@@ -191,7 +206,7 @@ Salve currently maintains the following pack families under
 ### 1. Greeting Packs
 
 - Filename: `{locale}.greetings.yaml`
-- Examples: `nl.greetings.yaml`, `el-GR.greetings.yaml`
+- Examples: `nl.greetings.yaml`, `el-GR.greetings.yaml`, `en-GB.greetings.yaml`
 - Purpose: time-of-day greetings and other non-event-specific
   utterances
 - Primary schema: greeting pack schema used by the greetings pipeline
@@ -203,7 +218,7 @@ a specific celebration or institution.
 ### 2. Event Registries
 
 - Filename: `{scope}.events.yaml`
-- Examples: `BE.events.yaml`, `christian.events.yaml`
+- Examples: `BE.events.yaml`, `NL.events.yaml`, `GR.events.yaml`, `UK.events.yaml`, `US.events.yaml`, `christian.events.yaml`
 - Purpose: regional, national, civil, or religious events and their
   greeting payloads
 - Primary generator: `scripts/generate-demo-packs.ts`
@@ -214,7 +229,7 @@ feast, observance, holiday, or public occasion.
 ### 3. Region Registries
 
 - Filename: `{country}.regions.yaml`
-- Examples: `BE.regions.yaml`
+- Examples: `BE.regions.yaml`, `NL.regions.yaml`, `GR.regions.yaml`
 - Purpose: political and jurisdictional subdivisions for geographic
   filtering
 - Primary generator: `scripts/generate-demo-packs.ts`
@@ -222,7 +237,7 @@ feast, observance, holiday, or public occasion.
 ### 4. Locale Registries
 
 - Filename: `{language}.locales.yaml`
-- Examples: `nl.locales.yaml`, `el.locales.yaml`
+- Examples: `nl.locales.yaml`, `el.locales.yaml`, `en.locales.yaml`
 - Purpose: linguistic geography, dialect areas, and locale coverage
 - Primary generator: `scripts/generate-demo-packs.ts`
 
@@ -247,8 +262,9 @@ These are always-on baseline packs for ordinary polite use.
 ### 6. Protocol Packs
 
 - Filename: `{locale}.protocol.{domain}.yaml`
-- Examples: `nl.protocol.academic.yaml`,
-  `nl.protocol.judicial.yaml`, `en.protocol.diplomatic.yaml`
+- Examples: `nl.protocol.academic.yaml`, `nl.protocol.judicial.yaml`,
+  `el.protocol.academic.yaml`, `en.protocol.academic.yaml`,
+  `en.protocol.diplomatic.yaml`
 - Location: `data/packs/protocol/`
 - Purpose: gated institutional overlays for academic, judicial,
   diplomatic, religious, military, noble, organizational, or other

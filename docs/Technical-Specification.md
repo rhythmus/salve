@@ -932,7 +932,8 @@ four core data types, each with specific naming and structural rules:
     1.  Event Registries (`<COUNTRY>|<TRADITION>.events.yaml`):
         Contains regional or tradition-specific event definitions and
         nested greetings.
-        -   Examples: `GR.events.yaml`, `christian.events.yaml`.
+        -   Examples: `GR.events.yaml`, `NL.events.yaml`,
+            `UK.events.yaml`, `US.events.yaml`, `christian.events.yaml`.
         -   Regional events MUST include labels and nested greetings.
 
     2.  Greeting Packs (`[locale].greetings.yaml`):
@@ -943,12 +944,14 @@ four core data types, each with specific naming and structural rules:
     3.  Region Registries (`[country].regions.yaml`):
         Jurisdictional data defining the political subdivisions of a
         country for geographic filtering.
-        -   Examples: `BE.regions.yaml`.
+        -   Examples: `BE.regions.yaml`, `NL.regions.yaml`,
+            `GR.regions.yaml`.
 
     4.  Locale Registries (`[language].locales.yaml`):
         Linguistic geography data defining regions where a language
         or dialect is spoken, separate from political boundaries.
-        -   Examples: `nl.locales.yaml`, `el.locales.yaml`.
+        -   Examples: `nl.locales.yaml`, `el.locales.yaml`,
+            `en.locales.yaml`.
 
     5.  Address Packs (`{locale}.address.yaml`):
         Baseline civility data for a locale: honorifics, format
@@ -957,11 +960,13 @@ four core data types, each with specific naming and structural rules:
         -   Examples: `en.address.yaml`, `nl.address.yaml`.
         -   Validated against `address-pack.schema.json`.
 
-    6.  Protocol Packs (`{domain}.{locale}.protocol.yaml`):
+    6.  Protocol Packs (`{locale}.protocol.{domain}.yaml`):
         Institutional protocol overlays for a specific domain and
         locale, providing gated title systems and addressing rules.
         -   Examples: `de.protocol.academic.yaml`,
-            `nl.protocol.judicial.yaml`.
+            `nl.protocol.academic.yaml`, `nl.protocol.judicial.yaml`,
+            `el.protocol.academic.yaml`, `en.protocol.academic.yaml`,
+            `en.protocol.diplomatic.yaml`.
         -   Validated against `protocol-pack.schema.json`.
 
     7.  Name-Day Saints (`{locale}.nameday-saints.yaml`):
@@ -1063,6 +1068,27 @@ metadata for each YAML source file — family, scope type, selector,
 tags, and protocol domain — to enable future custom bundle
 compilation by language, locale, event class, and protocol domain
 without requiring filesystem path parsing at build time.
+
+### 17.1.3.  Coverage and Integrator Guidance
+
+The project maintains a coverage plan for integrators who need
+complete, exhaustive support for a fixed set of languages or locales
+(e.g., a Dutch–Greek vocabulary application requiring Dutch, Greek,
+and English).  That plan documents which pack families exist for each
+language, what is missing, and recommended authoring order.  The
+document is maintained at `docs/Coverage-Plan-NL-EL-EN.md` and is
+updated when new country event packs, region registries, locale
+registries, protocol packs, or greeting packs are added.  Design
+choices reflected there include: (1) trilingual labels and greetings
+(nl, el, en) in country event packs (BE, GR, NL, UK, US) to support
+vocabulary and learning apps; (2) English locale registry
+(`en.locales.yaml`) and exhaustive `en-GB.greetings.yaml` so that
+English has parity with Dutch and Greek for greetings and geographic
+resolution; (3) Greek and English academic protocol packs so that
+protocol overlays are not limited to Dutch and German.  Implementers
+building targeted bundles (e.g., NL + EL + EN only) SHOULD consult
+that coverage plan and the pack index when selecting which YAML
+sources to include.
 
 ### 17.2.  Pack Structure
 
