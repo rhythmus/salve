@@ -1,0 +1,47 @@
+# Bulgarian Orthodox Name-Day Calendar
+# Fixed-date entries harvested from bg-name-days upstream
+
+locale: bg-BG
+sources:
+  - 'https://bg.wikipedia.org/wiki/Именни_дни_в_България'
+
+entries:
+  - month: 1
+    day: 6
+    saintQids: [Q132001]
+    label: Йордановден (Богоявление)
+
+  - month: 1
+    day: 7
+    saintQids: [Q43474]
+    label: Ивановден
+
+  - month: 1
+    day: 9
+    saintQids: [Q162908]
+    label: Стефановден
+
+  - month: 5
+    day: 6
+    saintQids: [Q43431]
+    label: Гергьовден
+
+  - month: 6
+    day: 29
+    saintQids: [Q42023]
+    label: Петровден
+
+  - month: 10
+    day: 26
+    saintQids: [Q43534]
+    label: Димитровден
+
+  - month: 12
+    day: 6
+    saintQids: [Q43107]
+    label: Никулден
+
+  - month: 12
+    day: 27
+    saintQids: [Q162908]
+    label: Стефановден
