@@ -12,6 +12,8 @@ export const resolveCommand = createCommand("resolve")
     .option("-s, --surname <surname>", "Last name")
     .option("-g, --gender <gender>", "Gender (male, female, nonBinary)")
     .option("-f, --formality <formality>", "Formality (formal, informal)", "formal")
+    .option("-d, --date <date>", "ISO date string to simulate")
+    .option("--policy-inference", "Allow gender inference", false)
     .action(async (options) => {
         const configPath = path.join(process.cwd(), "salve.config.json");
         const registry = new SalveRegistry();
@@ -36,13 +38,18 @@ export const resolveCommand = createCommand("resolve")
         const engine = new SalveEngine({ registry });
 
         const context = {
-            now: new Date(),
+            now: options.date ? new Date(options.date) : new Date(),
             locale: options.locale,
-            formality: options.formality,
-            profile: {
-                firstName: options.name,
-                lastName: options.surname,
+            interaction: {
+                formality: options.formality,
+            },
+            person: {
+                givenNames: options.name ? [options.name] : undefined,
+                surname: options.surname,
                 gender: options.gender
+            },
+            policy: {
+                allowGenderInference: options.policyInference
             }
         };
 
