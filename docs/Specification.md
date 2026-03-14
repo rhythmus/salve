@@ -768,6 +768,72 @@ normalization.  Title resolution order follows the system hierarchy:
 academic titles take precedence, followed by civil, religious, and
 military titles.
 
+### 14.8.  Address Pack Architecture (v1)
+
+The v1 address protocol introduces a layered pack architecture that
+separates baseline civility data from institutional protocol overlays.
+
+An AddressPack MUST include locale, gender-keyed honorifics, and
+format templates for at least the following output forms: postal,
+letterhead, salutation, and informal.  An AddressPack MAY include
+title definitions, collective formulas for group addressing, and
+title-suppression rules.
+
+A ProtocolPack extends the address data for a specific institutional
+domain (academic, judicial, diplomatic, religious, military, noble,
+or organizational).  A ProtocolPack MUST declare a
+`requiredSubculture` tag and is activated only when the runtime
+context includes a matching entry in `memberships.subcultures` and
+`policy.allowSubcultureAddressing` is true.
+
+### 14.9.  Output Form Distinction
+
+The engine distinguishes between multiple output forms derived from
+the same identity data:
+
+   -  "postal":  Abbreviated title forms for envelope or addressee
+      block (e.g., "Herrn Prof. Dr. Müller").
+   -  "letterhead":  Spelled-out correspondence forms for letter
+      opening lines (e.g., "Sehr geehrter Herr Professor Müller,").
+   -  "salutation":  Combined greeting + address for inline use.
+   -  "email_opening":  Form appropriate for electronic correspondence.
+   -  "email_closing":  Closing formula.
+
+### 14.10.  Composition and Rendering Policy
+
+Greeting text and address text are resolved independently and
+composed by a dedicated CompositionEngine.  The composition layer
+handles:
+
+   -  Terminal punctuation: greeting text that already ends in `!`,
+      `?`, or `.` is handled according to a configurable policy
+      ("move_to_end", "preserve", or "strip").
+   -  Separator insertion: configurable as "comma", "space",
+      "newline", "none", or "template".
+   -  Capitalization: "preserve", "lowercase_address", or
+      "sentence_case".
+   -  Custom template: developers MAY provide a template string
+      using tokens {greeting}, {greetingRaw}, {address}, and
+      {punctuation}.
+
+Locale packs provide sensible cultural defaults.  Developers MAY
+override any composition policy at runtime via `SalveRenderPolicy`.
+
+### 14.11.  Group and Collective Addressing
+
+The engine supports four audience kinds beyond single-person
+addressing:
+
+   -  "pair":  Two named recipients, formatted as an enumerated pair.
+   -  "group":  Multiple recipients addressed collectively via a
+      locale-specific formula (e.g., "Geachte dames en heren").
+   -  "public":  Undifferentiated public audience.
+   -  "institution":  Organizational entity addressed by role
+      or explicit collective label.
+
+When an explicit `collectiveLabel` is provided in the audience,
+it takes precedence over formula lookup.
+
 ## 15.  Rendering and Localization Model
 
 Rendering MUST:
@@ -1620,24 +1686,103 @@ The ScoreTuple incorporates a style compatibility bonus:
       in the requested style's fallback chain).
    -  0 otherwise.
 
-### 25.10.  Subculture Protocol Packs
+### 25.10.  Subculture Protocol Packs & Address Resolution
 
-Protocol packs are opt-in data modules containing greetings specific
-to institutional or socio-political subcultures.  Examples include:
+The v1 architecture implements a first-class address resolution
+pipeline that separates baseline civility from institutional
+protocol overlays and composes the final salutation through a
+dedicated rendering layer.
 
-   -  @salve/protocol-military:  Military greetings and forms of
-      address.
-   -  @salve/protocol-academic:  Academic salutations and titles.
-   -  @salve/protocol-diplomatic:  Diplomatic protocol greetings.
+#### 25.10.1.  AddressEngine
 
-Protocol packs are gated by two mechanisms:
+The `AddressEngine` is a standalone pipeline stage responsible for
+resolving structured address forms from recipient data.  It accepts
+an `AddressAudience` (one or more `AddressRecipient` objects) and an
+`AddressResolveContext`, and produces a `ResolvedAddress` containing
+the rendered text, trace data, and metadata about which rules and
+title codes were applied.
 
-   1.  The user's "memberships.subcultures" array must include a
-       matching tag.
-   2.  The policy flag "allowSubcultureAddressing" must be true.
+The resolution pipeline proceeds as follows:
 
-Both conditions MUST be met for protocol pack rules to participate
-in candidate enumeration.
+   1.  Normalize the audience kind (single, pair, group, public,
+       institution).
+   2.  Load the locale-appropriate baseline AddressPack.
+   3.  Merge title definitions from enabled ProtocolPacks.
+   4.  Build the title stack, applying rank ordering and locale-
+       specific suppression rules (e.g., "Professor suppresses
+       Doctor" in German and Dutch academic tradition).
+   5.  Resolve the gender-keyed honorific.
+   6.  Match formatting rules by priority, considering locale,
+       formality, output form, office role, and title system.
+   7.  Expand the template with token substitution.
+   8.  Apply linguistic transforms (e.g., vocative inflection).
+
+For pair audiences, the engine formats an enumerated pair with
+the locale-appropriate conjunction.  For group, public, and
+institution audiences, it selects a collective formula from the
+baseline pack or uses an explicit collective label.
+
+#### 25.10.2.  Protocol Pack Gating
+
+Protocol packs are activated only when two conditions are met:
+
+   1.  The user's `memberships.subcultures` array includes a tag
+       matching the pack's `requiredSubculture` field.
+   2.  The policy flag `allowSubcultureAddressing` is true.
+
+Both conditions MUST be met for protocol pack titles and rules to
+participate in address resolution.  This ensures that sensitive or
+rare institutional conventions are never applied without explicit
+opt-in.
+
+#### 25.10.3.  CompositionEngine
+
+The `CompositionEngine` is responsible for combining a greeting
+phrase and a resolved address form into a final rendered string.
+It resolves a `SalveRenderPolicy` by merging locale-specific
+cultural defaults with optional developer overrides.
+
+The composition layer handles:
+
+   -  Terminal punctuation: greeting text ending in punctuation
+      marks (!, ?, ., etc.) is processed according to the
+      `terminalPunctuation` policy (`move_to_end`, `preserve`,
+      or `strip`).
+   -  Separator insertion: the `separator` policy controls the
+      glue between greeting and address (`comma`, `space`,
+      `newline`, `none`, or `template`).
+   -  Capitalization: the `capitalization` policy controls how the
+      address text is cased (`preserve`, `lowercase_address`, or
+      `sentence_case`).
+   -  Custom templates: developers MAY provide a template string
+      with tokens `{greeting}`, `{greetingRaw}`, `{address}`, and
+      `{punctuation}` for full control over output structure.
+
+#### 25.10.4.  Integration with resolveV1
+
+The `SalveEngine.resolveV1()` method invokes the AddressEngine to
+produce three distinct output forms (postal, letterhead, salutation)
+from the same identity data, then feeds the salutation into the
+CompositionEngine together with the selected greeting text.
+
+The resulting `SalveOutputV1WithAddress` extends `SalveOutputV1`
+with:
+
+   -  `address`: the full `ResolvedAddress` for the salutation form.
+   -  `postalAddressText`: rendered postal address string.
+   -  `letterheadAddressText`: rendered letterhead address string.
+   -  `fullSalutationText`: composed greeting + address string.
+
+#### 25.10.5.  Pack Registration
+
+Baseline AddressPacks and gated ProtocolPacks are registered via
+`SalveEngine.registerAddressPack()` and
+`SalveEngine.registerProtocolPack()`, which delegate to both the
+central `PackRegistry` and the internal `AddressEngine`.
+
+Legacy `HonorificPack` data is automatically bridged into the
+AddressEngine as a minimal AddressPack via `importLegacyHonorifics`,
+ensuring backward compatibility with existing pack data.
 
 ### 25.11.  Low-Confidence Gender Inference
 
@@ -1700,7 +1845,15 @@ Salve MUST allow the following extension points:
       interface (Section 11).
    -  Additional honorific packs for new locales.
    -  Additional style packs for custom rhetorical registers.
-   -  Subculture protocol packs (Section 25.10).
+   -  Baseline address packs (`AddressPack`) for new locales,
+      providing honorifics, format templates, title definitions,
+      and collective formulas (Section 14.8).
+   -  Gated protocol packs (`ProtocolPack`) for institutional
+      domains such as academic, judicial, diplomatic, religious,
+      military, and noble addressing (Section 25.10).
+   -  Developer-configurable render policies (`SalveRenderPolicy`)
+      to override punctuation handling, separators, capitalization,
+      and custom templates (Section 14.10).
    -  Additional tradition registries and event providers.
    -  Custom suppression policies implementing the GreetingMemory
       interface (Section 16).
@@ -1805,6 +1958,22 @@ Potential extensions include:
    [RFC7322]  Flanagan, H. and S. Ginoza, "RFC Style Guide",
               RFC 7322, September 2014,
               <https://www.rfc-editor.org/info/rfc7322>.
+
+   [STYLE]    Wikipedia contributors, "Style (form of address)",
+              English Wikipedia, 2026,
+              <https://en.wikipedia.org/wiki/Style_(form_of_address)>.
+
+   [ANREDE]   Wikipedia contributors, "Anrede", German Wikipedia,
+              2026, <https://de.wikipedia.org/wiki/Anrede>.
+
+   [PREDICAT] Wikipedia contributors, "Prédicat honorifique",
+              French Wikipedia, 2026,
+              <https://fr.wikipedia.org/wiki/Pr%C3%A9dicat_honorifique>.
+
+   [AANSPREEKVORM]
+              Wikipedia contributors, "Aanspreekvorm", Dutch
+              Wikipedia, 2026,
+              <https://nl.wikipedia.org/wiki/Aanspreekvorm>.
 
    [WIKIDATA] Wikimedia Foundation, "Wikidata: A Free and Open
               Knowledge Base", <https://www.wikidata.org/>.

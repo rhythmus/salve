@@ -128,9 +128,19 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
 - **M9.6: Greeting Style Engine (Rhetorical Register)** (Completed)
     - [x] Introduce structural style modes: `neutral`, `formal`, `ceremonial`, `poetic`, `playful`, `archaic`, `liturgical`, `bureaucratic`, `minimal`.
     - [x] Enable fallback routing (e.g., `ceremonial` -> `formal` -> `neutral`) to transform base greetings.
-- **M9.7: Subculture Protocol Packs & Affinity Providers** (Not Started)
-    - [ ] Isolate socio-political and institutional greetings into Opt-In Protocol Packs (`@salve/protocol-*`).
+- **M9.7: Subculture Protocol Packs & Affinity Providers** (Partly Complete)
+    - [x] Define canonical v1 address/protocol type model (`AddressPack`, `ProtocolPack`, `AddressTitleToken`, `AddressRule`, `ResolvedAddress`, etc.) in `@salve/types`.
+    - [x] Create JSON schemas for address packs (`address-pack.schema.json`) and protocol packs (`protocol-pack.schema.json`).
+    - [x] Implement v1-first `AddressEngine` with title stacking, rule matching, protocol-pack gating, group/collective addressing, and safe degradation.
+    - [x] Implement `CompositionEngine` with locale-aware punctuation handling, separator policies, capitalization control, and developer-configurable `SalveRenderPolicy`.
+    - [x] Integrate address resolution and composition into `SalveEngine.resolveV1()` pipeline (`SalveOutputV1WithAddress`).
+    - [x] Expand `@salve/pack-global-addresses` with baseline civility `AddressPack` data for `en`, `de`, `fr`, `nl`, `el`.
+    - [x] Create first institutional protocol packs: `protocol-academic-de`, `protocol-academic-nl`, `protocol-academic-fr`, `protocol-judicial-nl`, `protocol-diplomatic-en`.
+    - [x] Add protocol workbench demo component (postal/letterhead/salutation mockups with configurable variables).
+    - [x] Add comprehensive test coverage for address engine, composition engine, title suppression, group addressing, and postal/letterhead distinction.
     - [ ] Implement "Affinity Reminders" (e.g., reminding a user in Belgium of a Japanese festival if they have an affinity for Japan).
+    - [ ] Add `protocol-royal-nl`, `protocol-diplomatic-nl`, `protocol-religious-*` packs (postponed to post-MVP).
+    - [ ] Expand to non-European address traditions (Japanese honorifics, Arabic titles, etc.).
 - **M9.8: Provider Integrations** (Not Started)
     - [ ] Wrap `date-holidays` into `@salve/provider-date-holidays` for global bank holidays.
     - [ ] Standardize Nameday remote fetching via `@salve/provider-namedays-*` (Date -> Saint -> Names).

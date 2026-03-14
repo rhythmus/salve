@@ -34,8 +34,9 @@ _Lectori salutem!_
   - [Contributing](#contributing)
   - [Sponsorship](#sponsorship)
   - [License](#license)
-  - [Gelukkige verjaardag, Pieter!](#gelukkige-verjaardag-pieter)
+  - [Data Sources \& Accountability](#data-sources--accountability)
   - [Citation](#citation)
+  - [Gelukkige verjaardag, Pieter!](#gelukkige-verjaardag-pieter)
   - [Contact](#contact)
 
 ---
@@ -147,8 +148,8 @@ devTools.mount();
 This monorepo is organized into several packages under `packages/`:
 
 ### Core & Logic
-- **`@salve/core`**: The brain of the operation. Handles resolution logic and priority scoring.
-- **`@salve/registry`**: Manages the loading and versioning of data packs.
+- **`@salve/core`**: The brain of the operation. Handles resolution logic, priority scoring, address resolution (`AddressEngine`), and salutation composition (`CompositionEngine`).
+- **`@salve/registry`**: Manages the loading and versioning of data packs, including address packs and protocol packs.
 - **`@salve/loader`**: Handles runtime data fetching and caching.
 
 ### Calendars & Plugins
@@ -158,7 +159,7 @@ This monorepo is organized into several packages under `packages/`:
 - **`@salve/calendars-specialty`**: Seasons, astronomical events, and personal milestones.
 
 ### Data Packs (Examples)
-- **`@salve/pack-global-addresses`**: Basic honorifics and address protocols.
+- **`@salve/pack-global-addresses`**: Baseline address packs (honorifics, format templates, titles) and institutional protocol packs (academic, judicial, diplomatic) for `en`, `de`, `fr`, `nl`, `el`.
 - **`@salve/pack-el-namedays`**: Greek Name Day data.
 - **`@salve/pack-bg-namedays`**: Bulgarian Name Day data.
 
@@ -176,6 +177,8 @@ For a comprehensive specification of the system, refer to the [Requirements Spec
 ## Contributing
 
 We welcome contributions! Please review our [Code of Conduct](./AGENTS.md) (currently in `AGENTS.md`) for coding standards and commit message conventions.
+
+For contributing address data and protocol packs, see the [Protocol Pack Authoring Guide](./docs/protocol-pack-authoring.md).
 
 1.  Fork the repository.
 2.  Create your feature branch (`git checkout -b feat/amazing-feature`).
