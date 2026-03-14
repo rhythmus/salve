@@ -1,0 +1,99 @@
+# Greece (GR) administrative regions
+# Used for region-scoped events and geographic resolution.
+# $schema: "../schemas/region-registry.schema.json"
+
+country: GR
+sources:
+  - 'https://en.wikipedia.org/wiki/Administrative_regions_of_Greece'
+
+regions:
+  - id: gr_attiki
+    label:
+      en: Attica
+      nl: Attica
+      el: Αττική
+    WikiData: Q758
+
+  - id: gr_makedonia
+    label:
+      en: Central Macedonia
+      nl: Centraal-Macedonië
+      el: Κεντρική Μακεδονία
+    WikiData: Q17151
+
+  - id: gr_thessalia
+    label:
+      en: Thessaly
+      nl: Thessalië
+      el: Θεσσαλία
+    WikiData: Q127993
+
+  - id: gr_kriti
+    label:
+      en: Crete
+      nl: Kreta
+      el: Κρήτη
+    WikiData: Q34374
+
+  - id: gr_peloponnisos
+    label:
+      en: Peloponnese
+      nl: Peloponnesos
+      el: Πελοπόννησος
+    WikiData: Q258796
+
+  - id: gr_anatoliki_makedonia
+    label:
+      en: Eastern Macedonia and Thrace
+      nl: Oost-Macedonië en Thracië
+      el: Ανατολική Μακεδονία και Θράκη
+    WikiData: Q210347
+
+  - id: gr_dytiki_ellada
+    label:
+      en: Western Greece
+      nl: West-Griekenland
+      el: Δυτική Ελλάδα
+    WikiData: Q170289
+
+  - id: gr_ionioi_nisoi
+    label:
+      en: Ionian Islands
+      nl: Ionische Eilanden
+      el: Ιόνια νησιά
+    WikiData: Q185127
+
+  - id: gr_dytiki_makedonia
+    label:
+      en: Western Macedonia
+      nl: West-Macedonië
+      el: Δυτική Μακεδονία
+    WikiData: Q210352
+
+  - id: gr_ipiros
+    label:
+      en: Epirus
+      nl: Epirus
+      el: Ήπειρος
+    WikiData: Q134258
+
+  - id: gr_sterea_ellada
+    label:
+      en: Central Greece
+      nl: Centraal-Griekenland
+      el: Στερεά Ελλάδα
+    WikiData: Q202726
+
+  - id: gr_notio_aigaio
+    label:
+      en: South Aegean
+      nl: Zuid-Egeïsch
+      el: Νότιο Αιγαίο
+    WikiData: Q173616
+
+  - id: gr_voreio_aigaio
+    label:
+      en: North Aegean
+      nl: Noord-Egeïsch
+      el: Βόρειο Αιγαίο
+    WikiData: Q169601

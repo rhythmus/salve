@@ -5,12 +5,28 @@ events:
     # ─── January ─────────────────────────────────────────────────────
 
   - date: 1 January
+    label:
+      en: New Year's Day
+      nl: Nieuwjaarsdag
+      el: Πρωτοχρονιά
     WikiData: Q2237444
     category: official
+    greetings:
+      en: Happy New Year!
+      nl: Gelukkig Nieuwjaar!
+      el: Καλή χρονιά!
 
   - date: 6 January
+    label:
+      en: Epiphany
+      nl: Driekoningen
+      el: Θεοφάνεια
     WikiData: Q167784
     category: official
+    greetings:
+      en: Happy Epiphany!
+      nl: Gelukkige Driekoningen!
+      el: Χρόνια Πολλά!
 
     # ─── April ─────────────────────────────────────────────────────
 
@@ -18,94 +34,163 @@ events:
     label:
       el: Καθαρά Δευτέρα
       en: Clean Monday
+      nl: Schone Maandag
     category: official
+    greetings:
+      el: Καλή Σαρακοστή!
+      en: Happy Clean Monday!
+      nl: Zalige vasten!
 
   - date: 25 March
     label:
       en: Independence Day
+      nl: Onafhankelijkheidsdag (Griekenland)
       el: Εικοστή Πέμπτη Μαρτίου
     WikiData: Q4158275
     category: official
     sources: https://en.wikipedia.org/wiki/Celebration_of_the_Greek_Revolution
     notes: Anniversary of the Greek Independence Day
     greetings:
-      - text: Χρόνια Πολλά!
-        phase: encounter
-        locale: el-GR
-        notes: Lit. “Many years!”
+      el: Χρόνια Πολλά!
+      en: Happy Independence Day!
+      nl: Gelukkige Onafhankelijkheidsdag!
 
   - date: pascha:-2
     label:
       el: Μεγάλη Παρασκευή
       en: Good Friday
+      nl: Goede Vrijdag
     category: official
+    greetings:
+      el: Καλή Ανάσταση
+      en: (Observance)
+      nl: Stille Goede Vrijdag.
 
   - date: pascha:-1
     label:
       el: Μέγα Σάββατο
+      en: Holy Saturday
+      nl: Stille Zaterdag
     category: official
 
   - date: pascha:0
+    label:
+      el: Κυριακή του Πάσχα
+      en: Easter Sunday
+      nl: Eerste paasdag
     WikiData: Q23674
     category: official
+    greetings:
+      el: Καλή Ανάσταση!
+      en: Happy Easter!
+      nl: Zalig Pasen!
 
   - date: pascha:1
+    label:
+      el: Δευτέρα του Πάσχα
+      en: Easter Monday
+      nl: Tweede paasdag
     WikiData: Q193163
     category: official
+    greetings:
+      el: Καλή Ανάσταση!
+      en: Happy Easter!
+      nl: Zalig Pasen!
 
     # ─── May ─────────────────────────────────────────────────────
 
   - date: 1 May
+    label:
+      el: Πρωτομαγιά
+      en: Labour Day
+      nl: Dag van de arbeid
     WikiData: Q1215449
     category: official
+    greetings:
+      el: Καλή Πρωτομαγιά!
+      en: Happy Labour Day!
+      nl: Gelukkige Dag van de arbeid!
 
     # ─── June ─────────────────────────────────────────────────────
 
   - date: pascha:50
+    label:
+      el: Δευτέρα του Αγίου Πνεύματος
+      en: Whit Monday
+      nl: Tweede pinksterdag
     WikiData: Q2512993
     category: official
+    greetings:
+      el: Καλή Πεντηκοστή!
+      en: Happy Whit Monday!
+      nl: Zalig Pinksteren!
 
     # ─── August ─────────────────────────────────────────────────────
 
   - date: 15 August
+    label:
+      el: Κοίμηση της Θεοτόκου
+      en: Dormition of the Theotokos
+      nl: Ontslapenis van de Moeder Gods
     WikiData: Q102237
     category: official
+    greetings:
+      el: Χρόνια Πολλά!
+      en: Happy Dormition!
+      nl: Zalige feestdag!
 
     # ─── October ─────────────────────────────────────────────────────
 
   - date: 28 October
     label:
       en: Ohi Day
+      nl: Ohi-dag
+      el: Επέτειος του Όχι
     WikiData: Q830166
     category: official
     sources: https://en.wikipedia.org/wiki/Ohi_Day
     notes: Ohi Day (October 28). Anniversary of the refusal to the Italian ultimatum.
     greetings:
-      - text: Χρόνια Πολλά!
-        phase: encounter
-        locale: el-GR
+      el: Χρόνια Πολλά!
+      en: Happy Ohi Day!
+      nl: Gelukkige Ohi-dag!
 
     # ─── November ─────────────────────────────────────────────────────
 
   - date: 17 November
     label:
       en: Polytechneio
+      nl: Polytechneio
+      el: Πολυτεχνείο
     WikiData: Q2628742
     category: observance
     notes: 'Polytechneio: Commemoration of the 1973 Athens Polytechnic uprising against the junta of the colonels (1967–1974).'
     greetings:
-      - text: Καλό Πολυτεχνείο!
-        phase: encounter
-        locale: el-GR
+      el: Καλό Πολυτεχνείο!
+      en: Honour to Polytechneio!
+      nl: Eer aan het Polytechneio!
 
     # ─── December ─────────────────────────────────────────────────────
 
   - date: 25 December
+    label:
+      el: Χριστούγεννα
+      en: Christmas Day
+      nl: Eerste kerstdag
     WikiData: Q19833
     category: official
+    greetings:
+      el: Καλά Χριστούγεννα!
+      en: Merry Christmas!
+      nl: Zalig Kerstmis!
 
   - date: 26 December
     label:
       el: Σύναξη της Θεοτόκου
       en: Synaxis of the Mother of God
+      nl: Synaxis van de Moeder Gods
     category: official
+    greetings:
+      el: Χρόνια Πολλά!
+      en: Happy Boxing Day!
+      nl: Zalig Kerstmis!
