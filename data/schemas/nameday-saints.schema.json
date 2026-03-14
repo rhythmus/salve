@@ -1,0 +1,64 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://salve.dev/schemas/nameday-saints.schema.json",
+    "title": "Salve Name-Day Saints Pack",
+    "description": "Saint definitions for a locale's name-day subsystem.  Each saint carries a WikiData QID, canonical name, tradition tags, and an alias corpus used for first-name matching.",
+    "type": "object",
+    "required": ["locale", "saints"],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "JSON Schema reference (for editor validation)"
+        },
+        "locale": {
+            "type": "string",
+            "description": "BCP 47 locale identifier (e.g. 'el-GR', 'bg-BG')",
+            "pattern": "^[a-z]{2,3}(-[A-Z]{2})?(-[A-Za-z0-9]+)*$"
+        },
+        "sources": {
+            "oneOf": [
+                { "type": "string" },
+                { "type": "array", "items": { "type": "string" } }
+            ],
+            "description": "Source URL(s) or bibliographic reference(s)"
+        },
+        "saints": {
+            "type": "array",
+            "description": "Saint definitions with WikiData QIDs and alias lists",
+            "items": { "$ref": "#/$defs/SaintDefinition" },
+            "minItems": 1
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {
+        "SaintDefinition": {
+            "type": "object",
+            "description": "A saint or feast figure whose name day triggers personal greetings",
+            "required": ["qid", "canonicalName", "traditions", "aliases"],
+            "properties": {
+                "qid": {
+                    "type": "string",
+                    "description": "WikiData QID (e.g. 'Q43431' for St. George)",
+                    "pattern": "^Q[0-9]+$"
+                },
+                "canonicalName": {
+                    "type": "string",
+                    "description": "English canonical name (e.g. 'George')"
+                },
+                "traditions": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Religious traditions (e.g. ['orthodox', 'catholic'])",
+                    "minItems": 1
+                },
+                "aliases": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Name variants in native script and Latin transliteration used for first-name matching",
+                    "minItems": 1
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

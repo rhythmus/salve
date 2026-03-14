@@ -6,6 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate:packs": "npx ts-node scripts/generate-demo-packs.ts",
     "generate:address-packs": "npx ts-node scripts/generate-address-packs.ts",
+    "generate:nameday-packs": "npx ts-node scripts/generate-nameday-packs.ts",
     "harvest": "npm run harvest -w packages/harvester --",
     "lint": "prettier --check .",
     "format": "prettier --write .",

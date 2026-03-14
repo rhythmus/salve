@@ -109,7 +109,7 @@ function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinitio
     let allRegions: RegionDefinition[] = [];
 
     for (const file of files) {
-        if (file.includes(".address.") || file.includes(".protocol.")) continue;
+        if (file.includes(".address.") || file.includes(".protocol.") || file.includes(".nameday-")) continue;
 
         const raw = fs.readFileSync(path.join(PACKS_DIR, file), "utf-8");
         const isRegions = file.includes(".regions.") || file.includes(".locales.");

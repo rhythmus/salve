@@ -1,0 +1,95 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://salve.dev/schemas/nameday-calendar.schema.json",
+    "title": "Salve Name-Day Calendar Pack",
+    "description": "Date-to-saint mappings for a locale's name-day calendar.  Entries can be fixed-date (month/day) or movable (relative to Pascha or another anchor).",
+    "type": "object",
+    "required": ["locale", "entries"],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "JSON Schema reference (for editor validation)"
+        },
+        "locale": {
+            "type": "string",
+            "description": "BCP 47 locale identifier (e.g. 'el-GR', 'bg-BG')",
+            "pattern": "^[a-z]{2,3}(-[A-Z]{2})?(-[A-Za-z0-9]+)*$"
+        },
+        "sources": {
+            "oneOf": [
+                { "type": "string" },
+                { "type": "array", "items": { "type": "string" } }
+            ],
+            "description": "Source URL(s) or bibliographic reference(s)"
+        },
+        "entries": {
+            "type": "array",
+            "description": "Calendar entries mapping dates to saints",
+            "items": { "$ref": "#/$defs/CalendarEntry" },
+            "minItems": 1
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {
+        "CalendarEntry": {
+            "type": "object",
+            "description": "A single date-to-saint(s) mapping, either fixed or movable.  At least one of saintQids or names MUST be present.",
+            "properties": {
+                "month": {
+                    "type": "integer",
+                    "description": "Month (1-12) for fixed-date entries",
+                    "minimum": 1,
+                    "maximum": 12
+                },
+                "day": {
+                    "type": "integer",
+                    "description": "Day of month for fixed-date entries",
+                    "minimum": 1,
+                    "maximum": 31
+                },
+                "relativeTo": {
+                    "type": "string",
+                    "description": "Anchor for movable entries (e.g. 'pascha')",
+                    "enum": ["pascha"]
+                },
+                "offset": {
+                    "type": "integer",
+                    "description": "Day offset from the anchor (negative = before, positive = after)"
+                },
+                "saintQids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "^Q[0-9]+$"
+                    },
+                    "description": "WikiData QID(s) of the saint(s) celebrated on this date",
+                    "minItems": 1
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Feast or celebration label"
+                },
+                "names": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Name variants celebrated on this date that are not yet linked to a saint QID"
+                }
+            },
+            "anyOf": [
+                { "required": ["saintQids"] },
+                { "required": ["names"] }
+            ],
+            "oneOf": [
+                {
+                    "required": ["month", "day"],
+                    "not": { "required": ["relativeTo"] }
+                },
+                {
+                    "required": ["relativeTo", "offset"],
+                    "not": { "required": ["month"] }
+                }
+            ],
+            "additionalProperties": false
+        }
+    }
+}

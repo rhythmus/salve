@@ -191,12 +191,24 @@ export interface SaintDefinition {
 }
 
 /**
- * Maps a specific date to one or more Saints
+ * Maps a fixed date to one or more Saints
  */
 export interface NameDayEntry {
     month: number; // 1-12
     day: number;
     saintQids: string[];
+}
+
+/**
+ * A movable name-day entry resolved relative to an anchor feast (e.g. Pascha).
+ * The runtime must compute the concrete date for a given year.
+ */
+export interface MovableNameDayEntry {
+    relativeTo: "pascha";
+    offset: number;
+    label?: string;
+    saintQids?: string[];
+    names?: string[];
 }
 
 /**
