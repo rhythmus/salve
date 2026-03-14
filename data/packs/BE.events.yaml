@@ -113,14 +113,15 @@ events:
     WikiData: Q10901070
     category: official
 
-  - date: 8 May
     label:
       en: Iris Festival
       nl: Irisfeest
       fr: Fête de l'Iris
       de: Iris-Festival
     WikiData: Q23929903
-    greetings: {}
+    greetings:
+      nl: Gelukkig Irisfeest!
+      fr: Bonne Fête de l'Iris !
     requiredRegions:
       - be_brussels
     category: observance
@@ -155,10 +156,13 @@ events:
   - date: 21 July
     label:
       en: King's Feast
-      nl: Fête du Roi
-      fr: Festtag des Königs
+      nl: Koningsfeest
+      fr: Fête du Roi
+      de: Festtag des Königs
     WikiData: Q589242
-    greetings: {}
+    greetings:
+      nl: Leve de Koning!
+      fr: Vive le Roi !
     category: observance
 
   - date: 21 July
@@ -168,7 +172,10 @@ events:
       fr: Fête Nationale
       de: Nationalfeiertag
     WikiData: Q57598
-    greetings: {}
+    greetings:
+      nl: Gelukkige Nationale Feestdag!
+      fr: Bonne Fête Nationale !
+      de: Frohen Nationalfeiertag!
     category: official
 
     # ─── August ─────────────────────────────────────────────────────
@@ -180,7 +187,9 @@ events:
       fr: Meyboom
       de: Meyboom
     WikiData: Q83372937
-    greetings: {}
+    greetings:
+      nl: Gelukkige Meyboom!
+      fr: Joyeux Meyboom !
     category: observance
 
   - date: 15 August
@@ -266,7 +275,9 @@ events:
       fr: Saint-Martin
       de: Sankt Martin
     WikiData: Q21617001
-    greetings: {}
+    greetings:
+      nl: Gelukkige Sint-Maarten!
+      de: Frohen Sankt Martin!
     requiredRegions:
       - be_ostbelgien
       - be_flanders_westhoek
@@ -301,7 +312,9 @@ events:
       fr: Saint-Verhaegen
       de: Sankt Verhaegen
     WikiData: Q3463486
-    greetings: {}
+    greetings:
+      nl: Gelukkige St-V!
+      fr: Joyeuse St-V !
     category: observance
 
     # ─── December ─────────────────────────────────────────────────────
