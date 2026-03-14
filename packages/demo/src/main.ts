@@ -1,5 +1,7 @@
 import './style.css';
-import { SalveEngine } from '@salve/core';
+import { SalveEngine, AddressEngine, CompositionEngine } from '@salve/core';
+import type { AddressAudience, AddressRecipient, AddressTitleToken, SalveRenderPolicy } from '@salve/types';
+import { globalAddressPacks, globalProtocolPacks } from '@salve/pack-global-addresses';
 import { DEMO_PACKS } from './packs';
 
 const engine = new SalveEngine();
@@ -494,6 +496,148 @@ function applyScenario(id: string) {
   if (s[id]) s[id]();
 }
 
+// ═══════════════════════════════════════════════════════════════════
+// Protocol Workbench
+// ═══════════════════════════════════════════════════════════════════
+
+const addressEngine = new AddressEngine();
+const compositionEngine = new CompositionEngine();
+
+for (const pack of globalAddressPacks) {
+  addressEngine.registerAddressPack(pack);
+}
+for (const pack of globalProtocolPacks) {
+  addressEngine.registerProtocolPack(pack);
+}
+
+function getWbValue(id: string): string {
+  return (document.getElementById(id) as HTMLInputElement | HTMLSelectElement)?.value ?? '';
+}
+
+function getWbMultiSelect(id: string): string[] {
+  const el = document.getElementById(id) as HTMLSelectElement | null;
+  if (!el) return [];
+  return Array.from(el.selectedOptions).map(o => o.value);
+}
+
+function updateWorkbench() {
+  const locale = getWbValue('wbLocale');
+  const gender = getWbValue('wbGender') as any;
+  const formality = getWbValue('wbFormality') as any;
+  const firstName = getWbValue('wbFirstName');
+  const surname = getWbValue('wbSurname');
+  const role = getWbValue('wbRole');
+  const titleCodes = getWbMultiSelect('wbTitles');
+  const protocol = getWbValue('wbProtocol');
+  const audienceKind = getWbValue('wbAudience') as any;
+  const separator = getWbValue('wbSeparator') as any;
+  const punctuation = getWbValue('wbPunctuation') as any;
+  const capitalization = getWbValue('wbCapitalization') as any;
+
+  const titles: AddressTitleToken[] = titleCodes.map(code => ({
+    system: 'academic' as const,
+    code,
+    display: code,
+    gender: gender === 'unknown' ? undefined : gender,
+  }));
+
+  const recipient: AddressRecipient = {
+    givenNames: firstName ? [firstName] : undefined,
+    surname: surname || undefined,
+    gender,
+    titles: titles.length > 0 ? titles : undefined,
+    officeRole: role || undefined,
+  };
+
+  const audience: AddressAudience = {
+    kind: audienceKind,
+    recipients: audienceKind === 'single' || audienceKind === 'pair' ? [recipient] : [],
+  };
+
+  const allowProto = protocol !== 'none';
+  const subcultures = allowProto ? [protocol] : [];
+
+  const baseCtx = {
+    locale,
+    formality,
+    addressMode: 'direct' as const,
+    outputForm: 'postal' as const,
+    allowSubcultureAddressing: allowProto,
+    subcultures,
+  };
+
+  const postal = addressEngine.resolve(audience, { ...baseCtx, outputForm: 'postal' });
+  const letterhead = addressEngine.resolve(audience, { ...baseCtx, outputForm: 'letterhead' });
+  const salAddr = addressEngine.resolve(audience, { ...baseCtx, outputForm: 'salutation' });
+
+  const renderPolicy: SalveRenderPolicy = {
+    separator,
+    terminalPunctuation: punctuation,
+    capitalization,
+  };
+
+  const greeting = locale === 'nl' ? 'Goedemorgen' :
+    locale === 'de' ? 'Guten Tag' :
+      locale === 'fr' ? 'Bonjour' :
+        locale === 'el' ? 'Καλημέρα' : 'Good morning';
+
+  const composed = compositionEngine.compose(
+    { greeting, address: salAddr.text, renderPolicy },
+    locale,
+  );
+
+  const postalEl = document.getElementById('wbPostalText');
+  const letterEl = document.getElementById('wbLetterheadText');
+  const salutEl = document.getElementById('wbSalutationText');
+  const traceEl = document.getElementById('wbTrace');
+
+  if (postalEl) postalEl.textContent = postal.text || '—';
+  if (letterEl) letterEl.textContent = letterhead.text || '—';
+  if (salutEl) salutEl.textContent = composed.text || '—';
+
+  if (traceEl) {
+    const traceLines = [
+      `locale: ${locale}`,
+      `formality: ${formality}`,
+      `protocol: ${protocol}`,
+      `audience: ${audienceKind}`,
+      '',
+      '── Postal ──',
+      ...postal.trace,
+      '',
+      '── Letterhead ──',
+      ...letterhead.trace,
+      '',
+      '── Salutation ──',
+      ...salAddr.trace,
+      '',
+      `── Composition ──`,
+      `separator: ${renderPolicy.separator}`,
+      `punctuation: ${renderPolicy.terminalPunctuation}`,
+      `capitalization: ${renderPolicy.capitalization}`,
+      `greeting: "${greeting}"`,
+      `address: "${salAddr.text}"`,
+      `result: "${composed.text}"`,
+    ];
+    traceEl.textContent = traceLines.join('\n');
+  }
+}
+
+function wireWorkbench() {
+  const ids = [
+    'wbLocale', 'wbGender', 'wbFormality', 'wbFirstName', 'wbSurname',
+    'wbRole', 'wbTitles', 'wbProtocol', 'wbAudience',
+    'wbSeparator', 'wbPunctuation', 'wbCapitalization',
+  ];
+  for (const id of ids) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('change', updateWorkbench);
+      el.addEventListener('input', updateWorkbench);
+    }
+  }
+}
+
 async function init() {
   const now = new Date();
   state.now = now;
@@ -508,6 +652,9 @@ async function init() {
 
   await rebuildTimelineAndUpdate();
   startAuto();
+
+  wireWorkbench();
+  updateWorkbench();
 }
 
 init();

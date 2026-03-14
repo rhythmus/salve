@@ -87,6 +87,123 @@
       </div>
     </section>
 
+    <section class="protocol-workbench" id="protocolWorkbench">
+      <h3 class="wb-title">Protocol Workbench</h3>
+      <p class="wb-subtitle">Postal addressing and letter-opening addressing are different rendering targets from the same identity data.</p>
+
+      <div class="wb-controls">
+        <div class="wb-row">
+          <label>Locale
+            <select id="wbLocale">
+              <option value="nl">Dutch (nl)</option>
+              <option value="de">German (de)</option>
+              <option value="fr">French (fr)</option>
+              <option value="en">English (en)</option>
+              <option value="el">Greek (el)</option>
+            </select>
+          </label>
+          <label>Gender
+            <select id="wbGender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="nonbinary">Non-binary</option>
+              <option value="unknown">Unknown</option>
+            </select>
+          </label>
+          <label>Formality
+            <select id="wbFormality">
+              <option value="formal">Formal</option>
+              <option value="informal">Informal</option>
+              <option value="hyperformal">Hyperformal</option>
+            </select>
+          </label>
+        </div>
+        <div class="wb-row">
+          <label>First name
+            <input type="text" id="wbFirstName" value="Pieter" placeholder="given name">
+          </label>
+          <label>Surname
+            <input type="text" id="wbSurname" value="De Jong" placeholder="surname">
+          </label>
+          <label>Office / Role
+            <input type="text" id="wbRole" value="" placeholder="professor, judge, …">
+          </label>
+        </div>
+        <div class="wb-row">
+          <label>Title stack
+            <select id="wbTitles" multiple size="3">
+              <option value="prof" selected>Professor</option>
+              <option value="dr" selected>Doctor</option>
+              <option value="mr">Mr. (Dutch legal)</option>
+              <option value="ir">ir. (Engineer)</option>
+              <option value="ing">ing.</option>
+              <option value="drs">drs.</option>
+            </select>
+          </label>
+          <label>Protocol pack
+            <select id="wbProtocol">
+              <option value="none">Baseline only</option>
+              <option value="academic" selected>Academic</option>
+              <option value="judicial">Judicial</option>
+              <option value="diplomatic">Diplomatic</option>
+            </select>
+          </label>
+          <label>Audience
+            <select id="wbAudience">
+              <option value="single">Single person</option>
+              <option value="pair">Pair</option>
+              <option value="group">Group</option>
+              <option value="institution">Institution</option>
+            </select>
+          </label>
+        </div>
+        <div class="wb-row">
+          <label>Separator
+            <select id="wbSeparator">
+              <option value="comma">Comma</option>
+              <option value="space">Space</option>
+              <option value="newline">Newline</option>
+              <option value="none">None</option>
+            </select>
+          </label>
+          <label>Punctuation
+            <select id="wbPunctuation">
+              <option value="move_to_end">Move to end</option>
+              <option value="preserve">Preserve</option>
+              <option value="strip">Strip</option>
+            </select>
+          </label>
+          <label>Capitalization
+            <select id="wbCapitalization">
+              <option value="preserve">Preserve</option>
+              <option value="lowercase_address">Lowercase address</option>
+              <option value="sentence_case">Sentence case</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="wb-outputs">
+        <div class="wb-mockup wb-envelope" id="wbEnvelope">
+          <div class="wb-mockup-label">Envelope / postal address</div>
+          <div class="wb-mockup-content" id="wbPostalText">—</div>
+        </div>
+        <div class="wb-mockup wb-letter" id="wbLetter">
+          <div class="wb-mockup-label">Letterhead / opening line</div>
+          <div class="wb-mockup-content" id="wbLetterheadText">—</div>
+        </div>
+        <div class="wb-mockup wb-salutation" id="wbSalutation">
+          <div class="wb-mockup-label">Full salutation (greeting + address)</div>
+          <div class="wb-mockup-content" id="wbSalutationText">—</div>
+        </div>
+      </div>
+
+      <details class="wb-trace">
+        <summary>Trace</summary>
+        <pre id="wbTrace">—</pre>
+      </details>
+    </section>
+
     <script type="module" src="./src/main.ts"></script>
 </body>
 

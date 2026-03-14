@@ -441,3 +441,127 @@ label {
     animation: octocat-wave 560ms ease-in-out;
   }
 }
+
+/* ---- Protocol Workbench ---- */
+
+.protocol-workbench {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.wb-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  margin: 0 0 4px;
+}
+
+.wb-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+
+.wb-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.wb-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 700px) {
+  .wb-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wb-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wb-controls select,
+.wb-controls input[type="text"] {
+  width: 100%;
+}
+
+.wb-controls select[multiple] {
+  height: auto;
+}
+
+.wb-outputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 700px) {
+  .wb-outputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wb-mockup {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 16px 20px;
+  min-height: 80px;
+}
+
+.wb-salutation {
+  grid-column: 1 / -1;
+}
+
+.wb-mockup-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.wb-mockup-content {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.wb-envelope .wb-mockup-content {
+  font-family: var(--mono);
+  font-size: 16px;
+  white-space: pre-line;
+}
+
+.wb-trace {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.wb-trace summary {
+  cursor: pointer;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wb-trace pre {
+  font-family: var(--mono);
+  font-size: 11px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: rgba(var(--fg-rgb), 0.03);
+  padding: 12px;
+  border-radius: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+}
