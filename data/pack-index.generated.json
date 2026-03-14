@@ -1,0 +1,278 @@
+{
+  "generatedAt": "2026-03-14T15:05:27.067Z",
+  "description": "Machine-readable pack index for selective bundle compilation.",
+  "packs": [
+    {
+      "file": "addresses/de.address.yaml",
+      "family": "address",
+      "scopeType": "language",
+      "selector": "de",
+      "tags": []
+    },
+    {
+      "file": "addresses/el.address.yaml",
+      "family": "address",
+      "scopeType": "language",
+      "selector": "el",
+      "tags": []
+    },
+    {
+      "file": "addresses/en.address.yaml",
+      "family": "address",
+      "scopeType": "language",
+      "selector": "en",
+      "tags": []
+    },
+    {
+      "file": "addresses/fr.address.yaml",
+      "family": "address",
+      "scopeType": "language",
+      "selector": "fr",
+      "tags": []
+    },
+    {
+      "file": "addresses/nl.address.yaml",
+      "family": "address",
+      "scopeType": "language",
+      "selector": "nl",
+      "tags": []
+    },
+    {
+      "file": "events/country/BE.events.yaml",
+      "family": "events",
+      "scopeType": "country",
+      "selector": "BE",
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "file": "events/country/GR.events.yaml",
+      "family": "events",
+      "scopeType": "country",
+      "selector": "GR",
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "file": "events/shared/international.base.events.yaml",
+      "family": "events",
+      "scopeType": "shared",
+      "selector": "international.base",
+      "tags": [
+        "base"
+      ]
+    },
+    {
+      "file": "events/shared/international.secular.events.yaml",
+      "family": "events",
+      "scopeType": "shared",
+      "selector": "international.secular",
+      "tags": [
+        "secular"
+      ]
+    },
+    {
+      "file": "events/supranational/EU.events.yaml",
+      "family": "events",
+      "scopeType": "supranational",
+      "selector": "EU",
+      "tags": [
+        "supranational"
+      ]
+    },
+    {
+      "file": "events/tradition/Chinese.events.yaml",
+      "family": "events",
+      "scopeType": "tradition",
+      "selector": "Chinese",
+      "tags": [
+        "tradition",
+        "cultural"
+      ]
+    },
+    {
+      "file": "events/tradition/christian.events.yaml",
+      "family": "events",
+      "scopeType": "tradition",
+      "selector": "christian",
+      "tags": [
+        "tradition",
+        "religious",
+        "christian"
+      ]
+    },
+    {
+      "file": "events/tradition/christian.orthodox.events.yaml",
+      "family": "events",
+      "scopeType": "tradition",
+      "selector": "christian.orthodox",
+      "tags": [
+        "tradition",
+        "religious",
+        "christian",
+        "orthodox"
+      ]
+    },
+    {
+      "file": "events/tradition/muslim.events.yaml",
+      "family": "events",
+      "scopeType": "tradition",
+      "selector": "muslim",
+      "tags": [
+        "tradition",
+        "religious",
+        "muslim"
+      ]
+    },
+    {
+      "file": "greetings/ar.greetings.yaml",
+      "family": "greetings",
+      "scopeType": "language",
+      "selector": "ar",
+      "tags": []
+    },
+    {
+      "file": "greetings/de-DE.greetings.yaml",
+      "family": "greetings",
+      "scopeType": "locale",
+      "selector": "de-DE",
+      "tags": []
+    },
+    {
+      "file": "greetings/el-GR.greetings.yaml",
+      "family": "greetings",
+      "scopeType": "locale",
+      "selector": "el-GR",
+      "tags": []
+    },
+    {
+      "file": "greetings/en-GB.greetings.yaml",
+      "family": "greetings",
+      "scopeType": "locale",
+      "selector": "en-GB",
+      "tags": []
+    },
+    {
+      "file": "greetings/nl.greetings.yaml",
+      "family": "greetings",
+      "scopeType": "language",
+      "selector": "nl",
+      "tags": []
+    },
+    {
+      "file": "greetings/tr-TR.greetings.yaml",
+      "family": "greetings",
+      "scopeType": "locale",
+      "selector": "tr-TR",
+      "tags": []
+    },
+    {
+      "file": "greetings/zh-CN.greetings.yaml",
+      "family": "greetings",
+      "scopeType": "locale",
+      "selector": "zh-CN",
+      "tags": []
+    },
+    {
+      "file": "locales/el.locales.yaml",
+      "family": "locales",
+      "scopeType": "language",
+      "selector": "el",
+      "tags": []
+    },
+    {
+      "file": "locales/nl.locales.yaml",
+      "family": "locales",
+      "scopeType": "language",
+      "selector": "nl",
+      "tags": []
+    },
+    {
+      "file": "namedays/bg-BG.nameday-calendar.yaml",
+      "family": "nameday-calendar",
+      "scopeType": "locale",
+      "selector": "bg-BG",
+      "tags": []
+    },
+    {
+      "file": "namedays/bg-BG.nameday-saints.yaml",
+      "family": "nameday-saints",
+      "scopeType": "locale",
+      "selector": "bg-BG",
+      "tags": []
+    },
+    {
+      "file": "namedays/el-GR.nameday-calendar.yaml",
+      "family": "nameday-calendar",
+      "scopeType": "locale",
+      "selector": "el-GR",
+      "tags": []
+    },
+    {
+      "file": "namedays/el-GR.nameday-saints.yaml",
+      "family": "nameday-saints",
+      "scopeType": "locale",
+      "selector": "el-GR",
+      "tags": []
+    },
+    {
+      "file": "protocol/de.protocol.academic.yaml",
+      "family": "protocol",
+      "scopeType": "language",
+      "selector": "de",
+      "tags": [
+        "academic"
+      ],
+      "domain": "academic"
+    },
+    {
+      "file": "protocol/en.protocol.diplomatic.yaml",
+      "family": "protocol",
+      "scopeType": "language",
+      "selector": "en",
+      "tags": [
+        "diplomatic"
+      ],
+      "domain": "diplomatic"
+    },
+    {
+      "file": "protocol/fr.protocol.academic.yaml",
+      "family": "protocol",
+      "scopeType": "language",
+      "selector": "fr",
+      "tags": [
+        "academic"
+      ],
+      "domain": "academic"
+    },
+    {
+      "file": "protocol/nl.protocol.academic.yaml",
+      "family": "protocol",
+      "scopeType": "language",
+      "selector": "nl",
+      "tags": [
+        "academic"
+      ],
+      "domain": "academic"
+    },
+    {
+      "file": "protocol/nl.protocol.judicial.yaml",
+      "family": "protocol",
+      "scopeType": "language",
+      "selector": "nl",
+      "tags": [
+        "judicial"
+      ],
+      "domain": "judicial"
+    },
+    {
+      "file": "regions/BE.regions.yaml",
+      "family": "regions",
+      "scopeType": "country",
+      "selector": "BE",
+      "tags": []
+    }
+  ]
+}

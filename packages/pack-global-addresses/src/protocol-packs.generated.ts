@@ -1,7 +1,7 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.protocol.yaml by scripts/generate-address-packs.ts
- * Generated at: 2026-03-14T13:23:33.048Z
+ * Generated at: 2026-03-14T15:05:24.440Z
  */
 
 import type { ProtocolPack } from "@salve/types";
@@ -53,6 +53,45 @@ export const protocolAcademicDe: ProtocolPack =
                 formality: ["formal", "hyperformal"],
                 outputForm: "salutation",
                 titleSystem: "academic",
+            },
+        },
+    ],
+}
+;
+
+export const protocolDiplomaticEn: ProtocolPack =
+{
+    id: "protocol-diplomatic-en",
+    locale: "en",
+    requiredSubculture: "diplomatic",
+    domain: "diplomatic" as const,
+    sources: ["https://en.wikipedia.org/wiki/Style_(form_of_address)"],
+    notes: "English diplomatic protocol: Your Excellency for ambassadors.\n",
+    titles: [
+        { system: "diplomatic" as const, code: "ambassador", rank: 1, postalForm: "H.E.", correspondenceForm: "His/Her Excellency" },
+        { system: "diplomatic" as const, code: "consul", rank: 2, postalForm: "Hon.", correspondenceForm: "The Honourable" },
+    ],
+    rules: [
+        {
+            id: "en-diplomatic-letterhead-ambassador",
+            priority: 20,
+            template: "Your Excellency,",
+            when: {
+                locale: "en",
+                formality: ["formal", "hyperformal"],
+                outputForm: "letterhead",
+                officeRole: "ambassador",
+            },
+        },
+        {
+            id: "en-diplomatic-postal-ambassador",
+            priority: 20,
+            template: "H.E. {honorific} {surname}",
+            when: {
+                locale: "en",
+                formality: ["formal", "hyperformal"],
+                outputForm: "postal",
+                officeRole: "ambassador",
             },
         },
     ],
@@ -180,45 +219,6 @@ export const protocolAcademicNl: ProtocolPack =
 }
 ;
 
-export const protocolDiplomaticEn: ProtocolPack =
-{
-    id: "protocol-diplomatic-en",
-    locale: "en",
-    requiredSubculture: "diplomatic",
-    domain: "diplomatic" as const,
-    sources: ["https://en.wikipedia.org/wiki/Style_(form_of_address)"],
-    notes: "English diplomatic protocol: Your Excellency for ambassadors.\n",
-    titles: [
-        { system: "diplomatic" as const, code: "ambassador", rank: 1, postalForm: "H.E.", correspondenceForm: "His/Her Excellency" },
-        { system: "diplomatic" as const, code: "consul", rank: 2, postalForm: "Hon.", correspondenceForm: "The Honourable" },
-    ],
-    rules: [
-        {
-            id: "en-diplomatic-letterhead-ambassador",
-            priority: 20,
-            template: "Your Excellency,",
-            when: {
-                locale: "en",
-                formality: ["formal", "hyperformal"],
-                outputForm: "letterhead",
-                officeRole: "ambassador",
-            },
-        },
-        {
-            id: "en-diplomatic-postal-ambassador",
-            priority: 20,
-            template: "H.E. {honorific} {surname}",
-            when: {
-                locale: "en",
-                formality: ["formal", "hyperformal"],
-                outputForm: "postal",
-                officeRole: "ambassador",
-            },
-        },
-    ],
-}
-;
-
 export const protocolJudicialNl: ProtocolPack =
 {
     id: "protocol-judicial-nl",
@@ -261,8 +261,8 @@ export const protocolJudicialNl: ProtocolPack =
 
 export const globalProtocolPacks: ProtocolPack[] = [
     protocolAcademicDe,
+    protocolDiplomaticEn,
     protocolAcademicFr,
     protocolAcademicNl,
-    protocolDiplomaticEn,
     protocolJudicialNl,
 ];

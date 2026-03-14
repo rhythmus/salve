@@ -1,7 +1,7 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.nameday-calendar.yaml by scripts/generate-nameday-packs.ts
- * Generated at: 2026-03-14T13:42:27.716Z
+ * Generated at: 2026-03-14T15:05:25.812Z
  */
 
 import type { NameDayEntry, MovableNameDayEntry } from "@salve/types";
