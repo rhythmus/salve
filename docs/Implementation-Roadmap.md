@@ -228,7 +228,19 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
     - Implement dedicated harvesters and calendar plugins for major world traditions.
     - [ ] Implement festival harvester based on [Wikipedia: Lists of festivals](https://en.wikipedia.org/wiki/Lists_of_festivals) (covering [Country](https://en.wikipedia.org/wiki/Lists_of_festivals#Country), [Continent](https://en.wikipedia.org/wiki/Lists_of_festivals#Continent), and [Sublists by type/topic](https://en.wikipedia.org/wiki/Lists_of_festivals#Sublists_by_type_or_topic)).
     - [ ] Integrate [multinational festivals and holidays](https://en.wikipedia.org/wiki/List_of_multinational_festivals_and_holidays).
-- [ ] **M14.3: Automated Maintenance Pipeline**
+- [ ] **M14.3: Address & Protocol Data Procurement**
+    - Implement harvesters and curate authoritative sources to populate address and protocol packs to full coverage.
+    - [ ] Implement harvester for [Wikipedia: Style (form of address)](https://en.wikipedia.org/wiki/Style_(form_of_address)) — English-language honorifics, styles, and modes of address across civil, academic, judicial, diplomatic, religious, military, and royal/noble domains.
+    - [ ] Implement harvester for [Wikipedia: Anrede](https://de.wikipedia.org/wiki/Anrede) — German-language title stacking, academic titles, pronoun choice, and formal/informal address conventions.
+    - [ ] Implement harvester for [Wikipedia: Prédicat honorifique](https://fr.wikipedia.org/wiki/Pr%C3%A9dicat_honorifique) — French-language honorific predicates and addressing conventions across Francophone countries.
+    - [ ] Implement harvester for [Wikipedia: Aanspreekvorm](https://nl.wikipedia.org/wiki/Aanspreekvorm) — Dutch-language protocols of addressing, including civility, academic, judicial, diplomatic, clerical, and royal/noble titulature.
+    - [ ] Implement harvester for [Wikipedia: Academische graad](https://nl.wikipedia.org/wiki/Academische_graad) — Dutch/Belgian academic degree system and associated predicates.
+    - [ ] Implement harvester for [Wikipedia: Predicaat (titel)](https://nl.wikipedia.org/wiki/Predicaat_(titel)) — Dutch honorific predicates in royal, noble, clerical, academic, and judicial contexts.
+    - [ ] Implement harvester for [Taaladvies: Titels en titulatuur in Nederland](https://taaladvies.net/titels-en-titulatuur-in-nederland-algemeen/) — authoritative NL title and addressing guide.
+    - [ ] Implement harvester for [Taaladvies: Titels en titulatuur in België](https://taaladvies.net/titels-en-titulatuur-in-belgie-algemeen/) — authoritative BE title and addressing guide.
+    - [ ] Curate address and protocol data from Van Dale Groot woordenboek der Nederlandse taal — manual extraction of honorific titles, professional titles, and formal usage conventions.
+    - [ ] Curate address and protocol data from The Chicago Manual of Style (17th ed.) — English-language forms of address, title usage, and correspondence conventions.
+- [ ] **M14.4: Automated Maintenance Pipeline**
     - Scale the harvester framework to handle daily/weekly monitoring of global holiday shifts.
-- [ ] **M14.4: Harvester Generalization & Pattern Extraction**
+- [ ] **M14.5: Harvester Generalization & Pattern Extraction**
     - Once 3-5 specific harvesters are stable, refactor the core logic into a generalized, configuration-driven harvester to minimize custom code for new Wikipedia-based sources.
