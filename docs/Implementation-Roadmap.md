@@ -74,6 +74,7 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
 - **M7.2: Developer Tools** (Completed)
     - [x] Visually interactive Developer Mode overlay (`@salve/devtools`).
     - [x] Debugging trace for greeting resolution.
+    - [ ] **Standalone dev tools integration**: Align and integrate the standalone Developer Playground (`website/salve-dev-playground.html`), Test Harness (`website/salve-test-harness.html`), and the Demo Webapp (`packages/demo` → `website/`) per [Integration Plan: Dev Tools & Demo](Integration-Plan-Dev-Tools.md) (three artifacts kept separate; shared context shape and test format; optional suite runner and real-engine wiring).
 - **M7.3: Project Documentation** (In Progress)
     - [x] Create comprehensive README with installation and usage guides.
     - [x] Add standard open-source metadata (LICENSE, CITATION, FUNDING).
