@@ -1,580 +1,15 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.{greetings,regions}.{json,yaml} by scripts/generate-demo-packs.ts
- * Generated at: 2026-03-14T15:05:22.743Z
+ * Generated at: 2026-03-14T15:33:56.086Z
  */
 
 import type { GreetingPack } from "@salve/types";
 
 export const DEMO_PACKS: GreetingPack[] = [
   {
-    locale: "el-GR",
-    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-    greetings: [
-      {
-        id: "el_gr_independence_day",
-        text: "Χρόνια Πολλά!",
-        eventRef: "salve.event.civil.un.independence_day",
-        locale: "el-GR",
-        phase: "encounter",
-        notes: "Lit. “Many years!”",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_ohi_day",
-        text: "Χρόνια Πολλά!",
-        eventRef: "salve.event.civil.un.ohi_day",
-        locale: "el-GR",
-        phase: "encounter",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_polytechneio",
-        text: "Καλό Πολυτεχνείο!",
-        eventRef: "salve.event.civil.un.polytechneio",
-        locale: "el-GR",
-        phase: "encounter",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_world_braille_day",
-        text: "Καλή Παγκόσμια Ημέρα γραφής Μπράιγ!",
-        eventRef: "salve.event.civil.un.world_braille_day",
-        emoji: "⠠⠃",
-        locale: "el-GR",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_international_day_of_education",
-        text: "Χρόνια Πολλά!",
-        eventRef: "salve.event.civil.un.international_day_of_education",
-        emoji: "📚",
-        locale: "el-GR",
-        professions: ["teacher"],
-        notes: "Greek: Happy Day, specifically for teachers!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_world_day_of_social_justice",
-        text: "Καλή Παγκόσμια Ημέρα Κοινωνικής Δικαιοσύνης!",
-        eventRef: "salve.event.civil.un.world_day_of_social_justice",
-        locale: "el-GR",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_international_women_s_day",
-        text: "Καλή Παγκόσμια Ημέρα της Γυναίκας!",
-        eventRef: "salve.event.civil.un.international_women_s_day",
-        emoji: "👩",
-        locale: "el-GR",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_world_autism_awareness_day",
-        text: "Καλή Παγκόσμια Ημέρα Ευαισθητοποίησης για τον Αυτισμό!",
-        eventRef: "salve.event.civil.un.world_autism_awareness_day",
-        emoji: "🧩",
-        locale: "el-GR",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_world_malaria_day",
-        text: "Καλή Παγκόσμια Ημέρα κατά της Ελονοσίας!",
-        eventRef: "salve.event.civil.un.world_malaria_day",
-        locale: "el-GR",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_international_jazz_day",
-        text: "Καλή Διεθνής Ημέρα Τζαζ!",
-        eventRef: "salve.event.civil.un.international_jazz_day",
-        emoji: "🎷",
-        locale: "el-GR",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_world_oceans_day",
-        text: "Καλή Παγκόσμια Ημέρα Ωκεανών!",
-        eventRef: "salve.event.civil.un.world_oceans_day",
-        emoji: "🌊",
-        locale: "el-GR",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_world_day_against_child_labour",
-        text: "Καλή Παγκόσμια Ημέρα κατά της Παιδικής Εργασίας!",
-        eventRef: "salve.event.civil.un.world_day_against_child_labour",
-        emoji: "⚒️",
-        locale: "el-GR",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_international_day_of_non_violenc",
-        text: "Καλή Παγκόσμια Ημέρα Μη Βίας!",
-        eventRef: "salve.event.civil.un.international_day_of_non_violenc",
-        locale: "el-GR",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_easter",
-        text: "Χριστός Ανέστη!",
-        eventRef: "salve.event.religious.christian.easter",
-        locale: "el-GR",
-        expectedResponse: "Αληθώς Ανέστη!",
-        formality: "neutral" as const,
-        notes: "Greek: Christ is Risen!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Christos Anesti!",
-        },
-      },
-      {
-        id: "el_gr_christmas",
-        text: "Καλά Χριστούγεννα!",
-        eventRef: "salve.event.religious.christian.christmas",
-        locale: "el-GR",
-        formality: "neutral" as const,
-        notes: "Greek: Merry Christmas",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Kala Kristougenna!",
-        },
-      },
-      {
-        id: "el_gr_christmas_day_2",
-        text: "Χρόνια Πολλά!",
-        eventRef: "salve.event.religious.christian.christmas_day_2",
-        locale: "el-GR",
-        notes: "Greek: Many years! (St. Stephen / Synaxis of Mother of God)",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_theophany",
-        text: "Καλή Φώτιση!",
-        eventRef: "salve.event.religious.christian.theophany",
-        locale: "el-GR",
-        notes: "Greek: Happy Enlightenment!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_assumption",
-        text: "Καλή Παναγιά!",
-        eventRef: "salve.event.religious.christian.assumption",
-        locale: "el-GR",
-        notes: "Greek: Happy Panagia! (Used in the lead-up to and on the Assumption)",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_clean_monday",
-        text: "Καλή Καθαρά Δευτέρα!",
-        eventRef: "salve.event.religious.orthodox.clean_monday",
-        locale: "el-GR",
-        notes: "Greek: Happy Clean Monday",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_clean_monday_1",
-        text: "Καλή Σαρακοστή!",
-        eventRef: "salve.event.religious.orthodox.clean_monday",
-        locale: "el-GR",
-        notes: "Greek: Happy Lent! (Wishing someone well for the 40-day fast starting on Clean Monday)",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_good_friday",
-        text: "Καλή Ανάσταση!",
-        eventRef: "salve.event.religious.orthodox.good_friday",
-        locale: "el-GR",
-        notes: "Greek: Happy Resurrection! (Wishing for the upcoming celebration)",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_holy_spirit_monday",
-        text: "Χρόνια Πολλά!",
-        eventRef: "salve.event.religious.orthodox.holy_spirit_monday",
-        locale: "el-GR",
-        notes: "Greek: Many years!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-      },
-      {
-        id: "el_gr_basic_hi_hello_often_short_for",
-        text: "Γεια!",
-        locale: "el-GR",
-        formality: "informal" as const,
-        phase: ["encounter", "parting"],
-        notes: "Basic 'Hi/Hello'. Often short for Γεια σου/σας.",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Ya!",
-        },
-      },
-      {
-        id: "el_gr_informal_hello_to_one_person",
-        text: "Γεια σου!",
-        audienceSize: "1",
-        locale: "el-GR",
-        formality: "informal" as const,
-        phase: ["encounter", "parting"],
-        notes: "Informal 'Hello' to one person.",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Ya su!",
-        },
-      },
-      {
-        id: "el_gr_formal_hello_to_one_person",
-        text: "Γεια σας!",
-        audienceSize: "1",
-        locale: "el-GR",
-        formality: "formal" as const,
-        phase: ["encounter", "parting"],
-        notes: "Formal 'Hello' to one person.",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Ya sas!",
-        },
-      },
-      {
-        id: "el_gr_informal_hello_to_a_group",
-        text: "Γεια σας!",
-        audienceSize: ">1",
-        locale: "el-GR",
-        formality: "informal" as const,
-        phase: ["encounter", "parting"],
-        notes: "Informal 'Hello' to a group.",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Ya sas!",
-        },
-      },
-      {
-        id: "el_gr_polite_formal_hello_to_one_perso",
-        text: "Χαίρετε!",
-        audienceSize: ">=1",
-        locale: "el-GR",
-        formality: "formal" as const,
-        phase: "encounter",
-        notes: "Polite/Formal 'Hello' to one person or a group.",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Khairete!",
-        },
-      },
-      {
-        id: "el_gr_see_you",
-        text: "Τα λέμε!",
-        locale: "el-GR",
-        phase: "parting",
-        notes: "See you!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Ta leme!",
-        },
-      },
-      {
-        id: "el_gr_see_you_1",
-        text: "Γεια! Τα λέμε!",
-        locale: "el-GR",
-        phase: "parting",
-        notes: "See you!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Ya! Ta leme! Ya, ta leme!",
-        },
-      },
-      {
-        id: "el_gr_see_you_2",
-        text: "Γεια, τα λέμε!",
-        locale: "el-GR",
-        phase: "parting",
-        notes: "See you!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Ya! Ta leme! Ya, ta leme!",
-        },
-      },
-      {
-        id: "el_gr_goodbye_used_for_permanent_or_lo",
-        text: "Αντίο",
-        locale: "el-GR",
-        formality: "formal" as const,
-        phase: "parting",
-        notes: "Goodbye. Used for permanent or long-term parting.",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Adío",
-        },
-      },
-      {
-        id: "el_gr_farewell_more_sophisticated_vers",
-        text: "Εις το επανιδείν!",
-        locale: "el-GR",
-        formality: "formal" as const,
-        phase: "parting",
-        notes: "Farewell. More sophisticated version of 'See you again'. Litt. “To the seeing-each-other-again!”",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Eis to epanidín!",
-        },
-      },
-      {
-        id: "el_gr_kali_mera_good_morning",
-        text: "Καλημέρα!",
-        timeOfDay: "morning",
-        locale: "el-GR",
-        phase: "encounter",
-        notes: ["Good morning! (Usually until 12pm)", "As in English, Καλημέρα consists of two separate words combined into one: Καλή + μέρα (kalí + méra) = “good” + “morning.”"],
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Kaliméra!",
-        },
-      },
-      {
-        id: "el_gr_kali_e_spera_good_afternoon",
-        text: "Καλησπέρα!",
-        timeOfDay: ["afternoon", "evening"],
-        locale: "el-GR",
-        phase: "encounter",
-        notes: ["Good afternoon! (12pm until late evening)", "Καλησπέρα consists of two separate words combined into one: Καλή + (ε)σπέρα (kalí + (e)spéra) = “good” + “afternoon.”"],
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Kalispéra!",
-        },
-      },
-      {
-        id: "el_gr_have_a_good_afternoon_used_when_",
-        text: "Καλό απόγευμα!",
-        timeOfDay: ["midday", "afternoon"],
-        locale: "el-GR",
-        phase: "parting",
-        notes: "Have a good afternoon! (Used when parting)",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Kaló apóyevma!",
-        },
-      },
-      {
-        id: "el_gr_have_a_good_evening_used_when_pa",
-        text: "Καλό βράδυ!",
-        timeOfDay: "evening",
-        locale: "el-GR",
-        phase: "parting",
-        notes: "Have a good evening! (Used when parting)",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Kaló vrádi!",
-        },
-      },
-      {
-        id: "el_gr_goodnight",
-        text: "Καληνύχτα!",
-        timeOfDay: ["evening", "night"],
-        locale: "el-GR",
-        phase: "parting",
-        notes: "Goodnight!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Kaliníhta!",
-        },
-      },
-      {
-        id: "el_gr_sweet_dreams_usually_follows_1",
-        text: "Καληνύχτα! Όνειρα γλυκά!",
-        timeOfDay: "night",
-        locale: "el-GR",
-        formality: "informal" as const,
-        phase: "parting",
-        relationship: ["intimate"],
-        notes: "Sweet dreams. Usually follows Καληνύχτα.",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Oneira glyka!",
-        },
-      },
-      {
-        id: "el_gr_sweet_dreams_usually_follows_2",
-        text: "Καλό βράδυ! Όνειρα γλυκά!",
-        timeOfDay: "night",
-        locale: "el-GR",
-        formality: "informal" as const,
-        phase: "parting",
-        relationship: ["intimate"],
-        notes: "Sweet dreams. Usually follows Καληνύχτα.",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Oneira glyka!",
-        },
-      },
-      {
-        id: "el_gr_sweet_dreams_usually_follows_3",
-        text: "Όνειρα γλυκά!",
-        timeOfDay: "night",
-        locale: "el-GR",
-        formality: "informal" as const,
-        phase: "parting",
-        relationship: ["intimate"],
-        notes: "Sweet dreams. Usually follows Καληνύχτα.",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Oneira glyka!",
-        },
-      },
-      {
-        id: "el_gr_hey_slang",
-        text: "Γεια χαρά!",
-        locale: "el-GR",
-        formality: "highly informal" as const,
-        phase: "encounter",
-        notes: "Hey! (Slang)",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Ya hará!",
-        },
-      },
-      {
-        id: "el_gr_yo_slang",
-        text: "Γιο!",
-        locale: "el-GR",
-        formality: "highly informal" as const,
-        phase: "encounter",
-        notes: "Yo! (Slang)",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Yo!",
-        },
-      },
-      {
-        id: "el_gr_long_time_no_see_1",
-        text: "Χρόνια και ζαμάνια!",
-        locale: "el-GR",
-        phase: "encounter",
-        notes: "Long time no see!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Hrónia ke zamánia!",
-        },
-      },
-      {
-        id: "el_gr_long_time_no_see_2",
-        text: "Γεια χαρά! Χρόνια και ζαμάνια!",
-        locale: "el-GR",
-        phase: "encounter",
-        notes: "Long time no see!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Hrónia ke zamánia!",
-        },
-      },
-      {
-        id: "el_gr_long_time_no_see_3",
-        text: "Γιο! Χρόνια και ζαμάνια!",
-        locale: "el-GR",
-        phase: "encounter",
-        notes: "Long time no see!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Hrónia ke zamánia!",
-        },
-      },
-      {
-        id: "el_gr_pleased_to_meet_you",
-        text: "Χαίρω πολύ!",
-        locale: "el-GR",
-        phase: "encounter",
-        notes: "Pleased to meet you!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Héro Polí!",
-        },
-      },
-      {
-        id: "el_gr_pleased_to_have_met_you",
-        text: "Χάρηκα!",
-        locale: "el-GR",
-        phase: ["encounter", "parting"],
-        notes: "Pleased (to have met you)!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Ηárika!",
-        },
-      },
-      {
-        id: "el_gr_pleased_to_make_your_acquaintanc",
-        text: "Χαίρομαι για τη γνωριμία!",
-        locale: "el-GR",
-        phase: "encounter",
-        notes: "Pleased to make your acquaintance!",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Hérome ya ti gnorimía!",
-        },
-      },
-      {
-        id: "el_gr_yes_informal",
-        text: "Ναι;",
-        locale: "el-GR",
-        formality: "informal" as const,
-        phase: "encounter",
-        relationship: ["friend"],
-        setting: ["chat_message", "phone"],
-        notes: "Answering phone: \"Yes?\" (Informal)",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Nai?",
-        },
-      },
-      {
-        id: "el_gr_please_universal",
-        text: "Παρακαλώ;",
-        locale: "el-GR",
-        phase: "encounter",
-        setting: ["chat_message", "phone"],
-        notes: "Answering phone: \"Please?\"\" (Universal)",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Parakaló?",
-        },
-      },
-      {
-        id: "el_gr_speak_standard",
-        text: "Λέγετε!",
-        locale: "el-GR",
-        phase: "encounter",
-        setting: ["chat_message", "phone"],
-        notes: "Answering phone: \"Speak\" (Standard)",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Légete!",
-        },
-      },
-      {
-        id: "el_gr_speak_please_standard",
-        text: "Λέγετε, παρακαλώ!",
-        locale: "el-GR",
-        formality: "formal" as const,
-        phase: "encounter",
-        setting: ["chat_message", "phone"],
-        notes: "Answering phone: \"Speak, please\" (Standard)",
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Légete, parakaló!",
-        },
-      },
-      {
-        id: "el_gr_item",
-        text: "Εμπρός!",
-        locale: "el-GR",
-        phase: "encounter",
-        setting: ["chat_message", "phone"],
-        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
-        transliterations: {
-          "el-Latn": "Emprós!",
-        },
-      },
-    ],
-  },
-  {
     locale: "en-GB",
+    sources: ["https://en.wikipedia.org/wiki/Greeting"],
     greetings: [
       {
         id: "en_gb_happy_world_braille_day",
@@ -582,18 +17,21 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_braille_day",
         emoji: "⠠⠃",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_clean",
         text: "Happy International Day of Clean Energy!",
         eventRef: "salve.event.civil.un.international_day_of_clean_energ",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_wetlands_day",
         text: "Happy World Wetlands Day!",
         eventRef: "salve.event.civil.un.world_wetlands_day",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_human",
@@ -601,6 +39,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_day_of_human_frate",
         emoji: "🤝",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_zero_",
@@ -608,12 +47,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_day_of_zero_tolera",
         emoji: "🤝",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_pulses_day",
         text: "Happy World Pulses Day!",
         eventRef: "salve.event.civil.un.world_pulses_day",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_women",
@@ -621,12 +62,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_day_of_women_and_g",
         emoji: "👩",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_for_the_",
         text: "Happy International Day for the Prevention of Violent Extremism as and when Conducive to Terrorism!",
         eventRef: "salve.event.civil.un.international_day_for_the_preven",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_radio_day",
@@ -634,30 +77,35 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_radio_day",
         emoji: "📻",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_global_tourism_resilience_",
         text: "Happy Global Tourism Resilience Day!",
         eventRef: "salve.event.civil.un.global_tourism_resilience_day",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_day_of_social_justic",
         text: "Happy World Day of Social Justice!",
         eventRef: "salve.event.civil.un.world_day_of_social_justice",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_zero_discrimination_day",
         text: "Happy Zero Discrimination Day!",
         eventRef: "salve.event.civil.un.zero_discrimination_day",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_seagrass_day",
         text: "Happy World Seagrass Day!",
         eventRef: "salve.event.civil.un.world_seagrass_day",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_wildlife_day",
@@ -665,12 +113,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_wildlife_day",
         emoji: "🐾",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_for_disa",
         text: "Happy International Day for Disarmament and Non-Proliferation Awareness!",
         eventRef: "salve.event.civil.un.international_day_for_disarmamen",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_women_s_day",
@@ -678,6 +128,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_women_s_day",
         emoji: "👩",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_women_1",
@@ -685,12 +136,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_day_of_women_judge",
         emoji: "👩",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_to_comba",
         text: "Happy International Day To Combat Islamophobia!",
         eventRef: "salve.event.civil.un.international_day_to_combat_isla",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_happi",
@@ -698,6 +151,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_day_of_happiness",
         emoji: "😊",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_water_day",
@@ -705,6 +159,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_water_day",
         emoji: "💧",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_autism_awareness_day",
@@ -712,12 +167,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_autism_awareness_day",
         emoji: "🧩",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_for_mine",
         text: "Happy International Day for Mine Awareness and Assistance in Mine Action!",
         eventRef: "salve.event.civil.un.international_day_for_mine_aware",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_consc",
@@ -725,12 +182,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_day_of_conscience",
         emoji: "🔬",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_malaria_day",
         text: "Happy World Malaria Day!",
         eventRef: "salve.event.civil.un.world_malaria_day",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_day_for_safety_and_h",
@@ -738,6 +197,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_day_for_safety_and_health_",
         emoji: "🏥",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_jazz_day",
@@ -745,6 +205,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_jazz_day",
         emoji: "🎷",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_labour_day",
@@ -752,6 +213,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.labour_day",
         emoji: "⚒️",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_tuna_day",
@@ -759,6 +221,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_tuna_day",
         emoji: "🐟",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_press_freedom_day",
@@ -766,6 +229,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_press_freedom_day",
         emoji: "🗞️",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_time_of_remembrance_and_re",
@@ -773,18 +237,21 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.time_of_remembrance_and_reconcil",
         emoji: "🕯️",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_bird_day",
         text: "Happy Bird Day!",
         eventRef: "salve.event.civil.un.world_migratory_bird_day",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_argan",
         text: "Happy International Day of Argania!",
         eventRef: "salve.event.civil.un.international_day_of_argania",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_plant",
@@ -792,12 +259,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_day_of_plant_healt",
         emoji: "🏥",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_fair_play_day",
         text: "Happy World Fair Play Day!",
         eventRef: "salve.event.civil.un.world_fair_play_day",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_bee_day",
@@ -805,6 +274,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_bee_day",
         emoji: "🐝",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_football_day",
@@ -812,6 +282,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_football_day",
         emoji: "⚽",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_potat",
@@ -819,6 +290,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_day_of_potato",
         emoji: "🥔",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_global_day_of_parents",
@@ -826,6 +298,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.global_day_of_parents",
         emoji: "👪",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_bicycle_day",
@@ -833,6 +306,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_bicycle_day",
         emoji: "🚲",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_innoc",
@@ -840,12 +314,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_day_of_innocent_ch",
         emoji: "🧒",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_for_the__1",
         text: "Happy International Day for the Fight against Illegal, Unreported and Unregulated Fishing!",
         eventRef: "salve.event.civil.un.international_day_for_the_fight_",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_food_safety_day",
@@ -853,6 +329,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_food_safety_day",
         emoji: "🍏",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_oceans_day",
@@ -860,18 +337,21 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_oceans_day",
         emoji: "🌊",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_for_dial",
         text: "Happy International Day for Dialogue among Civilizations!",
         eventRef: "salve.event.civil.un.international_day_for_dialogue_a",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_play",
         text: "Happy International Day of Play!",
         eventRef: "salve.event.civil.un.international_day_of_play",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_day_against_child_la",
@@ -879,36 +359,42 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_day_against_child_labour",
         emoji: "⚒️",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_democ",
         text: "Happy International Day of Democracy!",
         eventRef: "salve.event.civil.un.international_day_of_democracy",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_patient_safety_day",
         text: "Happy World Patient Safety Day!",
         eventRef: "salve.event.civil.un.world_patient_safety_day",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_non_v",
         text: "Happy International Day of Non-Violence!",
         eventRef: "salve.event.civil.un.international_day_of_non_violenc",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_cotton_day",
         text: "Happy World Cotton Day!",
         eventRef: "salve.event.civil.un.world_cotton_day",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_bird_day_1",
         text: "Happy Bird Day!",
         eventRef: "salve.event.civil.un.world_migratory_bird_day",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_the_s",
@@ -916,12 +402,14 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_day_of_the_snow_le",
         emoji: "🐆",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_to_end_i",
         text: "Happy International Day to End Impunity for Crimes Against Journalists!",
         eventRef: "salve.event.civil.un.international_day_to_end_impunit",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_tsunami_awareness_da",
@@ -929,6 +417,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_tsunami_awareness_day",
         emoji: "🌊",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_for_prev",
@@ -936,6 +425,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.international_day_for_preventing",
         emoji: "🌱",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_television_day",
@@ -943,6 +433,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_television_day",
         emoji: "📺",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_day_of_remembrance_for_all",
@@ -950,18 +441,21 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.day_of_remembrance_for_all_victi",
         emoji: "🕯️",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_aids_day",
         text: "Happy World AIDS Day!",
         eventRef: "salve.event.civil.un.world_aids_day",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_international_day_of_banks",
         text: "Happy International Day of Banks!",
         eventRef: "salve.event.civil.un.international_day_of_banks",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_world_soil_day",
@@ -969,6 +463,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.civil.un.world_soil_day",
         emoji: "⏳",
         locale: "en-GB",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_happy_chinese_new_year",
@@ -983,6 +478,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.religious.christian.easter",
         locale: "en-GB",
         formality: "neutral" as const,
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_christ_is_risen",
@@ -992,6 +488,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         expectedResponse: "Indeed, He is Risen!",
         formality: "neutral" as const,
         notes: "English Eastern Orthodox Easter greeting",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_merry_christmas",
@@ -999,6 +496,7 @@ export const DEMO_PACKS: GreetingPack[] = [
         eventRef: "salve.event.religious.christian.christmas",
         locale: "en-GB",
         formality: "neutral" as const,
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_eid_mubarak",
@@ -1018,24 +516,478 @@ export const DEMO_PACKS: GreetingPack[] = [
         id: "en_gb_hello",
         text: "Hello",
         locale: "en-GB",
+        formality: "neutral" as const,
+        phase: "encounter",
+        notes: "Universal greeting.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
-        id: "en_gb_good_morning",
+        id: "en_gb_hi",
+        text: "Hi",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "encounter",
+        notes: "Casual greeting.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_hey",
+        text: "Hey",
+        locale: "en-GB",
+        formality: "highly informal" as const,
+        phase: "encounter",
+        notes: "Very casual, often among friends.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_good_day",
+        text: "Good day",
+        timeOfDay: ["morning", "midday", "afternoon"],
+        locale: "en-GB",
+        formality: "formal" as const,
+        phase: "encounter",
+        notes: "Formal or slightly dated.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_good_morning_1",
         text: "Good morning",
         timeOfDay: "morning",
         locale: "en-GB",
+        formality: "neutral" as const,
+        phase: "encounter",
+        notes: "Morning: informal shortening.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_morning_2",
+        text: "Morning",
+        timeOfDay: "morning",
+        locale: "en-GB",
+        formality: "neutral" as const,
+        phase: "encounter",
+        notes: "Morning: informal shortening.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_good_afternoon",
         text: "Good afternoon",
-        timeOfDay: "afternoon",
+        timeOfDay: ["midday", "afternoon"],
         locale: "en-GB",
+        formality: "formal" as const,
+        phase: "encounter",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
       {
         id: "en_gb_good_evening",
         text: "Good evening",
         timeOfDay: "evening",
         locale: "en-GB",
+        formality: "formal" as const,
+        phase: "encounter",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_good_night",
+        text: "Good night",
+        timeOfDay: ["evening", "night"],
+        locale: "en-GB",
+        formality: "neutral" as const,
+        phase: "encounter",
+        notes: "Often used when meeting late in the evening (e.g. at a night event).",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_welcome",
+        text: "Welcome",
+        locale: "en-GB",
+        phase: "encounter",
+        notes: "Receiving greeting.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_greeter_welcomes_you",
+        text: "{greeter} welcomes you",
+        locale: "en-GB",
+        formality: "formal" as const,
+        phase: "encounter",
+        notes: "Written or formal spoken (e.g. on signs).",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_goodbye_1",
+        text: "Goodbye",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "parting",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_bye_2",
+        text: "Bye",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "parting",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_good_night_1",
+        text: "Good night",
+        timeOfDay: ["evening", "night"],
+        locale: "en-GB",
+        phase: "parting",
+        notes: "When going to sleep or leaving at night.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_see_you",
+        text: "See you",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "parting",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_see_you_later_1",
+        text: "See you later",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "parting",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_see_you_soon_2",
+        text: "See you soon",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "parting",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_catch_you_later_3",
+        text: "Catch you later",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "parting",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_take_care",
+        text: "Take care",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "parting",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_have_a_good_day",
+        text: "Have a good day",
+        timeOfDay: ["morning", "midday", "afternoon"],
+        locale: "en-GB",
+        phase: "parting",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_have_a_good_evening",
+        text: "Have a good evening",
+        timeOfDay: "evening",
+        locale: "en-GB",
+        phase: "parting",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_farewell",
+        text: "Farewell",
+        locale: "en-GB",
+        formality: "formal" as const,
+        phase: "parting",
+        notes: "Formal or permanent parting.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_cheerio",
+        text: "Cheerio",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "parting",
+        notes: "British informal.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_ta_ta",
+        text: "Ta-ta",
+        locale: "en-GB",
+        formality: "highly informal" as const,
+        phase: "parting",
+        notes: "British, very informal.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_hello_everyone_1",
+        text: "Hello everyone",
+        audienceSize: ">1",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "encounter",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_hello_everybody_2",
+        text: "Hello everybody",
+        audienceSize: ">1",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "encounter",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_hi_everyone_3",
+        text: "Hi everyone",
+        audienceSize: ">1",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "encounter",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_hello_all",
+        text: "Hello all",
+        audienceSize: ">1",
+        locale: "en-GB",
+        formality: "neutral" as const,
+        phase: "encounter",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_yours_sincerely",
+        text: "Yours sincerely",
+        locale: "en-GB",
+        formality: "formal" as const,
+        setting: ["email_closing"],
+        notes: "When recipient is known by name.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_yours_faithfully",
+        text: "Yours faithfully",
+        locale: "en-GB",
+        formality: "formal" as const,
+        setting: ["email_closing"],
+        notes: "When recipient is unknown (e.g. Dear Sir/Madam).",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_kind_regards_1",
+        text: "Kind regards",
+        locale: "en-GB",
+        formality: "formal" as const,
+        setting: ["email_closing"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_best_regards_2",
+        text: "Best regards",
+        locale: "en-GB",
+        formality: "formal" as const,
+        setting: ["email_closing"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_warm_regards_3",
+        text: "Warm regards",
+        locale: "en-GB",
+        formality: "formal" as const,
+        setting: ["email_closing"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_best_wishes_1",
+        text: "Best wishes",
+        locale: "en-GB",
+        formality: "formal" as const,
+        setting: ["email_closing"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_with_best_wishes_2",
+        text: "With best wishes",
+        locale: "en-GB",
+        formality: "formal" as const,
+        setting: ["email_closing"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_yours_1",
+        text: "Yours",
+        locale: "en-GB",
+        formality: "formal" as const,
+        setting: ["email_closing"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_yours_truly_2",
+        text: "Yours truly",
+        locale: "en-GB",
+        formality: "formal" as const,
+        setting: ["email_closing"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_cheers_1",
+        text: "Cheers",
+        locale: "en-GB",
+        formality: "informal" as const,
+        setting: ["email_closing"],
+        notes: "British informal email sign-off.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_thanks_2",
+        text: "Thanks",
+        locale: "en-GB",
+        formality: "informal" as const,
+        setting: ["email_closing"],
+        notes: "British informal email sign-off.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_take_care_1",
+        text: "Take care",
+        locale: "en-GB",
+        formality: "informal" as const,
+        setting: ["email_closing"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_all_the_best_2",
+        text: "All the best",
+        locale: "en-GB",
+        formality: "informal" as const,
+        setting: ["email_closing"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_hello_1",
+        text: "Hello?",
+        locale: "en-GB",
+        formality: "neutral" as const,
+        phase: "encounter",
+        setting: ["phone", "chat_message"],
+        notes: "Answering phone or opening a chat.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_yes",
+        text: "Yes?",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "encounter",
+        setting: ["phone", "chat_message"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_hi_there",
+        text: "Hi there",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "encounter",
+        setting: ["chat_message"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_pleased_to_meet_you_1",
+        text: "Pleased to meet you",
+        locale: "en-GB",
+        formality: "formal" as const,
+        phase: "encounter",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_nice_to_meet_you_2",
+        text: "Nice to meet you",
+        locale: "en-GB",
+        formality: "formal" as const,
+        phase: "encounter",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_good_to_see_you_1",
+        text: "Good to see you",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "encounter",
+        relationship: ["acquaintance", "friend"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_lovely_to_see_you_2",
+        text: "Lovely to see you",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "encounter",
+        relationship: ["acquaintance", "friend"],
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_long_time_no_see",
+        text: "Long time no see",
+        locale: "en-GB",
+        formality: "informal" as const,
+        phase: "encounter",
+        notes: "After a long absence.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_how_do_you_do",
+        text: "How do you do?",
+        locale: "en-GB",
+        formality: "hyperformal" as const,
+        phase: "encounter",
+        notes: "British formal; often answered with the same phrase.",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_howdy_1",
+        text: "Howdy",
+        locale: "en-GB",
+        formality: "highly informal" as const,
+        phase: "encounter",
+        notes: "Howdy (US/country); G'day (Australian, also used in UK informally).",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_g_day_2",
+        text: "G'day",
+        locale: "en-GB",
+        formality: "highly informal" as const,
+        phase: "encounter",
+        notes: "Howdy (US/country); G'day (Australian, also used in UK informally).",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_alright",
+        text: "Alright?",
+        locale: "en-GB",
+        formality: "highly informal" as const,
+        phase: "encounter",
+        notes: "British; can be greeting or \"Are you alright?\"",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_hiya_1",
+        text: "Hiya",
+        locale: "en-GB",
+        formality: "highly informal" as const,
+        phase: "encounter",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
+      },
+      {
+        id: "en_gb_hey_there_2",
+        text: "Hey there",
+        locale: "en-GB",
+        formality: "highly informal" as const,
+        phase: "encounter",
+        sources: ["https://en.wikipedia.org/wiki/Greeting"],
       },
     ],
   },
@@ -2349,6 +2301,547 @@ export const DEMO_PACKS: GreetingPack[] = [
         locale: "de-DE",
         formality: "informal" as const,
         phase: "parting",
+      },
+    ],
+  },
+  {
+    locale: "el-GR",
+    sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+    greetings: [
+      {
+        id: "el_gr_world_braille_day",
+        text: "Καλή Παγκόσμια Ημέρα γραφής Μπράιγ!",
+        eventRef: "salve.event.civil.un.world_braille_day",
+        emoji: "⠠⠃",
+        locale: "el-GR",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_international_day_of_education",
+        text: "Χρόνια Πολλά!",
+        eventRef: "salve.event.civil.un.international_day_of_education",
+        emoji: "📚",
+        locale: "el-GR",
+        professions: ["teacher"],
+        notes: "Greek: Happy Day, specifically for teachers!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_world_day_of_social_justice",
+        text: "Καλή Παγκόσμια Ημέρα Κοινωνικής Δικαιοσύνης!",
+        eventRef: "salve.event.civil.un.world_day_of_social_justice",
+        locale: "el-GR",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_international_women_s_day",
+        text: "Καλή Παγκόσμια Ημέρα της Γυναίκας!",
+        eventRef: "salve.event.civil.un.international_women_s_day",
+        emoji: "👩",
+        locale: "el-GR",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_world_autism_awareness_day",
+        text: "Καλή Παγκόσμια Ημέρα Ευαισθητοποίησης για τον Αυτισμό!",
+        eventRef: "salve.event.civil.un.world_autism_awareness_day",
+        emoji: "🧩",
+        locale: "el-GR",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_world_malaria_day",
+        text: "Καλή Παγκόσμια Ημέρα κατά της Ελονοσίας!",
+        eventRef: "salve.event.civil.un.world_malaria_day",
+        locale: "el-GR",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_international_jazz_day",
+        text: "Καλή Διεθνής Ημέρα Τζαζ!",
+        eventRef: "salve.event.civil.un.international_jazz_day",
+        emoji: "🎷",
+        locale: "el-GR",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_world_oceans_day",
+        text: "Καλή Παγκόσμια Ημέρα Ωκεανών!",
+        eventRef: "salve.event.civil.un.world_oceans_day",
+        emoji: "🌊",
+        locale: "el-GR",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_world_day_against_child_labour",
+        text: "Καλή Παγκόσμια Ημέρα κατά της Παιδικής Εργασίας!",
+        eventRef: "salve.event.civil.un.world_day_against_child_labour",
+        emoji: "⚒️",
+        locale: "el-GR",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_international_day_of_non_violenc",
+        text: "Καλή Παγκόσμια Ημέρα Μη Βίας!",
+        eventRef: "salve.event.civil.un.international_day_of_non_violenc",
+        locale: "el-GR",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_easter",
+        text: "Χριστός Ανέστη!",
+        eventRef: "salve.event.religious.christian.easter",
+        locale: "el-GR",
+        expectedResponse: "Αληθώς Ανέστη!",
+        formality: "neutral" as const,
+        notes: "Greek: Christ is Risen!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Christos Anesti!",
+        },
+      },
+      {
+        id: "el_gr_christmas",
+        text: "Καλά Χριστούγεννα!",
+        eventRef: "salve.event.religious.christian.christmas",
+        locale: "el-GR",
+        formality: "neutral" as const,
+        notes: "Greek: Merry Christmas",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Kala Kristougenna!",
+        },
+      },
+      {
+        id: "el_gr_christmas_day_2",
+        text: "Χρόνια Πολλά!",
+        eventRef: "salve.event.religious.christian.christmas_day_2",
+        locale: "el-GR",
+        notes: "Greek: Many years! (St. Stephen / Synaxis of Mother of God)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_theophany",
+        text: "Καλή Φώτιση!",
+        eventRef: "salve.event.religious.christian.theophany",
+        locale: "el-GR",
+        notes: "Greek: Happy Enlightenment!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_assumption",
+        text: "Καλή Παναγιά!",
+        eventRef: "salve.event.religious.christian.assumption",
+        locale: "el-GR",
+        notes: "Greek: Happy Panagia! (Used in the lead-up to and on the Assumption)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_clean_monday",
+        text: "Καλή Καθαρά Δευτέρα!",
+        eventRef: "salve.event.religious.orthodox.clean_monday",
+        locale: "el-GR",
+        notes: "Greek: Happy Clean Monday",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_clean_monday_1",
+        text: "Καλή Σαρακοστή!",
+        eventRef: "salve.event.religious.orthodox.clean_monday",
+        locale: "el-GR",
+        notes: "Greek: Happy Lent! (Wishing someone well for the 40-day fast starting on Clean Monday)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_good_friday",
+        text: "Καλή Ανάσταση!",
+        eventRef: "salve.event.religious.orthodox.good_friday",
+        locale: "el-GR",
+        notes: "Greek: Happy Resurrection! (Wishing for the upcoming celebration)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_holy_spirit_monday",
+        text: "Χρόνια Πολλά!",
+        eventRef: "salve.event.religious.orthodox.holy_spirit_monday",
+        locale: "el-GR",
+        notes: "Greek: Many years!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+      },
+      {
+        id: "el_gr_basic_hi_hello_often_short_for",
+        text: "Γεια!",
+        locale: "el-GR",
+        formality: "informal" as const,
+        phase: ["encounter", "parting"],
+        notes: "Basic 'Hi/Hello'. Often short for Γεια σου/σας.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Ya!",
+        },
+      },
+      {
+        id: "el_gr_informal_hello_to_one_person",
+        text: "Γεια σου!",
+        audienceSize: "1",
+        locale: "el-GR",
+        formality: "informal" as const,
+        phase: ["encounter", "parting"],
+        notes: "Informal 'Hello' to one person.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Ya su!",
+        },
+      },
+      {
+        id: "el_gr_formal_hello_to_one_person",
+        text: "Γεια σας!",
+        audienceSize: "1",
+        locale: "el-GR",
+        formality: "formal" as const,
+        phase: ["encounter", "parting"],
+        notes: "Formal 'Hello' to one person.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Ya sas!",
+        },
+      },
+      {
+        id: "el_gr_informal_hello_to_a_group",
+        text: "Γεια σας!",
+        audienceSize: ">1",
+        locale: "el-GR",
+        formality: "informal" as const,
+        phase: ["encounter", "parting"],
+        notes: "Informal 'Hello' to a group.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Ya sas!",
+        },
+      },
+      {
+        id: "el_gr_polite_formal_hello_to_one_perso",
+        text: "Χαίρετε!",
+        audienceSize: ">=1",
+        locale: "el-GR",
+        formality: "formal" as const,
+        phase: "encounter",
+        notes: "Polite/Formal 'Hello' to one person or a group.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Khairete!",
+        },
+      },
+      {
+        id: "el_gr_see_you",
+        text: "Τα λέμε!",
+        locale: "el-GR",
+        phase: "parting",
+        notes: "See you!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Ta leme!",
+        },
+      },
+      {
+        id: "el_gr_see_you_1",
+        text: "Γεια! Τα λέμε!",
+        locale: "el-GR",
+        phase: "parting",
+        notes: "See you!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Ya! Ta leme! Ya, ta leme!",
+        },
+      },
+      {
+        id: "el_gr_see_you_2",
+        text: "Γεια, τα λέμε!",
+        locale: "el-GR",
+        phase: "parting",
+        notes: "See you!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Ya! Ta leme! Ya, ta leme!",
+        },
+      },
+      {
+        id: "el_gr_goodbye_used_for_permanent_or_lo",
+        text: "Αντίο",
+        locale: "el-GR",
+        formality: "formal" as const,
+        phase: "parting",
+        notes: "Goodbye. Used for permanent or long-term parting.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Adío",
+        },
+      },
+      {
+        id: "el_gr_farewell_more_sophisticated_vers",
+        text: "Εις το επανιδείν!",
+        locale: "el-GR",
+        formality: "formal" as const,
+        phase: "parting",
+        notes: "Farewell. More sophisticated version of 'See you again'. Litt. “To the seeing-each-other-again!”",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Eis to epanidín!",
+        },
+      },
+      {
+        id: "el_gr_kali_mera_good_morning",
+        text: "Καλημέρα!",
+        timeOfDay: "morning",
+        locale: "el-GR",
+        phase: "encounter",
+        notes: ["Good morning! (Usually until 12pm)", "As in English, Καλημέρα consists of two separate words combined into one: Καλή + μέρα (kalí + méra) = “good” + “morning.”"],
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Kaliméra!",
+        },
+      },
+      {
+        id: "el_gr_kali_e_spera_good_afternoon",
+        text: "Καλησπέρα!",
+        timeOfDay: ["afternoon", "evening"],
+        locale: "el-GR",
+        phase: "encounter",
+        notes: ["Good afternoon! (12pm until late evening)", "Καλησπέρα consists of two separate words combined into one: Καλή + (ε)σπέρα (kalí + (e)spéra) = “good” + “afternoon.”"],
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Kalispéra!",
+        },
+      },
+      {
+        id: "el_gr_have_a_good_afternoon_used_when_",
+        text: "Καλό απόγευμα!",
+        timeOfDay: ["midday", "afternoon"],
+        locale: "el-GR",
+        phase: "parting",
+        notes: "Have a good afternoon! (Used when parting)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Kaló apóyevma!",
+        },
+      },
+      {
+        id: "el_gr_have_a_good_evening_used_when_pa",
+        text: "Καλό βράδυ!",
+        timeOfDay: "evening",
+        locale: "el-GR",
+        phase: "parting",
+        notes: "Have a good evening! (Used when parting)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Kaló vrádi!",
+        },
+      },
+      {
+        id: "el_gr_goodnight",
+        text: "Καληνύχτα!",
+        timeOfDay: ["evening", "night"],
+        locale: "el-GR",
+        phase: "parting",
+        notes: "Goodnight!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Kaliníhta!",
+        },
+      },
+      {
+        id: "el_gr_sweet_dreams_usually_follows_1",
+        text: "Καληνύχτα! Όνειρα γλυκά!",
+        timeOfDay: "night",
+        locale: "el-GR",
+        formality: "informal" as const,
+        phase: "parting",
+        relationship: ["intimate"],
+        notes: "Sweet dreams. Usually follows Καληνύχτα.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Oneira glyka!",
+        },
+      },
+      {
+        id: "el_gr_sweet_dreams_usually_follows_2",
+        text: "Καλό βράδυ! Όνειρα γλυκά!",
+        timeOfDay: "night",
+        locale: "el-GR",
+        formality: "informal" as const,
+        phase: "parting",
+        relationship: ["intimate"],
+        notes: "Sweet dreams. Usually follows Καληνύχτα.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Oneira glyka!",
+        },
+      },
+      {
+        id: "el_gr_sweet_dreams_usually_follows_3",
+        text: "Όνειρα γλυκά!",
+        timeOfDay: "night",
+        locale: "el-GR",
+        formality: "informal" as const,
+        phase: "parting",
+        relationship: ["intimate"],
+        notes: "Sweet dreams. Usually follows Καληνύχτα.",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Oneira glyka!",
+        },
+      },
+      {
+        id: "el_gr_hey_slang",
+        text: "Γεια χαρά!",
+        locale: "el-GR",
+        formality: "highly informal" as const,
+        phase: "encounter",
+        notes: "Hey! (Slang)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Ya hará!",
+        },
+      },
+      {
+        id: "el_gr_yo_slang",
+        text: "Γιο!",
+        locale: "el-GR",
+        formality: "highly informal" as const,
+        phase: "encounter",
+        notes: "Yo! (Slang)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Yo!",
+        },
+      },
+      {
+        id: "el_gr_long_time_no_see_1",
+        text: "Χρόνια και ζαμάνια!",
+        locale: "el-GR",
+        phase: "encounter",
+        notes: "Long time no see!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Hrónia ke zamánia!",
+        },
+      },
+      {
+        id: "el_gr_long_time_no_see_2",
+        text: "Γεια χαρά! Χρόνια και ζαμάνια!",
+        locale: "el-GR",
+        phase: "encounter",
+        notes: "Long time no see!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Hrónia ke zamánia!",
+        },
+      },
+      {
+        id: "el_gr_long_time_no_see_3",
+        text: "Γιο! Χρόνια και ζαμάνια!",
+        locale: "el-GR",
+        phase: "encounter",
+        notes: "Long time no see!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Hrónia ke zamánia!",
+        },
+      },
+      {
+        id: "el_gr_pleased_to_meet_you",
+        text: "Χαίρω πολύ!",
+        locale: "el-GR",
+        phase: "encounter",
+        notes: "Pleased to meet you!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Héro Polí!",
+        },
+      },
+      {
+        id: "el_gr_pleased_to_have_met_you",
+        text: "Χάρηκα!",
+        locale: "el-GR",
+        phase: ["encounter", "parting"],
+        notes: "Pleased (to have met you)!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Ηárika!",
+        },
+      },
+      {
+        id: "el_gr_pleased_to_make_your_acquaintanc",
+        text: "Χαίρομαι για τη γνωριμία!",
+        locale: "el-GR",
+        phase: "encounter",
+        notes: "Pleased to make your acquaintance!",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Hérome ya ti gnorimía!",
+        },
+      },
+      {
+        id: "el_gr_yes_informal",
+        text: "Ναι;",
+        locale: "el-GR",
+        formality: "informal" as const,
+        phase: "encounter",
+        relationship: ["friend"],
+        setting: ["chat_message", "phone"],
+        notes: "Answering phone: \"Yes?\" (Informal)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Nai?",
+        },
+      },
+      {
+        id: "el_gr_please_universal",
+        text: "Παρακαλώ;",
+        locale: "el-GR",
+        phase: "encounter",
+        setting: ["chat_message", "phone"],
+        notes: "Answering phone: \"Please?\"\" (Universal)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Parakaló?",
+        },
+      },
+      {
+        id: "el_gr_speak_standard",
+        text: "Λέγετε!",
+        locale: "el-GR",
+        phase: "encounter",
+        setting: ["chat_message", "phone"],
+        notes: "Answering phone: \"Speak\" (Standard)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Légete!",
+        },
+      },
+      {
+        id: "el_gr_speak_please_standard",
+        text: "Λέγετε, παρακαλώ!",
+        locale: "el-GR",
+        formality: "formal" as const,
+        phase: "encounter",
+        setting: ["chat_message", "phone"],
+        notes: "Answering phone: \"Speak, please\" (Standard)",
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Légete, parakaló!",
+        },
+      },
+      {
+        id: "el_gr_item",
+        text: "Εμπρός!",
+        locale: "el-GR",
+        phase: "encounter",
+        setting: ["chat_message", "phone"],
+        sources: "https://www.greekpod101.com/blog/2019/01/12/how-to-say-hello-in-greek/",
+        transliterations: {
+          "el-Latn": "Emprós!",
+        },
       },
     ],
   },
@@ -4398,6 +4891,171 @@ export const DEMO_REGIONS = [
     ]
   },
   {
+    "id": "en_gb_macro",
+    "name": "United Kingdom",
+    "locale": "en-GB",
+    "priority": 100,
+    "label": {
+      "en": "United Kingdom",
+      "nl": "Verenigd Koninkrijk",
+      "el": "Ηνωμένο Βασίλειο"
+    },
+    "polygon": [
+      [
+        60.8,
+        -8.6
+      ],
+      [
+        60.8,
+        1.8
+      ],
+      [
+        49.9,
+        1.8
+      ],
+      [
+        49.9,
+        -8.6
+      ],
+      [
+        60.8,
+        -8.6
+      ]
+    ]
+  },
+  {
+    "id": "en_us_macro",
+    "name": "United States",
+    "locale": "en-US",
+    "priority": 100,
+    "label": {
+      "en": "United States",
+      "nl": "Verenigde Staten",
+      "el": "Ηνωμένες Πολιτείες"
+    },
+    "polygon": [
+      [
+        49.4,
+        -125
+      ],
+      [
+        49.4,
+        -66.9
+      ],
+      [
+        24.5,
+        -66.9
+      ],
+      [
+        24.5,
+        -125
+      ],
+      [
+        49.4,
+        -125
+      ]
+    ]
+  },
+  {
+    "id": "en_ie_macro",
+    "name": "Ireland",
+    "locale": "en-IE",
+    "priority": 90,
+    "label": {
+      "en": "Ireland",
+      "nl": "Ierland",
+      "el": "Ιρλανδία"
+    },
+    "polygon": [
+      [
+        55.4,
+        -10.5
+      ],
+      [
+        55.4,
+        -6
+      ],
+      [
+        51.4,
+        -6
+      ],
+      [
+        51.4,
+        -10.5
+      ],
+      [
+        55.4,
+        -10.5
+      ]
+    ]
+  },
+  {
+    "id": "en_au_macro",
+    "name": "Australia",
+    "locale": "en-AU",
+    "priority": 90,
+    "label": {
+      "en": "Australia",
+      "nl": "Australië",
+      "el": "Αυστραλία"
+    },
+    "polygon": [
+      [
+        -10.1,
+        113.3
+      ],
+      [
+        -10.1,
+        153.6
+      ],
+      [
+        -44,
+        153.6
+      ],
+      [
+        -44,
+        113.3
+      ],
+      [
+        -10.1,
+        113.3
+      ]
+    ]
+  },
+  {
+    "id": "en_ca_macro",
+    "name": "Canada (English)",
+    "locale": "en-CA",
+    "priority": 85,
+    "label": {
+      "en": "Canada",
+      "nl": "Canada",
+      "el": "Καναδάς"
+    },
+    "polygon": [
+      [
+        83.1,
+        -141
+      ],
+      [
+        83.1,
+        -52.6
+      ],
+      [
+        41.7,
+        -52.6
+      ],
+      [
+        41.7,
+        -141
+      ],
+      [
+        83.1,
+        -141
+      ]
+    ]
+  },
+  {
     "id": "nld_macro",
     "name": "Dutch speaking area (NL + BE-vls)",
     "locale": "nl",
@@ -5096,5 +5754,230 @@ export const DEMO_REGIONS = [
         2.5
       ]
     ]
+  },
+  {
+    "id": "gr_attiki",
+    "label": {
+      "en": "Attica",
+      "nl": "Attica",
+      "el": "Αττική"
+    },
+    "WikiData": "Q758"
+  },
+  {
+    "id": "gr_makedonia",
+    "label": {
+      "en": "Central Macedonia",
+      "nl": "Centraal-Macedonië",
+      "el": "Κεντρική Μακεδονία"
+    },
+    "WikiData": "Q17151"
+  },
+  {
+    "id": "gr_thessalia",
+    "label": {
+      "en": "Thessaly",
+      "nl": "Thessalië",
+      "el": "Θεσσαλία"
+    },
+    "WikiData": "Q127993"
+  },
+  {
+    "id": "gr_kriti",
+    "label": {
+      "en": "Crete",
+      "nl": "Kreta",
+      "el": "Κρήτη"
+    },
+    "WikiData": "Q34374"
+  },
+  {
+    "id": "gr_peloponnisos",
+    "label": {
+      "en": "Peloponnese",
+      "nl": "Peloponnesos",
+      "el": "Πελοπόννησος"
+    },
+    "WikiData": "Q258796"
+  },
+  {
+    "id": "gr_anatoliki_makedonia",
+    "label": {
+      "en": "Eastern Macedonia and Thrace",
+      "nl": "Oost-Macedonië en Thracië",
+      "el": "Ανατολική Μακεδονία και Θράκη"
+    },
+    "WikiData": "Q210347"
+  },
+  {
+    "id": "gr_dytiki_ellada",
+    "label": {
+      "en": "Western Greece",
+      "nl": "West-Griekenland",
+      "el": "Δυτική Ελλάδα"
+    },
+    "WikiData": "Q170289"
+  },
+  {
+    "id": "gr_ionioi_nisoi",
+    "label": {
+      "en": "Ionian Islands",
+      "nl": "Ionische Eilanden",
+      "el": "Ιόνια νησιά"
+    },
+    "WikiData": "Q185127"
+  },
+  {
+    "id": "gr_dytiki_makedonia",
+    "label": {
+      "en": "Western Macedonia",
+      "nl": "West-Macedonië",
+      "el": "Δυτική Μακεδονία"
+    },
+    "WikiData": "Q210352"
+  },
+  {
+    "id": "gr_ipiros",
+    "label": {
+      "en": "Epirus",
+      "nl": "Epirus",
+      "el": "Ήπειρος"
+    },
+    "WikiData": "Q134258"
+  },
+  {
+    "id": "gr_sterea_ellada",
+    "label": {
+      "en": "Central Greece",
+      "nl": "Centraal-Griekenland",
+      "el": "Στερεά Ελλάδα"
+    },
+    "WikiData": "Q202726"
+  },
+  {
+    "id": "gr_notio_aigaio",
+    "label": {
+      "en": "South Aegean",
+      "nl": "Zuid-Egeïsch",
+      "el": "Νότιο Αιγαίο"
+    },
+    "WikiData": "Q173616"
+  },
+  {
+    "id": "gr_voreio_aigaio",
+    "label": {
+      "en": "North Aegean",
+      "nl": "Noord-Egeïsch",
+      "el": "Βόρειο Αιγαίο"
+    },
+    "WikiData": "Q169601"
+  },
+  {
+    "id": "nl_noord_holland",
+    "label": {
+      "en": "North Holland",
+      "nl": "Noord-Holland",
+      "el": "Βόρεια Ολλανδία"
+    },
+    "WikiData": "Q701"
+  },
+  {
+    "id": "nl_zuid_holland",
+    "label": {
+      "en": "South Holland",
+      "nl": "Zuid-Holland",
+      "el": "Νότια Ολλανδία"
+    },
+    "WikiData": "Q692"
+  },
+  {
+    "id": "nl_utrecht",
+    "label": {
+      "en": "Utrecht",
+      "nl": "Utrecht",
+      "el": "Ουτρέχτη"
+    },
+    "WikiData": "Q776"
+  },
+  {
+    "id": "nl_noord_brabant",
+    "label": {
+      "en": "North Brabant",
+      "nl": "Noord-Brabant",
+      "el": "Βόρεια Βραβάντη"
+    },
+    "WikiData": "Q823"
+  },
+  {
+    "id": "nl_gelderland",
+    "label": {
+      "en": "Gelderland",
+      "nl": "Gelderland",
+      "el": "Χέλντερλαντ"
+    },
+    "WikiData": "Q775"
+  },
+  {
+    "id": "nl_limburg",
+    "label": {
+      "en": "Limburg",
+      "nl": "Limburg",
+      "el": "Λιμβουργία"
+    },
+    "WikiData": "Q1093"
+  },
+  {
+    "id": "nl_overijssel",
+    "label": {
+      "en": "Overijssel",
+      "nl": "Overijssel",
+      "el": "Όβεραϊσελ"
+    },
+    "WikiData": "Q773"
+  },
+  {
+    "id": "nl_flevoland",
+    "label": {
+      "en": "Flevoland",
+      "nl": "Flevoland",
+      "el": "Φλέβολαντ"
+    },
+    "WikiData": "Q1094"
+  },
+  {
+    "id": "nl_friesland",
+    "label": {
+      "en": "Friesland",
+      "nl": "Friesland",
+      "el": "Φρίσλαντ"
+    },
+    "WikiData": "Q770"
+  },
+  {
+    "id": "nl_groningen",
+    "label": {
+      "en": "Groningen",
+      "nl": "Groningen",
+      "el": "Γκρόνινγκεν"
+    },
+    "WikiData": "Q774"
+  },
+  {
+    "id": "nl_drenthe",
+    "label": {
+      "en": "Drenthe",
+      "nl": "Drenthe",
+      "el": "Ντρενθέ"
+    },
+    "WikiData": "Q772"
+  },
+  {
+    "id": "nl_zeeland",
+    "label": {
+      "en": "Zeeland",
+      "nl": "Zeeland",
+      "el": "Ζηλανδία"
+    },
+    "WikiData": "Q705"
   },
 ];

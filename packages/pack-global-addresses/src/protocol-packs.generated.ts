@@ -1,7 +1,7 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.protocol.yaml by scripts/generate-address-packs.ts
- * Generated at: 2026-03-14T15:05:24.440Z
+ * Generated at: 2026-03-14T15:33:29.698Z
  */
 
 import type { ProtocolPack } from "@salve/types";
@@ -52,6 +52,123 @@ export const protocolAcademicDe: ProtocolPack =
                 locale: "de",
                 formality: ["formal", "hyperformal"],
                 outputForm: "salutation",
+                titleSystem: "academic",
+            },
+        },
+    ],
+}
+;
+
+export const protocolAcademicEl: ProtocolPack =
+{
+    id: "protocol-academic-el",
+    locale: "el",
+    requiredSubculture: "academic",
+    domain: "academic" as const,
+    sources: ["https://preply.com/en/blog/greek-titles/", "https://travelwithlanguages.com/blog/greek-email-letter-writing-guide.html"],
+    notes: "Greek academic protocol: Αξιότιμε κύριε / Αξιότιμη κυρία + title (vocative) + surname. Professor and Doctor titles as in baseline address pack; this pack adds domain-specific rules.\n",
+    titles: [
+        { system: "academic" as const, code: "prof", rank: 1, postalForm: "Καθ.", correspondenceForm: "Καθηγητά", gender: "male" as const },
+        { system: "academic" as const, code: "prof", rank: 1, postalForm: "Καθ.", correspondenceForm: "Καθηγήτρια", gender: "female" as const },
+        { system: "academic" as const, code: "dr", rank: 2, postalForm: "Δρ.", correspondenceForm: "Δρ." },
+    ],
+    rules: [
+        {
+            id: "el-academic-postal",
+            priority: 10,
+            template: "Κύριε/Κυρία {postalTitleStack} {surname}",
+            when: {
+                locale: "el",
+                formality: ["formal", "hyperformal"],
+                outputForm: "postal",
+                titleSystem: "academic",
+            },
+            notes: "Envelope: Κύριε or Κυρία + titles + surname.",
+        },
+        {
+            id: "el-academic-letterhead",
+            priority: 10,
+            template: "Αξιότιμε κύριε {correspondenceTitleStack} {surname},",
+            when: {
+                locale: "el",
+                formality: ["formal", "hyperformal"],
+                outputForm: "letterhead",
+                titleSystem: "academic",
+            },
+            notes: "Female: Αξιότιμη κυρία. Title in vocative (Καθηγητά, Καθηγήτρια, Δρ.).",
+        },
+        {
+            id: "el-academic-salutation",
+            priority: 10,
+            template: "{honorific} {correspondenceTitleStack} {surname}",
+            when: {
+                locale: "el",
+                formality: ["formal", "hyperformal"],
+                outputForm: "salutation",
+                titleSystem: "academic",
+            },
+        },
+    ],
+}
+;
+
+export const protocolAcademicEn: ProtocolPack =
+{
+    id: "protocol-academic-en",
+    locale: "en",
+    requiredSubculture: "academic",
+    domain: "academic" as const,
+    sources: ["https://en.wikipedia.org/wiki/Style_(form_of_address)"],
+    notes: "English academic protocol: Dear + correspondence title + surname in letterhead; Prof. / Dr. on envelope. Professor typically absorbs Doctor in salutation when both held.\n",
+    titles: [
+        { system: "academic" as const, code: "prof", rank: 1, postalForm: "Prof.", correspondenceForm: "Professor" },
+        { system: "academic" as const, code: "dr", rank: 2, postalForm: "Dr.", correspondenceForm: "Dr." },
+    ],
+    rules: [
+        {
+            id: "en-academic-postal",
+            priority: 10,
+            template: "{postalTitleStack} {surname}",
+            when: {
+                locale: "en",
+                formality: ["formal", "hyperformal"],
+                outputForm: "postal",
+                titleSystem: "academic",
+            },
+            notes: "Envelope: Prof. / Dr. + surname.",
+        },
+        {
+            id: "en-academic-letterhead",
+            priority: 10,
+            template: "Dear {correspondenceTitleStack} {surname},",
+            when: {
+                locale: "en",
+                formality: ["formal", "hyperformal"],
+                outputForm: "letterhead",
+                titleSystem: "academic",
+            },
+            notes: "Dear Professor Smith, or Dear Dr. Smith,",
+        },
+        {
+            id: "en-academic-salutation",
+            priority: 10,
+            template: "{correspondenceTitleStack} {surname}",
+            when: {
+                locale: "en",
+                formality: ["formal", "hyperformal"],
+                outputForm: "salutation",
+                titleSystem: "academic",
+            },
+            notes: "Spoken or displayed: Professor Smith / Dr. Smith.",
+        },
+        {
+            id: "en-academic-email-opening",
+            priority: 10,
+            template: "Dear {correspondenceTitleStack} {surname},",
+            when: {
+                locale: "en",
+                formality: ["formal", "hyperformal"],
+                outputForm: "email_opening",
                 titleSystem: "academic",
             },
         },
@@ -261,6 +378,8 @@ export const protocolJudicialNl: ProtocolPack =
 
 export const globalProtocolPacks: ProtocolPack[] = [
     protocolAcademicDe,
+    protocolAcademicEl,
+    protocolAcademicEn,
     protocolDiplomaticEn,
     protocolAcademicFr,
     protocolAcademicNl,

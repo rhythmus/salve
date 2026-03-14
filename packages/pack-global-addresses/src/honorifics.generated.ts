@@ -2,7 +2,7 @@
  * AUTO-GENERATED — Do not edit manually.
  * Legacy HonorificPack objects derived from address pack data.
  * Generated from data/packs/*.address.yaml by scripts/generate-address-packs.ts
- * Generated at: 2026-03-14T15:05:24.442Z
+ * Generated at: 2026-03-14T15:33:29.699Z
  */
 
 import type { HonorificPack } from "@salve/types";

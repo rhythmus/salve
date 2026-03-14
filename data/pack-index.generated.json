@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-14T15:11:43.337Z",
+  "generatedAt": "2026-03-14T15:34:00.177Z",
   "description": "Machine-readable pack index for selective bundle compilation.",
   "packs": [
     {
@@ -51,6 +51,33 @@
       "family": "events",
       "scopeType": "country",
       "selector": "GR",
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "file": "events/country/NL.events.yaml",
+      "family": "events",
+      "scopeType": "country",
+      "selector": "NL",
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "file": "events/country/UK.events.yaml",
+      "family": "events",
+      "scopeType": "country",
+      "selector": "UK",
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "file": "events/country/US.events.yaml",
+      "family": "events",
+      "scopeType": "country",
+      "selector": "US",
       "tags": [
         "country"
       ]
@@ -211,6 +238,13 @@
       "tags": []
     },
     {
+      "file": "locales/en.locales.yaml",
+      "family": "locales",
+      "scopeType": "language",
+      "selector": "en",
+      "tags": []
+    },
+    {
       "file": "locales/nl.locales.yaml",
       "family": "locales",
       "scopeType": "language",
@@ -222,6 +256,26 @@
       "family": "protocol",
       "scopeType": "language",
       "selector": "de",
+      "tags": [
+        "academic"
+      ],
+      "domain": "academic"
+    },
+    {
+      "file": "protocol/el.protocol.academic.yaml",
+      "family": "protocol",
+      "scopeType": "language",
+      "selector": "el",
+      "tags": [
+        "academic"
+      ],
+      "domain": "academic"
+    },
+    {
+      "file": "protocol/en.protocol.academic.yaml",
+      "family": "protocol",
+      "scopeType": "language",
+      "selector": "en",
       "tags": [
         "academic"
       ],
@@ -272,6 +326,20 @@
       "family": "regions",
       "scopeType": "country",
       "selector": "BE",
+      "tags": []
+    },
+    {
+      "file": "regions/GR.regions.yaml",
+      "family": "regions",
+      "scopeType": "country",
+      "selector": "GR",
+      "tags": []
+    },
+    {
+      "file": "regions/NL.regions.yaml",
+      "family": "regions",
+      "scopeType": "country",
+      "selector": "NL",
       "tags": []
     }
   ]

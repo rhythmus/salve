@@ -1,7 +1,7 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.address.yaml by scripts/generate-address-packs.ts
- * Generated at: 2026-03-14T15:05:24.438Z
+ * Generated at: 2026-03-14T15:33:29.696Z
  */
 
 import type { AddressPack } from "@salve/types";
