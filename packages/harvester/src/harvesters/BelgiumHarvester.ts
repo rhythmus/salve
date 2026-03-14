@@ -7,7 +7,7 @@ import { normalizeDateToSalve } from '../utils/date';
 
 export class BelgiumHarvester implements SalveHarvester {
     id = 'belgium-holidays';
-    defaultOutputPath = 'data/packs/BE.events.yaml';
+    defaultOutputPath = 'data/packs/events/country/BE.events.yaml';
 
     private url = 'https://en.wikipedia.org/wiki/Public_holidays_in_Belgium';
 

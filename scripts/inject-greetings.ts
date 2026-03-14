@@ -8,7 +8,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-const YAML_PATH = path.resolve(__dirname, "../data/packs/international.secular.events.yaml");
+const YAML_PATH = path.resolve(__dirname, "../data/packs/events/shared/international.secular.events.yaml");
 const LABELS_JSON_PATH = path.resolve(__dirname, "../data/wikidata_labels.json");
 
 // ─── Pattern Definitions ─────────────────────────────────────────────

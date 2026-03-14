@@ -7,7 +7,7 @@ import { normalizeDateToSalve } from '../utils/date';
 
 export class GreeceHarvester implements SalveHarvester {
     id = 'greece-holidays';
-    defaultOutputPath = 'data/packs/GR.events.yaml';
+    defaultOutputPath = 'data/packs/events/country/GR.events.yaml';
 
     private url = 'https://en.wikipedia.org/wiki/Public_holidays_in_Greece';
 

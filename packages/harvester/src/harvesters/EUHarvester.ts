@@ -7,7 +7,7 @@ import { normalizeDateToSalve } from '../utils/date';
 
 export class EUHarvester implements SalveHarvester {
     id = 'eu-holidays';
-    defaultOutputPath = 'data/packs/EU.events.yaml';
+    defaultOutputPath = 'data/packs/events/supranational/EU.events.yaml';
 
     private url = 'https://en.wikipedia.org/wiki/Public_holidays_in_the_European_Union';
 

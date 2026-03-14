@@ -9,7 +9,7 @@ import { lookupWikidataQid } from "../utils/wikidata";
 
 export class UnObservancesHarvester implements SalveHarvester {
     public readonly id = "un-observances";
-    public readonly defaultOutputPath = "data/packs/international.secular.events.yaml";
+    public readonly defaultOutputPath = "data/packs/events/shared/international.secular.events.yaml";
 
     private readonly WIKI_URL = "https://en.wikipedia.org/wiki/List_of_United_Nations_observances";
 

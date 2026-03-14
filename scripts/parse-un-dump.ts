@@ -2,7 +2,7 @@
  * parse-un-dump.ts
  * ────────────────
  * Parses the official UN observances text dump (UN-observances.txt)
- * and generates data/packs/international.secular.events.yaml.
+ * and generates data/packs/events/shared/international.secular.events.yaml.
  *
  * Merges existing WikiData IDs from the current YAML file when labels match.
  *
@@ -15,7 +15,7 @@ import * as path from "path";
 const yaml = require("js-yaml");
 
 const DUMP_PATH = path.resolve(__dirname, "../data/UN-observances.txt");
-const YAML_PATH = path.resolve(__dirname, "../data/packs/international.secular.events.yaml");
+const YAML_PATH = path.resolve(__dirname, "../data/packs/events/shared/international.secular.events.yaml");
 
 const MONTHS = [
     "January", "February", "March", "April", "May", "June",
