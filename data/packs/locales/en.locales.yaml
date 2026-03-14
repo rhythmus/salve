@@ -1,0 +1,79 @@
+# Geographic Region Definitions for English
+# $schema: "../schemas/locale-registry.schema.json"
+# Covers major English-speaking regions for locale resolution and bundling.
+
+regions:
+  - id: en_gb_macro
+    name: United Kingdom
+    locale: en-GB
+    priority: 100
+    label:
+      en: United Kingdom
+      nl: Verenigd Koninkrijk
+      el: Ηνωμένο Βασίλειο
+    polygon:
+      - [60.8, -8.6]
+      - [60.8, 1.8]
+      - [49.9, 1.8]
+      - [49.9, -8.6]
+      - [60.8, -8.6]
+
+  - id: en_us_macro
+    name: United States
+    locale: en-US
+    priority: 100
+    label:
+      en: United States
+      nl: Verenigde Staten
+      el: Ηνωμένες Πολιτείες
+    polygon:
+      - [49.4, -125.0]
+      - [49.4, -66.9]
+      - [24.5, -66.9]
+      - [24.5, -125.0]
+      - [49.4, -125.0]
+
+  - id: en_ie_macro
+    name: Ireland
+    locale: en-IE
+    priority: 90
+    label:
+      en: Ireland
+      nl: Ierland
+      el: Ιρλανδία
+    polygon:
+      - [55.4, -10.5]
+      - [55.4, -6.0]
+      - [51.4, -6.0]
+      - [51.4, -10.5]
+      - [55.4, -10.5]
+
+  - id: en_au_macro
+    name: Australia
+    locale: en-AU
+    priority: 90
+    label:
+      en: Australia
+      nl: Australië
+      el: Αυστραλία
+    polygon:
+      - [-10.1, 113.3]
+      - [-10.1, 153.6]
+      - [-44.0, 153.6]
+      - [-44.0, 113.3]
+      - [-10.1, 113.3]
+
+  - id: en_ca_macro
+    name: Canada (English)
+    locale: en-CA
+    priority: 85
+    label:
+      en: Canada
+      nl: Canada
+      el: Καναδάς
+    polygon:
+      - [83.1, -141.0]
+      - [83.1, -52.6]
+      - [41.7, -52.6]
+      - [41.7, -141.0]
+      - [83.1, -141.0]
