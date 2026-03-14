@@ -950,8 +950,72 @@ four core data types, each with specific naming and structural rules:
         or dialect is spoken, separate from political boundaries.
         -   Examples: `nl.locales.yaml`, `el.locales.yaml`.
 
+    5.  Address Packs (`{locale}.address.yaml`):
+        Baseline civility data for a locale: honorifics, format
+        templates, title definitions, collective formulas, and
+        title-suppression rules.
+        -   Examples: `en.address.yaml`, `nl.address.yaml`.
+        -   Validated against `address-pack.schema.json`.
+
+    6.  Protocol Packs (`{domain}.{locale}.protocol.yaml`):
+        Institutional protocol overlays for a specific domain and
+        locale, providing gated title systems and addressing rules.
+        -   Examples: `academic.de.protocol.yaml`,
+            `judicial.nl.protocol.yaml`.
+        -   Validated against `protocol-pack.schema.json`.
+
+    7.  Name-Day Saints (`{locale}.nameday-saints.yaml`):
+        Saint definitions with WikiData QIDs, canonical names,
+        tradition tags, and alias corpora used for first-name
+        matching.
+        -   Examples: `el-GR.nameday-saints.yaml`,
+            `bg-BG.nameday-saints.yaml`.
+        -   Validated against `nameday-saints.schema.json`.
+
+    8.  Name-Day Calendars (`{locale}.nameday-calendar.yaml`):
+        Date-to-saint mappings, supporting both fixed-date entries
+        (month/day) and movable entries relative to an anchor feast
+        such as Pascha.
+        -   Examples: `el-GR.nameday-calendar.yaml`,
+            `bg-BG.nameday-calendar.yaml`.
+        -   Validated against `nameday-calendar.schema.json`.
+
 These files constitute the single source of truth from which all
 downstream artifacts are generated.
+
+### 17.1.1.  YAML-First Data Architecture Principle
+
+All locale-specific, region-specific, language-specific, cultural,
+or domain-specific textual data — including but not limited to
+greeting phrases, event labels, honorific titles, address format
+templates, saint aliases, calendar entries, and protocol rules —
+MUST be maintained as declarative YAML source files under
+`data/packs/`.
+
+This data MUST NOT be hardcoded in TypeScript, JavaScript, or any
+other executable source file.  Executable code MAY contain structural
+logic (engines, resolvers, generators), but the string-level cultural
+content MUST originate from schema-validated YAML.
+
+A dedicated generator script MUST exist for each data category.
+Generators read YAML sources, validate them against the corresponding
+JSON Schema under `data/schemas/`, and emit `.generated.ts` files
+that export typed data structures.  Generated files MUST NOT be
+edited manually and SHOULD carry a header comment identifying the
+generator and timestamp.
+
+The rationale for this separation is threefold:
+
+   1.  Transparency:  Cultural data is auditable, diffable, and
+       reviewable by domain experts who may not read TypeScript.
+   2.  Harvestability:  Automated harvesters can refresh YAML files
+       from upstream sources (Wikipedia, WikiData) without touching
+       code (see Section 34).
+   3.  Consistency:  A single architectural convention reduces
+       onboarding friction and prevents "data burial" — the
+       anti-pattern of embedding culturally significant strings
+       inside executable modules where they become invisible to
+       data governance workflows.
 
 ### 17.2.  Pack Structure
 
@@ -1013,17 +1077,32 @@ contributors to validate edits without running TypeScript.
 
 ### 17.4.  Generator Pipeline
 
-A generator script ("scripts/generate-demo-packs.ts") SHALL scan the
-"data/packs/" directory for both `*.greetings.yaml` and
-`*.regions.yaml` files, validate each according to its schema, and
-emit a TypeScript module ("packs.generated.ts") that exports bundled
-registries for the demo application.
+Dedicated generator scripts SHALL transform YAML source files in
+`data/packs/` into typed TypeScript modules.  The project maintains
+the following generators:
 
-The generator MUST:
+   -  `scripts/generate-demo-packs.ts`:  Scans `*.greetings.yaml`,
+      `*.events.yaml`, `*.regions.yaml`, and `*.locales.yaml` files
+      and emits bundled registries for the demo application.
+   -  `scripts/generate-address-packs.ts`:  Scans `*.address.yaml`
+      and `*.protocol.yaml` files, validates against the address-pack
+      and protocol-pack schemas, and emits `address-packs.generated.ts`,
+      `protocol-packs.generated.ts`, and `honorifics.generated.ts`
+      into `packages/pack-global-addresses/src/`.
+   -  `scripts/generate-nameday-packs.ts`:  Scans
+      `*.nameday-saints.yaml` and `*.nameday-calendar.yaml` files,
+      validates against the nameday schemas, cross-checks saint QID
+      references, and emits `saints.generated.ts` and
+      `calendar.generated.ts` into each locale's nameday pack
+      package.
 
-   -  Parse and validate each JSON file.
+Each generator MUST:
+
+   -  Parse and validate each YAML file against its JSON Schema.
    -  Fail with a descriptive error on malformed input.
    -  Produce type-safe output importing from @salve/types.
+   -  Include a header comment identifying the source files,
+      generator script, and generation timestamp.
 
 ### 17.5.  Distribution Constraints
 
@@ -1049,6 +1128,12 @@ these guidelines when creating new packs:
       within the greeting entry. This allows the primary "text" to 
       remain the native script while providing alternatives without
       duplicating metadata. See Section 15.3 for technical details.
+   -  YAML-First Discipline:  Contributors SHOULD extend existing
+      pack families, schemas, and generators rather than introducing
+      code-local exceptions for cultural data.
+   -  Authoring Manual:  Contributors working on pack data SHOULD
+      consult the dedicated Salve Data Authoring Guide for naming
+      conventions, workflow, and category-specific guidance.
 
 ### 17.7.  Hybrid Event Distribution Model
 
@@ -1091,13 +1176,16 @@ data packs MAY be hosted on a Content Delivery Network (CDN)
 instead of being bundled directly.  The following strategies are
 supported:
 
-   -  GitHub Pages:  Commit the "packs/" directory to a "gh-pages"
-      branch or the "docs/" folder.  Packs are then accessible via
-      <https://{user}.github.io/salve/packs/{locale}/namedays.json>.
-   -  unpkg / jsDelivr:  If packs are published to npm, they are
-      automatically available via public CDN URLs (e.g.,
-      <https://unpkg.com/@salve/pack-el-namedays@latest/dist/data/
-      recurring_namedays.json>).
+   -  GitHub Pages:  Publish generated JSON pack artifacts to a
+      "gh-pages" branch or the "docs/" folder.  For example,
+      locale-specific nameday data MAY be exposed as
+      `<https://{user}.github.io/salve/packs/el-GR.nameday-saints.json>`
+      and
+      `<https://{user}.github.io/salve/packs/el-GR.nameday-calendar.json>`.
+   -  unpkg / jsDelivr:  If packs are published to npm, generated
+      pack artifacts MAY be exposed via public CDN URLs (for example,
+      emitted saints and calendar JSON or TypeScript-derived bundle
+      assets), rather than raw package-local source blobs.
    -  Custom S3/CloudFront:  For enterprise deployments, host JSON
       files on a private S3 bucket fronted by CloudFront.
 
@@ -1163,6 +1251,37 @@ Each saint record MUST include:
    -  "traditions":  Array of tradition tags this saint is recognized
       by (e.g., ["orthodox", "catholic"]).
    -  "aliases":  Array of name variants across languages.
+
+### 20.3.  Canonical Pack Split
+
+The canonical name-day dataset MUST be split into at least two pack
+artifacts per locale:
+
+   -  a saint registry (`{locale}.nameday-saints.yaml`) containing
+      identity metadata, traditions, and aliases
+   -  a calendar mapping (`{locale}.nameday-calendar.yaml`) containing
+      date-to-saint associations
+
+This split is REQUIRED so that identity data and calendar data can be
+validated, harvested, loaded, and evolved independently.
+
+### 20.4.  Calendar Entry Forms
+
+The calendar mapping layer MUST support:
+
+   -  fixed-date entries using `month`, `day`, and `saintQids`
+   -  movable entries using `relativeTo`, `offset`, and optional
+      `saintQids` or auxiliary name lists
+
+For the MVP, `relativeTo` MUST support at least `pascha`.
+
+### 20.5.  Generated Runtime Artifacts
+
+Name-day YAML source packs SHOULD be transformed at build time into
+typed runtime artifacts such as `saints.generated.ts` and
+`calendar.generated.ts`.  Pack entrypoints SHOULD re-export these
+generated structures rather than reconstructing them from inline maps
+or package-local JSON files.
 
 ## 21.  Name Normalization and Fuzzy Resolution
 
@@ -1252,6 +1371,12 @@ the loader inspects each component's structural signature:
    -  Objects with a "locale" and "greetings" array → greeting pack.
    -  Objects with a "locale" and "titles" object → honorific pack.
    -  Objects with a "style" and "rules" array → style pack.
+
+For name-day data, the loader SHOULD also recognize generated saint
+arrays and calendar entry arrays and register them predictably with
+both the pack registry and any installed local nameday resolver. This
+avoids ad hoc manual wiring and keeps YAML-derived data packs aligned
+with runtime registration behavior.
 
 This enables a single-call registration pattern:
 

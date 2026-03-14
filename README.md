@@ -171,14 +171,15 @@ This monorepo is organized into several packages under `packages/`:
 
 Current Version: **v0.0.1 (Alpha)**
 
-For detailed development plans, see our [Roadmap](./docs/development-roadmap.md).
-For a comprehensive specification of the system, refer to the [Requirements Specification](./docs/requirements-specification.md).
+For detailed development plans, see our [Roadmap](./docs/Roadmap.md).
+For a comprehensive specification of the system, refer to the
+[Specification](./docs/Specification.md).
 
 ## Contributing
 
-We welcome contributions! Please review our [Code of Conduct](./AGENTS.md) (currently in `AGENTS.md`) for coding standards and commit message conventions.
+We welcome contributions! Please review our [Code of Conduct](./AGENTS.md) (currently in `AGENTS.md`) for coding standards, commit message conventions, and the repository's YAML-first data policy.
 
-For contributing address data and protocol packs, see the [Protocol Pack Authoring Guide](./docs/protocol-pack-authoring.md).
+For all work on datasets in `data/packs/` including greetings, events, honorifics, address packs, protocol packs, regions, locales, and namedays, see the [Salve Data Authoring Guide](./docs/salve-data-authoring-guide.md).
 
 1.  Fork the repository.
 2.  Create your feature branch (`git checkout -b feat/amazing-feature`).
