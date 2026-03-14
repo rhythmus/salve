@@ -165,6 +165,23 @@ The following terms are used throughout this document:
 
 ## 4.  System Overview
 
+### 4.1.  Language Coverage Targets
+
+Salve aims to provide a high-fidelity cultural awareness engine with broad linguistic support. The project prioritizes the following language sets:
+
+   -  **European Union Official Languages (24)**: Bulgarian (bg), Croatian (hr), Czech (cs), Danish (da), Dutch (nl), English (en), Estonian (et), Finnish (fi), French (fr), German (de), Greek (el), Hungarian (hu), Irish (ga), Italian (it), Latvian (lv), Lithuanian (lt), Maltese (mt), Polish (pl), Portuguese (pt), Romanian (ro), Slovak (sk), Slovenian (sl), Spanish (es), and Swedish (sv).
+   -  **Major Global Languages**: Arabic (ar), Russian (ru), Turkish (tr), and Chinese (zh).
+
+These languages serve as the primary targets for event labeling, greeting resolution, and regional data procurement.
+
+### 4.2.  Global Data Procurement Targets
+
+Salve aims for comprehensive coverage of the world's public holidays and religious observances. The procurement strategy focuses on three pillars:
+
+   1.  **Universal Jurisdiction Coverage**: Implementation of harvesters for all countries and territories, targeting the authoritative lists of public holidays maintained by the global community (e.g., Wikipedia's ["Lists of holidays by country"](https://en.wikipedia.org/wiki/Lists_of_holidays_by_country)).
+   2.  **Major Traditions and Religions**: Systematic data collection for the feasts, fasts, and observances of major world religions (Christianity, Islam, Judaism, Hinduism, Buddhism, etc.) and secular traditions.
+   3.  **Automated Harvester Ecosystem**: Development of a scalable framework of modular harvesters capable of tracking and updating this global dataset while preserving curated cultural metadata.
+
 Salve consists of the following major subsystems:
 
    -  Core Engine
@@ -840,20 +857,35 @@ The v1 context includes a "policy.repetition" object with:
 
 ## 17.  Data Pack Architecture
 
-### 17.1.  Single Source of Truth
+### 17.1.  File Types and Naming Conventions
 
-All greeting data MUST be maintained as canonical JSON files in the
-repository's "data/packs/" directory.  These files constitute the
-single source of truth from which all downstream artifacts —
-TypeScript packs, published npm modules, and remote JSON
-distributions — are generated.
+All greeting data MUST be maintained as canonical YAML files in the
+repository's "data/packs/" directory. Salve distinguishes between
+four core data types, each with specific naming and structural rules:
 
-    -  `[locale].greetings.yaml`:  Contains lexicon and rules for a
-       specific language.
-    -  `[locale].regions.yaml`:  Contains geographic boundaries for a
-       specific area.
-    -  `[tradition].events.yaml`:  Contains greetings for shared
-       celebrations across multiple locales (e.g., `christian.events.yaml`).
+    1.  Event Registries (`<COUNTRY>|<TRADITION>.events.yaml`):
+        Contains regional or tradition-specific event definitions and
+        nested greetings.
+        -   Examples: `GR.events.yaml`, `christian.events.yaml`.
+        -   Regional events MUST include labels and nested greetings.
+
+    2.  Greeting Packs (`[locale].greetings.yaml`):
+        Purely linguistic lexicons containing time-of-day greetings
+        and other non-event-specific utterances.
+        -   Examples: `el-GR.greetings.yaml`, `nl.greetings.yaml`.
+
+    3.  Region Registries (`[country].regions.yaml`):
+        Jurisdictional data defining the political subdivisions of a
+        country for geographic filtering.
+        -   Examples: `BE.regions.yaml`.
+
+    4.  Locale Registries (`[language].locales.yaml`):
+        Linguistic geography data defining regions where a language
+        or dialect is spoken, separate from political boundaries.
+        -   Examples: `nl.locales.yaml`, `el.locales.yaml`.
+
+These files constitute the single source of truth from which all
+downstream artifacts are generated.
 
 ### 17.2.  Pack Structure
 
@@ -1607,6 +1639,21 @@ Protocol packs are gated by two mechanisms:
 Both conditions MUST be met for protocol pack rules to participate
 in candidate enumeration.
 
+### 25.11.  Low-Confidence Gender Inference
+
+The SCNA MAY implement a low-confidence gender inference module that
+derives a `gender` hint from the person's `givenNames`.
+
+   1.  **Policy Control**:  This module MUST only execute when the
+       `allowGenderInference` policy flag is `true`.  It MUST default
+       to `false`.
+   2.  **Linguistic Patterns**:  Inference is based on common suffix
+       patterns for the resolved locale (e.g., "-ia", "-a" for female-coded
+       names in many Indo-European languages).
+   3.  **Source Attribution**:  When an inference occurs, the engine
+       MUST set the `genderSource` field to `"inferred"`.  Explicit
+       input always takes precedence and is marked as `"explicit"`.
+
 ## 26.  Geographic Locale Mapping Subsystem
  
 The Geographic Locale Mapping subsystem enables precise greeting
@@ -1805,3 +1852,11 @@ MUST implement a non-destructive merging strategy:
 The `@salve/harvester` package provides a unified CLI (`npm run harvest`)
 to execute the entire procurement pipeline or targeted individual
 harvesters. This component is integral to the Salve project build cycle.
+
+### 34.5.  Generalization & Scale-up
+
+As the number of targeted data sources grows (e.g., universal public holidays,
+bank holidays, and across-continent festivals), the project prioritizes
+the extraction of common patterns into a generalized, configuration-driven
+harvester framework. This minimizes custom implementation code and
+centralizes logic for parsing standardized Wikipedia list formats.

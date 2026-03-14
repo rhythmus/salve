@@ -169,3 +169,25 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
 - [x] **M12.3: Data Deduplication & Refinement**
     - [x] Create international.base.events.yaml to centralize shared holidays.
     - [x] Refactor regional packs (BE, el-GR) to use WikiData-based augmentation.
+
+## Milestone 13: Language Coverage Expansion
+- [ ] **M13.1: Core EU Support**
+    - aims to support all 24 official EU languages: `bg, hr, cs, da, nl, en, et, fi, fr, de, el, hu, ga, it, lv, lt, mt, pl, pt, ro, sk, sl, es, sv`.
+- [ ] **M13.2: Major World Languages**
+    - aims to support: `ar` (Arabic), `ru` (Russian), `tr` (Turkish), `zh` (Chinese).
+- [ ] **M13.3: Regional Dialects**
+    - expand support for regional specificities (e.g., Flemish `nl-BE`).
+
+## Milestone 14: Global Data & Harvester Scale-up
+- [ ] **M14.1: Universal Holiday Inventory**
+    - Target 200+ countries/territories for public holiday coverage.
+    - [ ] Implement master harvester for [Wikipedia: Lists of holidays by country](https://en.wikipedia.org/wiki/Lists_of_holidays_by_country) and [Category: Lists of public holidays by country](https://en.wikipedia.org/wiki/Category:Lists_of_public_holidays_by_country).
+    - [ ] Implement harvester for [Wikipedia: Bank holidays](https://en.wikipedia.org/wiki/Bank_holiday) and [Bank holidays in other countries](https://en.wikipedia.org/wiki/Bank_holiday_(disambiguation)#Bank_holidays_in_other_countries).
+- [ ] **M14.2: Religious Heritage & Festival Expansion**
+    - Implement dedicated harvesters and calendar plugins for major world traditions.
+    - [ ] Implement festival harvester based on [Wikipedia: Lists of festivals](https://en.wikipedia.org/wiki/Lists_of_festivals) (covering [Country](https://en.wikipedia.org/wiki/Lists_of_festivals#Country), [Continent](https://en.wikipedia.org/wiki/Lists_of_festivals#Continent), and [Sublists by type/topic](https://en.wikipedia.org/wiki/Lists_of_festivals#Sublists_by_type_or_topic)).
+    - [ ] Integrate [multinational festivals and holidays](https://en.wikipedia.org/wiki/List_of_multinational_festivals_and_holidays).
+- [ ] **M14.3: Automated Maintenance Pipeline**
+    - Scale the harvester framework to handle daily/weekly monitoring of global holiday shifts.
+- [ ] **M14.4: Harvester Generalization & Pattern Extraction**
+    - Once 3-5 specific harvesters are stable, refactor the core logic into a generalized, configuration-driven harvester to minimize custom code for new Wikipedia-based sources.
