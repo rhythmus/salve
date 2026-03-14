@@ -2,30 +2,31 @@
  * SALVE Deterministic Scoring & Priority Logic
  */
 
-import { EventDomain, CelebrationEvent, EventDomainV1, ScoreTuple, GreetingRule, NormalizedContext, SalveEvent } from "./types";
+import { CelebrationEvent, EventDomainV1, ScoreTuple, GreetingRule, NormalizedContext, SalveEvent } from "./types";
 
 /**
  * Domain-based base weights.
  * Higher number = Higher Priority.
- * 
+ *
  * Hierarchy: Personal > Religious > Civil > Cultural Baseline > Temporal
  */
-export const DOMAIN_WEIGHTS: Record<EventDomain, number> = {
+export const DOMAIN_WEIGHTS: Record<string, number> = {
     personal: 1000,
     religious: 500,
     civil: 300,
+    official: 400,
+    observance: 200,
     cultural_baseline: 100,
     temporal: 50,
 };
 
 /**
- * Calculate the score for a specific event based on its domain and 
+ * Calculate the score for a specific event based on its domain and
  * optional custom priority overrides.
  */
 export function calculateEventScore(event: CelebrationEvent): number {
-    const baseWeight = DOMAIN_WEIGHTS[event.domain] ?? 0;
-
-    // Custom priority overrides are additive to the base weight
+    const domainKey = event.domain ?? event.category ?? "";
+    const baseWeight = DOMAIN_WEIGHTS[domainKey] ?? 0;
     const priorityBonus = event.priority ?? 0;
 
     return baseWeight + priorityBonus;
@@ -47,13 +48,15 @@ export function isAffiliated(event: CelebrationEvent, userAffiliations: string[]
  * Expanded domain rank for the v1 event taxonomy.
  * Higher number = higher priority.
  */
-export const DOMAIN_RANK_V1: Record<EventDomainV1, number> = {
+export const DOMAIN_RANK_V1: Record<string, number> = {
     protocol: 9000,
     religious: 8000,
     personal: 7000,
     bank: 6500,
     civil: 6000,
+    official: 6000,
     seasonal: 5000,
+    observance: 3000,
     affinity: 2000,
     temporal: 1000,
     cultural_baseline: 500,
@@ -72,8 +75,8 @@ export function computeScoreTuple(
     localeChain: string[],
     ruleLocale: string
 ): ScoreTuple {
-    // Domain rank from matched event
-    const domainRank = event ? (DOMAIN_RANK_V1[event.kind] ?? 0) : 0;
+    const domainKey = event?.kind ?? event?.category ?? "";
+    const domainRank = event ? (DOMAIN_RANK_V1[domainKey] ?? 0) : 0;
 
     // Event rank from event precedence
     const eventRank = event?.precedence ?? 0;
@@ -115,7 +118,8 @@ export function compareScoreTuples(a: ScoreTuple, b: ScoreTuple): number {
     if (a.rulePriority !== b.rulePriority) return a.rulePriority - b.rulePriority;
     if (a.localeMatchScore !== b.localeMatchScore) return a.localeMatchScore - b.localeMatchScore;
 
-    // Stable tie-break: lexicographic (lower string wins for determinism)
-    return a.stableTieBreak < b.stableTieBreak ? 1 : a.stableTieBreak > b.stableTieBreak ? -1 : 0;
+    const aTie = a.stableTieBreak ?? "";
+    const bTie = b.stableTieBreak ?? "";
+    return aTie < bTie ? 1 : aTie > bTie ? -1 : 0;
 }
 

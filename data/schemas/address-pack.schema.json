@@ -1,0 +1,171 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://salve.dev/schemas/address-pack.schema.json",
+    "title": "Salve Address Pack",
+    "description": "Baseline civility address data for a single locale.  Contains honorifics, format patterns, title definitions, collective formulas, and title-suppression rules for ordinary written address forms.",
+    "type": "object",
+    "required": [
+        "locale",
+        "honorifics",
+        "formats"
+    ],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "JSON Schema reference (for editor validation)"
+        },
+        "locale": {
+            "type": "string",
+            "description": "BCP 47 locale identifier",
+            "pattern": "^[a-z]{2,3}(-[A-Z]{2})?(-[A-Za-z0-9]+)*$"
+        },
+        "extends": {
+            "type": "string",
+            "description": "Optional parent locale for inheritance"
+        },
+        "sources": {
+            "oneOf": [
+                { "type": "string" },
+                { "type": "array", "items": { "type": "string" } }
+            ],
+            "description": "Source URL(s) or bibliographic reference(s)"
+        },
+        "honorifics": {
+            "$ref": "#/$defs/Honorifics"
+        },
+        "formats": {
+            "$ref": "#/$defs/Formats"
+        },
+        "titles": {
+            "type": "array",
+            "description": "Title definitions for this locale's baseline civility",
+            "items": { "$ref": "#/$defs/PackTitle" }
+        },
+        "collectiveFormulas": {
+            "type": "array",
+            "description": "Collective address formulas for group addressing",
+            "items": { "$ref": "#/$defs/CollectiveFormula" }
+        },
+        "titleSuppression": {
+            "$ref": "#/$defs/TitleSuppression"
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {
+        "Honorifics": {
+            "type": "object",
+            "description": "Gender-keyed honorific forms",
+            "required": ["male", "female"],
+            "properties": {
+                "male": { "type": "string" },
+                "female": { "type": "string" },
+                "nonBinary": { "type": "string" },
+                "unspecified": { "type": "string" }
+            },
+            "additionalProperties": false
+        },
+        "Formats": {
+            "type": "object",
+            "description": "Template patterns for each output form.  Tokens: {honorific}, {titleStack}, {surname}, {firstName}, {officeTitle}, {style}, {collectiveLabel}, {postalTitleStack}, {correspondenceTitleStack}.",
+            "required": ["postal", "letterhead", "salutation", "informal"],
+            "properties": {
+                "postal": {
+                    "type": "string",
+                    "description": "Envelope / addressee block (e.g. '{honorific} {postalTitleStack} {surname}')"
+                },
+                "letterhead": {
+                    "type": "string",
+                    "description": "Letter opening line (e.g. 'Geachte {honorific} {correspondenceTitleStack} {surname},')"
+                },
+                "salutation": {
+                    "type": "string",
+                    "description": "Full greeting + address composition (e.g. '{greeting}, {honorific} {surname}')"
+                },
+                "email_opening": {
+                    "type": "string",
+                    "description": "Email opening form"
+                },
+                "email_closing": {
+                    "type": "string",
+                    "description": "Email closing form"
+                },
+                "informal": {
+                    "type": "string",
+                    "description": "Informal form (e.g. '{firstName}')"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PackTitle": {
+            "type": "object",
+            "description": "A baseline title definition",
+            "required": ["system", "code", "rank", "postalForm", "correspondenceForm"],
+            "properties": {
+                "system": {
+                    "type": "string",
+                    "enum": [
+                        "academic", "civil", "judicial", "diplomatic",
+                        "religious", "military", "noble", "organizational", "other"
+                    ]
+                },
+                "code": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "rank": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "postalForm": { "type": "string" },
+                "correspondenceForm": { "type": "string" },
+                "postalAbbrev": { "type": "string" },
+                "gender": {
+                    "type": "string",
+                    "enum": ["male", "female", "neutral"]
+                }
+            },
+            "additionalProperties": false
+        },
+        "CollectiveFormula": {
+            "type": "object",
+            "description": "A group / collective address formula",
+            "required": ["id", "formality", "text"],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_-]*$"
+                },
+                "formality": {
+                    "type": "string",
+                    "enum": ["informal", "highly informal", "formal", "hyperformal", "neutral"]
+                },
+                "text": { "type": "string" },
+                "audienceKind": {
+                    "type": "string",
+                    "enum": ["single", "pair", "group", "public", "institution"]
+                },
+                "gender": {
+                    "type": "string",
+                    "enum": ["male", "female", "mixed", "neutral"]
+                },
+                "notes": { "type": "string" }
+            },
+            "additionalProperties": false
+        },
+        "TitleSuppression": {
+            "type": "object",
+            "description": "Title-suppression rules for this locale",
+            "properties": {
+                "informalDropsTitles": {
+                    "type": "boolean",
+                    "description": "When true, informal address omits all titles"
+                },
+                "professorSuppressesDoctor": {
+                    "type": "boolean",
+                    "description": "When true, 'Professor' absorbs 'Doctor' in title stack"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

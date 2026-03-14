@@ -43,7 +43,8 @@ export type EventCategory =
     | "official"
     | "observance"
     | "temporal"
-    | "cultural_baseline";
+    | "cultural_baseline"
+    | "civil";
 
 export type EventDomain = EventCategory;
 
@@ -81,13 +82,15 @@ export interface GreetingContext {
  */
 export interface CelebrationEvent {
     id: string;
-    category: EventCategory;
+    category?: EventCategory;
+    domain?: string;
     tradition?: string;
-    priority?: number; // Optional override
+    priority?: number;
     emoji?: string;
     requiredRegions?: string[];
     requiredProfessions?: string[];
     wikiDataId?: string;
+    WikiData?: string;
     metadata?: Record<string, any>;
 }
 
@@ -125,10 +128,11 @@ export interface GreetingResult {
     expectedResponse?: string;
     metadata: {
         eventId?: string;
+        category?: string;
         domain?: EventDomain;
         locale: string;
         score: number;
-        trace: string[]; // For developer transparency
+        trace: string[];
     };
 }
 
@@ -260,7 +264,9 @@ export type EventDomainV1 =
     | "affinity"
     | "custom"
     | "temporal"
-    | "cultural_baseline";
+    | "cultural_baseline"
+    | "official"
+    | "observance";
 
 // ── Greeting Rule (Ontology‐Aware) ──────────────────────────────
 
@@ -303,21 +309,32 @@ export interface GreetingRule {
 /** A namespaced event emitted by providers (salve.event.domain.region.name) */
 export interface SalveEvent {
     id: string;
-    kind: EventDomainV1;
-    start: string;   // ISO date
-    end: string;     // ISO date
+    kind?: EventDomainV1;
+    category?: string;
+    start?: string;   // ISO date
+    end?: string;     // ISO date
     label?: string;
     source?: string;
     emoji?: string;
     precedence?: number;
     confidence?: number;
+    wikiDataId?: string;
+    requiredRegions?: string[];
+    requiredProfessions?: string[];
     metadata?: Record<string, unknown>;
 }
 
 /** Entry in the Event Namespace Registry */
 export interface EventRegistryEntry {
-    path: string; // e.g. "salve.event.official.be.national_day"
-    event: SalveEvent;
+    id: string;
+    path?: string;
+    domain: string;
+    country?: string;
+    description?: string;
+    scope?: string;
+    aliases?: string[];
+    emoji?: string;
+    event?: SalveEvent;
 }
 
 // ── Context Normalization ───────────────────────────────────────
@@ -440,7 +457,7 @@ export interface SalveExtra {
 export interface SalveOutputV1 {
     primary: SalvePrimaryOutput;
     extras?: SalveExtra[];
-    activeEvents: SalveEvent[];
+    activeEvents?: SalveEvent[];
     trace: {
         candidates: SalveTraceEntry[];
         usedEvents: string[];
@@ -450,11 +467,245 @@ export interface SalveOutputV1 {
 
 /** Debugging entry for transparency */
 export interface SalveTraceEntry {
-    packId: string;
+    packId?: string;
     ruleId: string;
     eventId?: string;
-    score: number;
-    reasons: string[];
+    score?: number;
+    reasons?: string[];
+    tuple?: ScoreTuple;
 }
 
-export type ScoreTuple = [number, number, number, number, number];
+export interface ScoreTuple {
+    domainRank: number;
+    eventRank: number;
+    packPrecedence: number;
+    rulePriority: number;
+    localeMatchScore: number;
+    stableTieBreak?: string;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Address Protocol Architecture — v1 Types
+// ═══════════════════════════════════════════════════════════════════
+
+// ── Title Systems ───────────────────────────────────────────────
+
+/** Institutional domain a title belongs to */
+export type TitleSystem =
+    | "academic"
+    | "civil"
+    | "judicial"
+    | "diplomatic"
+    | "religious"
+    | "military"
+    | "noble"
+    | "organizational"
+    | "other";
+
+/**
+ * A structured title token with locale-aware display forms.
+ * Titles carry both an abbreviated postal form and a spelled-out
+ * correspondence form, because these differ in many traditions
+ * (e.g. postal "Prof. Dr." vs letterhead "Hooggeleerde Heer").
+ */
+export interface AddressTitleToken {
+    system: TitleSystem;
+    code: string;
+    rank?: number;
+    display: string;
+    abbrev?: string;
+    gender?: "male" | "female" | "neutral";
+    number?: "singular" | "plural";
+    directForm?: string;
+    referenceForm?: string;
+}
+
+// ── Audience & Recipient ────────────────────────────────────────
+
+/** Kind of audience being addressed */
+export type AudienceKind = "single" | "pair" | "group" | "public" | "institution";
+
+/** Address mode: direct speech vs third-person reference */
+export type AddressMode = "direct" | "reference";
+
+/**
+ * Rendering target: determines which formatting rules apply.
+ * Postal addresses use abbreviated titles ("Herrn Prof. Dr."),
+ * letterhead uses correspondence forms ("Sehr geehrter Herr Professor"),
+ * and salutation combines greeting + address.
+ */
+export type AddressOutputForm = "postal" | "letterhead" | "salutation" | "email_opening" | "email_closing";
+
+/** One recipient in a potentially multi-person audience */
+export interface AddressRecipient {
+    givenNames?: string[];
+    initials?: string;
+    surname?: string;
+    preferredName?: string;
+    gender?: "male" | "female" | "nonbinary" | "unknown";
+    genderSource?: "explicit" | "inferred" | "unknown";
+    titles?: AddressTitleToken[];
+    officeRole?: string;
+    nobilityParticle?: string;
+}
+
+/** An audience of one or more recipients */
+export interface AddressAudience {
+    kind: AudienceKind;
+    recipients: AddressRecipient[];
+    collectiveLabel?: string;
+}
+
+// ── Address Rules & Patterns ────────────────────────────────────
+
+/**
+ * Selection conditions for an address formatting rule.
+ * Rules are matched by locale, formality, relationship,
+ * audience kind, address mode, and optional office role.
+ */
+export interface AddressRuleWhen {
+    locale?: string | string[];
+    formality?: Formality | Formality[];
+    relationship?: RelationshipContext | RelationshipContext[];
+    audienceKind?: AudienceKind | AudienceKind[];
+    addressMode?: AddressMode;
+    outputForm?: AddressOutputForm | AddressOutputForm[];
+    officeRole?: string | string[];
+    titleSystem?: TitleSystem | TitleSystem[];
+}
+
+/**
+ * A single address formatting rule.
+ * Templates use tokens like {honorific}, {titleStack}, {surname},
+ * {officeTitle}, {style}, {collectiveLabel}, {firstName}.
+ */
+export interface AddressRule {
+    id: string;
+    priority: number;
+    template: string;
+    when?: AddressRuleWhen;
+    notes?: string;
+}
+
+// ── Address Packs ───────────────────────────────────────────────
+
+/** Locale-specific gender-keyed honorific forms */
+export interface AddressHonorifics {
+    male: string;
+    female: string;
+    nonBinary?: string;
+    unspecified?: string;
+}
+
+/** Collective address formulas for groups */
+export interface CollectiveFormula {
+    id: string;
+    formality: Formality;
+    text: string;
+    audienceKind?: AudienceKind;
+    gender?: "male" | "female" | "mixed" | "neutral";
+    notes?: string;
+}
+
+/** Title definition within a pack */
+export interface AddressPackTitle {
+    system: TitleSystem;
+    code: string;
+    rank: number;
+    postalForm: string;
+    correspondenceForm: string;
+    postalAbbrev?: string;
+    gender?: "male" | "female" | "neutral";
+}
+
+/**
+ * Baseline civility address data for a locale.
+ * Contains honorifics, format patterns, title definitions,
+ * and collective formulas for group addressing.
+ */
+export interface AddressPack {
+    locale: string;
+    extends?: string;
+    sources?: string | string[];
+    honorifics: AddressHonorifics;
+    formats: {
+        postal: string;
+        letterhead: string;
+        salutation: string;
+        email_opening?: string;
+        email_closing?: string;
+        informal: string;
+    };
+    titles?: AddressPackTitle[];
+    collectiveFormulas?: CollectiveFormula[];
+    titleSuppression?: {
+        informalDropsTitles?: boolean;
+        professorSuppressesDoctor?: boolean;
+    };
+}
+
+/**
+ * Gated institutional protocol overlay.
+ * Activated only when memberships.subcultures matches
+ * the requiredSubculture tag and policy allows it.
+ */
+export interface ProtocolPack {
+    id: string;
+    locale: string;
+    extends?: string;
+    requiredSubculture: string;
+    domain: TitleSystem;
+    sources?: string | string[];
+    titles: AddressPackTitle[];
+    rules: AddressRule[];
+    notes?: string;
+}
+
+// ── Resolved Address Output ─────────────────────────────────────
+
+/** Structured result from address resolution */
+export interface ResolvedAddress {
+    text: string;
+    outputForm: AddressOutputForm;
+    mode: AddressMode;
+    audienceKind: AudienceKind;
+    usedRuleIds: string[];
+    usedTitleCodes: string[];
+    trace: string[];
+}
+
+// ── Composition & Rendering Policy ──────────────────────────────
+
+/** How terminal punctuation in greeting text should be handled */
+export type TerminalPunctuationPolicy = "preserve" | "strip" | "move_to_end";
+
+/** What separator to use between greeting and address */
+export type SeparatorPolicy = "comma" | "space" | "newline" | "none" | "template";
+
+/** Capitalization handling */
+export type CapitalizationPolicy = "preserve" | "lowercase_address" | "sentence_case";
+
+/**
+ * Rendering policy for composing greeting + address into a
+ * final salutation string.  Locale packs provide defaults;
+ * developers can override at runtime.
+ */
+export interface SalveRenderPolicy {
+    separator?: SeparatorPolicy;
+    terminalPunctuation?: TerminalPunctuationPolicy;
+    capitalization?: CapitalizationPolicy;
+    outputForm?: AddressOutputForm;
+    customTemplate?: string;
+}
+
+/**
+ * Extended v1 output that includes structured address data
+ * and rendering metadata alongside the primary greeting.
+ */
+export interface SalveOutputV1WithAddress extends SalveOutputV1 {
+    address?: ResolvedAddress;
+    postalAddressText?: string;
+    letterheadAddressText?: string;
+    fullSalutationText?: string;
+    renderPolicy?: SalveRenderPolicy;
+}

@@ -6,7 +6,9 @@ import {
     HonorificPack,
     EventRegistryEntry,
     EventDomainV1,
-    GreetingRule
+    GreetingRule,
+    AddressPack,
+    ProtocolPack,
 } from "@salve/types";
 
 /**
@@ -44,6 +46,8 @@ export class PackRegistry {
     private honorifics: HonorificPack[] = [];
     private saints: SaintDefinition[] = [];
     private nameDays: NameDayEntry[] = [];
+    private addressPacks = new Map<string, AddressPack>();
+    private protocolPacks: ProtocolPack[] = [];
 
     registerHonorifics(pack: HonorificPack): void {
         this.honorifics.push(pack);
@@ -71,6 +75,31 @@ export class PackRegistry {
 
     getNameDays(): NameDayEntry[] {
         return this.nameDays;
+    }
+
+    registerAddressPack(pack: AddressPack): void {
+        this.addressPacks.set(pack.locale, pack);
+    }
+
+    getAddressPack(locale: string): AddressPack | undefined {
+        return this.addressPacks.get(locale) ?? this.addressPacks.get(locale.split("-")[0]);
+    }
+
+    getAllAddressPacks(): AddressPack[] {
+        return Array.from(this.addressPacks.values());
+    }
+
+    registerProtocolPack(pack: ProtocolPack): void {
+        this.protocolPacks.push(pack);
+    }
+
+    getProtocolPacksByLocale(locale: string): ProtocolPack[] {
+        const base = locale.split("-")[0];
+        return this.protocolPacks.filter(p => p.locale === locale || p.locale === base);
+    }
+
+    getAllProtocolPacks(): ProtocolPack[] {
+        return this.protocolPacks;
     }
 }
 

@@ -1,0 +1,203 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://salve.dev/schemas/protocol-pack.schema.json",
+    "title": "Salve Protocol Pack",
+    "description": "An institutional protocol overlay for the Salve address engine.  Protocol packs provide gated address rules and title definitions for a specific locale and institutional domain (academic, judicial, diplomatic, etc.).  They are activated only when the runtime context includes a matching subculture membership and the policy allows subculture addressing.",
+    "type": "object",
+    "required": [
+        "id",
+        "locale",
+        "requiredSubculture",
+        "domain",
+        "titles",
+        "rules"
+    ],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "JSON Schema reference (for editor validation)"
+        },
+        "id": {
+            "type": "string",
+            "description": "Unique pack identifier (e.g. 'protocol-academic-de')",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+        },
+        "locale": {
+            "type": "string",
+            "description": "BCP 47 locale this pack covers",
+            "pattern": "^[a-z]{2,3}(-[A-Z]{2})?(-[A-Za-z0-9]+)*$"
+        },
+        "extends": {
+            "type": "string",
+            "description": "Optional parent pack to inherit from"
+        },
+        "requiredSubculture": {
+            "type": "string",
+            "description": "The subculture tag that must be present in memberships.subcultures for this pack to activate"
+        },
+        "domain": {
+            "type": "string",
+            "enum": [
+                "academic",
+                "civil",
+                "judicial",
+                "diplomatic",
+                "religious",
+                "military",
+                "noble",
+                "organizational",
+                "other"
+            ],
+            "description": "Institutional domain this pack covers"
+        },
+        "sources": {
+            "oneOf": [
+                { "type": "string" },
+                { "type": "array", "items": { "type": "string" } }
+            ],
+            "description": "Bibliographic or URL source references"
+        },
+        "notes": {
+            "type": "string",
+            "description": "Editorial notes about the pack"
+        },
+        "titles": {
+            "type": "array",
+            "description": "Title definitions provided by this protocol pack",
+            "items": { "$ref": "#/$defs/PackTitle" },
+            "minItems": 1
+        },
+        "rules": {
+            "type": "array",
+            "description": "Address formatting rules provided by this protocol pack",
+            "items": { "$ref": "#/$defs/AddressRule" },
+            "minItems": 1
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {
+        "PackTitle": {
+            "type": "object",
+            "description": "A title definition with postal and correspondence forms",
+            "required": ["system", "code", "rank", "postalForm", "correspondenceForm"],
+            "properties": {
+                "system": {
+                    "type": "string",
+                    "enum": [
+                        "academic", "civil", "judicial", "diplomatic",
+                        "religious", "military", "noble", "organizational", "other"
+                    ]
+                },
+                "code": {
+                    "type": "string",
+                    "description": "Canonical title code (e.g. 'prof', 'dr', 'judge')",
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "rank": {
+                    "type": "integer",
+                    "description": "Ordering rank within system (lower = higher precedence)",
+                    "minimum": 0
+                },
+                "postalForm": {
+                    "type": "string",
+                    "description": "Abbreviated form for postal / envelope addressing (e.g. 'Prof.')"
+                },
+                "correspondenceForm": {
+                    "type": "string",
+                    "description": "Spelled-out form for letterhead / correspondence (e.g. 'Professor')"
+                },
+                "postalAbbrev": {
+                    "type": "string",
+                    "description": "Even shorter abbreviation when space is limited"
+                },
+                "gender": {
+                    "type": "string",
+                    "enum": ["male", "female", "neutral"],
+                    "description": "Gendered title form if this entry is gender-specific"
+                }
+            },
+            "additionalProperties": false
+        },
+        "AddressRule": {
+            "type": "object",
+            "description": "A formatting rule that matches context conditions and provides a template",
+            "required": ["id", "priority", "template"],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique rule identifier within this pack",
+                    "pattern": "^[a-z][a-z0-9_-]*$"
+                },
+                "priority": {
+                    "type": "integer",
+                    "description": "Higher priority rules are preferred (0 = baseline fallback)",
+                    "minimum": 0
+                },
+                "template": {
+                    "type": "string",
+                    "description": "Pattern template using tokens: {honorific}, {titleStack}, {surname}, {firstName}, {officeTitle}, {style}, {collectiveLabel}"
+                },
+                "when": {
+                    "$ref": "#/$defs/RuleWhen"
+                },
+                "notes": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "RuleWhen": {
+            "type": "object",
+            "description": "Selection conditions for rule matching",
+            "properties": {
+                "locale": {
+                    "oneOf": [
+                        { "type": "string" },
+                        { "type": "array", "items": { "type": "string" } }
+                    ]
+                },
+                "formality": {
+                    "oneOf": [
+                        { "type": "string", "enum": ["informal", "highly informal", "formal", "hyperformal", "neutral"] },
+                        { "type": "array", "items": { "type": "string", "enum": ["informal", "highly informal", "formal", "hyperformal", "neutral"] } }
+                    ]
+                },
+                "relationship": {
+                    "oneOf": [
+                        { "type": "string", "enum": ["stranger", "acquaintance", "friend", "family", "intimate", "superior", "subordinate"] },
+                        { "type": "array", "items": { "type": "string", "enum": ["stranger", "acquaintance", "friend", "family", "intimate", "superior", "subordinate"] } }
+                    ]
+                },
+                "audienceKind": {
+                    "oneOf": [
+                        { "type": "string", "enum": ["single", "pair", "group", "public", "institution"] },
+                        { "type": "array", "items": { "type": "string", "enum": ["single", "pair", "group", "public", "institution"] } }
+                    ]
+                },
+                "addressMode": {
+                    "type": "string",
+                    "enum": ["direct", "reference"]
+                },
+                "outputForm": {
+                    "oneOf": [
+                        { "type": "string", "enum": ["postal", "letterhead", "salutation", "email_opening", "email_closing"] },
+                        { "type": "array", "items": { "type": "string", "enum": ["postal", "letterhead", "salutation", "email_opening", "email_closing"] } }
+                    ]
+                },
+                "officeRole": {
+                    "oneOf": [
+                        { "type": "string" },
+                        { "type": "array", "items": { "type": "string" } }
+                    ]
+                },
+                "titleSystem": {
+                    "oneOf": [
+                        { "type": "string", "enum": ["academic", "civil", "judicial", "diplomatic", "religious", "military", "noble", "organizational", "other"] },
+                        { "type": "array", "items": { "type": "string", "enum": ["academic", "civil", "judicial", "diplomatic", "religious", "military", "noble", "organizational", "other"] } }
+                    ]
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
