@@ -249,7 +249,6 @@ export class SalveLoader {
     }
 
     private processComponent(comp: any): void {
-        // Very basic discovery logic based on signature/properties
         if (comp.id && comp.getCelebrations) {
             this.registry.plugins.registerCalendar(comp.id, comp);
         } else if (comp.id && comp.transform && comp.locales) {
@@ -257,19 +256,33 @@ export class SalveLoader {
         } else if (comp.locale && comp.honorifics) {
             this.registry.packs.registerHonorifics(comp);
         } else if (Array.isArray(comp) && comp.length > 0) {
-            // Check first element to guess type
             const first = comp[0];
             if (first.qid && first.canonicalName) {
                 this.registry.packs.registerSaints(comp);
+                this.wireNameDayPlugin("saints", comp);
             } else if (first.month && first.day && first.saintQids) {
                 this.registry.packs.registerNameDays(comp);
+                this.wireNameDayPlugin("entries", comp);
             }
         } else if (comp.events && Array.isArray(comp.events)) {
-            // Register YAML-based events with the rule-based calendar if it exists
             const ruleBased = this.registry.plugins.getCalendar("rule-based") as any;
             if (ruleBased && typeof ruleBased.registerEvents === 'function') {
                 ruleBased.registerEvents(comp.events);
             }
+        }
+    }
+
+    /**
+     * Auto-wire nameday data to any registered nameday plugin so that
+     * consumers don't need separate manual registration calls.
+     */
+    private wireNameDayPlugin(kind: "saints" | "entries", data: any[]): void {
+        const plugin = this.registry.plugins.getCalendar("nameday-plugin") as any;
+        if (!plugin) return;
+        if (kind === "saints" && typeof plugin.registerSaints === "function") {
+            plugin.registerSaints(data);
+        } else if (kind === "entries" && typeof plugin.registerNameDays === "function") {
+            plugin.registerNameDays(data);
         }
     }
 }
