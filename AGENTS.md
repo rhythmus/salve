@@ -41,7 +41,7 @@ Follow this format consistently for all commits.
 
 All locale-specific, region-specific, language-specific, cultural, or domain-specific **textual data** — including greeting phrases, event labels, honorific titles, address format templates, saint aliases, calendar entries, and protocol rules — MUST live as declarative YAML source files under `data/packs/`.
 
-For practical authoring rules, naming patterns, category breakdowns, and workflow guidance, contributors and agents working on pack data MUST consult `docs/salve-data-authoring-guide.md`.
+For practical authoring rules, naming patterns, category breakdowns, and workflow guidance, contributors and agents working on pack data MUST consult `docs/Data-Authoring-Guide.md`.
 
 ### Hard rule
 
@@ -80,7 +80,7 @@ Generated files MUST NOT be edited manually.  When data needs to change, edit th
 1. Create or extend the YAML file under `data/packs/` following the naming convention for its category.
 2. Ensure a JSON Schema exists under `data/schemas/` for validation.
 3. If no generator exists for the category, create one under `scripts/` following the pattern of the existing generators.
-4. Update `docs/salve-data-authoring-guide.md` if the new category or workflow changes the contributor-facing authoring model.
+4. Update `docs/Data-Authoring-Guide.md` if the new category or workflow changes the contributor-facing authoring model.
 5. Add the source to `data/data-sources.bib`.
 6. Never embed the data directly in a `.ts` file.
 
@@ -92,7 +92,7 @@ When adding a new dataset, manually populating greetings, or implementing a new 
 
 ## 📄 RFC Specification Authoring
 
-The Salve specification (`docs/Specification.md`) follows the RFC authoring guidelines defined in RFC 7322 ("RFC Style Guide") and its web companion.  All updates to the specification MUST comply with the rules below.
+The Salve specification (`docs/Technical-Specification.md`) follows the RFC authoring guidelines defined in RFC 7322 ("RFC Style Guide") and its web companion.  All updates to the specification MUST comply with the rules below.
 
 ### Required Document Structure
 

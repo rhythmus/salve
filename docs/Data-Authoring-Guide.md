@@ -348,7 +348,7 @@ This guide is the practical authoring manual for Salve datasets.
 
 Use it together with:
 
-- `docs/Specification.md` for formal technical requirements
+- `docs/Technical-Specification.md` for formal technical requirements
 - `AGENTS.md` for contributor and agent policy
 - `data/data-sources.bib` for provenance
 
