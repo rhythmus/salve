@@ -1,0 +1,68 @@
+# English academic protocol pack
+#
+# British/International English academic address: Professor and Dr. in postal
+# and letterhead forms. "Dear Professor Smith" / "Dear Dr. Smith" in correspondence.
+#
+# Source: https://en.wikipedia.org/wiki/Style_(form_of_address)
+
+id: protocol-academic-en
+locale: en
+requiredSubculture: academic
+domain: academic
+sources:
+  - 'https://en.wikipedia.org/wiki/Style_(form_of_address)'
+notes: >
+  English academic protocol: Dear + correspondence title + surname in letterhead;
+  Prof. / Dr. on envelope. Professor typically absorbs Doctor in salutation when both held.
+
+titles:
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: Prof.
+    correspondenceForm: Professor
+  - system: academic
+    code: dr
+    rank: 2
+    postalForm: Dr.
+    correspondenceForm: Dr.
+
+rules:
+  - id: en-academic-postal
+    priority: 10
+    template: "{postalTitleStack} {surname}"
+    when:
+      locale: en
+      formality: [formal, hyperformal]
+      outputForm: postal
+      titleSystem: academic
+    notes: "Envelope: Prof. / Dr. + surname."
+
+  - id: en-academic-letterhead
+    priority: 10
+    template: "Dear {correspondenceTitleStack} {surname},"
+    when:
+      locale: en
+      formality: [formal, hyperformal]
+      outputForm: letterhead
+      titleSystem: academic
+    notes: "Dear Professor Smith, or Dear Dr. Smith,"
+
+  - id: en-academic-salutation
+    priority: 10
+    template: "{correspondenceTitleStack} {surname}"
+    when:
+      locale: en
+      formality: [formal, hyperformal]
+      outputForm: salutation
+      titleSystem: academic
+    notes: "Spoken or displayed: Professor Smith / Dr. Smith."
+
+  - id: en-academic-email-opening
+    priority: 10
+    template: "Dear {correspondenceTitleStack} {surname},"
+    when:
+      locale: en
+      formality: [formal, hyperformal]
+      outputForm: email_opening
+      titleSystem: academic
