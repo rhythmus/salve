@@ -14,31 +14,22 @@ events:
     greetings:
       - text: Happy World Braille Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Wereldbrailledag!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale du braille !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Welt Braille Tag!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: Καλή Παγκόσμια Ημέρα γραφής Μπράιγ!
         locale: el-GR
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial del Braille!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial do Braille!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم يوم بريل العالمي مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界點字日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day of Education
     emoji: "📚"
@@ -59,25 +50,18 @@ events:
     greetings:
       - text: Happy International Day of Clean Energy!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale des énergies propres !
         locale: fr
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de la Energía!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional da Energia Limpa!
         locale: pt
-        sources: wikidata-localized-label
       - text: Международный день чистой энергии!
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للطاقة النظيفة مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 国际清洁能源日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day of Commemoration in Memory of the Victims of the Holocaust
     date: 27 January
@@ -102,34 +86,24 @@ events:
     greetings:
       - text: Happy World Wetlands Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale des zones humides !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Welttag der Feuchtgebiete!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de los Humedales!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona giornata mondiale delle zone umide!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial das Zonas Húmidas!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день водно-болотных угодий!
         locale: ru
-        sources: wikidata-localized-label
       - text: Światowy Dzień Mokradeł!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للأراضي الرطبة مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界湿地日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day of Human Fraternity
     emoji: "🤝"
@@ -139,28 +113,20 @@ events:
     greetings:
       - text: Happy International Day of Human Fraternity!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale de la fraternité humaine !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Internationaler Tag der menschlichen Geschwisterlichkeit!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de la Fraternidad Humana!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona Giornata Internazionale della Fratellanza Umana!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional da Fraternidade Humana!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للأخوة الإنسانية مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 國際人類博愛日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day of Zero Tolerance to Female Genital Mutilation
     emoji: "🤝"
@@ -170,34 +136,24 @@ events:
     greetings:
       - text: Happy International Day of Zero Tolerance to Female Genital Mutilation!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Zero Tolerance Dag!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale de la tolérance zéro à l'égard des mutilations génitales féminines !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Internationaler Tag gegen weibliche Genitalverstümmelung!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de Tolerancia Cero con la Mutilación Genital Femenina!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona Giornata internazionale contro le mutilazioni genitali femminili!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional da Tolerância Zero à Mutilação Genital Feminina!
         locale: pt
-        sources: wikidata-localized-label
       - text: Międzynarodowy Dzień Zerowej Tolerancji dla Okaleczania Żeńskich Narządów Płciowych!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي لرفض ختان الإناث مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 女陰殘割國際零容忍日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day of the Arabian Leopard
     date: 10 February
@@ -211,25 +167,18 @@ events:
     greetings:
       - text: Happy World Pulses Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale des légumineuses !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Internationaler Tag der Hülsenfrüchte!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de las Legumbres!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial das Leguminosas!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день зернобобовых!
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للبقول مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Day of Women and Girls in Science
     emoji: "👩"
@@ -239,34 +188,24 @@ events:
     greetings:
       - text: Happy International Day of Women and Girls in Science!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale des femmes et des filles en Science !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Internationaler Tag der Frauen und Mädchen in der Wissenschaft!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de la Mujer y la Niña en la Ciencia!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona Giornata internazionale delle donne e delle ragazze nella scienza!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional das Mulheres e Raparigas na Ciência!
         locale: pt
-        sources: wikidata-localized-label
       - text: Международный день женщин и девочек в науке!
         locale: ru
-        sources: wikidata-localized-label
       - text: Międzynarodowy Dzień Kobiet i Dziewcząt w Nauce!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للمرأة والفتاة في ميدان العلوم مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 妇女和女童参与科学国际日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day for the Prevention of Violent Extremism as and when Conducive to Terrorism
     date: 12 February
@@ -275,25 +214,18 @@ events:
     greetings:
       - text: Happy International Day for the Prevention of Violent Extremism as and when Conducive to Terrorism!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale pour la prévention de l’extrémisme violent pouvant conduire au terrorisme !
         locale: fr
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional para la Prevención del Extremismo Violento cuando Conduzca al Terrorismo!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional para a Prevenção do Extremismo Violento como e quando Condutor do Terrorismo!
         locale: pt
-        sources: wikidata-localized-label
       - text: 'Международный день предупреждения насильственного экстремизма, создающего питательную среду для терроризма!'
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي لمنع التطرف العنيف عندما يفضي إلى الإرهاب مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 防止助长恐怖主义的暴力极端主义国际日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: World Radio Day
     emoji: "📻"
@@ -303,31 +235,22 @@ events:
     greetings:
       - text: Happy World Radio Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale de la radio !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Welttag des Radios!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de la Radio!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona giornata della radio!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial da Rádio!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день радио!
         locale: ru
-        sources: wikidata-localized-label
       - text: Światowy Dzień Radia!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للإذاعة مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: Global Tourism Resilience Day
     date: 17 February
@@ -336,13 +259,10 @@ events:
     greetings:
       - text: Happy Global Tourism Resilience Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de la Resiliencia del Turismo!
         locale: es
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للسياحة القادرة على الصمود مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: World Day of Social Justice
     date: 20 February
@@ -351,34 +271,24 @@ events:
     greetings:
       - text: Happy World Day of Social Justice!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne World Day of Social Justice!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale de la justice sociale !
         locale: fr
-        sources: wikidata-localized-label
       - text: Καλή Παγκόσμια Ημέρα Κοινωνικής Δικαιοσύνης!
         locale: el-GR
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de la Justicia Social!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona giornata mondiale della giustizia sociale!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial da Justiça Social!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день социальной справедливости!
         locale: ru
-        sources: wikidata-localized-label
       - text: Światowy Dzień Sprawiedliwości Społecznej!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للعدالة الاجتماعية مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Mother Language Day
     date: 21 February
@@ -393,28 +303,20 @@ events:
     greetings:
       - text: Happy Zero Discrimination Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée zéro discrimination !
         locale: fr
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional para la Cero Discriminación!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia da Discriminação Zero!
         locale: pt
-        sources: wikidata-localized-label
       - text: День «Ноль дискриминации»!
         locale: ru
-        sources: wikidata-localized-label
       - text: Zero dla Dyskryminacji!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم يوم الانعدام التام للتمييز مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 艾滋病零歧视日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: World Seagrass Day
     date: 1 March
@@ -423,28 +325,20 @@ events:
     greetings:
       - text: Happy World Seagrass Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale des herbiers marins !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Welttag des Seegrases!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de los Pastos Marinos!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial das Ervas Marinhas!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день морских трав!
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للأعشاب البحرية مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界海草日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: World Wildlife Day
     emoji: "🐾"
@@ -454,31 +348,22 @@ events:
     greetings:
       - text: Happy World Wildlife Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse journée mondiale de la vie sauvage !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Tag des Artenschutzes!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de la Vida Silvestre!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona Giornata mondiale della fauna selvatica!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial da Vida Selvagem!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день дикой природы!
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للحياة البرية مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界野生生物日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day for Disarmament and Non-Proliferation Awareness
     date: 5 March
@@ -487,25 +372,18 @@ events:
     greetings:
       - text: Happy International Day for Disarmament and Non-Proliferation Awareness!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale de sensibilisation au désarmement et à la non-prolifération !
         locale: fr
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional para Concienciar sobre el Desarme y la No Proliferación!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional do Desarmamento e Conscientização sobre a Não-Proliferação!
         locale: pt
-        sources: wikidata-localized-label
       - text: Международный день просвещения по вопросам разоружения и нераспространения!
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للتوعية بمسائل نزع السلاح وعدم الانتشار مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 裁军和不扩散宣传国际日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Women's Day
     emoji: "👩"
@@ -514,40 +392,28 @@ events:
     greetings:
       - text: Happy International Women's Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Internationale Vrouwendag!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale des femmes !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Internationaler Frauentag!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: Καλή Παγκόσμια Ημέρα της Γυναίκας!
         locale: el-GR
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de la Mujer!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona Giornata internazionale della donna!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional da Mulher!
         locale: pt
-        sources: wikidata-localized-label
       - text: Международный женский день!
         locale: ru
-        sources: wikidata-localized-label
       - text: Dzień Kobiet!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للمرأة مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 國際婦女節快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day of Women Judges
     emoji: "👩"
@@ -557,19 +423,14 @@ events:
     greetings:
       - text: Happy International Day of Women Judges!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale des femmes juges !
         locale: fr
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de las Juezas!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional das Juízas!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للقاضيات مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Day to Combat Islamophobia
     date: 10 March
@@ -578,19 +439,14 @@ events:
     greetings:
       - text: Happy International Day To Combat Islamophobia!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de la Lucha contra la Islamofobia!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional de Combate à Islamofobia!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي لمكافحة رهاب الإسلام مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 打擊伊斯蘭恐懼症國際日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day of Happiness
     emoji: "😊"
@@ -600,37 +456,26 @@ events:
     greetings:
       - text: Happy International Day of Happiness!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne International Day of Happiness!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale du bonheur !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Weltglückstag!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de la Felicidad!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona giornata internazionale della felicità!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional da Felicidade!
         locale: pt
-        sources: wikidata-localized-label
       - text: Международный день счастья!
         locale: ru
-        sources: wikidata-localized-label
       - text: Międzynarodowy Dzień Szczęścia!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للسعادة مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 国际幸福日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: French Language Day
     emoji: "🇫🇷"
@@ -677,37 +522,26 @@ events:
     greetings:
       - text: Happy World Water Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Wereldwaterdag!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale de l'eau !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Weltwassertag!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial del Agua!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona giornata mondiale dell'acqua!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial da Água!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день воды!
         locale: ru
-        sources: wikidata-localized-label
       - text: Światowy Dzień Wody!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم يوم الماء العالمي مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界水日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: World Meteorological Day
     emoji: ☁️
@@ -747,40 +581,28 @@ events:
     greetings:
       - text: Happy World Autism Awareness Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Wereld Autisme Dag!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale de la sensibilisation à l'autisme !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Welt-Autismus-Tag!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: Καλή Παγκόσμια Ημέρα Ευαισθητοποίησης για τον Αυτισμό!
         locale: el-GR
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de Concienciación sobre el Autismo!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona Giornata mondiale per la consapevolezza sull'autismo!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial de Conscientização do Autismo!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день распространения информации о проблеме аутизма!
         locale: ru
-        sources: wikidata-localized-label
       - text: Światowy Dzień Świadomości Autyzmu!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للتوحد مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界自闭症关注日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day for Mine Awareness and Assistance in Mine Action
     date: 4 April
@@ -789,22 +611,16 @@ events:
     greetings:
       - text: Happy International Day for Mine Awareness and Assistance in Mine Action!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de Información sobre el Peligro de las Minas y de Asistencia para las Actividades Relativas a las Minas!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional de Sensibilização sobre Minas e Assistência à Desminagem!
         locale: pt
-        sources: wikidata-localized-label
       - text: 'Международный день просвещения по вопросам минной опасности и помощи в деятельности, связанной с разминированием!'
         locale: ru
-        sources: wikidata-localized-label
       - text: Międzynarodowy Dzień Wiedzy o Minach i Działań Zapobiegających Minom!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للتوعية بخطر الألغام مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Day of Conscience
     emoji: "🔬"
@@ -814,22 +630,16 @@ events:
     greetings:
       - text: Happy International Day of Conscience!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Alles Gute zum Internationaler Tag des Gewissens!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de la Conciencia!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional da Consciência!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للضمير مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 國際良心日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day of Sport for Development and Peace
     emoji: "🕊️"
@@ -906,25 +716,18 @@ events:
     greetings:
       - text: Happy World Malaria Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Alles Gute zum Weltmalariatag!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: Καλή Παγκόσμια Ημέρα κατά της Ελονοσίας!
         locale: el-GR
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial del Paludismo!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial da Luta contra a Malária!
         locale: pt
-        sources: wikidata-localized-label
       - text: Światowy Dzień Malarii!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للملاريا مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Delegate’s Day
     date: 25 April
@@ -946,13 +749,10 @@ events:
     greetings:
       - text: Happy World Day for Safety and Health at Work!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale pour la sécurité et la santé au travail !
         locale: fr
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للصحة والسلامة في مكان العمل مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Day in Memory of the Victims of Earthquakes
     emoji: "🎨"
@@ -967,34 +767,24 @@ events:
     greetings:
       - text: Happy International Jazz Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale du jazz !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Internationaler Tag des Jazz!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: Καλή Διεθνής Ημέρα Τζαζ!
         locale: el-GR
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional del Jazz!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona Giornata internazionale del jazz!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional do Jazz!
         locale: pt
-        sources: wikidata-localized-label
       - text: Международный день джаза!
         locale: ru
-        sources: wikidata-localized-label
       - text: Międzynarodowy Dzień Jazzu!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم يوم الجاز الدولي مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
     # ─── May ─────────────────────────────────────────────────────
 
@@ -1005,37 +795,26 @@ events:
     greetings:
       - text: Happy Labour Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Dag van de Arbeid!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse fête du Travail !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Tag der Arbeit!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz día del Trabajo!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona Festa dei lavoratori!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia do Trabalhador!
         locale: pt
-        sources: wikidata-localized-label
       - text: День труда!
         locale: ru
-        sources: wikidata-localized-label
       - text: Dzień Pracy!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم عيد العمال مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 勞動節快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: 'Vesak, the Day of the Full Moon'
     date: 1 May
@@ -1049,19 +828,14 @@ events:
     greetings:
       - text: Happy World Tuna Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse journée mondiale du thon !
         locale: fr
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial del Atún!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial do Atum!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي لسمك التونة مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: World Press Freedom Day
     emoji: "🗞️"
@@ -1071,37 +845,26 @@ events:
     greetings:
       - text: Happy World Press Freedom Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Internationale Dag van de Persvrijheid!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale de la liberté de la presse !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Internationaler Tag der Pressefreiheit!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de la Libertad de Prensa!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona giornata mondiale della libertà di stampa!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial da Liberdade de Imprensa!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день свободы печати!
         locale: ru
-        sources: wikidata-localized-label
       - text: Światowy Dzień Wolności Prasy!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي لحرية الصحافة مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界新聞自由日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: World Portuguese Language Day
     emoji: "🇵🇹"
@@ -1117,25 +880,18 @@ events:
     greetings:
       - text: Happy Time of Remembrance and Reconciliation for Those Who Lost Their Lives during the Second World War!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Alles Gute zum Tage des Gedenkens und der Versöhnung!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Días del Recuerdo y la Reconciliación Conmemoración de la Segunda Guerra Mundial!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Momento de lembrança e reconciliação para aqueles que perderam suas vidas durante a Segunda Guerra Mundial!
         locale: pt
-        sources: wikidata-localized-label
       - text: Дни памяти и примирения!
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم مناسبة للتذكر والمصالحة إجلالا لذكرى جميع ضحايا الحرب العالمية الثانية مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 第二次世界大戰喪生者紀念與和解日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: World Migratory Bird Day
     date: 10 May
@@ -1144,19 +900,14 @@ events:
     greetings:
       - text: Happy Bird Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de las Aves Migratorias!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial das Aves Migratórias!
         locale: pt
-        sources: wikidata-localized-label
       - text: Światowy Dzień Ptaków Wędrownych!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للطيور المهاجرة مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Day of Argania
     date: 10 May
@@ -1165,19 +916,14 @@ events:
     greetings:
       - text: Happy International Day of Argania!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale de l’arganier !
         locale: fr
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de los Arganes!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional da Argânia!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي لشجرة الأرگان مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Day of Plant Health
     emoji: "🏥"
@@ -1188,25 +934,18 @@ events:
     greetings:
       - text: Happy International Day of Plant Health!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale de la santé des végétaux !
         locale: fr
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de la Sanidad Vegetal!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional da Saúde Vegetal!
         locale: pt
-        sources: wikidata-localized-label
       - text: Международный день охраны здоровья растений!
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للصحة النباتية مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 国际植物健康日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: 'Vesak, the Day of Full Moon'
     date: 12 May
@@ -1238,16 +977,12 @@ events:
     greetings:
       - text: Happy World Fair Play Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial del Juego Limpio!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial do Jogo Limpo!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للعب النظيف مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: World Bee Day
     emoji: "🐝"
@@ -1258,37 +993,26 @@ events:
     greetings:
       - text: Happy World Bee Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Wereld Bijendag!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale des abeilles !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Weltbienentag!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de las Abejas!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona Giornata mondiale delle api!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial das Abelhas!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день пчел!
         locale: ru
-        sources: wikidata-localized-label
       - text: Dzień pszczoły!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للنحل مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界蜜蜂日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Tea Day
     emoji: "🍵"
@@ -1325,10 +1049,8 @@ events:
     greetings:
       - text: Happy World Football Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي لكرة القدم مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: 'Week of Solidarity with the Peoples of Non-Self-Governing Territories, 25-31 May'
     date: 25 May
@@ -1349,19 +1071,14 @@ events:
     greetings:
       - text: Happy International Day of Potato!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale de la pomme de terre !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Internationaler Tag der Kartoffel!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de la Papa!
         locale: es
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للبطاطا مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: World No-Tobacco Day
     date: 31 May
@@ -1381,19 +1098,14 @@ events:
     greetings:
       - text: Happy Global Day of Parents!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Internationale Dag van de Ouders!
         locale: nl
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de las Madres y los Padres!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial das Mães e dos Pais!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للوالدين مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: World Bicycle Day
     emoji: "🚲"
@@ -1403,37 +1115,26 @@ events:
     greetings:
       - text: Happy World Bicycle Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Wereldfietsdag!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale de la bicyclette !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Weltfahrradtag!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de la Bicicleta!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona Giornata mondiale della bicicletta!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial da Bicicleta!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день велосипеда!
         locale: ru
-        sources: wikidata-localized-label
       - text: Światowy Dzień Roweru!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للدراجات الهوائية مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界自行车日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day of Innocent Children Victims of Aggression
     emoji: "🧒"
@@ -1443,25 +1144,18 @@ events:
     greetings:
       - text: Happy International Day of Innocent Children Victims of Aggression!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale des enfants victimes innocentes de l'agression !
         locale: fr
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de los Niños Víctimas Inocentes de Agresión!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional das Crianças Inocentes Vítimas de Agressão!
         locale: pt
-        sources: wikidata-localized-label
       - text: Международный день невинных детей — жертв агрессии!
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للأطفال الأبرياء ضحايا العدوان مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 受侵略戕害的无辜儿童国际日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: World Environment Day
     emoji: "🌱"
@@ -1475,25 +1169,18 @@ events:
     greetings:
       - text: 'Happy International Day for the Fight against Illegal, Unreported and Unregulated Fishing!'
         locale: en-GB
-        sources: wikidata-localized-label
       - text: 'Joyeuse Journée internationale de la lutte contre la pêche illicite, non déclarée et non réglementée !'
         locale: fr
-        sources: wikidata-localized-label
       - text: '¡Feliz Día Internacional de la Lucha contra la Pesca Ilegal, No Declarada y No Reglamentada!'
         locale: es
-        sources: wikidata-localized-label
       - text: 'Feliz Dia Internacional de Combate à Pesca Ilegal, Não Declarada e Não Regulamentada!'
         locale: pt
-        sources: wikidata-localized-label
       - text: "Международный день борьбы с незаконным, ﻿несообщаемым и нерегулируемым промыслом!"
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي لمكافحة الصيد غير القانوني دون إبلاغ ودون تنظيم مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 打击非法、未报告和无管制的捕捞活动国际日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: Russian Language Day
     emoji: "🇷🇺"
@@ -1507,28 +1194,20 @@ events:
     greetings:
       - text: "Happy World\_Food Safety Day!"
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale de la sécurité sanitaire des aliments !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Welttag der Lebensmittelsicherheit!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de la Inocuidad de los Alimentos!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona Giornata Mondiale dedicata alla Sicurezza Alimentare!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial da Segurança dos Alimentos!
         locale: pt
-        sources: wikidata-localized-label
       - text: всемирный день безопасности пищевых продуктов!
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي لسلامة الأغذية مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: World Oceans Day
     emoji: "🌊"
@@ -1538,37 +1217,26 @@ events:
     greetings:
       - text: Happy World Oceans Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Wereldoceanendag!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale de l'océan !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Welttag der Ozeane!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: Καλή Παγκόσμια Ημέρα Ωκεανών!
         locale: el-GR
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de los Océanos!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial dos Oceanos!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день океанов!
         locale: ru
-        sources: wikidata-localized-label
       - text: Światowy Dzień Oceanów!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للمحيطات مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界海洋日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day for Dialogue among Civilizations
     date: 10 June
@@ -1577,13 +1245,10 @@ events:
     greetings:
       - text: Happy International Day for Dialogue among Civilizations!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional do Diálogo entre Civilizações!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للحوار بين الحضارات مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Day of Play
     date: 11 June
@@ -1592,13 +1257,10 @@ events:
     greetings:
       - text: Happy International Day of Play!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional do Brincar!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للّعب مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: World Day Against Child Labour
     emoji: ⚒️
@@ -1607,28 +1269,20 @@ events:
     greetings:
       - text: Happy World Day Against Child Labour!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Alles Gute zum Welttag gegen Kinderarbeit!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: Καλή Παγκόσμια Ημέρα κατά της Παιδικής Εργασίας!
         locale: el-GR
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial contra el Trabajo Infantil!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial contra o Trabalho Infantil!
         locale: pt
-        sources: wikidata-localized-label
       - text: Światowy Dzień Sprzeciwu wobec Pracy Dzieci!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي لمكافحة عمل الأطفال مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界無童工日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Albinism Awareness Day
     date: 13 June
@@ -1917,25 +1571,18 @@ events:
     greetings:
       - text: Happy International Day of Democracy!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de la Democracia!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional da Democracia!
         locale: pt
-        sources: wikidata-localized-label
       - text: Международный день демократии!
         locale: ru
-        sources: wikidata-localized-label
       - text: Międzynarodowy Dzień Demokracji!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للديمقراطية مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 国际民主日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: 'International Day of Science, Technology and Innovation for the South'
     emoji: "🔬"
@@ -1957,28 +1604,20 @@ events:
     greetings:
       - text: Happy World Patient Safety Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale de la sécurité des patients !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Internationaler Welttag der Patientensicherheit!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de la Seguridad del Paciente!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial da Segurança do Paciente!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день безопасности пациентов!
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي لسلامة المرضى مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界患者安全日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Equal Pay Day
     date: 18 September
@@ -2039,40 +1678,28 @@ events:
     greetings:
       - text: Happy International Day of Non-Violence!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Internationale Dag van de Geweldloosheid!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale de la non-violence !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Internationaler Tag der Gewaltlosigkeit!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: Καλή Παγκόσμια Ημέρα Μη Βίας!
         locale: el-GR
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de la No Violencia!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona giornata internazionale della nonviolenza!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional da Não-Violência!
         locale: pt
-        sources: wikidata-localized-label
       - text: Международный день ненасилия!
         locale: ru
-        sources: wikidata-localized-label
       - text: Międzynarodowy Dzień bez Przemocy!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للاعنف مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 國際非暴力日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: 'World Space Week, 4-10 October'
     emoji: "🚀"
@@ -2097,25 +1724,18 @@ events:
     greetings:
       - text: Happy World Cotton Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale du coton !
         locale: fr
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial del Algodón!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial do Algodão!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день хлопка!
         locale: ru
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للقطن مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界棉花日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: World Post Day
     date: 9 October
@@ -2132,19 +1752,14 @@ events:
     greetings:
       - text: Happy Bird Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de las Aves Migratorias!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial das Aves Migratórias!
         locale: pt
-        sources: wikidata-localized-label
       - text: Światowy Dzień Ptaków Wędrownych!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للطيور المهاجرة مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Day of the Girl Child
     date: 11 October
@@ -2177,10 +1792,8 @@ events:
     greetings:
       - text: Happy International Day of the Snow Leopard!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي لنمر الثلوج مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: World Development Information Day
     emoji: "📈"
@@ -2225,37 +1838,26 @@ events:
     greetings:
       - text: Happy International Day to End Impunity for Crimes Against Journalists!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Internationale Dag tegen de straffeloosheid van misdaden tegen journalisten!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée internationale de la fin de l'impunité pour les crimes commis contre des journalistes !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Internationaler Tag zur Beendigung der Straflosigkeit für Verbrechen an Journalisten!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional para Poner Fin a la Impunidad de los Crímenes contra Periodistas!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona Giornata internazionale per porre fine all'impunità per i crimini contro i giornalisti!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional pelo Fim da Impunidade dos Crimes contra Jornalistas!
         locale: pt
-        sources: wikidata-localized-label
       - text: Международный день прекращения безнаказанности за преступления против журналистов!
         locale: ru
-        sources: wikidata-localized-label
       - text: Międzynarodowy Dzień Walki z Bezkarnością za Przestępstwa wobec Dziennikarzy!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي لإنهاء الإفلات من العقاب على الجرائم المرتكبة ضد الصحافيين مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 終止針對記者犯罪不受懲罰現象國際日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: World Tsunami Awareness Day
     emoji: "🌊"
@@ -2265,16 +1867,12 @@ events:
     greetings:
       - text: Happy World Tsunami Awareness Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de Concienciación sobre los Sunamis!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial da Conscientização sobre Tsunâmis!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للتوعية بأمواج تسونامي مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Day for Preventing the Exploitation of the Environment in War and Armed Conflict
     emoji: "🌱"
@@ -2284,25 +1882,18 @@ events:
     greetings:
       - text: Happy International Day for Preventing the Exploitation of the Environment in War and Armed Conflict!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional para la Prevención de la Explotación del Medio Ambiente en la Guerra y los Conflictos Armados!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional para a Prevenção da Exploração do Meio Ambiente na Guerra e nos Conflitos Armados!
         locale: pt
-        sources: wikidata-localized-label
       - text: Международный день предотвращения эксплуатации окружающей среды во время войны и вооружённых конфликтов!
         locale: ru
-        sources: wikidata-localized-label
       - text: Międzynarodowy Dzień Zapobiegania Wyzyskowi Środowiska Naturalnego podczas Wojen i Konfliktów Zbrojnych!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي لمنع استخدام البيئة في الحروب والصراعات العسكرية مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 防止戰爭和武裝衝突糟蹋環境國際日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: 'International Week of Science and Peace, 9-15 November'
     emoji: "🕊️"
@@ -2376,31 +1967,22 @@ events:
     greetings:
       - text: Happy World Television Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale de la télévision !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Welttag des Fernsehens!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial de la Televisión!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial da Televisão!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день телевидения!
         locale: ru
-        sources: wikidata-localized-label
       - text: Światowy Dzień Telewizji!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للتلفزيون مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界电视日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: World Conjoined Twins Day
     date: 24 November
@@ -2428,19 +2010,14 @@ events:
     greetings:
       - text: Happy Day of Remembrance for all Victims of Chemical Warfare!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: ¡Feliz Día de Conmemoración de todas las Víctimas de la Guerra Química!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia em Memória de Todas as Vítimas da Guerra Química!
         locale: pt
-        sources: wikidata-localized-label
       - text: Dzień Pamięci o Ofiarach Wojen Chemicznych!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم يوم إحياء ذكرى جميع ضحايا الحرب الكيميائية مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
     # ─── December ─────────────────────────────────────────────────────
 
@@ -2450,37 +2027,26 @@ events:
     greetings:
       - text: Happy World AIDS Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Fijne Wereldaidsdag!
         locale: nl
-        sources: wikidata-localized-label
       - text: Joyeuse Journée mondiale de lutte contre le sida !
         locale: fr
-        sources: wikidata-localized-label
       - text: Alles Gute zum Welt-AIDS-Tag!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial del Sida!
         locale: es
-        sources: wikidata-localized-label
       - text: Buona giornata mondiale contro l'AIDS!
         locale: it
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial de Combate à Sida!
         locale: pt
-        sources: wikidata-localized-label
       - text: Всемирный день борьбы со СПИДом!
         locale: ru
-        sources: wikidata-localized-label
       - text: Światowy Dzień AIDS!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم يوم الإيدز العالمي مبارك!
         locale: ar
-        sources: wikidata-localized-label
       - text: 世界艾滋病日快乐！
         locale: zh-CN
-        sources: wikidata-localized-label
 
   - label: International Day for the Abolition of Slavery
     date: 2 December
@@ -2497,16 +2063,12 @@ events:
     greetings:
       - text: Happy International Day of Banks!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Internacional de los Bancos!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Internacional dos Bancos!
         locale: pt
-        sources: wikidata-localized-label
       - text: يوم اليوم الدولي للمصارف مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Day Against Unilateral Coercive Measures
     date: 4 December
@@ -2525,22 +2087,16 @@ events:
     greetings:
       - text: Happy World Soil Day!
         locale: en-GB
-        sources: wikidata-localized-label
       - text: Alles Gute zum Weltbodentag!
         locale: de-DE
-        sources: wikidata-localized-label
       - text: ¡Feliz Día Mundial del Suelo!
         locale: es
-        sources: wikidata-localized-label
       - text: Feliz Dia Mundial do Solo!
         locale: pt
-        sources: wikidata-localized-label
       - text: Światowy Dzień Gleby!
         locale: pl
-        sources: wikidata-localized-label
       - text: يوم اليوم العالمي للتربة مبارك!
         locale: ar
-        sources: wikidata-localized-label
 
   - label: International Civil Aviation Day
     emoji: ✈️
