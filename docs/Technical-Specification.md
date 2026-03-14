@@ -1034,7 +1034,12 @@ The canonical directory layout is:
    -  `protocol/` — protocol overlay packs for all domains and locales
    -  `locales/` — locale geography registries
    -  `regions/` — region registries
-   -  `namedays/` — nameday saint and calendar packs
+
+
+Nameday saint definitions and calendar packs live under
+`events/tradition/` alongside other tradition-scoped event data,
+since namedays are themselves tradition-based events following
+religious and liturgical calendars.
 
 Category-first organization was chosen over language-first or
 region-first grouping because:

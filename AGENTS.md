@@ -86,12 +86,11 @@ Pack YAML files are organized into category-first subdirectories:
 | `data/packs/events/shared/` | Shared international event registries |
 | `data/packs/events/supranational/` | Supranational event registries (e.g. `EU.events.yaml`) |
 | `data/packs/events/country/` | Country-scoped event registries (e.g. `GR.events.yaml`) |
-| `data/packs/events/tradition/` | Tradition-scoped event registries (e.g. `christian.events.yaml`) |
+| `data/packs/events/tradition/` | Tradition-scoped events, including nameday saints and calendars (e.g. `christian.events.yaml`, `el-GR.nameday-saints.yaml`) |
 | `data/packs/addresses/` | Address packs (e.g. `nl.address.yaml`, `el.address.yaml`) |
 | `data/packs/protocol/` | Protocol overlay packs (e.g. `nl.protocol.academic.yaml`) |
 | `data/packs/locales/` | Locale geography registries (e.g. `nl.locales.yaml`) |
 | `data/packs/regions/` | Region registries (e.g. `BE.regions.yaml`) |
-| `data/packs/namedays/` | Nameday packs (e.g. `el-GR.nameday-saints.yaml`) |
 
 ### When adding new data
 

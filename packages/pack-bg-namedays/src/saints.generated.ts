@@ -1,7 +1,7 @@
 /**
  * AUTO-GENERATED — Do not edit manually.
  * Generated from data/packs/*.nameday-saints.yaml by scripts/generate-nameday-packs.ts
- * Generated at: 2026-03-14T15:05:25.811Z
+ * Generated at: 2026-03-14T15:11:41.778Z
  */
 
 import type { SaintDefinition } from "@salve/types";

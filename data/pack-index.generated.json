@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-14T15:05:27.067Z",
+  "generatedAt": "2026-03-14T15:11:43.337Z",
   "description": "Machine-readable pack index for selective bundle compilation.",
   "packs": [
     {
@@ -93,6 +93,20 @@
       ]
     },
     {
+      "file": "events/tradition/bg-BG.nameday-calendar.yaml",
+      "family": "nameday-calendar",
+      "scopeType": "locale",
+      "selector": "bg-BG",
+      "tags": []
+    },
+    {
+      "file": "events/tradition/bg-BG.nameday-saints.yaml",
+      "family": "nameday-saints",
+      "scopeType": "locale",
+      "selector": "bg-BG",
+      "tags": []
+    },
+    {
       "file": "events/tradition/christian.events.yaml",
       "family": "events",
       "scopeType": "tradition",
@@ -114,6 +128,20 @@
         "christian",
         "orthodox"
       ]
+    },
+    {
+      "file": "events/tradition/el-GR.nameday-calendar.yaml",
+      "family": "nameday-calendar",
+      "scopeType": "locale",
+      "selector": "el-GR",
+      "tags": []
+    },
+    {
+      "file": "events/tradition/el-GR.nameday-saints.yaml",
+      "family": "nameday-saints",
+      "scopeType": "locale",
+      "selector": "el-GR",
+      "tags": []
     },
     {
       "file": "events/tradition/muslim.events.yaml",
@@ -187,34 +215,6 @@
       "family": "locales",
       "scopeType": "language",
       "selector": "nl",
-      "tags": []
-    },
-    {
-      "file": "namedays/bg-BG.nameday-calendar.yaml",
-      "family": "nameday-calendar",
-      "scopeType": "locale",
-      "selector": "bg-BG",
-      "tags": []
-    },
-    {
-      "file": "namedays/bg-BG.nameday-saints.yaml",
-      "family": "nameday-saints",
-      "scopeType": "locale",
-      "selector": "bg-BG",
-      "tags": []
-    },
-    {
-      "file": "namedays/el-GR.nameday-calendar.yaml",
-      "family": "nameday-calendar",
-      "scopeType": "locale",
-      "selector": "el-GR",
-      "tags": []
-    },
-    {
-      "file": "namedays/el-GR.nameday-saints.yaml",
-      "family": "nameday-saints",
-      "scopeType": "locale",
-      "selector": "el-GR",
       "tags": []
     },
     {

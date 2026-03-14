@@ -78,11 +78,14 @@ The current layout is:
 data/packs/
   greetings/
   events/
+    shared/
+    supranational/
+    country/
+    tradition/          ← includes nameday saints and calendars
   addresses/
   protocol/
   locales/
   regions/
-  namedays/
 ```
 
 ### Why Category-First
@@ -429,8 +432,8 @@ Follow these file naming patterns exactly:
 - `{language}.locales.yaml` in `locales/`
 - `{locale}.address.yaml` in `addresses/`
 - `{locale}.protocol.{domain}.yaml` in `protocol/`
-- `{locale}.nameday-saints.yaml` in `namedays/`
-- `{locale}.nameday-calendar.yaml` in `namedays/`
+- `{locale}.nameday-saints.yaml` in `events/tradition/`
+- `{locale}.nameday-calendar.yaml` in `events/tradition/`
 
 For protocol packs, the locale comes first so related overlays cluster
 naturally for contributors and tools.
@@ -454,7 +457,7 @@ Good:
 
 - add `pt.address.yaml` in `addresses/` for Portuguese honorifics and templates
 - add `fr.protocol.military.yaml` in `protocol/` for French military addressing
-- extend `el-GR.nameday-saints.yaml` in `namedays/` with additional saint aliases
+- extend `el-GR.nameday-saints.yaml` in `events/tradition/` with additional saint aliases
 - correct a holiday label in `events/country/BE.events.yaml`
 
 Bad:
