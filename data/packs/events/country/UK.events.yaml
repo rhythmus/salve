@@ -1,0 +1,209 @@
+# United Kingdom public and common law holidays
+# England & Wales, Scotland, Northern Ireland (main dates; regional differences exist).
+# Sources: https://en.wikipedia.org/wiki/Public_holidays_in_the_United_Kingdom
+
+country: UK
+sources:
+  - 'https://en.wikipedia.org/wiki/Public_holidays_in_the_United_Kingdom'
+  - 'https://www.gov.uk/bank-holidays'
+
+events:
+
+  # ─── January ─────────────────────────────────────────────────────
+
+  - date: 1 January
+    label:
+      en: New Year's Day
+      nl: Nieuwjaarsdag
+      el: Πρωτοχρονιά
+    WikiData: Q2237444
+    category: official
+    greetings:
+      en: Happy New Year!
+      nl: Gelukkig Nieuwjaar!
+      el: Καλή χρονιά!
+
+  - date: 2 January
+    label:
+      en: 2nd January (Scotland)
+      nl: 2 januari (Schotland)
+      el: 2 Ιανουαρίου (Σκωτία)
+    category: official
+    notes: Bank holiday in Scotland only.
+    greetings:
+      en: Happy New Year!
+      nl: Gelukkig Nieuwjaar!
+      el: Καλή χρονιά!
+
+  # ─── March ─────────────────────────────────────────────────────
+
+  - date: 17 March
+    label:
+      en: Saint Patrick's Day
+      nl: Sint-Patrick
+      el: Αγίου Πατρίκιου
+    WikiData: Q121404
+    category: observance
+    notes: Bank holiday in Northern Ireland only.
+    greetings:
+      en: Happy St Patrick's Day!
+      nl: Gelukkige Sint-Patrick!
+      el: Καλή γιορτή Αγίου Πατρίκιου!
+
+  # ─── April ─────────────────────────────────────────────────────
+
+  - date: pascha:-2
+    label:
+      en: Good Friday
+      nl: Goede Vrijdag
+      el: Μεγάλη Παρασκευή
+    WikiData: Q133247
+    category: official
+    greetings:
+      en: (Observance)
+      nl: Stille Goede Vrijdag.
+      el: Καλή Ανάσταση
+
+  - date: pascha:1
+    label:
+      en: Easter Monday
+      nl: Paasmaandag
+      el: Δευτέρα του Πάσχα
+    WikiData: Q193163
+    category: official
+    notes: Not in Scotland.
+    greetings:
+      en: Happy Easter!
+      nl: Zalig Pasen!
+      el: Καλή Ανάσταση!
+
+  # ─── May ─────────────────────────────────────────────────────
+
+  - date: '05:mon:1'
+    label:
+      en: Early May Bank Holiday
+      nl: Vroege meibankvakantie
+      el: Πρώτη Δευτέρα Μαΐου
+    category: official
+    greetings:
+      en: Happy Bank Holiday!
+      nl: Fijne vrije dag!
+      el: Καλή γιορτή!
+
+  - date: pascha:39
+    label:
+      en: Spring Bank Holiday (Ascension)
+      nl: Hemelvaartsdag
+      el: Αναλήψεως
+    WikiData: Q51638
+    category: official
+    notes: Fixed as last Monday of May in England, Wales, NI; Scotland varies.
+    greetings:
+      en: Happy Bank Holiday!
+      nl: Zalige Hemelvaart!
+      el: Καλή Ανάληψη!
+
+  # ─── June ─────────────────────────────────────────────────────
+
+  - date: '06:sat:2'
+    label:
+      en: King's Official Birthday (UK)
+      nl: Verjaardag van de koning (VK)
+      el: Επίσημα γενέθλια του Βασιλιά
+    category: official
+    notes: Ceremonial; actual birthday varies. Parades.
+    greetings:
+      en: Happy King's Birthday!
+      nl: Fijne verjaardag van de koning!
+      el: Χρόνια Πολλά!
+
+  # ─── July ─────────────────────────────────────────────────────
+
+  - date: 12 July
+    label:
+      en: Battle of the Boyne (Orangemen's Day)
+      nl: Slag aan de Boyne
+      el: Μάχη του Μπόιν
+    WikiData: Q185206
+    category: observance
+    notes: Bank holiday in Northern Ireland only.
+    greetings: {}
+
+  # ─── August ─────────────────────────────────────────────────────
+
+  - date: '08:mon:1'
+    label:
+      en: Summer Bank Holiday (Scotland)
+      nl: Zomerbankvakantie (Schotland)
+      el: Καλοκαιρινή τράπεζα (Σκωτία)
+    category: official
+    notes: First Monday of August in Scotland only.
+    greetings:
+      en: Happy Bank Holiday!
+      nl: Fijne vakantie!
+      el: Καλή γιορτή!
+
+  - date: '08:mon:last'
+    label:
+      en: Summer Bank Holiday (E&W, NI)
+      nl: Zomerbankvakantie (E&W, NI)
+      el: Καλοκαιρινή τράπεζα
+    category: official
+    notes: Last Monday of August in England, Wales, Northern Ireland.
+    greetings:
+      en: Happy Bank Holiday!
+      nl: Fijne vakantie!
+      el: Καλή γιορτή!
+
+  # ─── November ─────────────────────────────────────────────────────
+
+  - date: 5 November
+    label:
+      en: Guy Fawkes Night
+      nl: Guy Fawkes Night
+      el: Νύχτα Γκυ Φωξ
+    WikiData: Q180795
+    category: observance
+    greetings:
+      en: Happy Bonfire Night!
+      nl: Fijne Guy Fawkes Night!
+      el: Καλή γιορτή!
+
+  - date: 30 November
+    label:
+      en: Saint Andrew's Day
+      nl: Sint-Andreas
+      el: Αγίου Ανδρέα
+    WikiData: Q128592
+    category: observance
+    notes: Bank holiday in Scotland only.
+    greetings:
+      en: Happy St Andrew's Day!
+      nl: Gelukkige Sint-Andreas!
+      el: Καλή γιορτή Αγίου Ανδρέα!
+
+  # ─── December ─────────────────────────────────────────────────────
+
+  - date: 25 December
+    label:
+      en: Christmas Day
+      nl: Eerste kerstdag
+      el: Χριστούγεννα
+    WikiData: Q19833
+    category: official
+    greetings:
+      en: Merry Christmas!
+      nl: Zalig Kerstmis!
+      el: Καλά Χριστούγεννα!
+
+  - date: 26 December
+    label:
+      en: Boxing Day
+      nl: Tweede kerstdag
+      el: Δεύτερη μέρα Χριστουγέννων
+    WikiData: Q15113728
+    category: official
+    greetings:
+      en: Happy Boxing Day!
+      nl: Zalig Kerstmis!
+      el: Καλά Χριστούγεννα!

@@ -1,0 +1,213 @@
+# United States federal and common observances
+# Federal holidays and widely observed days (not all are non-working in all states).
+# Sources: https://en.wikipedia.org/wiki/Public_holidays_in_the_United_States
+
+country: US
+sources:
+  - 'https://en.wikipedia.org/wiki/Public_holidays_in_the_United_States'
+  - 'https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/'
+
+events:
+
+  # ─── January ─────────────────────────────────────────────────────
+
+  - date: 1 January
+    label:
+      en: New Year's Day
+      nl: Nieuwjaarsdag
+      el: Πρωτοχρονιά
+    WikiData: Q2237444
+    category: official
+    greetings:
+      en: Happy New Year!
+      nl: Gelukkig Nieuwjaar!
+      el: Καλή χρονιά!
+
+  - date: '01:mon:3'
+    label:
+      en: Martin Luther King Jr. Day
+      nl: Martin Luther King-dag
+      el: Ημέρα Martin Luther King
+    WikiData: Q131066
+    category: official
+    greetings:
+      en: Happy MLK Day!
+      nl: Gelukkige Martin Luther King-dag!
+      el: Καλή γιορτή!
+
+  # ─── February ─────────────────────────────────────────────────────
+
+  - date: '02:mon:3'
+    label:
+      en: Presidents' Day
+      nl: Presidentsdag
+      el: Ημέρα των Προέδρων
+    WikiData: Q755758
+    category: official
+    notes: Washington's Birthday (federal); often called Presidents' Day.
+    greetings:
+      en: Happy Presidents' Day!
+      nl: Fijne Presidentsdag!
+      el: Καλή γιορτή!
+
+  # ─── March ─────────────────────────────────────────────────────
+
+  - date: 17 March
+    label:
+      en: Saint Patrick's Day
+      nl: Sint-Patrick
+      el: Αγίου Πατρίκιου
+    WikiData: Q121404
+    category: observance
+    greetings:
+      en: Happy St Patrick's Day!
+      nl: Gelukkige Sint-Patrick!
+      el: Καλή γιορτή Αγίου Πατρίκιου!
+
+  # ─── April ─────────────────────────────────────────────────────
+
+  - date: pascha:-2
+    label:
+      en: Good Friday
+      nl: Goede Vrijdag
+      el: Μεγάλη Παρασκευή
+    WikiData: Q133247
+    category: observance
+    notes: Not a federal holiday; observed in some states.
+    greetings:
+      en: (Observance)
+      nl: Stille Goede Vrijdag.
+      el: Καλή Ανάσταση
+
+  - date: pascha:0
+    label:
+      en: Easter Sunday
+      nl: Eerste paasdag
+      el: Κυριακή του Πάσχα
+    WikiData: Q23674
+    category: observance
+    greetings:
+      en: Happy Easter!
+      nl: Zalig Pasen!
+      el: Καλή Ανάσταση!
+
+  # ─── May ─────────────────────────────────────────────────────
+
+  - date: '05:mon:last'
+    label:
+      en: Memorial Day
+      nl: Memorial Day
+      el: Ημέρα Μνήμης
+    WikiData: Q178496
+    category: official
+    greetings:
+      en: (Observance; solemn)
+      nl: Eerbetoon aan de gevallenen.
+      el: (Σεβασμός στη μνήμη των πεσόντων.)
+
+  # ─── June ─────────────────────────────────────────────────────
+
+  - date: 19 June
+    label:
+      en: Juneteenth
+      nl: Juneteenth
+      el: Τζούντινθ
+    WikiData: Q28129677
+    category: official
+    notes: National Independence Day (federal since 2021).
+    greetings:
+      en: Happy Juneteenth!
+      nl: Fijne Juneteenth!
+      el: Καλή γιορτή!
+
+  # ─── July ─────────────────────────────────────────────────────
+
+  - date: 4 July
+    label:
+      en: Independence Day
+      nl: Onafhankelijkheidsdag (VS)
+      el: Ημέρα Ανεξαρτησίας (ΗΠΑ)
+    WikiData: Q57598
+    category: official
+    greetings:
+      en: Happy Fourth of July!
+      nl: Fijne Onafhankelijkheidsdag!
+      el: Καλή γιορτή Ανεξαρτησίας!
+
+  # ─── September ─────────────────────────────────────────────────────
+
+  - date: '09:mon:1'
+    label:
+      en: Labor Day
+      nl: Dag van de Arbeid (VS)
+      el: Ημέρα Εργασίας
+    WikiData: Q1215449
+    category: official
+    greetings:
+      en: Happy Labor Day!
+      nl: Gelukkige Dag van de Arbeid!
+      el: Καλή Πρωτομαγιά!
+
+  # ─── October ─────────────────────────────────────────────────────
+
+  - date: '10:mon:2'
+    label:
+      en: Columbus Day / Indigenous Peoples' Day
+      nl: Columbusdag
+      el: Ημέρα του Κολόμβου
+    WikiData: Q185298
+    category: observance
+    notes: Federal holiday; some states observe Indigenous Peoples' Day instead.
+    greetings: {}
+
+  - date: 31 October
+    label:
+      en: Halloween
+      nl: Halloween
+      el: Χαλοουίν
+    WikiData: Q251868
+    category: observance
+    greetings:
+      en: Happy Halloween!
+      nl: Fijne Halloween!
+      el: Καλό Halloween!
+
+  # ─── November ─────────────────────────────────────────────────────
+
+  - date: 11 November
+    label:
+      en: Veterans Day
+      nl: Veteranendag
+      el: Ημέρα Βετεράνων
+    WikiData: Q161242
+    category: official
+    greetings:
+      en: Thank you for your service.
+      nl: Ingetogen Veteranendag!
+      el: Σεβασμός στους βετεράνους.
+
+  - date: '11:thu:4'
+    label:
+      en: Thanksgiving
+      nl: Thanksgiving
+      el: Ημέρα Ευχαριστίας
+    WikiData: Q13959
+    category: official
+    greetings:
+      en: Happy Thanksgiving!
+      nl: Fijne Thanksgiving!
+      el: Καλή Ημέρα Ευχαριστίας!
+
+  # ─── December ─────────────────────────────────────────────────────
+
+  - date: 25 December
+    label:
+      en: Christmas Day
+      nl: Eerste kerstdag
+      el: Χριστούγεννα
+    WikiData: Q19833
+    category: official
+    greetings:
+      en: Merry Christmas!
+      nl: Zalig Kerstmis!
+      el: Καλά Χριστούγεννα!
