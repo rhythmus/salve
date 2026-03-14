@@ -1,13 +1,211 @@
+# English (British) greetings and salutations
+# Exhaustive coverage for time-of-day, encounter/parting, formality, and settings.
+# Sources: see data/data-sources.bib (wikipedia_greeting_en, etc.)
+
 locale: en-GB
+sources:
+  - 'https://en.wikipedia.org/wiki/Greeting'
+
 greetings:
 
-  - text: Hello
+  # ─── Encounter (general) ─────────────────────────────────────────
 
-  - text: Good morning
+  - text: Hello
+    phase: encounter
+    formality: neutral
+    notes: Universal greeting.
+
+  - text: Hi
+    phase: encounter
+    formality: informal
+    notes: Casual greeting.
+
+  - text: Hey
+    phase: encounter
+    formality: highly informal
+    notes: Very casual, often among friends.
+
+  - text: Good day
+    timeOfDay: [morning, midday, afternoon]
+    phase: encounter
+    formality: formal
+    notes: Formal or slightly dated.
+
+  - text: ["Good morning", "Morning"]
     timeOfDay: morning
+    phase: encounter
+    formality: neutral
+    notes: "Morning: informal shortening."
 
   - text: Good afternoon
-    timeOfDay: afternoon
+    timeOfDay: [midday, afternoon]
+    phase: encounter
+    formality: formal
 
   - text: Good evening
     timeOfDay: evening
+    phase: encounter
+    formality: formal
+
+  - text: Good night
+    timeOfDay: [evening, night]
+    phase: encounter
+    formality: neutral
+    notes: Often used when meeting late in the evening (e.g. at a night event).
+
+  # ─── Welcome ───────────────────────────────────────────────────────
+
+  - text: Welcome
+    phase: encounter
+    notes: Receiving greeting.
+
+  - text: '{greeter} welcomes you'
+    phase: encounter
+    formality: formal
+    notes: Written or formal spoken (e.g. on signs).
+
+  # ─── Parting ────────────────────────────────────────────────────────
+
+  - text: [Goodbye, Bye]
+    phase: parting
+    formality: informal
+
+  - text: Good night
+    timeOfDay: [evening, night]
+    phase: parting
+    notes: When going to sleep or leaving at night.
+
+  - text: See you
+    phase: parting
+    formality: informal
+
+  - text: ["See you later", "See you soon", "Catch you later"]
+    phase: parting
+    formality: informal
+
+  - text: Take care
+    phase: parting
+    formality: informal
+
+  - text: Have a good day
+    phase: parting
+    timeOfDay: [morning, midday, afternoon]
+
+  - text: Have a good evening
+    phase: parting
+    timeOfDay: evening
+
+  - text: Farewell
+    phase: parting
+    formality: formal
+    notes: Formal or permanent parting.
+
+  - text: Cheerio
+    phase: parting
+    formality: informal
+    notes: British informal.
+
+  - text: Ta-ta
+    phase: parting
+    formality: highly informal
+    notes: British, very informal.
+
+  # ─── Audience size ─────────────────────────────────────────────────
+
+  - text: ["Hello everyone", "Hello everybody", "Hi everyone"]
+    audienceSize: ">1"
+    phase: encounter
+    formality: informal
+
+  - text: Hello all
+    audienceSize: ">1"
+    phase: encounter
+    formality: neutral
+
+  # ─── Letter and email closing formulas ────────────────────────────
+
+  - text: Yours sincerely
+    setting: [email_closing]
+    formality: formal
+    notes: When recipient is known by name.
+
+  - text: Yours faithfully
+    setting: [email_closing]
+    formality: formal
+    notes: When recipient is unknown (e.g. Dear Sir/Madam).
+
+  - text: ["Kind regards", "Best regards", "Warm regards"]
+    setting: [email_closing]
+    formality: formal
+
+  - text: ["Best wishes", "With best wishes"]
+    setting: [email_closing]
+    formality: formal
+
+  - text: ["Yours", "Yours truly"]
+    setting: [email_closing]
+    formality: formal
+
+  - text: ["Cheers", "Thanks"]
+    setting: [email_closing]
+    formality: informal
+    notes: British informal email sign-off.
+
+  - text: ["Take care", "All the best"]
+    setting: [email_closing]
+    formality: informal
+
+  # ─── Phone and chat ──────────────────────────────────────────────────
+
+  - text: Hello?
+    phase: encounter
+    setting: [phone, chat_message]
+    formality: neutral
+    notes: Answering phone or opening a chat.
+
+  - text: Yes?
+    phase: encounter
+    setting: [phone, chat_message]
+    formality: informal
+
+  - text: Hi there
+    phase: encounter
+    setting: [chat_message]
+    formality: informal
+
+  # ─── Meeting / acquaintance ─────────────────────────────────────────
+
+  - text: ["Pleased to meet you", "Nice to meet you"]
+    phase: encounter
+    formality: formal
+
+  - text: ["Good to see you", "Lovely to see you"]
+    phase: encounter
+    formality: informal
+    relationship: [acquaintance, friend]
+
+  - text: Long time no see
+    phase: encounter
+    formality: informal
+    notes: After a long absence.
+
+  # ─── Regional / informal variants ───────────────────────────────────
+
+  - text: How do you do?
+    phase: encounter
+    formality: hyperformal
+    notes: British formal; often answered with the same phrase.
+
+  - text: ["Howdy", "G'day"]
+    phase: encounter
+    formality: highly informal
+    notes: Howdy (US/country); G'day (Australian, also used in UK informally).
+
+  - text: Alright?
+    phase: encounter
+    formality: highly informal
+    notes: British; can be greeting or "Are you alright?"
+
+  - text: ["Hiya", "Hey there"]
+    phase: encounter
+    formality: highly informal
