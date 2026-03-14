@@ -1,0 +1,96 @@
+# Dutch academic protocol pack
+#
+# Dutch academic titulature uses specific predicates based on degree:
+# - Weledelgeleerde (dr., mr.)
+# - Hooggeleerde (prof. dr.)
+# - Zeergeleerde (dr.)
+#
+# Source: https://nl.wikipedia.org/wiki/Aanspreekvorm
+
+id: protocol-academic-nl
+locale: nl
+requiredSubculture: academic
+domain: academic
+sources:
+  - 'https://nl.wikipedia.org/wiki/Aanspreekvorm'
+notes: >
+  Dutch academic protocol: uses predicates (Hooggeleerde, Weledelgeleerde,
+  Zeergeleerde) based on degree level.
+
+titles:
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: prof. dr.
+    correspondenceForm: professor
+  - system: academic
+    code: dr
+    rank: 2
+    postalForm: dr.
+    correspondenceForm: dr.
+  - system: academic
+    code: mr
+    rank: 3
+    postalForm: mr.
+    correspondenceForm: mr.
+  - system: academic
+    code: ir
+    rank: 4
+    postalForm: ir.
+    correspondenceForm: ir.
+  - system: academic
+    code: ing
+    rank: 5
+    postalForm: ing.
+    correspondenceForm: ing.
+  - system: academic
+    code: drs
+    rank: 6
+    postalForm: drs.
+    correspondenceForm: drs.
+
+rules:
+  - id: nl-academic-postal-prof
+    priority: 15
+    template: "De hooggeleerde heer/vrouwe {postalTitleStack} {surname}"
+    when:
+      locale: nl
+      formality: [formal, hyperformal]
+      outputForm: postal
+      titleSystem: academic
+      officeRole: professor
+  - id: nl-academic-postal-dr
+    priority: 10
+    template: "De weledelgeleerde heer/vrouwe {postalTitleStack} {surname}"
+    when:
+      locale: nl
+      formality: [formal, hyperformal]
+      outputForm: postal
+      titleSystem: academic
+  - id: nl-academic-letterhead-prof
+    priority: 15
+    template: "Hooggeleerde Heer {surname},"
+    when:
+      locale: nl
+      formality: [formal, hyperformal]
+      outputForm: letterhead
+      titleSystem: academic
+      officeRole: professor
+    notes: "Female form: Hooggeleerde Vrouwe"
+  - id: nl-academic-letterhead-dr
+    priority: 10
+    template: "Weledelgeleerde Heer {surname},"
+    when:
+      locale: nl
+      formality: [formal, hyperformal]
+      outputForm: letterhead
+      titleSystem: academic
+    notes: "Female form: Weledelgeleerde Vrouwe"
+  - id: nl-academic-salutation
+    priority: 10
+    template: "{honorific} {correspondenceTitleStack} {surname}"
+    when:
+      locale: nl
+      formality: [formal, hyperformal]
+      outputForm: salutation
+      titleSystem: academic

@@ -1,0 +1,56 @@
+# French academic protocol pack
+#
+# Source: https://fr.wikipedia.org/wiki/Pr%C3%A9dicat_honorifique
+
+id: protocol-academic-fr
+locale: fr
+requiredSubculture: academic
+domain: academic
+sources:
+  - 'https://fr.wikipedia.org/wiki/Pr%C3%A9dicat_honorifique'
+notes: >
+  French academic protocol: Monsieur/Madame le/la Professeur/Docteur.
+
+titles:
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: Pr
+    correspondenceForm: Professeur
+    gender: male
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: Pr
+    correspondenceForm: Professeure
+    gender: female
+  - system: academic
+    code: dr
+    rank: 2
+    postalForm: Dr
+    correspondenceForm: Docteur
+    gender: male
+  - system: academic
+    code: dr
+    rank: 2
+    postalForm: Dr
+    correspondenceForm: Docteure
+    gender: female
+
+rules:
+  - id: fr-academic-postal-formal
+    priority: 10
+    template: "{honorific} le {correspondenceTitleStack} {surname}"
+    when:
+      locale: fr
+      formality: [formal, hyperformal]
+      outputForm: postal
+      titleSystem: academic
+  - id: fr-academic-letterhead-formal
+    priority: 10
+    template: "Cher {honorific} le {correspondenceTitleStack} {surname},"
+    when:
+      locale: fr
+      formality: [formal, hyperformal]
+      outputForm: letterhead
+      titleSystem: academic

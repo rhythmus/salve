@@ -1,0 +1,42 @@
+# English diplomatic protocol pack
+#
+# Source: https://en.wikipedia.org/wiki/Style_(form_of_address)
+
+id: protocol-diplomatic-en
+locale: en
+requiredSubculture: diplomatic
+domain: diplomatic
+sources:
+  - 'https://en.wikipedia.org/wiki/Style_(form_of_address)'
+notes: >
+  English diplomatic protocol: Your Excellency for ambassadors.
+
+titles:
+  - system: diplomatic
+    code: ambassador
+    rank: 1
+    postalForm: H.E.
+    correspondenceForm: His/Her Excellency
+  - system: diplomatic
+    code: consul
+    rank: 2
+    postalForm: Hon.
+    correspondenceForm: The Honourable
+
+rules:
+  - id: en-diplomatic-letterhead-ambassador
+    priority: 20
+    template: "Your Excellency,"
+    when:
+      locale: en
+      formality: [formal, hyperformal]
+      outputForm: letterhead
+      officeRole: ambassador
+  - id: en-diplomatic-postal-ambassador
+    priority: 20
+    template: "H.E. {honorific} {surname}"
+    when:
+      locale: en
+      formality: [formal, hyperformal]
+      outputForm: postal
+      officeRole: ambassador

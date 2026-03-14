@@ -1,3 +1,3 @@
-export * from "./honorifics";
-export * from "./address-packs";
-export * from "./protocol-academic";
+export * from "./honorifics.generated";
+export * from "./address-packs.generated";
+export * from "./protocol-packs.generated";

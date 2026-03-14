@@ -1,0 +1,61 @@
+# German baseline address pack
+# Source: https://de.wikipedia.org/wiki/Anrede
+
+locale: de
+sources:
+  - 'https://de.wikipedia.org/wiki/Anrede'
+
+honorifics:
+  male: Herr
+  female: Frau
+  nonBinary: Mx.
+  unspecified: M.
+
+formats:
+  postal: "Herrn {postalTitleStack} {surname}"
+  letterhead: "Sehr geehrter {honorific} {correspondenceTitleStack} {surname},"
+  salutation: "{honorific} {correspondenceTitleStack} {surname}"
+  email_opening: "Sehr geehrte/r {honorific} {correspondenceTitleStack} {surname},"
+  informal: "{firstName}"
+
+titles:
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: Prof.
+    correspondenceForm: Professor
+    gender: male
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: Prof.
+    correspondenceForm: Professorin
+    gender: female
+  - system: academic
+    code: dr
+    rank: 2
+    postalForm: Dr.
+    correspondenceForm: Dr.
+  - system: academic
+    code: dr_mult
+    rank: 2
+    postalForm: Dr. Dr.
+    correspondenceForm: Dr. Dr.
+
+collectiveFormulas:
+  - id: de-formal-group
+    formality: formal
+    text: Sehr geehrte Damen und Herren
+    audienceKind: group
+  - id: de-formal-public
+    formality: formal
+    text: Sehr geehrte Damen und Herren
+    audienceKind: public
+  - id: de-informal-group
+    formality: informal
+    text: Liebe Alle
+    audienceKind: group
+
+titleSuppression:
+  informalDropsTitles: true
+  professorSuppressesDoctor: true

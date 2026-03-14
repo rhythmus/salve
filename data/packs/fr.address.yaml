@@ -1,0 +1,63 @@
+# French baseline address pack
+# Source: https://fr.wikipedia.org/wiki/Pr%C3%A9dicat_honorifique
+
+locale: fr
+sources:
+  - 'https://fr.wikipedia.org/wiki/Pr%C3%A9dicat_honorifique'
+
+honorifics:
+  male: Monsieur
+  female: Madame
+  nonBinary: Mx.
+  unspecified: M.
+
+formats:
+  postal: "{honorific} {postalTitleStack} {surname}"
+  letterhead: "Cher {honorific} {correspondenceTitleStack} {surname},"
+  salutation: "{honorific} {surname}"
+  email_opening: "Cher {honorific} {surname},"
+  informal: "{firstName}"
+
+titles:
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: Pr
+    correspondenceForm: Professeur
+    gender: male
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: Pr
+    correspondenceForm: Professeure
+    gender: female
+  - system: academic
+    code: dr
+    rank: 2
+    postalForm: Dr
+    correspondenceForm: Docteur
+    gender: male
+  - system: academic
+    code: dr
+    rank: 2
+    postalForm: Dr
+    correspondenceForm: Docteure
+    gender: female
+
+collectiveFormulas:
+  - id: fr-formal-group
+    formality: formal
+    text: "Mesdames, Messieurs"
+    audienceKind: group
+  - id: fr-formal-public
+    formality: formal
+    text: Mesdames et Messieurs
+    audienceKind: public
+  - id: fr-informal-group
+    formality: informal
+    text: Chers amis
+    audienceKind: group
+
+titleSuppression:
+  informalDropsTitles: true
+  professorSuppressesDoctor: false

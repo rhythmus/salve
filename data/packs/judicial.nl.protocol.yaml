@@ -1,0 +1,48 @@
+# Dutch judicial protocol pack
+#
+# Source: https://nl.wikipedia.org/wiki/Aanspreekvorm
+
+id: protocol-judicial-nl
+locale: nl
+requiredSubculture: judicial
+domain: judicial
+sources:
+  - 'https://nl.wikipedia.org/wiki/Aanspreekvorm'
+notes: >
+  Dutch judicial protocol: Edelachtbare for judges, Weledelgestrenge
+  for advocates.
+
+titles:
+  - system: judicial
+    code: judge
+    rank: 1
+    postalForm: mr.
+    correspondenceForm: rechter
+  - system: judicial
+    code: prosecutor
+    rank: 2
+    postalForm: mr.
+    correspondenceForm: officier van justitie
+  - system: judicial
+    code: advocate
+    rank: 3
+    postalForm: mr.
+    correspondenceForm: mr.
+
+rules:
+  - id: nl-judicial-letterhead-judge
+    priority: 15
+    template: "Edelachtbare Heer/Vrouwe,"
+    when:
+      locale: nl
+      formality: [formal, hyperformal]
+      outputForm: letterhead
+      officeRole: judge
+  - id: nl-judicial-postal-judge
+    priority: 15
+    template: "De edelachtbare heer/vrouwe {postalTitleStack} {surname}"
+    when:
+      locale: nl
+      formality: [formal, hyperformal]
+      outputForm: postal
+      officeRole: judge

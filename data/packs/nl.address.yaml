@@ -1,0 +1,82 @@
+# Dutch baseline address pack
+# Source: https://nl.wikipedia.org/wiki/Aanspreekvorm
+
+locale: nl
+sources:
+  - 'https://nl.wikipedia.org/wiki/Aanspreekvorm'
+
+honorifics:
+  male: de heer
+  female: mevrouw
+  nonBinary: Mx.
+  unspecified: M.
+
+formats:
+  postal: "De heer/Mevrouw {postalTitleStack} {surname}"
+  letterhead: "Geachte {honorific} {correspondenceTitleStack} {surname},"
+  salutation: "{honorific} {correspondenceTitleStack} {surname}"
+  email_opening: "Geachte {honorific} {surname},"
+  email_closing: "Met vriendelijke groet,"
+  informal: "Beste {firstName}"
+
+titles:
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: prof.
+    correspondenceForm: professor
+    gender: male
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: prof.
+    correspondenceForm: professor
+    gender: female
+  - system: academic
+    code: dr
+    rank: 2
+    postalForm: dr.
+    correspondenceForm: dr.
+  - system: academic
+    code: mr
+    rank: 3
+    postalForm: mr.
+    correspondenceForm: mr.
+    gender: male
+  - system: academic
+    code: ir
+    rank: 4
+    postalForm: ir.
+    correspondenceForm: ir.
+  - system: academic
+    code: ing
+    rank: 5
+    postalForm: ing.
+    correspondenceForm: ing.
+  - system: academic
+    code: drs
+    rank: 6
+    postalForm: drs.
+    correspondenceForm: drs.
+
+collectiveFormulas:
+  - id: nl-formal-group
+    formality: formal
+    text: Geachte dames en heren
+    audienceKind: group
+  - id: nl-formal-public
+    formality: formal
+    text: Geachte dames en heren
+    audienceKind: public
+  - id: nl-informal-group
+    formality: informal
+    text: Beste allen
+    audienceKind: group
+  - id: nl-informal-pair
+    formality: informal
+    text: Beste
+    audienceKind: pair
+
+titleSuppression:
+  informalDropsTitles: true
+  professorSuppressesDoctor: true

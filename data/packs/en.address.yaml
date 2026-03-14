@@ -1,0 +1,53 @@
+# English baseline address pack
+# Source: https://en.wikipedia.org/wiki/Style_(form_of_address)
+
+locale: en
+sources:
+  - 'https://en.wikipedia.org/wiki/Style_(form_of_address)'
+
+honorifics:
+  male: Mr.
+  female: Ms.
+  nonBinary: Mx.
+  unspecified: M.
+
+formats:
+  postal: "{honorific} {postalTitleStack} {surname}"
+  letterhead: "Dear {honorific} {correspondenceTitleStack} {surname},"
+  salutation: "{honorific} {surname}"
+  email_opening: "Dear {honorific} {surname},"
+  informal: "{firstName}"
+
+titles:
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: Prof.
+    correspondenceForm: Professor
+  - system: academic
+    code: dr
+    rank: 2
+    postalForm: Dr.
+    correspondenceForm: Dr.
+
+collectiveFormulas:
+  - id: en-formal-group
+    formality: formal
+    text: Ladies and Gentlemen
+    audienceKind: group
+  - id: en-formal-public
+    formality: formal
+    text: Dear All
+    audienceKind: public
+  - id: en-informal-group
+    formality: informal
+    text: Everyone
+    audienceKind: group
+  - id: en-formal-institution
+    formality: formal
+    text: Dear Members
+    audienceKind: institution
+
+titleSuppression:
+  informalDropsTitles: true
+  professorSuppressesDoctor: false

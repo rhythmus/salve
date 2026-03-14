@@ -1,0 +1,49 @@
+# Greek baseline address pack
+
+locale: el
+
+honorifics:
+  male: Κύριε
+  female: Κυρία
+  nonBinary: Mx.
+  unspecified: M.
+
+formats:
+  postal: "{honorific} {postalTitleStack} {surname}"
+  letterhead: "Αξιότιμε {honorific} {correspondenceTitleStack} {surname},"
+  salutation: "{honorific} {surname}"
+  email_opening: "Αγαπητέ {honorific} {surname},"
+  informal: "{firstName}"
+
+titles:
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: Καθ.
+    correspondenceForm: Καθηγητά
+    gender: male
+  - system: academic
+    code: prof
+    rank: 1
+    postalForm: Καθ.
+    correspondenceForm: Καθηγήτρια
+    gender: female
+  - system: academic
+    code: dr
+    rank: 2
+    postalForm: Δρ.
+    correspondenceForm: Δρ.
+
+collectiveFormulas:
+  - id: el-formal-group
+    formality: formal
+    text: Κυρίες και Κύριοι
+    audienceKind: group
+  - id: el-informal-group
+    formality: informal
+    text: Αγαπητοί φίλοι
+    audienceKind: group
+
+titleSuppression:
+  informalDropsTitles: true
+  professorSuppressesDoctor: false
