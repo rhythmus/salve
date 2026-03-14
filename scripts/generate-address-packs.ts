@@ -14,6 +14,7 @@
 
 import * as fs from "fs";
 import * as path from "path";
+import { discoverPacks } from "./lib/discover-packs";
 const yaml = require("js-yaml");
 const Ajv = require("ajv/dist/2020");
 const ajv = new Ajv({ allErrors: true, allowUnionTypes: true });
@@ -291,15 +292,14 @@ function renderProtocolPack(pack: ProtocolPackData, indent: string): string {
 
 // ── Main ────────────────────────────────────────────────────────
 
-function loadYAMLFiles<T>(suffix: string, validator: any): { file: string; data: T }[] {
-    const files = fs.readdirSync(PACKS_DIR)
-        .filter(f => f.endsWith(suffix))
-        .sort();
+function loadYAMLFiles<T>(category: string, validator: any): { file: string; data: T }[] {
+    const filePaths = discoverPacks(PACKS_DIR, category);
 
     const results: { file: string; data: T }[] = [];
 
-    for (const file of files) {
-        const raw = fs.readFileSync(path.join(PACKS_DIR, file), "utf-8");
+    for (const filePath of filePaths) {
+        const file = path.basename(filePath);
+        const raw = fs.readFileSync(filePath, "utf-8");
         let parsed: any;
         try {
             parsed = yaml.load(raw);
@@ -324,10 +324,10 @@ function loadYAMLFiles<T>(suffix: string, validator: any): { file: string; data:
 console.log("\nGenerating address and protocol packs from data/packs/...\n");
 
 console.log("Address packs:");
-const addressFiles = loadYAMLFiles<AddressPackData>(".address.yaml", validators.address);
+const addressFiles = loadYAMLFiles<AddressPackData>("address", validators.address);
 
 console.log("\nProtocol packs:");
-const protocolFiles = loadYAMLFiles<ProtocolPackData>(".protocol.yaml", validators.protocol);
+const protocolFiles = loadYAMLFiles<ProtocolPackData>("protocol", validators.protocol);
 
 if (addressFiles.length === 0) {
     console.error("\nNo address pack files found in data/packs/");

@@ -13,6 +13,7 @@
 
 import * as fs from "fs";
 import * as path from "path";
+import { discoverPacks } from "./lib/discover-packs";
 const yaml = require("js-yaml");
 const Ajv = require("ajv/dist/2020");
 const ajv = new Ajv({ allErrors: true, allowUnionTypes: true });
@@ -73,15 +74,14 @@ interface CalendarFileData {
 
 // ── YAML loader with validation ──────────────────────────────────
 
-function loadYAMLFiles<T>(suffix: string, validator: any): { file: string; data: T }[] {
-    const files = fs.readdirSync(PACKS_DIR)
-        .filter(f => f.endsWith(suffix))
-        .sort();
+function loadYAMLFiles<T>(category: string, validator: any): { file: string; data: T }[] {
+    const filePaths = discoverPacks(PACKS_DIR, category);
 
     const results: { file: string; data: T }[] = [];
 
-    for (const file of files) {
-        const raw = fs.readFileSync(path.join(PACKS_DIR, file), "utf-8");
+    for (const filePath of filePaths) {
+        const file = path.basename(filePath);
+        const raw = fs.readFileSync(filePath, "utf-8");
         let parsed: any;
         try {
             parsed = yaml.load(raw);
@@ -208,10 +208,10 @@ function generateCalendarFile(data: CalendarFileData): string {
 console.log("\nGenerating nameday packs from data/packs/...\n");
 
 console.log("Saints files:");
-const saintsFiles = loadYAMLFiles<SaintsFileData>(".nameday-saints.yaml", validators.saints);
+const saintsFiles = loadYAMLFiles<SaintsFileData>("nameday-saints", validators.saints);
 
 console.log("\nCalendar files:");
-const calendarFiles = loadYAMLFiles<CalendarFileData>(".nameday-calendar.yaml", validators.calendar);
+const calendarFiles = loadYAMLFiles<CalendarFileData>("nameday-calendar", validators.calendar);
 
 if (saintsFiles.length === 0) {
     console.error("\nNo nameday-saints files found in data/packs/");

@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+import { discoverAllYAML } from "./lib/discover-packs";
 const yaml = require("js-yaml");
 const Ajv = require("ajv/dist/2020");
 const ajv = new Ajv({ allErrors: true, allowUnionTypes: true });
@@ -104,14 +105,15 @@ function slugify(text: string): string {
 }
 
 function loadData(): { packs: NormalizedGreetingPack[], regions: RegionDefinition[] } {
-    const files = fs.readdirSync(PACKS_DIR).filter(f => f.endsWith(".json") || f.endsWith(".yaml")).sort();
+    const filePaths = discoverAllYAML(PACKS_DIR);
     const rawPacksByLocale = new Map<string, { extends?: string, sources?: string | string[], greetings: GreetingEntry[] }>();
     let allRegions: RegionDefinition[] = [];
 
-    for (const file of files) {
+    for (const filePath of filePaths) {
+        const file = path.basename(filePath);
         if (file.includes(".address.") || file.includes(".protocol.") || file.includes(".nameday-")) continue;
 
-        const raw = fs.readFileSync(path.join(PACKS_DIR, file), "utf-8");
+        const raw = fs.readFileSync(filePath, "utf-8");
         const isRegions = file.includes(".regions.") || file.includes(".locales.");
         const isEvents = file.includes(".events.");
 
