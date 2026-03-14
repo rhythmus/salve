@@ -12,11 +12,19 @@ import {
     GreetingMemory,
     HonorificPack,
     AddressProfile,
+    AddressPack,
+    AddressAudience,
+    AddressRecipient,
+    AddressTitleToken,
+    ProtocolPack,
+    ResolvedAddress,
     SalveContextV1,
     SalveOutputV1,
+    SalveOutputV1WithAddress,
     SalvePrimaryOutput,
     SalveExtra,
     SalveTraceEntry,
+    SalveRenderPolicy,
     NormalizedContext,
     GreetingRule,
     SalveEvent,
@@ -25,6 +33,8 @@ import {
 } from "./types";
 import { calculateEventScore, isAffiliated, computeScoreTuple, compareScoreTuples } from "./scoring";
 import { AddressResolver, TransformHook } from "./address";
+import { AddressEngine, AddressResolveContext } from "./address-engine";
+import { CompositionEngine, CompositionInput } from "./composition";
 import { SalveRegistry, SalveLoader } from "@salve/registry";
 import { LocationResolver, RegionDefinition } from "./location";
 import { normalizeContext } from "./normalize";
@@ -51,6 +61,8 @@ export class SalveEngine {
     private packs: Map<string, GreetingPack> = new Map();
     private memory?: GreetingMemory;
     private addressResolver: AddressResolver;
+    private addressEngine: AddressEngine;
+    private compositionEngine: CompositionEngine;
     private registry: SalveRegistry;
     private loader: SalveLoader;
     private stylePacks: StylePack[] = [];
@@ -61,11 +73,17 @@ export class SalveEngine {
         this.memory = options.memory;
         this.loader = new SalveLoader(this.registry);
         this.addressResolver = new AddressResolver(this.registry.packs.getAllHonorifics());
+        this.addressEngine = new AddressEngine();
+        this.compositionEngine = new CompositionEngine();
         if (options.regions) {
             this.locationResolver = new LocationResolver(options.regions);
         }
         this.registerPlugin(new RuleBasedCalendarPlugin());
         this.registerDefaultTransforms();
+
+        for (const hp of this.registry.packs.getAllHonorifics()) {
+            this.addressEngine.importLegacyHonorifics(hp);
+        }
     }
 
     private registerDefaultTransforms(): void {
@@ -136,6 +154,23 @@ export class SalveEngine {
     public registerHonorifics(pack: HonorificPack): void {
         this.registry.packs.registerHonorifics(pack);
         this.addressResolver.registerHonorifics(pack);
+        this.addressEngine.importLegacyHonorifics(pack);
+    }
+
+    /**
+     * Register a v1 address pack for baseline civility data
+     */
+    public registerAddressPack(pack: AddressPack): void {
+        this.registry.packs.registerAddressPack(pack);
+        this.addressEngine.registerAddressPack(pack);
+    }
+
+    /**
+     * Register a gated institutional protocol pack
+     */
+    public registerProtocolPack(pack: ProtocolPack): void {
+        this.registry.packs.registerProtocolPack(pack);
+        this.addressEngine.registerProtocolPack(pack);
     }
 
     /**
@@ -244,8 +279,8 @@ export class SalveEngine {
             expectedResponse: candidate.expectedResponse,
             metadata: {
                 eventId: bestEvent?.id,
-                category: bestEvent?.category,
-                domain: bestEvent?.category as any, // Deprecated
+                category: bestEvent?.category ?? bestEvent?.domain,
+                domain: (bestEvent?.domain ?? bestEvent?.category) as any,
                 locale: context.locale,
                 score: highestScore,
                 trace: trace
@@ -296,12 +331,13 @@ export class SalveEngine {
                 phase: ctx.interaction.phase === "encounter" ? "encounter" : "parting",
             });
 
-            // Convert CelebrationEvent → SalveEvent
             for (const le of legacyEvents as any[]) {
                 const dateStr = ctx.env.now.toISOString().split("T")[0];
+                const mappedKind = this.mapLegacyDomain(le.domain || le.category);
                 activeEvents.push({
                     id: le.id,
-                    category: this.mapLegacyDomain(le.domain || le.category),
+                    kind: mappedKind,
+                    category: le.domain || le.category,
                     start: dateStr,
                     end: dateStr,
                     label: le.id,
@@ -310,7 +346,7 @@ export class SalveEngine {
                     precedence: le.priority ?? 0,
                     requiredRegions: le.requiredRegions,
                     requiredProfessions: le.requiredProfessions,
-                    wikiDataId: le.wikiDataId || le.WikiData
+                    wikiDataId: le.wikiDataId || le.WikiData,
                 });
             }
         }
@@ -363,28 +399,24 @@ export class SalveEngine {
         }
         const finalActiveEvents = [...noWikiDataEvents, ...mergedEvents.values()];
 
-        // Filter events by policy
         const filteredEvents = finalActiveEvents.filter((e: SalveEvent) => {
-            // Category allowed?
-            if (!ctx.policy.allowDomains.includes(e.category)) return false;
+            const eDomain = (e.kind ?? e.category ?? "cultural_baseline") as EventDomainV1;
 
-            // Religious events need explicit traditions
-            if (e.category === "religious" && ctx.policy.requireExplicitTraditionsForReligious) {
+            if (!ctx.policy.allowDomains.includes(eDomain)) return false;
+
+            if (eDomain === "religious" && ctx.policy.requireExplicitTraditionsForReligious) {
                 if (ctx.memberships.traditions.length === 0) return false;
             }
 
-            // Protocol events need subculture addressing
-            if (e.category === "protocol" && !ctx.policy.allowSubcultureAddressing) return false;
+            if (eDomain === "protocol" && !ctx.policy.allowSubcultureAddressing) return false;
 
-            // Geographic Filtering
             if (e.requiredRegions && e.requiredRegions.length > 0) {
-                const hasMatchingRegion = e.requiredRegions.some(rid => ctx.regions.includes(rid));
+                const hasMatchingRegion = e.requiredRegions.some((rid: string) => ctx.regions.includes(rid));
                 if (!hasMatchingRegion) return false;
             }
 
-            // Professional Filtering
             if (e.requiredProfessions && e.requiredProfessions.length > 0) {
-                const hasMatchingProfession = e.requiredProfessions.some(p => ctx.memberships.professions.includes(p.toLowerCase()));
+                const hasMatchingProfession = e.requiredProfessions.some((p: string) => ctx.memberships.professions.includes(p.toLowerCase()));
                 if (!hasMatchingProfession) return false;
             }
 
@@ -554,15 +586,92 @@ export class SalveEngine {
             }
         }
 
-        return {
+        // ── Stage 6b: Address Resolution (v1) ───────────────────
+        const audience = this.buildAudienceFromContext(ctx);
+        let resolvedAddress: ResolvedAddress | undefined;
+        let postalAddress: ResolvedAddress | undefined;
+        let letterheadAddress: ResolvedAddress | undefined;
+
+        if (audience) {
+            const baseAddrCtx: AddressResolveContext = {
+                locale: ctx.env.locale,
+                formality: ctx.interaction.formality,
+                relationship: ctx.interaction.relationship,
+                addressMode: "direct",
+                outputForm: "salutation",
+                allowSubcultureAddressing: ctx.policy.allowSubcultureAddressing,
+                subcultures: ctx.memberships.subcultures,
+            };
+
+            resolvedAddress = this.addressEngine.resolve(audience, baseAddrCtx);
+
+            postalAddress = this.addressEngine.resolve(audience, {
+                ...baseAddrCtx,
+                outputForm: "postal",
+            });
+
+            letterheadAddress = this.addressEngine.resolve(audience, {
+                ...baseAddrCtx,
+                outputForm: "letterhead",
+            });
+        }
+
+        // ── Compose full salutation ─────────────────────────────
+        let fullSalutationText: string | undefined;
+        if (resolvedAddress?.text) {
+            const composed = this.compositionEngine.compose(
+                { greeting: primaryText, address: resolvedAddress.text },
+                ctx.env.locale,
+            );
+            fullSalutationText = composed.text;
+        }
+
+        const result: SalveOutputV1WithAddress = {
             primary,
             extras: extras.length > 0 ? extras : undefined,
             activeEvents: finalActiveEvents,
+            address: resolvedAddress,
+            postalAddressText: postalAddress?.text || undefined,
+            letterheadAddressText: letterheadAddress?.text || undefined,
+            fullSalutationText,
             trace: {
                 candidates: traceEntries,
                 usedEvents,
                 normalizedContext: ctx,
             },
+        };
+
+        return result;
+    }
+
+    /**
+     * Build an AddressAudience from normalized context person data.
+     */
+    private buildAudienceFromContext(ctx: NormalizedContext): AddressAudience | null {
+        if (!ctx.person) return null;
+
+        const recipient: AddressRecipient = {
+            givenNames: ctx.person.givenNames,
+            surname: ctx.person.surname,
+            preferredName: ctx.person.preferredName,
+            gender: ctx.person.gender as any,
+            genderSource: ctx.person.genderSource,
+            titles: ctx.person.titles?.map(t => ({
+                system: t.system,
+                code: t.code,
+                display: t.code,
+            })),
+        };
+
+        const audienceSize = ctx.interaction.audienceSize;
+        let kind: import("./types").AudienceKind = "single";
+        if (audienceSize && audienceSize > 1) {
+            kind = audienceSize === 2 ? "pair" : "group";
+        }
+
+        return {
+            kind,
+            recipients: [recipient],
         };
     }
 
@@ -578,6 +687,8 @@ export class SalveEngine {
             temporal: "temporal",
             official: "official",
             observance: "observance",
+            bank: "bank",
+            seasonal: "seasonal",
         };
         return map[domain] ?? "cultural_baseline";
     }
@@ -655,7 +766,7 @@ export class SalveEngine {
 
         trace.push(`No exact matches in pack [${pack.locale}]. Falling back.`);
         // Fallback to generic greeting within the pack if event-specific fails
-        return pack.greetings.find(g => !g.eventRef) || { id: "err", text: "Hello", category: "personal" as any };
+        return pack.greetings.find(g => !g.eventRef) || { id: "err", text: "Hello" };
     }
 
     private resolveAddress(context: GreetingContext): string {
@@ -681,8 +792,8 @@ export class SalveEngine {
             salutation: `Hello, ${address}`.replace(/,\s*$/, ""),
             metadata: {
                 eventId: event?.id || "emergency-fallback",
-                category: event?.category || ("cultural_baseline" as any),
-                domain: (event?.category || "cultural_baseline") as any,
+                category: event?.category ?? event?.domain ?? "cultural_baseline",
+                domain: (event?.domain ?? event?.category ?? "cultural_baseline") as any,
                 locale: context.locale,
                 score: 0,
                 trace: trace
