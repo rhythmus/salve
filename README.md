@@ -143,6 +143,13 @@ const devTools = new SalveDevTools(engine);
 devTools.mount();
 ```
 
+In addition, the repository provides **standalone, static HTML dev tools** (no build step) for context building, test authoring, and quick regression checks. These live alongside the built demo in `website/` and are kept separate from the in-app DevTools overlay by design:
+
+- **Developer Playground** (`website/salve-dev-playground.html`): Build full Salve contexts (env, interaction, person, memberships, affinities, policy), simulate events, view resolution trace, and export test cases or suites (JSON and Vitest snippet). Uses a self-contained inline demo runtime so you can explore behaviour without building the monorepo.
+- **Test Harness** (`website/salve-test-harness.html`): Lightweight single-case runner: set locale, time, relationship, name, title, tradition, and date; compare output to an expected string. Suited for quick sanity checks and manual regression.
+
+How these tools relate to each other and to the demo app, and how to integrate them with the real engine and CI, is described in the [Integration Plan for Dev Tools & Demo](./docs/Integration-Plan-Dev-Tools.md).
+
 ## Project Structure
 
 This monorepo is organized into several packages under `packages/`:
@@ -167,6 +174,10 @@ This monorepo is organized into several packages under `packages/`:
 - **`@salve/cli`**: Command-line interface for project management.
 - **`@salve/devtools`**: Visual overlay for debugging.
 
+### Website and brand
+- **`website/`**: Static web deliverables: the built demo (`index.html`, from `packages/demo`), plus standalone Developer Playground and Test Harness (`salve-dev-playground.html`, `salve-test-harness.html`). All are suitable for `file://` or GitHub Pages.
+- **`brand/`**: Shared brand assets (e.g. `Salve-logo.svg`) for the website and documentation.
+
 ## Roadmap & Status
 
 Current Version: **v0.0.1 (Alpha)**
@@ -187,6 +198,9 @@ namedays, see the
 Integrators needing complete coverage for a fixed set of languages
 (e.g. Dutch, Greek, English) should also see the
 [Coverage Plan (NL/EL/EN)](./docs/Coverage-Plan-NL-EL-EN.md).
+For the relationship between the standalone Developer Playground, Test
+Harness, and demo app, see the
+[Integration Plan (Dev Tools & Demo)](./docs/Integration-Plan-Dev-Tools.md).
 
 1.  Fork the repository.
 2.  Create your feature branch (`git checkout -b feat/amazing-feature`).

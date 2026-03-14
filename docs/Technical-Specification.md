@@ -1513,6 +1513,46 @@ production-grade integration.  Greeting data in the demo MUST be
 sourced from the canonical JSON packs in "data/packs/" via the
 generator pipeline (see Section 17.4).
 
+### 24.3.  Standalone Developer Playground and Test Harness
+
+In addition to the in-app Developer Tools overlay (Section 24.1) and
+the demo application (Section 24.2), the project MAY provide
+standalone, static HTML artifacts for developer use.  These artifacts
+are kept separate from the demo and from each other by design: each
+serves a distinct use case (context building and test authoring vs.
+single-case regression vs. end-user showcase).
+
+  -  **Developer Playground**: A self-contained HTML page that allows
+     building full Salve contexts (env, interaction, person,
+     memberships, affinities, policy), simulating events, viewing
+     resolution trace, and exporting test cases or suites (JSON and
+     Vitest snippet).  It MAY include an inline demo runtime so that
+     behaviour can be explored without building the monorepo.  The
+     canonical location for this artifact is "website/salve-dev-
+     playground.html".
+
+  -  **Test Harness**: A lightweight HTML page for configuring a
+     minimal context (locale, time, relationship, name, title,
+     tradition, date), running resolution once, and comparing the
+     output to an expected string.  It MAY include a simplified
+     inline resolver.  The canonical location is "website/salve-test-
+     harness.html".
+
+  -  **Shared contracts**: Where these tools exchange test data or
+     invoke the same resolution logic, they MUST use the same context
+     shape (SalveContextV1 / normalized context) and the same test
+     case format (testId, context, expected).  The Developer Playground
+     export format is the reference.  Test vectors used for
+     regression SHOULD be run against the real @salve/core engine.
+
+  -  **Brand assets**: Shared visual identity assets (e.g. logo) MAY
+     be stored under a dedicated "brand/" directory (e.g.
+     "brand/Salve-logo.svg") for use by the website and documentation.
+
+A detailed integration plan (rationale, workflows, implementation
+phases) is maintained in "docs/Integration-Plan-Dev-Tools.md" and
+referenced from the Implementation Roadmap.
+
 ## 25.  Advanced Architecture (v1)
 
 ### 25.1.  Greeting Ontology

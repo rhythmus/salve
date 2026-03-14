@@ -7,6 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 ### Added
+- Integration plan for standalone dev tools and demo: `docs/Integration-Plan-Dev-Tools.md`. Defines how the Developer Playground, Test Harness, and Demo Webapp coexist (kept separate by design), shared context shape and test format, and implementation phases. Referenced from Implementation Roadmap (M7.2) and from README and Technical Specification.
+- Standalone Developer Playground (`website/salve-dev-playground.html`) and Test Harness (`website/salve-test-harness.html`) for context building, test authoring, trace inspection, and quick regression. No build step; self-contained or simplified inline runtimes.
+- Brand directory (`brand/`) and Salve logo (`brand/Salve-logo.svg`) for shared visual identity across website and docs.
+- README subsection on standalone dev tools and "Website and brand" in Project Structure; Contributing link to Integration Plan.
+- Technical Specification Section 24.3: Standalone Developer Playground and Test Harness (locations, shared contracts, brand assets, reference to integration plan).
 - Comprehensive README documentation including features, use cases, and usage guide.
 - LICENSE file (MIT License).
 - CITATION.cff file for software citation support.
@@ -34,5 +39,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   `@salve/devtools`, and calendar plugins for real greeting resolution.
 - Updated deployment flow so that building the demo produces a self-contained HTML file suitable for `file://`
   usage and GitHub Pages hosting.
+- Moved standalone Developer Playground and Test Harness into `website/` so all web deliverables live in one place. Moved Salve logo from repository root to `brand/Salve-logo.svg`. Implementation Roadmap M7.2 updated to reference the integration plan and the new paths.
 
 ## [0.0.1] - 2026-03-04
