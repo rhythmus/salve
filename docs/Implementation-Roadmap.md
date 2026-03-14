@@ -60,6 +60,9 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
 - **M6.1: @salve/registry & Loader** (Completed)
     - [x] Implement manifest-based dynamic loading (`SalveLoader`).
     - [ ] Support for integrity hashes and selective payload inclusion.
+    - [ ] Introduce a generated pack index or manifest that can classify
+      YAML sources by family, scope type, selectors, and tags for future
+      custom bundle compilation.
 - **M6.2: Distribution Infrastructure** (Partially Complete)
     - […] Setup automated CI/CD for publishing packs to NPM and a central CDN (GitHub Actions workflows exist for Pages deploy and publish, but no CDN distribution).
 
@@ -168,6 +171,34 @@ Status markers: `[x]` = completed, `[…]` = partly done, `[ ]` = not yet starte
     - [x] Mass-populated 247 UN observances with high-quality, WikiData-sourced official labels across 12 languages.
     - [x] Verified localized idiomatic patterns for professional awareness greetings.
     - [x] Applied premium formatting and month-heading restoration to the secular events dataset.
+
+## Milestone 12A: Pack Source Reorganization & Selective Build Foundations
+- [x] **M12A.1: `data/packs` Directory Reorganization**
+    - [x] Reorganize pack YAML sources into category-first subdirectories:
+      `greetings/`, `events/`, `addresses/`, `protocol/`, `locales/`,
+      `regions/`, and `namedays/`.
+    - [x] Preserve stable machine-readable filenames instead of inventing
+      human geography buckets such as `greece-and-greek/`.
+    - [x] Keep the canonical source tree precise even when contributors think
+      in language or cultural context.
+- […] **M12A.2: Recursive Discovery & Shared Pack Index**
+    - [x] Replace flat `data/packs/` scans in generator scripts with shared
+      recursive discovery via `scripts/lib/discover-packs.ts`.
+    - [ ] Generate a normalized index or manifest recording pack family,
+      scope type, selectors, and tags.
+    - [ ] Use that index as the foundation for future custom pack
+      compilation.
+- [x] **M12A.3: Protocol Pack Naming Normalization**
+    - [x] Migrate protocol filenames from domain-first style such as
+      `academic.nl.protocol.yaml` to locale-first style such as
+      `nl.protocol.academic.yaml`.
+    - [x] Align authoring conventions with contributor intuition and sorted
+      file grouping by locale.
+- [x] **M12A.4: Harvester Alignment**
+    - [x] Update harvester output paths and maintenance documentation to
+      align with the reorganized `data/packs/` structure.
+    - [x] Keep harvester organization conceptually consistent with explicit
+      scope axes used by pack sources.
 ## Milestone 12: Event Augmentation & Data Normalization (Completed)
 - [x] **M12.1: Event Augmentation Mechanism**
     - [x] Implement WikiData-based merging and de-duplication in resolveV1.

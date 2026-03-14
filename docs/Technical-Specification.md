@@ -960,8 +960,8 @@ four core data types, each with specific naming and structural rules:
     6.  Protocol Packs (`{domain}.{locale}.protocol.yaml`):
         Institutional protocol overlays for a specific domain and
         locale, providing gated title systems and addressing rules.
-        -   Examples: `academic.de.protocol.yaml`,
-            `judicial.nl.protocol.yaml`.
+        -   Examples: `de.protocol.academic.yaml`,
+            `nl.protocol.judicial.yaml`.
         -   Validated against `protocol-pack.schema.json`.
 
     7.  Name-Day Saints (`{locale}.nameday-saints.yaml`):
@@ -1016,6 +1016,48 @@ The rationale for this separation is threefold:
        anti-pattern of embedding culturally significant strings
        inside executable modules where they become invisible to
        data governance workflows.
+
+### 17.1.2.  Directory Organization
+
+Pack YAML files SHALL be organized into category-first subdirectories
+under `data/packs/`.  The primary axis of organization is the pack
+family (what the data is), not the language or region it belongs to.
+
+The canonical directory layout is:
+
+   -  `greetings/` — greeting packs for all languages and locales
+   -  `events/shared/` — shared international event registries
+   -  `events/supranational/` — supranational event registries
+   -  `events/country/` — country-scoped event registries
+   -  `events/tradition/` — tradition-scoped event registries
+   -  `addresses/` — address packs for all languages
+   -  `protocol/` — protocol overlay packs for all domains and locales
+   -  `locales/` — locale geography registries
+   -  `regions/` — region registries
+   -  `namedays/` — nameday saint and calendar packs
+
+Category-first organization was chosen over language-first or
+region-first grouping because:
+
+   1.  Salve's data mixes independent scope axes — language, locale,
+       country, tradition, and institutional domain — that do not map
+       cleanly into a single geographic taxonomy.
+   2.  Generators and schemas already operate per pack family, so the
+       directory structure mirrors the processing pipeline.
+   3.  Future selective pack builders need to filter across multiple
+       dimensions independently.  A category-first layout separates
+       major concerns before any fine-grained filtering is applied.
+
+Language-scoped and locale-scoped packs within the same family (e.g.
+`nl.greetings.yaml` and `de-DE.greetings.yaml`) SHALL coexist in the
+same directory without further subdivision, since a locale is simply
+a more specific regional variant of a language.
+
+A generated pack index (`data/pack-index.generated.json`) records
+metadata for each YAML source file — family, scope type, selector,
+tags, and protocol domain — to enable future custom bundle
+compilation by language, locale, event class, and protocol domain
+without requiring filesystem path parsing at build time.
 
 ### 17.2.  Pack Structure
 
@@ -1078,21 +1120,25 @@ contributors to validate edits without running TypeScript.
 ### 17.4.  Generator Pipeline
 
 Dedicated generator scripts SHALL transform YAML source files in
-`data/packs/` into typed TypeScript modules.  The project maintains
-the following generators:
+`data/packs/` into typed TypeScript modules.  All generators use
+the shared `scripts/lib/discover-packs.ts` helper to recursively
+discover pack files by category marker within the `data/packs/`
+directory tree.  The project maintains the following generators:
 
-   -  `scripts/generate-demo-packs.ts`:  Scans `*.greetings.yaml`,
-      `*.events.yaml`, `*.regions.yaml`, and `*.locales.yaml` files
-      and emits bundled registries for the demo application.
-   -  `scripts/generate-address-packs.ts`:  Scans `*.address.yaml`
-      and `*.protocol.yaml` files, validates against the address-pack
-      and protocol-pack schemas, and emits `address-packs.generated.ts`,
+   -  `scripts/generate-demo-packs.ts`:  Recursively discovers
+      files containing `.greetings.`, `.events.`, `.regions.`, and
+      `.locales.` markers and emits bundled registries for the demo
+      application.
+   -  `scripts/generate-address-packs.ts`:  Recursively discovers
+      files containing `.address.` and `.protocol.` markers,
+      validates against the address-pack and protocol-pack schemas,
+      and emits `address-packs.generated.ts`,
       `protocol-packs.generated.ts`, and `honorifics.generated.ts`
       into `packages/pack-global-addresses/src/`.
-   -  `scripts/generate-nameday-packs.ts`:  Scans
-      `*.nameday-saints.yaml` and `*.nameday-calendar.yaml` files,
-      validates against the nameday schemas, cross-checks saint QID
-      references, and emits `saints.generated.ts` and
+   -  `scripts/generate-nameday-packs.ts`:  Recursively discovers
+      files containing `.nameday-saints.` and `.nameday-calendar.`
+      markers, validates against the nameday schemas, cross-checks
+      saint QID references, and emits `saints.generated.ts` and
       `calendar.generated.ts` into each locale's nameday pack
       package.
 

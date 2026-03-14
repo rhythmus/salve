@@ -61,7 +61,7 @@ For practical authoring rules, naming patterns, category breakdowns, and workflo
 ### Generator pipeline
 
 Every YAML data category has a corresponding generator script under `scripts/` that:
-1. Reads `*.{category}.yaml` files from `data/packs/`
+1. Recursively discovers `*.{category}.*yaml` files from `data/packs/` and its subdirectories via the shared `scripts/lib/discover-packs.ts` helper
 2. Validates each file against its JSON Schema in `data/schemas/`
 3. Emits `.generated.ts` files into the appropriate package's `src/` directory
 
@@ -69,15 +69,33 @@ Generated files MUST NOT be edited manually.  When data needs to change, edit th
 
 ### Current generators
 
-| Script | Input pattern | Output target |
+| Script | Category marker | Output target |
 |---|---|---|
-| `scripts/generate-demo-packs.ts` | `*.greetings.yaml`, `*.events.yaml`, `*.regions.yaml`, `*.locales.yaml` | `packages/demo/src/` |
-| `scripts/generate-address-packs.ts` | `*.address.yaml`, `*.protocol.yaml` | `packages/pack-global-addresses/src/` |
-| `scripts/generate-nameday-packs.ts` | `*.nameday-saints.yaml`, `*.nameday-calendar.yaml` | `packages/pack-{locale}-namedays/src/` |
+| `scripts/generate-demo-packs.ts` | `*.greetings.*`, `*.events.*`, `*.regions.*`, `*.locales.*` | `packages/demo/src/` |
+| `scripts/generate-address-packs.ts` | `*.address.*`, `*.protocol.*` | `packages/pack-global-addresses/src/` |
+| `scripts/generate-nameday-packs.ts` | `*.nameday-saints.*`, `*.nameday-calendar.*` | `packages/pack-{locale}-namedays/src/` |
+| `scripts/generate-pack-index.ts` | all YAML files | `data/pack-index.generated.json` |
+
+### Pack directory structure
+
+Pack YAML files are organized into category-first subdirectories:
+
+| Subdirectory | Contents |
+|---|---|
+| `data/packs/greetings/` | Greeting packs (e.g. `nl.greetings.yaml`, `el-GR.greetings.yaml`) |
+| `data/packs/events/shared/` | Shared international event registries |
+| `data/packs/events/supranational/` | Supranational event registries (e.g. `EU.events.yaml`) |
+| `data/packs/events/country/` | Country-scoped event registries (e.g. `GR.events.yaml`) |
+| `data/packs/events/tradition/` | Tradition-scoped event registries (e.g. `christian.events.yaml`) |
+| `data/packs/addresses/` | Address packs (e.g. `nl.address.yaml`, `el.address.yaml`) |
+| `data/packs/protocol/` | Protocol overlay packs (e.g. `nl.protocol.academic.yaml`) |
+| `data/packs/locales/` | Locale geography registries (e.g. `nl.locales.yaml`) |
+| `data/packs/regions/` | Region registries (e.g. `BE.regions.yaml`) |
+| `data/packs/namedays/` | Nameday packs (e.g. `el-GR.nameday-saints.yaml`) |
 
 ### When adding new data
 
-1. Create or extend the YAML file under `data/packs/` following the naming convention for its category.
+1. Create or extend the YAML file in the appropriate subdirectory under `data/packs/` following the naming convention for its category.
 2. Ensure a JSON Schema exists under `data/schemas/` for validation.
 3. If no generator exists for the category, create one under `scripts/` following the pattern of the existing generators.
 4. Update `docs/Data-Authoring-Guide.md` if the new category or workflow changes the contributor-facing authoring model.

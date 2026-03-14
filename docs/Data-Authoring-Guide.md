@@ -65,6 +65,121 @@ Every data category follows the same architectural pattern:
 
 Generated files are build artifacts.  They MUST NOT be edited manually.
 
+## Pack Directory Structure
+
+Pack YAML files are organized into category-first subdirectories under
+`data/packs/`.  This structure preserves stable, machine-readable
+filenames while making the corpus easier to browse and enabling future
+selective pack generation.
+
+The current layout is:
+
+```text
+data/packs/
+  greetings/
+  events/
+  addresses/
+  protocol/
+  locales/
+  regions/
+  namedays/
+```
+
+### Why Category-First
+
+At first glance, a language-first or region-first tree can feel more
+natural for contributors.  For example, it is intuitive to imagine a
+Greek contributor working on Greek greetings, Greek holidays, Greek
+namedays, and Greek address or protocol data together.
+
+However, Salve's data corpus mixes several different axes:
+
+- language-scoped packs such as `el.address.yaml`
+- locale-scoped packs such as `el-GR.greetings.yaml`
+- country-scoped packs such as `GR.events.yaml`
+- shared or supranational packs such as `international.base.events.yaml`
+- tradition-scoped packs such as `christian.orthodox.events.yaml`
+- domain overlays such as protocol packs
+
+Because these axes are independent, a broad folder such as `greek/` or
+`greece-and-greek/` would quickly become ambiguous.  It would blur the
+difference between language, locale, country, tradition, and shared
+data, and that ambiguity would make future selective build tooling much
+harder to implement.
+
+Category-first organization was chosen for the canonical source tree
+because it:
+
+- matches the current schema and generator split
+- keeps shared and transnational data separate from locale data
+- scales better for future selective build tooling
+- gives harvesters and generators a clearer one-to-one mapping to pack
+  families
+
+### Contributor and Harvester Perspective
+
+This category-first decision does **not** mean contributor experience is
+being ignored.
+
+Contributors will often think in cultural or linguistic contexts rather
+than in abstract pack families.  Likewise, harvesters may be maintained
+around country, locale, or tradition expertise.  Salve supports both
+views:
+
+- a canonical source layout organized by pack family
+- contributor-facing documentation and tooling that can surface data
+  by language, locale, country, or tradition
+- harvester paths and registries that are conceptually aligned with
+  the same explicit axes
+
+In other words, the filesystem remains precise, while contributor
+experience can still be language-aware and culture-aware.
+
+### Build-System Rationale
+
+A key goal of this layout is to enable developers to build minimal,
+highly targeted data bundles.
+
+For example, a developer may want:
+
+- Dutch and Greek only
+- secular events only
+- academic protocol only
+- no religious overlays
+
+That kind of request spans multiple dimensions at once:
+
+- pack family
+- language or locale
+- country
+- domain
+- tradition or event class
+
+Category-first storage, combined with an explicit generated pack index
+or manifest, is the clearest foundation for this future custom build
+pipeline.
+
+### Pack Index
+
+Directory structure alone is not enough for selective bundle
+compilation.  The `scripts/generate-pack-index.ts` generator produces
+`data/pack-index.generated.json`, a machine-readable manifest that
+records metadata for every YAML source file:
+
+- `family`: pack category (greetings, events, address, protocol, etc.)
+- `scopeType`: what the scope token represents (`language`, `locale`,
+  `country`, `shared`, `supranational`, `tradition`)
+- `selector`: the primary scope identifier (`nl`, `el`, `el-GR`, `GR`,
+  `EU`, etc.)
+- `tags`: additional classification labels (`secular`, `religious`,
+  `orthodox`, `academic`, `judicial`, etc.)
+- `domain`: protocol domain if applicable (`academic`, `judicial`,
+  `diplomatic`, etc.)
+
+Future tooling can consume this index to assemble low-payload bundles
+for targeted developer use cases without parsing filenames or walking
+the directory tree at build time.
+
 ## Pack Categories
 
 Salve currently maintains the following pack families under
@@ -128,9 +243,10 @@ These are always-on baseline packs for ordinary polite use.
 
 ### 6. Protocol Packs
 
-- Filename: `{domain}.{locale}.protocol.yaml`
-- Examples: `academic.nl.protocol.yaml`,
-  `judicial.nl.protocol.yaml`, `diplomatic.en.protocol.yaml`
+- Filename: `{locale}.protocol.{domain}.yaml`
+- Examples: `nl.protocol.academic.yaml`,
+  `nl.protocol.judicial.yaml`, `en.protocol.diplomatic.yaml`
+- Location: `data/packs/protocol/`
 - Purpose: gated institutional overlays for academic, judicial,
   diplomatic, religious, military, noble, organizational, or other
   domains
@@ -139,6 +255,11 @@ These are always-on baseline packs for ordinary polite use.
 
 Protocol packs are **not** generic locale data.  They are activated
 only when the runtime explicitly opts into the relevant subculture.
+
+Locale-first protocol naming keeps all protocol overlays for the same
+locale adjacent in sorted listings and better matches how contributors
+usually think about their work: "Dutch protocol data", "Greek protocol
+data", and so on.
 
 ### 7. Name-Day Saints Packs
 
@@ -199,11 +320,12 @@ When introducing a new pack family:
 
 Current generator mapping:
 
-| Generator | Reads | Emits |
+| Generator | Category markers (recursive) | Emits |
 |---|---|---|
-| `scripts/generate-demo-packs.ts` | `*.greetings.yaml`, `*.events.yaml`, `*.regions.yaml`, `*.locales.yaml` | demo registries |
-| `scripts/generate-address-packs.ts` | `*.address.yaml`, `*.protocol.yaml` | `address-packs.generated.ts`, `protocol-packs.generated.ts`, `honorifics.generated.ts` |
-| `scripts/generate-nameday-packs.ts` | `*.nameday-saints.yaml`, `*.nameday-calendar.yaml` | locale-specific `saints.generated.ts` and `calendar.generated.ts` |
+| `scripts/generate-demo-packs.ts` | `.greetings.`, `.events.`, `.regions.`, `.locales.` | demo registries |
+| `scripts/generate-address-packs.ts` | `.address.`, `.protocol.` | `address-packs.generated.ts`, `protocol-packs.generated.ts`, `honorifics.generated.ts` |
+| `scripts/generate-nameday-packs.ts` | `.nameday-saints.`, `.nameday-calendar.` | locale-specific `saints.generated.ts` and `calendar.generated.ts` |
+| `scripts/generate-pack-index.ts` | all YAML files | `data/pack-index.generated.json` |
 
 Generator responsibilities:
 
@@ -299,19 +421,19 @@ source anyway.  A generator or harvester does not replace provenance.
 
 ## Naming Conventions
 
-Follow existing file naming patterns exactly:
+Follow these file naming patterns exactly:
 
-- `{locale}.greetings.yaml`
-- `{scope}.events.yaml`
-- `{country}.regions.yaml`
-- `{language}.locales.yaml`
-- `{locale}.address.yaml`
-- `{domain}.{locale}.protocol.yaml`
-- `{locale}.nameday-saints.yaml`
-- `{locale}.nameday-calendar.yaml`
+- `{locale}.greetings.yaml` in `greetings/`
+- `{scope}.events.yaml` in `events/shared/`, `events/supranational/`, `events/country/`, or `events/tradition/`
+- `{country}.regions.yaml` in `regions/`
+- `{language}.locales.yaml` in `locales/`
+- `{locale}.address.yaml` in `addresses/`
+- `{locale}.protocol.{domain}.yaml` in `protocol/`
+- `{locale}.nameday-saints.yaml` in `namedays/`
+- `{locale}.nameday-calendar.yaml` in `namedays/`
 
-Prefer extending existing naming conventions rather than inventing new
-ones for each feature.
+For protocol packs, the locale comes first so related overlays cluster
+naturally for contributors and tools.
 
 ## Review Checklist
 
@@ -330,10 +452,10 @@ Before submitting data changes, verify:
 
 Good:
 
-- add `pt.address.yaml` for Portuguese honorifics and templates
-- add `military.fr.protocol.yaml` for French military addressing
-- extend `el-GR.nameday-saints.yaml` with additional saint aliases
-- correct a holiday label in `BE.events.yaml`
+- add `pt.address.yaml` in `addresses/` for Portuguese honorifics and templates
+- add `fr.protocol.military.yaml` in `protocol/` for French military addressing
+- extend `el-GR.nameday-saints.yaml` in `namedays/` with additional saint aliases
+- correct a holiday label in `events/country/BE.events.yaml`
 
 Bad:
 
